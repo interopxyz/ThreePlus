@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0F140621-06B7-4BE9-B528-0B37F590E215}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ThreePlus</RootNamespace>
+    <AssemblyName>ThreePlus</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="RhinoCommon">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Rhino 6\System\rhinocommon.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Grasshopper">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Rhino 6\Plug-ins\Grasshopper\Grasshopper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="GH_IO">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Rhino 6\Plug-ins\Grasshopper\GH_IO.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Camera.cs" />
+    <Compile Include="Classes\Light.cs" />
+    <Compile Include="Classes\Material.cs" />
+    <Compile Include="Classes\Model.cs" />
+    <Compile Include="Classes\Scene.cs" />
+    <Compile Include="Classes\SceneObject.cs" />
+    <Compile Include="Classes\Scenes\MetaData.cs" />
+    <Compile Include="Classes\Scenes\Settings.cs" />
+    <Compile Include="Classes\Script.cs" />
+    <Compile Include="Components\Lights\GH_Light_Point.cs" />
+    <Compile Include="Components\Output\GH_ToHtml.cs" />
+    <Compile Include="Components\Scene\GH_Scene.cs" />
+    <Compile Include="Components\Output\GH_ToJson.cs" />
+    <Compile Include="Components\Materials\GH_Material_Flat.cs" />
+    <Compile Include="Extensions\GhToThree.cs" />
+    <Compile Include="Extensions\ObjToJavascript.cs" />
+    <Compile Include="Extensions\ObjToJson.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ThreePlusInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Constants.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_LightDirectional.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\three.module.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VRButton.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_LightHemisphere.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_LightLine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_LightPoint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_LightSpot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialAnalytical.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialFlat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialLambert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialPhong.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialPhysical.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_LightAmbient.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).gha"
+Erase "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <FallbackCulture>en-US</FallbackCulture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartProgram>C:\Program Files\Rhino 6\System\Rhino.exe</StartProgram>
+    <StartArguments>
+    </StartArguments>
+    <StartAction>Program</StartAction>
+  </PropertyGroup>
+</Project>
