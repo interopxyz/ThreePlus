@@ -1,19 +1,21 @@
 ﻿using Grasshopper.Kernel;
+using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
-namespace ThreePlus.Components
+namespace ThreePlus.Components.Materials
 {
-    public class GH_Light : GH_Component
+    public class GH_MaterialLambert : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the GH_Light class.
+        /// Initializes a new instance of the GH_MaterialLambert class.
         /// </summary>
-        public GH_Light()
-          : base("Light", "Light",
+        public GH_MaterialLambert()
+          : base("Lambert Material", "Lambert Material",
               "Description",
-              Constants.ShortName, "Lights")
+              Constants.ShortName, "Materials")
         {
         }
 
@@ -22,6 +24,9 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
+            pManager.AddGenericParameter("Model", "M", "A Model, Mesh, or Brep", GH_ParamAccess.item);
+            pManager.AddColourParameter("Color", "C", "The material's color", GH_ParamAccess.item, Color.Wheat);
+            pManager[1].Optional = true;
         }
 
         /// <summary>
@@ -29,6 +34,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
+            pManager.AddGenericParameter("Model", "M", "The updated Model", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -37,6 +43,26 @@ namespace ThreePlus.Components
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+
+            IGH_Goo goo = null;
+            if (!DA.GetData(0, ref goo)) return;
+
+            Model model = null;
+            if (goo.CastTo<Model>(out model))
+            {
+                model = new Model(model);
+            }
+            else
+            {
+                model = goo.ToModel();
+            }
+
+            Color color = Color.Wheat;
+            DA.GetData(1, ref color);
+
+            model.Material = Material.LambertMaterial(color);
+
+            DA.SetData(0, model);
         }
 
         /// <summary>
@@ -57,7 +83,7 @@ namespace ThreePlus.Components
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("2471da93-962d-428b-8fcc-2ee1b6be35dd"); }
+            get { return new Guid("791a01a2-f06a-4be3-a753-bf2530da0813"); }
         }
     }
 }

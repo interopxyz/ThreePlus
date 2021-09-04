@@ -3,19 +3,20 @@ using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
-namespace ThreePlus.Components
+namespace ThreePlus.Components.Helpers
 {
-    public class GH_Scene : GH_Component
+    public class GH_DisplayTangent : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the GH_Scene class.
+        /// Initializes a new instance of the GH_DisplayTangent class.
         /// </summary>
-        public GH_Scene()
-          : base("Scene", "Scene",
+        public GH_DisplayTangent()
+          : base("Display Tangents", "Tangents",
               "Description",
-              Constants.ShortName, "Subcategory")
-        {
+              Constants.ShortName, "Helper")
+        { 
         }
 
         /// <summary>
@@ -23,7 +24,13 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Scene Objects", "O", "Scene Objects including (Curves, Breps, Meshes, Lights, Cameras, Three Objects)", GH_ParamAccess.list);
+            pManager.AddGenericParameter("Model", "M", "A Model or Curve, Mesh, or Brep", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Size", "S", "The length of the vector line", GH_ParamAccess.item, 10);
+            pManager[1].Optional = true;
+            pManager.AddNumberParameter("Width", "D", "The width of the vector line", GH_ParamAccess.item, 1);
+            pManager[2].Optional = true;
+            pManager.AddColourParameter("Color", "C", "The color of the vector line", GH_ParamAccess.item, Color.Magenta);
+            pManager[3].Optional = true;
         }
 
         /// <summary>
@@ -31,7 +38,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Scene", "S", "Scene", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model", "M", "The updated Model", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -40,41 +47,33 @@ namespace ThreePlus.Components
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            List<IGH_Goo> goos = new List<IGH_Goo>();
-            if (!DA.GetDataList(0, goos)) return;
-
-            Scene scene = new Scene();
+            IGH_Goo goo = null;
+            if (!DA.GetData(0, ref goo)) return;
 
             Model model = null;
-            Grid grid = new Grid();
-            Axes axes = new Axes();
-            Light light = new Light();
 
-            foreach (IGH_Goo goo in goos)
-            {
                 if (goo.CastTo<Model>(out model))
                 {
-                    scene.Models.Add(new Model(model));
-                }
-                else if (goo.CastTo<Grid>(out grid))
-                {
-                    scene.Grid = new Grid(grid);
-                }
-                else if (goo.CastTo<Axes>(out axes))
-                {
-                    scene.Axes = new Axes(axes);
-                }
-                else if (goo.CastTo<Light>(out light))
-                {
-                    scene.Lights.Add(new Light(light));
+                    model = new Model(model);
                 }
                 else
                 {
-                    scene.Models.Add(goo.ToModel());
+                model = goo.ToModel();
                 }
-            }
 
-            DA.SetData(0, scene);
+            double size = 10;
+            DA.GetData(1, ref size);
+
+            double width = 1;
+            DA.GetData(2, ref width);
+
+            Color color = Color.Magenta;
+            DA.GetData(3, ref color);
+
+            model.Tangents = new TangentDisplay(size, width, color);
+
+            DA.SetData(0, model);
+
         }
 
         /// <summary>
@@ -95,7 +94,7 @@ namespace ThreePlus.Components
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("8eb51f10-c5c8-4e74-8c38-c6820ba815e6"); }
+            get { return new Guid("436c2ce7-0fbb-442c-9e0f-e16279ea1d1d"); }
         }
     }
 }

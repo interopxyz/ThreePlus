@@ -13,7 +13,8 @@ namespace ThreePlus
 
         #region members
 
-        protected Rg.Point3d position = new Rg.Point3d(1,1,1);
+        protected Rg.Point3d position = new Rg.Point3d(100,100,100);
+        protected Rg.Point3d target = new Rg.Point3d(0, 0, 0);
 
         protected int fov = 50;
         protected double zoom = 1;
@@ -37,6 +38,7 @@ namespace ThreePlus
         public Camera(Camera camera) : base(camera)
         {
             this.position = new Rg.Point3d(camera.position);
+            this.target = new Rg.Point3d(camera.target);
 
             this.fov = camera.fov;
             this.zoom = camera.zoom;
@@ -56,6 +58,12 @@ namespace ThreePlus
         {
             get { return position; }
         }
+
+        public virtual Rg.Point3d Target
+        {
+            get { return target; }
+        }
+
         public virtual int FOV
         {
             get { return fov; }

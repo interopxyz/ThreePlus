@@ -18,7 +18,9 @@ namespace ThreePlus
         protected Rg.Mesh mesh = null;
         protected Rg.NurbsCurve curve = null;
 
-        protected Material material = new Material();
+        public Material Material = new Material();
+        public TangentDisplay Tangents = new TangentDisplay();
+        public NormalDisplay Normals = new NormalDisplay();
 
         #endregion
 
@@ -31,7 +33,10 @@ namespace ThreePlus
             if (model.mesh != null) this.mesh = model.mesh.DuplicateMesh();
             if (model.curve != null) this.curve= model.curve.DuplicateCurve().ToNurbsCurve();
 
-            this.material = new Material(model.material);
+            this.Tangents = new TangentDisplay(model.Tangents);
+            this.Normals = new NormalDisplay(model.Normals);
+
+            this.Material = new Material(model.Material);
         }
 
         public Model(Rg.Mesh mesh):base()
@@ -64,7 +69,7 @@ namespace ThreePlus
 
         public virtual bool IsCurve
         {
-            get { return (this.mesh != null); }
+            get { return (this.curve != null); }
         }
 
         private string GeometryType
@@ -90,11 +95,6 @@ namespace ThreePlus
         public virtual Guid GeoId
         {
             get { return geoId; }
-        }
-
-        public Material Material
-        {
-            get { return material; }
         }
 
         #endregion

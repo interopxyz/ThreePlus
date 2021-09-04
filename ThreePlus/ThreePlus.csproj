@@ -56,20 +56,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Helpers\Axes.cs" />
     <Compile Include="Classes\Camera.cs" />
+    <Compile Include="Classes\Helpers\Grid.cs" />
+    <Compile Include="Classes\Helpers\TangentDisplay.cs" />
     <Compile Include="Classes\Light.cs" />
     <Compile Include="Classes\Material.cs" />
     <Compile Include="Classes\Model.cs" />
+    <Compile Include="Classes\Helpers\NormalDisplay.cs" />
     <Compile Include="Classes\Scene.cs" />
     <Compile Include="Classes\SceneObject.cs" />
     <Compile Include="Classes\Scenes\MetaData.cs" />
     <Compile Include="Classes\Scenes\Settings.cs" />
     <Compile Include="Classes\Script.cs" />
-    <Compile Include="Components\Lights\GH_Light_Point.cs" />
+    <Compile Include="Components\Helpers\GH_Axes.cs" />
+    <Compile Include="Components\Helpers\GH_DisplayNormal.cs" />
+    <Compile Include="Components\Helpers\GH_DisplayTangent.cs" />
+    <Compile Include="Components\Helpers\GH_Grid.cs" />
+    <Compile Include="Components\Lights\GH_LightAmbient.cs" />
+    <Compile Include="Components\Lights\GH_LightDirectional.cs" />
+    <Compile Include="Components\Lights\GH_LightHemisphere.cs" />
+    <Compile Include="Components\Lights\GH_LightPoint.cs" />
+    <Compile Include="Components\Lights\GH_LightSpot.cs" />
+    <Compile Include="Components\Materials\GH_MaterialDepth.cs" />
+    <Compile Include="Components\Materials\GH_MaterialLambert.cs" />
+    <Compile Include="Components\Materials\GH_MaterialNormal.cs" />
+    <Compile Include="Components\Output\GH_SaveHtml.cs" />
     <Compile Include="Components\Output\GH_ToHtml.cs" />
     <Compile Include="Components\Scene\GH_Scene.cs" />
     <Compile Include="Components\Output\GH_ToJson.cs" />
-    <Compile Include="Components\Materials\GH_Material_Flat.cs" />
+    <Compile Include="Components\Materials\GH_MaterialBasic.cs" />
     <Compile Include="Extensions\GhToThree.cs" />
     <Compile Include="Extensions\ObjToJavascript.cs" />
     <Compile Include="Extensions\ObjToJson.cs" />
@@ -127,6 +143,7 @@
   <ItemGroup>
     <None Include="Resources\Three_LightAmbient.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

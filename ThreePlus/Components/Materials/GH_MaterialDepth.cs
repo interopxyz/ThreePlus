@@ -3,18 +3,19 @@ using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
-namespace ThreePlus.Components
+namespace ThreePlus.Components.Materials
 {
-    public class GH_Scene : GH_Component
+    public class GH_MaterialDepth : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the GH_Scene class.
+        /// Initializes a new instance of the GH_MaterialDepth class.
         /// </summary>
-        public GH_Scene()
-          : base("Scene", "Scene",
+        public GH_MaterialDepth()
+          : base("Depth Material", "Depth Material",
               "Description",
-              Constants.ShortName, "Subcategory")
+              Constants.ShortName, "Materials")
         {
         }
 
@@ -23,7 +24,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Scene Objects", "O", "Scene Objects including (Curves, Breps, Meshes, Lights, Cameras, Three Objects)", GH_ParamAccess.list);
+            pManager.AddGenericParameter("Model", "M", "A Model, Mesh, or Brep", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -31,7 +32,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Scene", "S", "Scene", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model", "M", "The updated Model", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -40,41 +41,23 @@ namespace ThreePlus.Components
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            List<IGH_Goo> goos = new List<IGH_Goo>();
-            if (!DA.GetDataList(0, goos)) return;
 
-            Scene scene = new Scene();
+            IGH_Goo goo = null;
+            if (!DA.GetData(0, ref goo)) return;
 
             Model model = null;
-            Grid grid = new Grid();
-            Axes axes = new Axes();
-            Light light = new Light();
-
-            foreach (IGH_Goo goo in goos)
+            if (goo.CastTo<Model>(out model))
             {
-                if (goo.CastTo<Model>(out model))
-                {
-                    scene.Models.Add(new Model(model));
-                }
-                else if (goo.CastTo<Grid>(out grid))
-                {
-                    scene.Grid = new Grid(grid);
-                }
-                else if (goo.CastTo<Axes>(out axes))
-                {
-                    scene.Axes = new Axes(axes);
-                }
-                else if (goo.CastTo<Light>(out light))
-                {
-                    scene.Lights.Add(new Light(light));
-                }
-                else
-                {
-                    scene.Models.Add(goo.ToModel());
-                }
+                model = new Model(model);
+            }
+            else
+            {
+                model = goo.ToModel();
             }
 
-            DA.SetData(0, scene);
+            model.Material = Material.DepthMaterial();
+
+            DA.SetData(0, model);
         }
 
         /// <summary>
@@ -95,7 +78,7 @@ namespace ThreePlus.Components
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("8eb51f10-c5c8-4e74-8c38-c6820ba815e6"); }
+            get { return new Guid("15107453-836f-4bdb-abd8-86ba225a0f46"); }
         }
     }
 }

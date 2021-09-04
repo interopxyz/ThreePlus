@@ -16,6 +16,8 @@ namespace ThreePlus
         public Settings Settings = new Settings();
 
         public Camera Camera = new Camera();
+        public Grid Grid = new Grid();
+        public Axes Axes = new Axes();
 
         public List<Model> Models = new List<Model>();
         public List<Light> Lights = new List<Light>();
