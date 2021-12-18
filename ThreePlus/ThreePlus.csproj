@@ -56,6 +56,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Environments\Atmosphere.cs" />
+    <Compile Include="Classes\Environments\Environment.cs" />
+    <Compile Include="Classes\Environments\Ground.cs" />
+    <Compile Include="Classes\PostProcessing\AmbientOcclusion.cs" />
+    <Compile Include="Components\Scene\GH_AmbientOcclusion.cs" />
+    <Compile Include="Components\Scene\GH_Ground.cs" />
     <Compile Include="Classes\Helpers\Axes.cs" />
     <Compile Include="Classes\Camera.cs" />
     <Compile Include="Classes\Helpers\Grid.cs" />
@@ -69,6 +75,8 @@
     <Compile Include="Classes\Scenes\MetaData.cs" />
     <Compile Include="Classes\Scenes\Settings.cs" />
     <Compile Include="Classes\Script.cs" />
+    <Compile Include="Components\Scene\GH_Atmosphere.cs" />
+    <Compile Include="Components\Scene\GH_EnvironmentMap.cs" />
     <Compile Include="Components\Helpers\GH_Axes.cs" />
     <Compile Include="Components\Helpers\GH_DisplayNormal.cs" />
     <Compile Include="Components\Helpers\GH_DisplayTangent.cs" />
@@ -81,6 +89,10 @@
     <Compile Include="Components\Materials\GH_MaterialDepth.cs" />
     <Compile Include="Components\Materials\GH_MaterialLambert.cs" />
     <Compile Include="Components\Materials\GH_MaterialNormal.cs" />
+    <Compile Include="Components\Materials\GH_MaterialPhong.cs" />
+    <Compile Include="Components\Materials\GH_MaterialPhysical.cs" />
+    <Compile Include="Components\Materials\GH_MaterialStandard.cs" />
+    <Compile Include="Components\Materials\GH_MaterialToon.cs" />
     <Compile Include="Components\Output\GH_SaveHtml.cs" />
     <Compile Include="Components\Output\GH_ToHtml.cs" />
     <Compile Include="Components\Scene\GH_Scene.cs" />
@@ -99,9 +111,6 @@
     <Compile Include="Utilities\Constants.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Three_LightDirectional.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -114,36 +123,92 @@
     <None Include="Resources\VRButton.js" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Three_LightHemisphere.png" />
+    <None Include="Resources\VertexNormalsHelper.js" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Three_LightLine.png" />
+    <None Include="Resources\VertexTangentsHelper.js" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Three_LightPoint.png" />
+    <None Include="Resources\OrbitControls.js" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Three_LightSpot.png" />
+    <None Include="Resources\three.js" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Three_MaterialAnalytical.png" />
+    <None Include="Resources\ThreePlus_16.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Three_MaterialFlat.png" />
+    <None Include="Resources\ThreePlus_24.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Three_MaterialLambert.png" />
+    <Folder Include="Components\Environments\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Three_MaterialPhong.png" />
+    <None Include="Resources\Three_Helper_Axis-01.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Three_MaterialPhysical.png" />
+    <None Include="Resources\Three_Helper_Grid-01.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Three_LightAmbient.png" />
+    <None Include="Resources\Three_Light_Ambient-01.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Three_Light_Directional-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Light_Hemisphere-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Light_Linear-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Light_Point-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Light_Spot-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Basic-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Depth-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Lambert-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Normal-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Phong-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Physical-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Standard-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Toon-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CopyShader.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EffectComposer.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShaderPass.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SSAOPass.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SSAOShader.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SimplexNoise.js" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

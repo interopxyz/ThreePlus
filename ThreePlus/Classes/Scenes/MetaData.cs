@@ -43,6 +43,7 @@ namespace ThreePlus
         public virtual string Name
         {
             get { return name; }
+            set { name = value; }
         }
 
         public virtual double Version

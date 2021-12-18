@@ -32,6 +32,19 @@ namespace ThreePlus
                 output.AppendLine("<script src=\"js/OrbitControls.js\"></script>");
                 output.AppendLine("<script src=\"js/VertexNormalsHelper.js\"></script>");
                 output.AppendLine("<script src=\"js/VertexTangentsHelper.js\"></script>");
+
+                if (input.AmbientOcclusion.HasAO)
+                {
+                    output.AppendLine("<script src=\"js/EffectComposer.js\"></script>");
+                    output.AppendLine("<script src=\"js/CopyShader.js\"></script>");
+                    output.AppendLine("<script src=\"js/ShaderPass.js\"></script>");
+
+                    output.AppendLine("<script src=\"js/SSAOPass.js\"></script>");
+                    output.AppendLine("<script src=\"js/SimplexNoise.js\"></script>");
+                    output.AppendLine("<script src=\"js/SSAOShader.js\"></script>");
+                }
+
+
             }
             else
             {
@@ -50,6 +63,10 @@ namespace ThreePlus
             StringBuilder output = new StringBuilder();
 
             output.AppendLine("const scene = new THREE.Scene();");
+
+            output.AppendLine(input.Environment.ToJavascript());
+            if (input.Atmosphere.HasFog) output.AppendLine(input.Atmosphere.ToJavascript());
+            if (input.Ground.HasGround) output.AppendLine(input.Ground.ToJavascript());
 
             output.AppendLine("const renderer = new THREE.WebGLRenderer({ antialias: true });");
             output.AppendLine("renderer.setSize(window.innerWidth, window.innerHeight);");
@@ -81,14 +98,87 @@ namespace ThreePlus
                 i++;
             }
 
+            output.Append(input.AmbientOcclusion.ToJavascript());
+
             output.AppendLine("controls = new THREE.OrbitControls (camera, renderer.domElement);");
             output.AppendLine("const animate = function () {");
             output.AppendLine("controls.update();");
             output.AppendLine("requestAnimationFrame ( animate ); ");
             output.AppendLine("renderer.render (scene, camera);");
+
+            if (input.AmbientOcclusion.HasAO) output.AppendLine("composer.render();");
+
             output.AppendLine("};");
             output.AppendLine("animate();");
 
+            return output.ToString();
+        }
+
+        public static string ToJavascript(this AmbientOcclusion input)
+        {
+            StringBuilder output = new StringBuilder();
+
+            if (input.HasAO)
+            {
+                output.AppendLine("let composer = new THREE.EffectComposer( renderer );");
+                output.AppendLine("const ssaoPass = new THREE.SSAOPass( scene, camera, window.innerWidth, window.innerHeight );");
+                output.AppendLine("ssaoPass.kernelRadius = " + input.Radius + ";");
+                output.AppendLine("ssaoPass.minDistance = " + input.MinDistance + ";");
+                output.AppendLine("ssaoPass.maxDistance = " + input.MaxDistance+ ";");
+                output.AppendLine("composer.addPass( ssaoPass );");
+            }
+
+            return output.ToString();
+        }
+
+        public static string ToJavascript(this Ground input)
+        {
+            StringBuilder output = new StringBuilder();
+
+            output.AppendLine("var groundMaterial = new THREE.MeshBasicMaterial();");
+            output.AppendLine("var groundPlane = new THREE.Mesh(new THREE.PlaneBufferGeometry("+input.Size+","+ input.Size + "), groundMaterial);");
+            output.AppendLine("groundPlane.position.y = "+input.Height+";");
+            output.AppendLine("groundPlane.rotation.x = - Math.PI / 2;");
+            output.AppendLine("groundPlane.receiveShadow = true;");
+            output.AppendLine("scene.add(groundPlane);");
+
+            return output.ToString();
+        }
+
+        public static string ToJavascript(this Atmosphere input)
+        {
+            StringBuilder output = new StringBuilder();
+
+            output.AppendLine("scene.fog = new THREE.FogExp2( " + input.Color.ToJs() + " , "+input.Density+ " );");
+
+            return output.ToString();
+        }
+
+        public static string ToJavascript(this Environment input)
+        {
+            StringBuilder output = new StringBuilder();
+
+            string background = "scene.background = new THREE.Color(" + input.Background.ToJs() + ");";
+
+            if (input.HasEnvMap)
+            {
+                output.AppendLine("var envMap = new THREE.TextureLoader().load(\"data:image/png;base64," + input.EnvMap.ToJs() + "\");");
+
+                output.AppendLine("envMap.mapping = THREE.EquirectangularReflectionMapping;");
+                if (input.IsBackground)
+                {
+                    output.AppendLine("scene.background = envMap;");
+                }
+                else
+                {
+                    output.AppendLine(background);
+                }
+                if (input.IsEnvironment) output.AppendLine("scene.environment = envMap;");
+            }
+            else
+            {
+                output.AppendLine(background);
+            }
             return output.ToString();
         }
 
@@ -163,10 +253,19 @@ namespace ThreePlus
             switch (input.MaterialType)
             {
                 default:
-                    output.AppendLine(starter+"MeshBasicMaterial( { color: " + input.Color.ToJs() + " } );");
+                    output.AppendLine(starter+"MeshBasicMaterial( { color: " + input.Color.ToJs() + ", transparent: " + input.Color.IsTransparent() + ", opacity: "+ input.Color.ToJsOpacity() + " } );");
                     break;
                 case Material.Types.Lambert:
-                    output.AppendLine(starter + "MeshLambertMaterial( { color: " + input.Color.ToJs() + " } );");
+                    output.AppendLine(starter + "MeshLambertMaterial( { color: " + input.Color.ToJs() + ", transparent: " + input.Color.IsTransparent() + ", opacity: " + input.Color.ToJsOpacity() + " } );");
+                    break;
+                case Material.Types.Phong:
+                    output.AppendLine(starter + "MeshPhongMaterial( { color: " + input.Color.ToJs() + ", transparent: " + input.Color.IsTransparent() + ", opacity: " + input.Color.ToJsOpacity() + ", shininess: " + (input.Shininess*100.0) + " } );");
+                    break;
+                case Material.Types.Standard:
+                    output.AppendLine(starter + "MeshStandardMaterial( { color: " + input.Color.ToJs() + ", transparent: " + input.Color.IsTransparent() + ", opacity: " + input.Color.ToJsOpacity() + ", roughness: " + (input.Roughness) + ", metalness: " + (input.Metalness) + " } );");
+                    break;
+                case Material.Types.Physical:
+                    output.AppendLine(starter + "MeshPhysicalMaterial( { color: " + input.Color.ToJs() + ", transparent: " + input.Color.IsTransparent() + ", opacity: " + input.Color.ToJsOpacity() + ", roughness: " + (input.Roughness * 100.0) + ", metalness: " + (input.Metalness * 100.0) + ", reflectivity: " + (input.Reflectivity * 100.0) + ", clearcoat: " + (input.Clearcoat * 100.0) + ", clearcoatRoughness: " + (input.ClearcoatRoughness * 100.0) + " } );");
                     break;
                 case Material.Types.Normal:
                     output.AppendLine(starter + "MeshNormalMaterial();");
@@ -178,6 +277,7 @@ namespace ThreePlus
 
             return output.ToString();
         }
+
         public static string ToJavascript(this Light input, string index)
         {
             StringBuilder output = new StringBuilder();
@@ -186,66 +286,76 @@ namespace ThreePlus
             switch (input.LightType)
             {
                 default:
-                    output.AppendLine(starter + "AmbientLight( { color: " + input.Color.ToJs() + ", intensity: " + input.Intensity + " } );");
+                    output.AppendLine(starter + "AmbientLight(" + input.Color.ToJs() + ", " + input.Intensity + " );");
                     break;
                 case Light.Types.Point:
-                    output.AppendLine(starter + "PointLight( { color: " + input.Color.ToJs() + " , intensity : " + input.Intensity + " , distance : " + input.Distance + " , decay  : " + input.Decay + " } );");
+                    output.AppendLine(starter + "PointLight(" + input.Color.ToJs() + ", " + input.Intensity + ", " + input.Distance + ", " + input.Decay + " );");
                     output.AppendLine(name + ".position.set( " + input.Position.ToJs() + " );");
                     break;
                 case Light.Types.Directional:
-                    output.AppendLine(starter + "DirectionalLight( { color: " + input.Color.ToJs() + ", intensity: " + input.Intensity + " } );");
+                    output.AppendLine(starter + "DirectionalLight(" + input.Color.ToJs() + ", " + input.Intensity + " );");
                     output.AppendLine(name + ".position.set( " + input.Position.ToJs() + " );");
                     output.AppendLine(input.Target.ToJsTarget(name));
                     break;
                 case Light.Types.Hemisphere:
-                    output.AppendLine(starter + "HemisphereLight( { skyColor : " + input.Color.ToJs() + ", groundColor : " + input.ColorB.ToJs() + ", intensity: " + input.Intensity + " } );");
+                    output.AppendLine(starter + "HemisphereLight(" + input.Color.ToJs() + ", " + input.ColorB.ToJs() + ", " + input.Intensity + " );");
                     break;
             }
 
             return output.ToString();
         }
 
-
-
         public static string ToJavascript(this Rg.Mesh input,string name)
         {
             input = input.DuplicateMesh();
             input.Faces.ConvertQuadsToTriangles();
-            //input.RebuildNormals();
+            if (input.Normals.Count < 1) input.RebuildNormals();
 
-            StringBuilder output = new StringBuilder();
+            bool hasUV = (input.TextureCoordinates.Count > 0);
+
+                StringBuilder output = new StringBuilder();
 
             output.AppendLine("const mesh" + name + " = new THREE.BufferGeometry();");
 
-            List<string> vertices = new List<string>();
-            List<string> normals = new List<string>();
-            List<string> uvs = new List<string>();
-            
-            foreach (Rg.MeshFace face in input.Faces)
+            int count = input.Faces.Count;
+            var vertices = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count*3);
+            var normals = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count * 3);
+            var uvs = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count * 3);
+
+
+            Parallel.For(0, count, k =>
             {
-                vertices.Add(input.Vertices[face.A].ToJs());
-                normals.Add(input.Normals[face.A].ToJs());
-                uvs.Add(input.TextureCoordinates[face.A].ToJs());
+                Rg.MeshFace face = input.Faces[k];
 
-                vertices.Add(input.Vertices[face.C].ToJs());
-                normals.Add(input.Normals[face.C].ToJs());
-                uvs.Add(input.TextureCoordinates[face.C].ToJs());
+                vertices[k*3] = input.Vertices[face.A].ToJs();
+                normals[k * 3] = input.Normals[face.A].ToJs();
 
-                vertices.Add(input.Vertices[face.B].ToJs());
-                normals.Add(input.Normals[face.B].ToJs());
-                uvs.Add(input.TextureCoordinates[face.B].ToJs());
+                vertices[k * 3 + 1] = input.Vertices[face.C].ToJs();
+                normals[k * 3 + 1] = input.Normals[face.C].ToJs();
+
+                vertices[k * 3 + 2] = input.Vertices[face.B].ToJs();
+                normals[k * 3 + 2] = input.Normals[face.B].ToJs();
             }
+            );
 
-            output.AppendLine("const vertices" + name + " = new Float32Array( [" + string.Join(",", vertices) + "] );");
-            output.AppendLine("const normals" + name + " = new Float32Array( [" + string.Join(",", normals) + "] );");
-            output.AppendLine("const uv" + name + " = new Float32Array( [" + string.Join(",", uvs) + "] );");
-            //output.AppendLine("const uv" + name + " = new Float32Array( [" + string.Join(",", input.TextureCoordinates.ToFloatArray()) + "] );");
-            //output.AppendLine("const faces" + name + " = new Uint8Array( [" + string.Join(",", input.Faces.ToIntArray(false)) + "] );");
+            if (hasUV) {
+                Parallel.For(0, count, k =>
+                {
+                    Rg.MeshFace face = input.Faces[k];
+                    uvs[k * 3] = input.TextureCoordinates[face.A].ToJs();
+                    uvs[k * 3 + 1] = input.TextureCoordinates[face.C].ToJs();
+                    uvs[k * 3 + 2] = input.TextureCoordinates[face.B].ToJs();
+                }
+                );
+            }
+            
+            output.AppendLine("const vertices" + name + " = new Float32Array( [" + string.Join(",", vertices.Values) + "] );");
+            output.AppendLine("const normals" + name + " = new Float32Array( [" + string.Join(",", normals.Values) + "] );");
+            if (hasUV) output.AppendLine("const uv" + name + " = new Float32Array( [" + string.Join(",", uvs.Values) + "] );");
 
             output.AppendLine("mesh"+name + ".setAttribute( 'position', new THREE.BufferAttribute( vertices" + name + ", 3 ) );");
             output.AppendLine("mesh"+name + ".setAttribute( 'normal', new THREE.BufferAttribute( normals" + name + ", 3 ) );");
-            output.AppendLine("mesh"+name + ".setAttribute( 'uv', new THREE.BufferAttribute( uv" + name + ", 2 ) );");
-            //output.AppendLine("mesh"+name + ".setAttribute( 'index', new THREE.BufferAttribute( faces" + name + ", 3 ) );");
+            if (hasUV) output.AppendLine("mesh"+name + ".setAttribute( 'uv', new THREE.BufferAttribute( uv" + name + ", 2 ) );");
 
             return output.ToString();
         }
@@ -265,34 +375,56 @@ namespace ThreePlus
             return output.ToString();
         }
 
+        public static string IsTransparent(this Sd.Color value)
+        {
+            string output = "false";
+            if (value.A < 255) output = "true";
+
+            return output;
+        }
+
+        public static string ToJsOpacity(this Sd.Color value, int digits = 5)
+        {
+            return "'" + Math.Round(((double)value.A)/255.0,digits)+ "'";
+        }
+
         public static string ToJs(this Sd.Color value)
         {
-            return Sd.ColorTranslator.ToOle(value).ToString();
+            return "'"+Sd.ColorTranslator.ToHtml(value).ToString() +"'";
         }
 
-        public static string ToJs(this Rg.Point3d value)
+        public static string ToJs(this Rg.Point3d value, int digits = 5)
         {
-            return value.X+","+value.Z+","+value.Y;
+            return Math.Round(value.X, digits)+ ","+ Math.Round(value.Z, digits) + ","+ Math.Round(value.Y, digits);
         }
 
-        public static string ToJs(this Rg.Point3f value)
+        public static string ToJs(this Rg.Point3f value, int digits = 5)
         {
-            return value.X + "," + value.Z + "," + value.Y;
+            return Math.Round(value.X, digits) + "," + Math.Round(value.Z, digits) + "," + Math.Round(value.Y, digits);
         }
 
-        public static string ToJs(this Rg.Vector3d value)
+        public static string ToJs(this Rg.Vector3d value, int digits = 5)
         {
-            return value.X + "," + value.Z + "," + value.Y;
+            return Math.Round(value.X, digits) + "," + Math.Round(value.Z, digits) + "," + Math.Round(value.Y, digits);
         }
 
-        public static string ToJs(this Rg.Vector3f value)
+        public static string ToJs(this Rg.Vector3f value, int digits = 5)
         {
-            return value.X + "," + value.Z + "," + value.Y;
+            return Math.Round(value.X, digits) + "," + Math.Round(value.Z, digits) + "," + Math.Round(value.Y, digits);
         }
 
-        public static string ToJs(this Rg.Point2f value)
+        public static string ToJs(this Rg.Point2f value, int digits = 5)
         {
-            return value.X + "," + value.Y;
+            return Math.Round(value.X, digits) + "," + Math.Round(value.Y, digits);
+        }
+
+        public static string ToJs(this Sd.Bitmap input)
+        {
+            var ms = new System.IO.MemoryStream();
+            input.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+            byte[] data = ms.ToArray();
+
+            return Convert.ToBase64String(data);
         }
 
         #endregion

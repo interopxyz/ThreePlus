@@ -1,4 +1,5 @@
-﻿using Grasshopper.Kernel;
+﻿using Grasshopper;
+using Grasshopper.Kernel;
 using System;
 using System.Drawing;
 
@@ -18,7 +19,7 @@ namespace ThreePlus
             get
             {
                 //Return a 24x24 pixel bitmap to represent this GHA library.
-                return null;
+                return Properties.Resources.ThreePlus_24;
             }
         }
         public override string Description
@@ -26,7 +27,7 @@ namespace ThreePlus
             get
             {
                 //Return a short string describing the purpose of this GHA library.
-                return "";
+                return "A Three JS creation plugin for Grasshopper 3d";
             }
         }
         public override Guid Id
@@ -42,7 +43,7 @@ namespace ThreePlus
             get
             {
                 //Return a string identifying you or your company.
-                return "";
+                return "David Mans";
             }
         }
         public override string AuthorContact
@@ -50,8 +51,20 @@ namespace ThreePlus
             get
             {
                 //Return a string representing your preferred contact details.
-                return "";
+                return "interopxyz@gmail.com";
             }
+        }
+    }
+
+    public class BitmapPlusCategoryIcon : GH_AssemblyPriority
+    {
+        public object Properties { get; private set; }
+
+        public override GH_LoadingInstruction PriorityLoad()
+        {
+            Instances.ComponentServer.AddCategoryIcon(Constants.ShortName, ThreePlus.Properties.Resources.ThreePlus_16);
+            Instances.ComponentServer.AddCategorySymbolName(Constants.ShortName, '3');
+            return GH_LoadingInstruction.Proceed;
         }
     }
 }

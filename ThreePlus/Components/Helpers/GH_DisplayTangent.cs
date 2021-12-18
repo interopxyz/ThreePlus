@@ -16,7 +16,15 @@ namespace ThreePlus.Components.Helpers
           : base("Display Tangents", "Tangents",
               "Description",
               Constants.ShortName, "Helper")
-        { 
+        {
+        }
+
+        /// <summary>
+        /// Set Exposure level for the component.
+        /// </summary>
+        public override GH_Exposure Exposure
+        {
+            get { return GH_Exposure.tertiary; }
         }
 
         /// <summary>

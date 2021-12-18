@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,11 @@ namespace ThreePlus
         #region members
 
         public Settings Settings = new Settings();
+        public Environment Environment = new Environment();
+        public Atmosphere Atmosphere = new Atmosphere();
+        public Ground Ground = new Ground();
+
+        public AmbientOcclusion AmbientOcclusion = new AmbientOcclusion();
 
         public Camera Camera = new Camera();
         public Grid Grid = new Grid();
@@ -22,8 +28,6 @@ namespace ThreePlus
         public List<Model> Models = new List<Model>();
         public List<Light> Lights = new List<Light>();
         public List<Script> Scripts = new List<Script>();
-
-        public Sd.Color Background = Sd.Color.White;
 
         #endregion
 
@@ -38,6 +42,8 @@ namespace ThreePlus
         public Scene(Scene scene):base(scene)
         {
             this.Camera = new Camera(scene.Camera);
+            this.Grid = new Grid(scene.Grid);
+            this.Axes = new Axes(scene.Axes);
 
             foreach(Model model in scene.Models)
             {
@@ -52,14 +58,16 @@ namespace ThreePlus
                 this.Scripts.Add(new Script(script));
             }
 
-            this.Background = scene.Background;
+            this.Environment = new Environment(scene.Environment);
+            this.Atmosphere = new Atmosphere(scene.Atmosphere);
+            this.Ground = new Ground(scene.Ground);
+
+            this.AmbientOcclusion = new AmbientOcclusion(scene.AmbientOcclusion);
     }
 
         #endregion
 
         #region properties
-
-
 
         #endregion
 

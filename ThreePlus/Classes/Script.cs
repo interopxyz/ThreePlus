@@ -32,7 +32,7 @@ namespace ThreePlus
             this.type = "Script";
             this.title = name;
 
-            this.contents = contents;
+            this.contents = script;
         }
 
         #endregion

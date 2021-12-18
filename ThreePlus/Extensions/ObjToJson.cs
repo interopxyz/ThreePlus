@@ -129,7 +129,7 @@ namespace ThreePlus
 
             output.Append(((MetaData)input).ToJsonObjectMeta());
 
-            output.AppendLine(SetItem("background", input.Background));
+            output.AppendLine(SetItem("background", input.Environment.Background));
 
             output.AppendLine(OpenArray("children"));
             output.AppendLine(input.Models.ToJsonObjects());

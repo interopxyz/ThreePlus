@@ -28,7 +28,7 @@ namespace ThreePlus.Components.Output
             pManager.AddGenericParameter("Scene", "S", "Scene", GH_ParamAccess.item);
             pManager.AddTextParameter("Folder Path", "F", "The folderpath to save the file", GH_ParamAccess.item);
             pManager[1].Optional = true;
-            pManager.AddTextParameter("File Name", "N", "The filename for the Svg export", GH_ParamAccess.item);
+            pManager.AddTextParameter("Folder Name", "N", "The new export folder name", GH_ParamAccess.item);
             pManager[2].Optional = true;
             pManager.AddBooleanParameter("Save", "S", "If true, the new file will be writter or overwritten", GH_ParamAccess.item, false);
             pManager[3].Optional = true;
@@ -39,6 +39,8 @@ namespace ThreePlus.Components.Output
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
+            pManager.AddTextParameter("HTML path", "H", "The html text", GH_ParamAccess.item);
+            pManager.AddTextParameter("JS path", "J", "The javascript text", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -56,6 +58,8 @@ namespace ThreePlus.Components.Output
             string name = DateTime.UtcNow.ToString("yyyy-dd-M_HH-mm-ss");
             bool hasName = DA.GetData(2, ref name);
 
+            scene.Name = name;
+
             bool save = false;
             if (!DA.GetData(3, ref save)) return;
 
@@ -67,7 +71,10 @@ namespace ThreePlus.Components.Output
                 }
             }
 
-            string filepath = path + name;
+            if (save)
+            {
+
+                string filepath = path + name;
 
 
             if (!Directory.Exists(path))
@@ -76,16 +83,36 @@ namespace ThreePlus.Components.Output
                 return;
             }
 
-            Directory.CreateDirectory(path+"\\"+name);
-            path = path + "\\" + name + "\\";
+                string parent = path + "\\" + name + "\\";
+                string child = parent + "js" + "\\";
 
-            string html = scene.ToHtml(false);
+                Directory.CreateDirectory(parent);
+                Directory.CreateDirectory(child);
+
+            string html = scene.ToHtml(true);
             string js = scene.ToJavascript();
 
-            if (save)
-            {
-                File.WriteAllText(path +"index.html", html);
-                File.WriteAllText(path + "app.js", js);
+                File.WriteAllText(parent + "index.html", html);
+                File.WriteAllText(parent + "app.js", js);
+
+                File.WriteAllText(child + "three.js", Properties.Resources.three);
+                File.WriteAllText(child + "OrbitControls.js", Properties.Resources.OrbitControls);
+                File.WriteAllText(child + "VertexTangentsHelper.js", Properties.Resources.VertexTangentsHelper);
+                File.WriteAllText(child + "VertexNormalsHelper.js", Properties.Resources.VertexNormalsHelper);
+
+                if (scene.AmbientOcclusion.HasAO)
+                {
+                    File.WriteAllText(child + "EffectComposer.js", Properties.Resources.EffectComposer);
+                    File.WriteAllText(child + "CopyShader.js", Properties.Resources.CopyShader);
+                    File.WriteAllText(child + "ShaderPass.js", Properties.Resources.ShaderPass);
+
+                    File.WriteAllText(child + "SSAOPass.js", Properties.Resources.SSAOPass);
+                    File.WriteAllText(child + "SimplexNoise.js", Properties.Resources.SimplexNoise);
+                    File.WriteAllText(child + "SSAOShader.js", Properties.Resources.SSAOShader);
+                }
+
+                DA.SetData(0, parent + "index.html");
+                DA.SetData(1, parent + "app.js");
             }
 
 

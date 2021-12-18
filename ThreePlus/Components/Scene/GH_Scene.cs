@@ -3,6 +3,7 @@ using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace ThreePlus.Components
 {
@@ -12,10 +13,18 @@ namespace ThreePlus.Components
         /// Initializes a new instance of the GH_Scene class.
         /// </summary>
         public GH_Scene()
-          : base("Scene", "Scene",
+          : base("Assemble Scene", "Scene",
               "Description",
-              Constants.ShortName, "Subcategory")
+              Constants.ShortName, "Scene")
         {
+        }
+
+        /// <summary>
+        /// Set Exposure level for the component.
+        /// </summary>
+        public override GH_Exposure Exposure
+        {
+            get { return GH_Exposure.secondary; }
         }
 
         /// <summary>
@@ -49,6 +58,10 @@ namespace ThreePlus.Components
             Grid grid = new Grid();
             Axes axes = new Axes();
             Light light = new Light();
+            Environment environment = new Environment();
+            Atmosphere atmosphere = new Atmosphere();
+            Ground ground = new Ground();
+            AmbientOcclusion ambientOcclusion = new AmbientOcclusion();
 
             foreach (IGH_Goo goo in goos)
             {
@@ -68,11 +81,28 @@ namespace ThreePlus.Components
                 {
                     scene.Lights.Add(new Light(light));
                 }
+                else if (goo.CastTo<Environment>(out environment))
+                {
+                    scene.Environment = new Environment(environment);
+                }
+                else if (goo.CastTo<Atmosphere>(out atmosphere))
+                {
+                    scene.Atmosphere = new Atmosphere(atmosphere);
+                }
+                else if (goo.CastTo<Ground>(out ground))
+                {
+                    scene.Ground = new Ground(ground);
+                }
+                else if (goo.CastTo<AmbientOcclusion>(out ambientOcclusion))
+                {
+                    scene.AmbientOcclusion = new AmbientOcclusion(ambientOcclusion);
+                }
                 else
                 {
                     scene.Models.Add(goo.ToModel());
                 }
             }
+
 
             DA.SetData(0, scene);
         }

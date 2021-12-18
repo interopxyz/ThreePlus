@@ -61,6 +61,81 @@ namespace ThreePlus.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	/**
+        /// * Full-screen textured quad shader
+        /// */
+        ///	var CopyShader = {
+        ///		uniforms: {
+        ///			&apos;tDiffuse&apos;: {
+        ///				value: null
+        ///			},
+        ///			&apos;opacity&apos;: {
+        ///				value: 1.0
+        ///			}
+        ///		},
+        ///		vertexShader:
+        ///  /* glsl */
+        ///  `
+        ///
+        ///		varying vec2 vUv;
+        ///
+        ///		void main() {
+        ///
+        ///			vUv = uv;
+        ///			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+        ///
+        ///		}`,
+        ///		fragmentShader:
+        ///  /* glsl */
+        ///  `
+        ///
+        ///		uniform float opacity;
+        ///
+        ///		uniform sampler2D tDiffuse;
+        ///
+        ///		varying vec2 vUv;
+        ///
+        ///		void main() {
+        ///
+        ///			vec4 texel = texture2D( tDiffuse, [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string CopyShader {
+            get {
+                return ResourceManager.GetString("CopyShader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	class EffectComposer {
+        ///
+        ///		constructor( renderer, renderTarget ) {
+        ///
+        ///			this.renderer = renderer;
+        ///
+        ///			if ( renderTarget === undefined ) {
+        ///
+        ///				const parameters = {
+        ///					minFilter: THREE.LinearFilter,
+        ///					magFilter: THREE.LinearFilter,
+        ///					format: THREE.RGBAFormat
+        ///				};
+        ///				const size = renderer.getSize( new THREE.Vector2() );
+        ///				this._pixelRatio = renderer.getPixelRatio();
+        ///				this._width = size.width;
+        ///				this._height = size.height;
+        ///				renderTarget = new THREE.WebGLRenderTarget( this._ [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string EffectComposer {
+            get {
+                return ResourceManager.GetString("EffectComposer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to varying vec3 vPosition;\nvoid main() {\n\tgl_FragColor = vec4( vPosition * 2.0, 1.0 );\n}.
         /// </summary>
         internal static string FragmentShader {
@@ -70,112 +145,150 @@ namespace ThreePlus.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	// Unlike TrackballControls, it maintains the &quot;up&quot; direction object.up (+Y by default).
+        ///	//
+        ///	//    Orbit - left mouse / touch: one-finger move
+        ///	//    Zoom - middle mouse, or mousewheel / touch: two-finger spread or squish
+        ///	//    Pan - right mouse, or left mouse + ctrl/meta/shiftKey, or arrow keys / touch: two-finger move
+        ///
+        ///	const _changeEvent = {
+        ///		type: &apos;change&apos;
+        ///	};
+        ///	const _startEvent = {
+        ///		type: &apos;start&apos;
+        ///	};
+        ///	const _endEvent = {
+        ///		type: &apos;end&apos;
+        ///	};
+        ///
+        ///	class OrbitControls extends THREE.EventDi [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static System.Drawing.Bitmap Three_LightAmbient {
+        internal static string OrbitControls {
             get {
-                object obj = ResourceManager.GetObject("Three_LightAmbient", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("OrbitControls", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	class ShaderPass extends THREE.Pass {
+        ///
+        ///		constructor( shader, textureID ) {
+        ///
+        ///			super();
+        ///			this.textureID = textureID !== undefined ? textureID : &apos;tDiffuse&apos;;
+        ///
+        ///			if ( shader instanceof THREE.ShaderMaterial ) {
+        ///
+        ///				this.uniforms = shader.uniforms;
+        ///				this.material = shader;
+        ///
+        ///			} else if ( shader ) {
+        ///
+        ///				this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+        ///				this.material = new THREE.ShaderMaterial( {
+        ///					defines: Object.assign( {}, shader.defines ),
+        ///					uniforms: this.unif [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static System.Drawing.Bitmap Three_LightDirectional {
+        internal static string ShaderPass {
             get {
-                object obj = ResourceManager.GetObject("Three_LightDirectional", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("ShaderPass", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	// Ported from Stefan Gustavson&apos;s java implementation
+        ///	// http://staffwww.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf
+        ///	// Read Stefan&apos;s excellent paper for details on how this code works.
+        ///	//
+        ///	// Sean McCullough banksean@gmail.com
+        ///	//
+        ///	// Added 4D noise
+        ///
+        ///	/**
+        /// * You can pass in a random number generator object if you like.
+        /// * It is assumed to have a random() method.
+        /// */
+        ///	class SimplexNoise {
+        ///
+        ///		constructor( r = Math ) {
+        ///
+        ///			this.grad3 = [[ 1, 1, 0 ], [ - 1, 1, 0 ], [ 1, - 1, 0 ], [ - 1 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static System.Drawing.Bitmap Three_LightHemisphere {
+        internal static string SimplexNoise {
             get {
-                object obj = ResourceManager.GetObject("Three_LightHemisphere", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("SimplexNoise", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	class SSAOPass extends THREE.Pass {
+        ///
+        ///		constructor( scene, camera, width, height ) {
+        ///
+        ///			super();
+        ///			this.width = width !== undefined ? width : 512;
+        ///			this.height = height !== undefined ? height : 512;
+        ///			this.clear = true;
+        ///			this.camera = camera;
+        ///			this.scene = scene;
+        ///			this.kernelRadius = 8;
+        ///			this.kernelSize = 32;
+        ///			this.kernel = [];
+        ///			this.noiseTexture = null;
+        ///			this.output = 0;
+        ///			this.minDistance = 0.005;
+        ///			this.maxDistance = 0.1;
+        ///			this._visibilityCache = new Map(); //
+        ///
+        ///		 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static System.Drawing.Bitmap Three_LightLine {
+        internal static string SSAOPass {
             get {
-                object obj = ResourceManager.GetObject("Three_LightLine", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("SSAOPass", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	/**
+        /// * References:
+        /// * http://john-chapman-graphics.blogspot.com/2013/01/ssao-tutorial.html
+        /// * https://learnopengl.com/Advanced-Lighting/SSAO
+        /// * https://github.com/McNopper/OpenGL/blob/master/Example28/shader/ssao.frag.glsl
+        /// */
+        ///
+        ///	const SSAOShader = {
+        ///		defines: {
+        ///			&apos;PERSPECTIVE_CAMERA&apos;: 1,
+        ///			&apos;KERNEL_SIZE&apos;: 32
+        ///		},
+        ///		uniforms: {
+        ///			&apos;tDiffuse&apos;: {
+        ///				value: null
+        ///			},
+        ///			&apos;tNormal&apos;: {
+        ///				value: null
+        ///			},
+        ///			&apos;tDepth&apos;: {
+        ///				value: null
+        ///			},
+        ///			&apos;tNoise&apos;: {
+        ///				value: null
+        ///			},
+        ///			&apos;kernel&apos;: [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static System.Drawing.Bitmap Three_LightPoint {
+        internal static string SSAOShader {
             get {
-                object obj = ResourceManager.GetObject("Three_LightPoint", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Three_LightSpot {
-            get {
-                object obj = ResourceManager.GetObject("Three_LightSpot", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Three_MaterialAnalytical {
-            get {
-                object obj = ResourceManager.GetObject("Three_MaterialAnalytical", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Three_MaterialFlat {
-            get {
-                object obj = ResourceManager.GetObject("Three_MaterialFlat", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Three_MaterialLambert {
-            get {
-                object obj = ResourceManager.GetObject("Three_MaterialLambert", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Three_MaterialPhong {
-            get {
-                object obj = ResourceManager.GetObject("Three_MaterialPhong", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Three_MaterialPhysical {
-            get {
-                object obj = ResourceManager.GetObject("Three_MaterialPhysical", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("SSAOShader", resourceCulture);
             }
         }
         
@@ -185,24 +298,182 @@ namespace ThreePlus.Properties {
         /// * Copyright 2010-2021 Three.js Authors
         /// * SPDX-License-Identifier: MIT
         /// */
-        ///const REVISION = &apos;131&apos;;
-        ///const MOUSE = { LEFT: 0, MIDDLE: 1, RIGHT: 2, ROTATE: 0, DOLLY: 1, PAN: 2 };
-        ///const TOUCH = { ROTATE: 0, PAN: 1, DOLLY_PAN: 2, DOLLY_ROTATE: 3 };
-        ///const CullFaceNone = 0;
-        ///const CullFaceBack = 1;
-        ///const CullFaceFront = 2;
-        ///const CullFaceFrontBack = 3;
-        ///const BasicShadowMap = 0;
-        ///const PCFShadowMap = 1;
-        ///const PCFSoftShadowMap = 2;
-        ///const VSMShadowMap = 3;
-        ///const FrontSide = 0;
-        ///const BackSide = 1;
-        ///const  [rest of string was truncated]&quot;;.
+        ///(function (global, factory) {
+        ///	typeof exports === &apos;object&apos; &amp;&amp; typeof module !== &apos;undefined&apos; ? factory(exports) :
+        ///	typeof define === &apos;function&apos; &amp;&amp; define.amd ? define([&apos;exports&apos;], factory) :
+        ///	(global = typeof globalThis !== &apos;undefined&apos; ? globalThis : global || self, factory(global.THREE = {}));
+        ///}(this, (function (exports) { &apos;use strict&apos;;
+        ///
+        ///	const REVISION = &apos;131&apos;;
+        ///	const MOUSE = {
+        ///		LEFT: 0,
+        ///		MIDDLE: 1,
+        ///		RIGHT: 2,
+        ///		 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string three_module {
+        internal static string three {
             get {
-                return ResourceManager.GetString("three_module", resourceCulture);
+                return ResourceManager.GetString("three", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Helper_Axis_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Helper_Axis_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Helper_Grid_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Helper_Grid_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Light_Ambient_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Light_Ambient_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Light_Directional_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Light_Directional_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Light_Hemisphere_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Light_Hemisphere_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Light_Linear_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Light_Linear_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Light_Point_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Light_Point_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Light_Spot_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Light_Spot_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Materials_Basic_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Materials_Basic_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Materials_Depth_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Materials_Depth_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Materials_Lambert_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Materials_Lambert_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Materials_Normal_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Materials_Normal_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Materials_Phong_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Materials_Phong_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Materials_Physical_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Materials_Physical_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Materials_Standard_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Materials_Standard_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Materials_Toon_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Materials_Toon_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -216,11 +487,90 @@ namespace ThreePlus.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ThreePlus_16 {
+            get {
+                object obj = ResourceManager.GetObject("ThreePlus_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ThreePlus_24 {
+            get {
+                object obj = ResourceManager.GetObject("ThreePlus_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	const _v1 = new THREE.Vector3();
+        ///
+        ///	const _v2 = new THREE.Vector3();
+        ///
+        ///	const _normalMatrix = new THREE.Matrix3();
+        ///
+        ///	class VertexNormalsHelper extends THREE.LineSegments {
+        ///
+        ///		constructor( object, size = 1, color = 0xff0000 ) {
+        ///
+        ///			let nNormals = 0;
+        ///			const objGeometry = object.geometry;
+        ///
+        ///			if ( objGeometry &amp;&amp; objGeometry.isGeometry ) {
+        ///
+        ///				console.error( &apos;THREE.VertexNormalsHelper no longer supports Geometry. Use THREE.BufferGeometry instead.&apos; );
+        ///				return;
+        ///
+        ///			} else if ( objGeometry &amp;&amp; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string VertexNormalsHelper {
+            get {
+                return ResourceManager.GetString("VertexNormalsHelper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to uniform float time;\nvarying vec3 vPosition;\nvoid main() {\n\tvPosition = position;\n\tvPosition.x += sin( time + vPosition.z * 4.0 ) / 4.0;\n\tvPosition.y += cos( time + vPosition.z * 4.0 ) / 4.0;\n\tgl_Position = projectionMatrix * modelViewMatrix * vec4( vPosition, 1.0 );\n}.
         /// </summary>
         internal static string VertexShader {
             get {
                 return ResourceManager.GetString("VertexShader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	const _v1 = new THREE.Vector3();
+        ///
+        ///	const _v2 = new THREE.Vector3();
+        ///
+        ///	class VertexTangentsHelper extends THREE.LineSegments {
+        ///
+        ///		constructor( object, size = 1, color = 0x00ffff ) {
+        ///
+        ///			const objGeometry = object.geometry;
+        ///
+        ///			if ( ! ( objGeometry &amp;&amp; objGeometry.isBufferGeometry ) ) {
+        ///
+        ///				console.error( &apos;THREE.VertexTangentsHelper: geometry not an instance of THREE.BufferGeometry.&apos;, objGeometry );
+        ///				return;
+        ///
+        ///			}
+        ///
+        ///			const nTangents = objGeometry.attributes.tangent.count; //
+        ///
+        ///			const ge [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string VertexTangentsHelper {
+            get {
+                return ResourceManager.GetString("VertexTangentsHelper", resourceCulture);
             }
         }
         
@@ -245,7 +595,7 @@ namespace ThreePlus.Properties {
         ///
         ///				session.addEventListener( &apos;end&apos;, onSessionEnded );
         ///
-        ///				await renderer.xr.setSe [rest of string was truncated]&quot;;.
+        ///				awa [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string VRButton {
             get {
