@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 using System.Threading.Tasks;
 
 using Rg = Rhino.Geometry;
@@ -22,6 +23,9 @@ namespace ThreePlus
         public TangentDisplay Tangents = new TangentDisplay();
         public NormalDisplay Normals = new NormalDisplay();
 
+        protected bool hasHelper = false;
+        protected Color helperColor = Color.Gray;
+
         #endregion
 
         #region constructors
@@ -37,6 +41,8 @@ namespace ThreePlus
             this.Normals = new NormalDisplay(model.Normals);
 
             this.Material = new Material(model.Material);
+            this.hasHelper = model.hasHelper;
+            this.helperColor = model.helperColor;
         }
 
         public Model(Rg.Mesh mesh):base()
@@ -91,17 +97,30 @@ namespace ThreePlus
             get { return curve; }
         }
 
-
         public virtual Guid GeoId
         {
             get { return geoId; }
+        }
+
+        public virtual bool HasHelper
+        {
+            get { return hasHelper; }
+        }
+
+        public virtual Color HelperColor
+        {
+            get { return helperColor; }
         }
 
         #endregion
 
         #region methods
 
-
+        public void SetHelper(Color helperColor)
+        {
+            this.hasHelper = true;
+            this.helperColor = helperColor;
+        }
 
         #endregion
 

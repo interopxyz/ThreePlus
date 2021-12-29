@@ -30,6 +30,10 @@ namespace ThreePlus
         protected Rg.Point3d position = new Rg.Point3d(100, 100, 100);
         protected Rg.Point3d target = new Rg.Point3d(0, 0, 0);
 
+        protected bool hasHelper = false;
+        protected Sd.Color helperColor = Sd.Color.Gray;
+        protected double helperSize = 5;
+
         #endregion
 
         #region constructors
@@ -54,6 +58,10 @@ namespace ThreePlus
 
             this.position = new Rg.Point3d(light.position);
             this.target = new Rg.Point3d(light.target);
+
+            this.hasHelper = light.hasHelper;
+            this.helperColor = light.helperColor;
+            this.helperSize = light.helperSize;
         }
 
         public static Light SpotLight(Rg.Point3d position, Rg.Point3d target, double intensity,double distance,double angle, double penumbra, double decay, Sd.Color color)
@@ -187,12 +195,31 @@ namespace ThreePlus
             get { return new Rg.Point3d(target); }
         }
 
+        public virtual bool HasHelper
+        {
+            get { return hasHelper; }
+        }
+
+        public virtual double HelperSize
+        {
+            get { return helperSize; }
+        }
+
+        public virtual Sd.Color HelperColor
+        {
+            get { return helperColor; }
+        }
+
         #endregion
 
         #region methods
 
-
-
+        public void SetHelper(double size, Sd.Color color)
+        {
+            this.hasHelper = true;
+            this.helperSize = size;
+            this.helperColor = color;
+        }
         #endregion
 
         #region overrides

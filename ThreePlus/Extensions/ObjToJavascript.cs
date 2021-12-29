@@ -84,6 +84,11 @@ namespace ThreePlus
                 output.AppendLine(model.Material.ToJavascript(index));
                 output.AppendLine("const model"+ index + " = new THREE.Mesh( mesh"+ index + ", material" + index + " );");
                 output.AppendLine("scene.add(model"+ index + ");");
+                if (model.HasHelper)
+                {
+                    output.AppendLine("const bbox" + index + " = new THREE.BoxHelper( model" + index + ", " + model.HelperColor.ToJs() + " );");
+                    output.AppendLine("scene.add( bbox" + index + " );");
+                }
                 if (model.IsCurve) output.Append(model.Tangents.ToJavascript(index));
                 if (model.IsMesh) output.Append(model.Normals.ToJavascript(index));
                 i++;
@@ -283,6 +288,8 @@ namespace ThreePlus
             StringBuilder output = new StringBuilder();
             string name = "light" + index;
             string starter = "const " + name + " = new THREE.";
+            string hName = "h" + name;
+            string helperStart = "const " + hName + " = new THREE.";
             switch (input.LightType)
             {
                 default:
@@ -291,17 +298,26 @@ namespace ThreePlus
                 case Light.Types.Point:
                     output.AppendLine(starter + "PointLight(" + input.Color.ToJs() + ", " + input.Intensity + ", " + input.Distance + ", " + input.Decay + " );");
                     output.AppendLine(name + ".position.set( " + input.Position.ToJs() + " );");
+                    if (input.HasHelper) output.AppendLine(helperStart+ "PointLightHelper("+ name + ", "+input.HelperSize+", "+input.HelperColor.ToJs()+" );");
                     break;
                 case Light.Types.Directional:
                     output.AppendLine(starter + "DirectionalLight(" + input.Color.ToJs() + ", " + input.Intensity + " );");
                     output.AppendLine(name + ".position.set( " + input.Position.ToJs() + " );");
                     output.AppendLine(input.Target.ToJsTarget(name));
+                    if (input.HasHelper) output.AppendLine(helperStart + "DirectionalLightHelper(" + name + ", " + input.HelperSize + ", " + input.HelperColor.ToJs() + " );");
                     break;
                 case Light.Types.Hemisphere:
                     output.AppendLine(starter + "HemisphereLight(" + input.Color.ToJs() + ", " + input.ColorB.ToJs() + ", " + input.Intensity + " );");
+                    if (input.HasHelper) output.AppendLine(helperStart + "HemisphereLightHelper(" + name + ", " + input.HelperSize + ", " + input.HelperColor.ToJs() + " );");
+                    break;
+                case Light.Types.Spot:
+                    output.AppendLine(starter + "SpotLight(" + input.Color.ToJs() + ", " + input.Intensity + ", " + input.Distance + ", " + input.Angle + ", " + input.Penumbra + ", " + input.Decay + " );");
+                    output.AppendLine(name + ".position.set( " + input.Position.ToJs() + " );");
+                    output.AppendLine(input.Target.ToJsTarget(name));
+                    if (input.HasHelper) output.AppendLine(helperStart + "SpotLightHelper(" + name + ", " + input.HelperColor.ToJs() + " );");
                     break;
             }
-
+            if (input.HasHelper) output.AppendLine("scene.add(" + hName + ");");
             return output.ToString();
         }
 

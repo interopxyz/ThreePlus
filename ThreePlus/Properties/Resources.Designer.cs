@@ -19,7 +19,7 @@ namespace ThreePlus.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -98,8 +98,7 @@ namespace ThreePlus.Properties {
         ///		varying vec2 vUv;
         ///
         ///		void main() {
-        ///
-        ///			vec4 texel = texture2D( tDiffuse, [rest of string was truncated]&quot;;.
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CopyShader {
             get {
@@ -127,7 +126,7 @@ namespace ThreePlus.Properties {
         ///				this._pixelRatio = renderer.getPixelRatio();
         ///				this._width = size.width;
         ///				this._height = size.height;
-        ///				renderTarget = new THREE.WebGLRenderTarget( this._ [rest of string was truncated]&quot;;.
+        ///				renderTarget = new THREE.WebGLR [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string EffectComposer {
             get {
@@ -163,7 +162,7 @@ namespace ThreePlus.Properties {
         ///		type: &apos;end&apos;
         ///	};
         ///
-        ///	class OrbitControls extends THREE.EventDi [rest of string was truncated]&quot;;.
+        ///	class OrbitControls ext [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string OrbitControls {
             get {
@@ -191,7 +190,7 @@ namespace ThreePlus.Properties {
         ///				this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
         ///				this.material = new THREE.ShaderMaterial( {
         ///					defines: Object.assign( {}, shader.defines ),
-        ///					uniforms: this.unif [rest of string was truncated]&quot;;.
+        ///					 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ShaderPass {
             get {
@@ -218,7 +217,7 @@ namespace ThreePlus.Properties {
         ///
         ///		constructor( r = Math ) {
         ///
-        ///			this.grad3 = [[ 1, 1, 0 ], [ - 1, 1, 0 ], [ 1, - 1, 0 ], [ - 1 [rest of string was truncated]&quot;;.
+        ///			this.grad3 = [[ 1, 1, 0 ], [ - 1, 1, 0 ], [  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SimplexNoise {
             get {
@@ -246,9 +245,7 @@ namespace ThreePlus.Properties {
         ///			this.output = 0;
         ///			this.minDistance = 0.005;
         ///			this.maxDistance = 0.1;
-        ///			this._visibilityCache = new Map(); //
-        ///
-        ///		 [rest of string was truncated]&quot;;.
+        ///			this._visibilityCache  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SSAOPass {
             get {
@@ -282,9 +279,7 @@ namespace ThreePlus.Properties {
         ///				value: null
         ///			},
         ///			&apos;tNoise&apos;: {
-        ///				value: null
-        ///			},
-        ///			&apos;kernel&apos;: [rest of string was truncated]&quot;;.
+        ///				value [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SSAOShader {
             get {
@@ -307,9 +302,7 @@ namespace ThreePlus.Properties {
         ///	const REVISION = &apos;131&apos;;
         ///	const MOUSE = {
         ///		LEFT: 0,
-        ///		MIDDLE: 1,
-        ///		RIGHT: 2,
-        ///		 [rest of string was truncated]&quot;;.
+        ///		MIDDLE: 1,        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string three {
             get {
@@ -527,7 +520,7 @@ namespace ThreePlus.Properties {
         ///				console.error( &apos;THREE.VertexNormalsHelper no longer supports Geometry. Use THREE.BufferGeometry instead.&apos; );
         ///				return;
         ///
-        ///			} else if ( objGeometry &amp;&amp; [rest of string was truncated]&quot;;.
+        ///			} else [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string VertexNormalsHelper {
             get {
@@ -564,9 +557,7 @@ namespace ThreePlus.Properties {
         ///
         ///			}
         ///
-        ///			const nTangents = objGeometry.attributes.tangent.count; //
-        ///
-        ///			const ge [rest of string was truncated]&quot;;.
+        ///			const nTangents = objGeometry.attributes.tangent.cou [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string VertexTangentsHelper {
             get {
