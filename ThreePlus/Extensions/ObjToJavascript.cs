@@ -153,6 +153,7 @@ namespace ThreePlus
                     bbox.Union(model.Curve.GetBoundingBox(false));
 
                     output.Append(model.Tangents.ToJavascript(index));
+                    output.AppendLine("scene.add(line" + index + ");");
                 }
                 else
                 {
@@ -181,9 +182,9 @@ namespace ThreePlus
                     }
 
                     if (model.IsMesh) output.Append(model.Normals.ToJavascript(index));
-                    i++;
 
                 }
+                    i++;
             }
 
             if (input.Camera.IsDefault)
