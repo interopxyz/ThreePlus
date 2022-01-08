@@ -35,16 +35,18 @@ namespace ThreePlus.Components.Materials
             pManager.AddGenericParameter("Model", "M", "A Model, Mesh, or Brep", GH_ParamAccess.item);
             pManager.AddColourParameter("Color", "C", "The material's color", GH_ParamAccess.item, Color.Wheat);
             pManager[1].Optional = true;
-            pManager.AddNumberParameter("Roughness", "R", "How rough the material appears. 0.0 means a smooth mirror reflection, 1.0 means fully diffuse.", GH_ParamAccess.item, 1.0);
+            pManager.AddNumberParameter("Roughness", "X", "How rough the material appears. 0.0 means a smooth mirror reflection, 1.0 means fully diffuse.", GH_ParamAccess.item, 0.1);
             pManager[2].Optional = true;
-            pManager.AddNumberParameter("Metalness", "M", "How much the material is like a metal. Non-metallic materials such as wood or stone use 0.0, metallic use 1.0, with nothing (usually) in between.", GH_ParamAccess.item, 1.0);
-            pManager[3].Optional = true;
             pManager.AddNumberParameter("Reflectivity", "R", "Degree of reflectivity, from 0.0 to 1.0.", GH_ParamAccess.item, 0.5);
+            pManager[3].Optional = true;
+            pManager.AddNumberParameter("Metalness", "M", "How much the material is like a metal. Non-metallic materials such as wood or stone use 0.0, metallic use 1.0, with nothing (usually) in between.", GH_ParamAccess.item, 0.5);
             pManager[4].Optional = true;
-            pManager.AddNumberParameter("Clearcoat", "C", "Represents the intensity of the clear coat layer, from 0.0 to 1.0.", GH_ParamAccess.item, 0.0);
+            pManager.AddNumberParameter("Sheen", "S", "The intensity of the sheen layer, from 0.0 to 1.0.", GH_ParamAccess.item, 0.0);
             pManager[5].Optional = true;
-            pManager.AddNumberParameter("Clearcoat Roughness", "CR", "Roughness of the clear coat layer, from 0.0 to 1.0.", GH_ParamAccess.item, 0.0);
+            pManager.AddColourParameter("Sheen Color", "Sc", "The color of the sheen layer", GH_ParamAccess.item, Color.White);
             pManager[6].Optional = true;
+            pManager.AddNumberParameter("Clearcoat", "L", "Represents the intensity of the clear coat layer, from 0.0 to 1.0.", GH_ParamAccess.item, 0.0);
+            pManager[7].Optional = true;
         }
 
         /// <summary>
@@ -78,22 +80,25 @@ namespace ThreePlus.Components.Materials
             Color color = Color.Wheat;
             DA.GetData(1, ref color);
 
-            double roughness = 1.0;
+            double roughness = 0.1;
             DA.GetData(2, ref roughness);
 
-            double metalness = 1.0;
-            DA.GetData(3, ref metalness);
-
             double reflectivity = 0.5;
-            DA.GetData(4, ref reflectivity);
+            DA.GetData(3, ref reflectivity);
+
+            double metalness = 0.5;
+            DA.GetData(4, ref metalness);
+
+            double sheen = 0.0;
+            DA.GetData(5, ref sheen);
+
+            Color sheenColor = Color.White;
+            DA.GetData(6, ref sheenColor);
 
             double clearcoat = 0.0;
-            DA.GetData(5, ref clearcoat);
+            DA.GetData(7, ref clearcoat);
 
-            double clearcoatReflectivity = 1.0;
-            DA.GetData(6, ref clearcoatReflectivity);
-
-            model.Material = Material.PhysicalMaterial(color, roughness, metalness,reflectivity,clearcoat,clearcoatReflectivity);
+            model.Material = Material.PhysicalMaterial(color, roughness, metalness,sheen, sheenColor, 0.1, reflectivity, clearcoat,0.9);
 
             DA.SetData(0, model);
         }

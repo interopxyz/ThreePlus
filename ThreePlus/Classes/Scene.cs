@@ -17,7 +17,7 @@ namespace ThreePlus
         public Settings Settings = new Settings();
         public Environment Environment = new Environment();
         public Atmosphere Atmosphere = new Atmosphere();
-        public Ground Ground = new Ground();
+        public Outline Outline = new Outline();
 
         public AmbientOcclusion AmbientOcclusion = new AmbientOcclusion();
 
@@ -26,8 +26,10 @@ namespace ThreePlus
         public Axes Axes = new Axes();
 
         public List<Model> Models = new List<Model>();
-        public List<Light> Lights = new List<Light>();
+        protected List<Light> lights = new List<Light>();
         public List<Script> Scripts = new List<Script>();
+
+        protected bool hasShadows = false;
 
         #endregion
 
@@ -49,9 +51,9 @@ namespace ThreePlus
             {
                 this.Models.Add(new Model(model));
             }
-            foreach (Light light in scene.Lights)
+            foreach (Light light in scene.lights)
             {
-                this.Lights.Add(new Light(light));
+                this.lights.Add(new Light(light));
             }
             foreach (Script script in scene.Scripts)
             {
@@ -60,14 +62,26 @@ namespace ThreePlus
 
             this.Environment = new Environment(scene.Environment);
             this.Atmosphere = new Atmosphere(scene.Atmosphere);
-            this.Ground = new Ground(scene.Ground);
 
             this.AmbientOcclusion = new AmbientOcclusion(scene.AmbientOcclusion);
+            this.Outline = scene.Outline;
+
+            this.hasShadows = scene.hasShadows;
     }
 
         #endregion
 
         #region properties
+
+        public List<Light> Lights
+        {
+            get { return lights; }
+        }
+
+        public bool HasShadows
+        {
+            get { return hasShadows; }
+        }
 
         #endregion
 
@@ -81,13 +95,19 @@ namespace ThreePlus
             return output.ToString();
         }
 
+        public void AddLight(Light light)
+        {
+            if (light.HasShadow) hasShadows = true;
+                lights.Add(new Light(light));
+        }
+
         #endregion
 
         #region overrides
 
         public override string ToString()
         {
-            return "Image(m:" + this.Models.Count + " l:" + this.Lights.Count+ ")";
+            return "Image(m:" + this.Models.Count + " l:" + this.lights.Count+ ")";
         }
 
         #endregion

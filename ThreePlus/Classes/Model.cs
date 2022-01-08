@@ -13,9 +13,13 @@ namespace ThreePlus
     {
 
         #region members
+        public enum GeometryTypes { None,Cloud,Plane,Curve,Mesh}
+        protected GeometryTypes geometryType = GeometryTypes.None;
 
         protected Guid geoId = new Guid();
 
+        protected Rg.Plane plane = Rg.Plane.Unset;
+        protected double size = double.NaN;
         protected Rg.Mesh mesh = null;
         protected Rg.NurbsCurve curve = null;
 
@@ -30,12 +34,18 @@ namespace ThreePlus
 
         #region constructors
 
-        public Model(Model model) : base()
+        public Model() : base()
+        {
+
+        }
+
+        public Model(Model model) : base(model)
         {
             this.geoId = new Guid(model.geoId.ToString());
 
             if (model.mesh != null) this.mesh = model.mesh.DuplicateMesh();
-            if (model.curve != null) this.curve= model.curve.DuplicateCurve().ToNurbsCurve();
+            if (model.curve != null) this.curve = model.curve.DuplicateCurve().ToNurbsCurve();
+            if (model.plane != Rg.Plane.Unset) this.plane= (Rg.Plane)model.plane.Clone();
 
             this.Tangents = new TangentDisplay(model.Tangents);
             this.Normals = new NormalDisplay(model.Normals);
@@ -43,11 +53,26 @@ namespace ThreePlus
             this.Material = new Material(model.Material);
             this.hasHelper = model.hasHelper;
             this.helperColor = model.helperColor;
+
+            this.geometryType = model.geometryType;
+            this.size = model.size;
+        }
+
+        public Model(Rg.Plane plane, double size) : base()
+        {
+            this.geoId = Guid.NewGuid();
+            this.geometryType = GeometryTypes.Plane;
+
+            this.name = plane.ToString();
+            
+            this.plane = (Rg.Plane)plane;
+            this.size = size;
         }
 
         public Model(Rg.Mesh mesh):base()
         {
-            geoId = Guid.NewGuid();
+            this.geoId = Guid.NewGuid();
+            this.geometryType = GeometryTypes.Mesh;
 
             this.type = "BufferGeometry";
             this.name = mesh.GetUserString("name");
@@ -57,7 +82,8 @@ namespace ThreePlus
 
         public Model(Rg.NurbsCurve curve) : base()
         {
-            geoId = Guid.NewGuid();
+            this.geoId = Guid.NewGuid();
+            this.geometryType = GeometryTypes.Curve;
 
             this.name = curve.GetUserString("name");
 
@@ -70,21 +96,22 @@ namespace ThreePlus
 
         public virtual bool IsMesh
         {
-            get { return (this.mesh != null); }
+            get { return this.geometryType == GeometryTypes.Mesh; }
         }
 
         public virtual bool IsCurve
         {
-            get { return (this.curve != null); }
+            get { return this.geometryType == GeometryTypes.Curve; }
+        }
+
+        public virtual bool IsPlane
+        {
+            get { return this.geometryType == GeometryTypes.Plane; }
         }
 
         private string GeometryType
         {
-            get { if (this.IsMesh) {
-                    return "Mesh";
-                        }
-                return "Curve";
-            }
+            get { return this.geometryType.ToString(); }
         }
 
         public virtual Rg.Mesh Mesh 
@@ -95,6 +122,16 @@ namespace ThreePlus
         public virtual Rg.NurbsCurve Curve
         {
             get { return curve; }
+        }
+
+        public virtual Rg.Plane Plane
+        {
+            get { return plane; }
+        }
+
+        public virtual double Size
+        {
+            get { return size; }
         }
 
         public virtual Guid GeoId
@@ -128,7 +165,7 @@ namespace ThreePlus
 
         public override string ToString()
         {
-            return "Model | "+ GeometryType;
+            return "Model | "+ GeometryType.ToString() + " | "+Material.MaterialType.ToString();
         }
 
         #endregion

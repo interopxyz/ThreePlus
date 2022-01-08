@@ -1,8 +1,10 @@
 ﻿using Grasshopper.Kernel;
+using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 
 namespace ThreePlus.Components
 {
@@ -23,7 +25,7 @@ namespace ThreePlus.Components
         /// </summary>
         public override GH_Exposure Exposure
         {
-            get { return GH_Exposure.primary; }
+            get { return GH_Exposure.secondary; }
         }
 
         /// <summary>
@@ -31,14 +33,16 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddColourParameter("Background Color", "C", "The background color is an image is not used.", GH_ParamAccess.item, Color.White);
+            pManager.AddColourParameter("Background Color", "C", "The background color if an image is not used.", GH_ParamAccess.item, Color.White);
             pManager[0].Optional = true;
-            pManager.AddGenericParameter("Bitmap", "I", "A bitmap image", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Bitmap", "Img", "A bitmap image", GH_ParamAccess.item);
             pManager[1].Optional = true;
             pManager.AddBooleanParameter("Is Background", "B", "If true the image will be used as the background", GH_ParamAccess.item, true);
             pManager[2].Optional = true;
-            pManager.AddBooleanParameter("Is Environment", "E", "If true the image will be used as the reflection environment for physical based materials", GH_ParamAccess.item, true);
+            pManager.AddBooleanParameter("Is Environment", "E", "If true the image will be used as the reflection environment for physical and standard materials", GH_ParamAccess.item, true);
             pManager[3].Optional = true;
+            pManager.AddBooleanParameter("Is Illumination", "L", "If true the image will be used as a light probe illuminating the scene. NOTE: This will only work for CubeMaps.", GH_ParamAccess.item, true);
+            pManager[4].Optional = true;
         }
 
         /// <summary>
@@ -58,8 +62,10 @@ namespace ThreePlus.Components
             Color color = Color.White;
             DA.GetData(0, ref color);
 
-            Bitmap envMap = null;
-            DA.GetData(1, ref envMap);
+            Environment environment = new Environment(color);
+
+            IGH_Goo goo = null;
+            bool hasImage = DA.GetData(1, ref goo);
 
             bool hasBackground = true;
             DA.GetData(2, ref hasBackground);
@@ -67,14 +73,48 @@ namespace ThreePlus.Components
             bool hasEnvironment = true;
             DA.GetData(3, ref hasEnvironment);
 
-            Environment environment = new Environment();
-            if (envMap != null)
+            bool hasIllumination = true;
+            DA.GetData(4, ref hasIllumination);
+
+            Bitmap bitmap = null;
+            CubeMap cubeMap = null;
+            string filePath = string.Empty;
+            if (hasImage)
             {
-            environment = new Environment(envMap);
-            environment.IsBackground = hasBackground;
-            environment.IsEnvironment = hasEnvironment;
-            }
+                goo.CastTo<string>(out filePath);
+                if (goo.CastTo<CubeMap>(out cubeMap))
+                {
+                    environment = new Environment(cubeMap);
+                }
+                else if (goo.CastTo<Bitmap>(out bitmap))
+                {
+                    environment = new Environment(bitmap);
+                }
+                else if (File.Exists(filePath))
+                {
+                    if (!filePath.GetBitmapFromFile(out bitmap))
+                    {
+                        if (!Path.HasExtension(filePath))
+                        {
+                            this.AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "This is not a valid file path. This file does not have a valid bitmap extension"); this.AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "This is not a valid file path. This file does not have a valid bitmap extension");
+                            return;
+                        }
+                        else
+                        {
+                            this.AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "This is not a valid bitmap file type. The extension " + Path.GetExtension(filePath) + " is not a supported bitmap format");
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    this.AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "This is not a valid ThreePlus CubeMap, System Drawing Bitmap, or File Path to a valid Image file");
+                }
+                environment.IsBackground = hasBackground;
+                environment.IsEnvironment = hasEnvironment;
+                environment.IsIllumination = hasIllumination;
                 environment.Background = color;
+            }
 
             DA.SetData(0, environment);
         }
@@ -88,7 +128,7 @@ namespace ThreePlus.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.Three_SceneEnvironment_01;
             }
         }
 

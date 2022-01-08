@@ -59,9 +59,10 @@ namespace ThreePlus.Components
             Axes axes = new Axes();
             Light light = new Light();
             Environment environment = new Environment();
-            Atmosphere atmosphere = new Atmosphere();
-            Ground ground = new Ground();
+            Atmosphere atmosphere = new Atmosphere()
+                ;
             AmbientOcclusion ambientOcclusion = new AmbientOcclusion();
+            Outline outline = new Outline();
 
             foreach (IGH_Goo goo in goos)
             {
@@ -79,7 +80,7 @@ namespace ThreePlus.Components
                 }
                 else if (goo.CastTo<Light>(out light))
                 {
-                    scene.Lights.Add(new Light(light));
+                    scene.AddLight(new Light(light));
                 }
                 else if (goo.CastTo<Environment>(out environment))
                 {
@@ -89,13 +90,13 @@ namespace ThreePlus.Components
                 {
                     scene.Atmosphere = new Atmosphere(atmosphere);
                 }
-                else if (goo.CastTo<Ground>(out ground))
-                {
-                    scene.Ground = new Ground(ground);
-                }
                 else if (goo.CastTo<AmbientOcclusion>(out ambientOcclusion))
                 {
                     scene.AmbientOcclusion = new AmbientOcclusion(ambientOcclusion);
+                }
+                else if (goo.CastTo<Outline>(out outline))
+                {
+                    scene.Outline = new Outline(outline);
                 }
                 else
                 {
@@ -116,7 +117,7 @@ namespace ThreePlus.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.Three_SceneCompile_01;
             }
         }
 

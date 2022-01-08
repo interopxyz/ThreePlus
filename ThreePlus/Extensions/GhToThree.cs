@@ -1,16 +1,54 @@
 ﻿using Grasshopper.Kernel.Types;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 using Rg = Rhino.Geometry;
+using Sd = System.Drawing;
 
 namespace ThreePlus
 {
     public static class GhToThree
     {
+
+        public static bool TryGetBitmap(this IGH_Goo goo, out Sd.Bitmap bitmap, out string message)
+        {
+            message = string.Empty;
+            bitmap = null;
+
+            string filePath = string.Empty;
+
+            goo.CastTo<string>(out filePath);
+            if (!goo.CastTo<Sd.Bitmap>(out bitmap))
+            {
+            if (File.Exists(filePath))
+            {
+                if (!filePath.GetBitmapFromFile(out bitmap))
+                {
+                    if (!Path.HasExtension(filePath))
+                    {
+                            message = "This is not a valid file path. This file does not have a valid bitmap extension";
+                            return false;
+                        }
+                        else
+                    {
+                            message = "This is not a valid bitmap file type. The extension " + Path.GetExtension(filePath) + " is not a supported bitmap format";
+                            return false;
+                        }
+                    }
+            }
+            else
+            {
+                message = "This is not a valid System Drawing Bitmap, or File Path to a valid Image file";
+                    return false;
+                }
+            }
+
+            return true;
+        }
 
         public static Model ToModel(this IGH_Goo goo)
         {

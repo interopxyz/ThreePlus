@@ -34,6 +34,9 @@ namespace ThreePlus
         protected Sd.Color helperColor = Sd.Color.Gray;
         protected double helperSize = 5;
 
+        protected bool hasShadow = false;
+        protected int shadowSamples = 20;
+
         #endregion
 
         #region constructors
@@ -62,6 +65,10 @@ namespace ThreePlus
             this.hasHelper = light.hasHelper;
             this.helperColor = light.helperColor;
             this.helperSize = light.helperSize;
+
+            this.hasShadow = light.hasShadow;
+            this.shadowSamples = light.shadowSamples;
+
         }
 
         public static Light SpotLight(Rg.Point3d position, Rg.Point3d target, double intensity,double distance,double angle, double penumbra, double decay, Sd.Color color)
@@ -210,9 +217,20 @@ namespace ThreePlus
             get { return helperColor; }
         }
 
+        public bool HasShadow
+        {
+            get { return hasShadow; }
+        }
+
         #endregion
 
         #region methods
+
+        public void SetShadow(int samples)
+        {
+            hasShadow = true;
+            this.shadowSamples = samples;
+        }
 
         public void SetHelper(double size, Sd.Color color)
         {
@@ -226,7 +244,7 @@ namespace ThreePlus
 
         public override string ToString()
         {
-            return "Light | ";
+            return "Light | "+this.LightType.ToString();
         }
 
         #endregion

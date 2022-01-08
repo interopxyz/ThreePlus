@@ -95,7 +95,7 @@ namespace ThreePlus.Components.Output
                 File.WriteAllText(parent + "index.html", html);
                 File.WriteAllText(parent + "app.js", js);
 
-                File.WriteAllText(child + "three.js", Properties.Resources.three);
+                File.WriteAllText(child + "three.min.js", Properties.Resources.three_min);
                 File.WriteAllText(child + "OrbitControls.js", Properties.Resources.OrbitControls);
                 File.WriteAllText(child + "VertexTangentsHelper.js", Properties.Resources.VertexTangentsHelper);
                 File.WriteAllText(child + "VertexNormalsHelper.js", Properties.Resources.VertexNormalsHelper);
@@ -109,6 +109,13 @@ namespace ThreePlus.Components.Output
                     File.WriteAllText(child + "SSAOPass.js", Properties.Resources.SSAOPass);
                     File.WriteAllText(child + "SimplexNoise.js", Properties.Resources.SimplexNoise);
                     File.WriteAllText(child + "SSAOShader.js", Properties.Resources.SSAOShader);
+                }
+
+                if (scene.Outline.HasOutline) File.WriteAllText(child + "OutlineEffect.js", Properties.Resources.OutlineEffect);
+                if (scene.Environment.EnvironmentMode == Environment.EnvironmentModes.CubeMap)
+                {
+                    File.WriteAllText(child + "LightProbeGenerator.js", Properties.Resources.LightProbeGenerator);
+                    File.WriteAllText(child + "LightProbeHelper.js", Properties.Resources.LightProbeHelper);
                 }
 
                 DA.SetData(0, parent + "index.html");

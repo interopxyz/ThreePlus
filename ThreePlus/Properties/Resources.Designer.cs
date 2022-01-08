@@ -19,7 +19,7 @@ namespace ThreePlus.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -98,11 +98,72 @@ namespace ThreePlus.Properties {
         ///		varying vec2 vUv;
         ///
         ///		void main() {
-        /// [rest of string was truncated]&quot;;.
+        ///
+        ///			vec4 texel = texture2D( tDiffuse, [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CopyShader {
             get {
                 return ResourceManager.GetString("CopyShader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EarthNegx {
+            get {
+                object obj = ResourceManager.GetObject("EarthNegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EarthNegy {
+            get {
+                object obj = ResourceManager.GetObject("EarthNegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EarthNegz {
+            get {
+                object obj = ResourceManager.GetObject("EarthNegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EarthPosx {
+            get {
+                object obj = ResourceManager.GetObject("EarthPosx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EarthPosy {
+            get {
+                object obj = ResourceManager.GetObject("EarthPosy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EarthPosz {
+            get {
+                object obj = ResourceManager.GetObject("EarthPosz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -126,11 +187,71 @@ namespace ThreePlus.Properties {
         ///				this._pixelRatio = renderer.getPixelRatio();
         ///				this._width = size.width;
         ///				this._height = size.height;
-        ///				renderTarget = new THREE.WebGLR [rest of string was truncated]&quot;;.
+        ///				renderTarget = new THREE.WebGLRenderTarget( this._ [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string EffectComposer {
             get {
                 return ResourceManager.GetString("EffectComposer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ForestNegx {
+            get {
+                object obj = ResourceManager.GetObject("ForestNegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ForestNegy {
+            get {
+                object obj = ResourceManager.GetObject("ForestNegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ForestNegz {
+            get {
+                object obj = ResourceManager.GetObject("ForestNegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ForestPosx {
+            get {
+                object obj = ResourceManager.GetObject("ForestPosx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ForestPosy {
+            get {
+                object obj = ResourceManager.GetObject("ForestPosy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ForestPosz {
+            get {
+                object obj = ResourceManager.GetObject("ForestPosz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -140,6 +261,328 @@ namespace ThreePlus.Properties {
         internal static string FragmentShader {
             get {
                 return ResourceManager.GetString("FragmentShader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GamlaStanNegx {
+            get {
+                object obj = ResourceManager.GetObject("GamlaStanNegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GamlaStanNegy {
+            get {
+                object obj = ResourceManager.GetObject("GamlaStanNegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GamlaStanNegz {
+            get {
+                object obj = ResourceManager.GetObject("GamlaStanNegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GamlaStanPosx {
+            get {
+                object obj = ResourceManager.GetObject("GamlaStanPosx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GamlaStanPosy {
+            get {
+                object obj = ResourceManager.GetObject("GamlaStanPosy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GamlaStanPosz {
+            get {
+                object obj = ResourceManager.GetObject("GamlaStanPosz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HeroesSquarenegx {
+            get {
+                object obj = ResourceManager.GetObject("HeroesSquarenegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HeroesSquarenegy {
+            get {
+                object obj = ResourceManager.GetObject("HeroesSquarenegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HeroesSquarenegz {
+            get {
+                object obj = ResourceManager.GetObject("HeroesSquarenegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HeroesSquareposx {
+            get {
+                object obj = ResourceManager.GetObject("HeroesSquareposx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HeroesSquareposy {
+            get {
+                object obj = ResourceManager.GetObject("HeroesSquareposy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HeroesSquareposz {
+            get {
+                object obj = ResourceManager.GetObject("HeroesSquareposz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	class LightProbeGenerator {
+        ///
+        ///		// https://www.ppsloan.org/publications/StupidSH36.pdf
+        ///		static fromCubeTexture( cubeTexture ) {
+        ///
+        ///			let totalWeight = 0;
+        ///			const coord = new THREE.Vector3();
+        ///			const dir = new THREE.Vector3();
+        ///			const color = new THREE.Color();
+        ///			const shBasis = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+        ///			const sh = new THREE.SphericalHarmonics3();
+        ///			const shCoefficients = sh.coefficients;
+        ///
+        ///			for ( let faceIndex = 0; faceIndex &lt; 6; faceIndex ++ ) {
+        ///
+        ///				const image = cubeTexture [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LightProbeGenerator {
+            get {
+                return ResourceManager.GetString("LightProbeGenerator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	class LightProbeHelper extends THREE.Mesh {
+        ///
+        ///		constructor( lightProbe, size ) {
+        ///
+        ///			const material = new THREE.ShaderMaterial( {
+        ///				type: &apos;LightProbeHelperMaterial&apos;,
+        ///				uniforms: {
+        ///					sh: {
+        ///						value: lightProbe.sh.coefficients
+        ///					},
+        ///					// by reference
+        ///					intensity: {
+        ///						value: lightProbe.intensity
+        ///					}
+        ///				},
+        ///				vertexShader: [ &apos;varying vec3 vNormal;&apos;, &apos;void main() {&apos;, &apos;	vNormal = normalize( normalMatrix * normal );&apos;, &apos;	gl_Position = projectionMatrix * modelViewMatrix * [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LightProbeHelper {
+            get {
+                return ResourceManager.GetString("LightProbeHelper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lyckselenegx {
+            get {
+                object obj = ResourceManager.GetObject("Lyckselenegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lyckselenegy {
+            get {
+                object obj = ResourceManager.GetObject("Lyckselenegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lyckselenegz {
+            get {
+                object obj = ResourceManager.GetObject("Lyckselenegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lyckseleposx {
+            get {
+                object obj = ResourceManager.GetObject("Lyckseleposx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lyckseleposy {
+            get {
+                object obj = ResourceManager.GetObject("Lyckseleposy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lyckseleposz {
+            get {
+                object obj = ResourceManager.GetObject("Lyckseleposz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap negx {
+            get {
+                object obj = ResourceManager.GetObject("negx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap negy {
+            get {
+                object obj = ResourceManager.GetObject("negy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap negz {
+            get {
+                object obj = ResourceManager.GetObject("negz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NissiBeachnegx {
+            get {
+                object obj = ResourceManager.GetObject("NissiBeachnegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NissiBeachnegy {
+            get {
+                object obj = ResourceManager.GetObject("NissiBeachnegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NissiBeachnegz {
+            get {
+                object obj = ResourceManager.GetObject("NissiBeachnegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NissiBeachposx {
+            get {
+                object obj = ResourceManager.GetObject("NissiBeachposx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NissiBeachposy {
+            get {
+                object obj = ResourceManager.GetObject("NissiBeachposy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NissiBeachposz {
+            get {
+                object obj = ResourceManager.GetObject("NissiBeachposz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -162,11 +605,395 @@ namespace ThreePlus.Properties {
         ///		type: &apos;end&apos;
         ///	};
         ///
-        ///	class OrbitControls ext [rest of string was truncated]&quot;;.
+        ///	class OrbitControls extends THREE.EventDi [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string OrbitControls {
             get {
                 return ResourceManager.GetString("OrbitControls", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	/**
+        /// * Reference: https://en.wikipedia.org/wiki/Cel_shading
+        /// *
+        /// * API
+        /// *
+        /// * 1. Traditional
+        /// *
+        /// * const effect = new OutlineEffect( renderer );
+        /// *
+        /// * function render() {
+        /// *
+        /// * 	effect.render( scene, camera );
+        /// *
+        /// * }
+        /// *
+        /// * 2. VR compatible
+        /// *
+        /// * const effect = new OutlineEffect( renderer );
+        /// * let renderingOutline = false;
+        /// *
+        /// * scene.onAfterRender = function () {
+        /// *
+        /// * 	if ( renderingOutline ) return;
+        /// *
+        /// * 	renderingOutline = true;
+        /// *
+        /// * 	effect.renderOutline( scene, camera );
+        /// *
+        /// * 	rend [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string OutlineEffect {
+            get {
+                return ResourceManager.GetString("OutlineEffect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	class OutlinePass extends THREE.Pass {
+        ///
+        ///		constructor( resolution, scene, camera, selectedObjects ) {
+        ///
+        ///			super();
+        ///			this.renderScene = scene;
+        ///			this.renderCamera = camera;
+        ///			this.selectedObjects = selectedObjects !== undefined ? selectedObjects : [];
+        ///			this.visibleEdgeColor = new THREE.Color( 1, 1, 1 );
+        ///			this.hiddenEdgeColor = new THREE.Color( 0.1, 0.04, 0.02 );
+        ///			this.edgeGlow = 0.0;
+        ///			this.usePatternTexture = false;
+        ///			this.edgeThickness = 1.0;
+        ///			this.edgeStrength = 3.0;
+        ///			thi [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string OutlinePass {
+            get {
+                return ResourceManager.GetString("OutlinePass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Parknegx {
+            get {
+                object obj = ResourceManager.GetObject("Parknegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Parknegy {
+            get {
+                object obj = ResourceManager.GetObject("Parknegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Parknegz {
+            get {
+                object obj = ResourceManager.GetObject("Parknegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Parkposx {
+            get {
+                object obj = ResourceManager.GetObject("Parkposx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Parkposy {
+            get {
+                object obj = ResourceManager.GetObject("Parkposy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Parkposz {
+            get {
+                object obj = ResourceManager.GetObject("Parkposz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PereaBeachnegx {
+            get {
+                object obj = ResourceManager.GetObject("PereaBeachnegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PereaBeachnegy {
+            get {
+                object obj = ResourceManager.GetObject("PereaBeachnegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PereaBeachnegz {
+            get {
+                object obj = ResourceManager.GetObject("PereaBeachnegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PereaBeachposx {
+            get {
+                object obj = ResourceManager.GetObject("PereaBeachposx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PereaBeachposy {
+            get {
+                object obj = ResourceManager.GetObject("PereaBeachposy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PereaBeachposz {
+            get {
+                object obj = ResourceManager.GetObject("PereaBeachposz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap polyhaven_autoshop {
+            get {
+                object obj = ResourceManager.GetObject("polyhaven_autoshop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap polyhaven_photo_studio_loft_hall {
+            get {
+                object obj = ResourceManager.GetObject("polyhaven_photo_studio_loft_hall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap polyhaven_pink_sunrise {
+            get {
+                object obj = ResourceManager.GetObject("polyhaven_pink_sunrise", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap polyhaven_satara_night {
+            get {
+                object obj = ResourceManager.GetObject("polyhaven_satara_night", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap polyhaven_snowy_park {
+            get {
+                object obj = ResourceManager.GetObject("polyhaven_snowy_park", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap polyhaven_spruit_sunrise {
+            get {
+                object obj = ResourceManager.GetObject("polyhaven_spruit_sunrise", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap polyhaven_studio_country_hall {
+            get {
+                object obj = ResourceManager.GetObject("polyhaven_studio_country_hall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap polyhaven_studio_small_03 {
+            get {
+                object obj = ResourceManager.GetObject("polyhaven_studio_small_03", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap polyhaven_sunset_in_the_chalk_quarry {
+            get {
+                object obj = ResourceManager.GetObject("polyhaven_sunset_in_the_chalk_quarry", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap polyhaven_the_sky_is_on_fire {
+            get {
+                object obj = ResourceManager.GetObject("polyhaven_the_sky_is_on_fire", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap polyhaven_venice_sunset {
+            get {
+                object obj = ResourceManager.GetObject("polyhaven_venice_sunset", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pondnegx {
+            get {
+                object obj = ResourceManager.GetObject("Pondnegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pondnegy {
+            get {
+                object obj = ResourceManager.GetObject("Pondnegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pondnegz {
+            get {
+                object obj = ResourceManager.GetObject("Pondnegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pondposx {
+            get {
+                object obj = ResourceManager.GetObject("Pondposx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pondposy {
+            get {
+                object obj = ResourceManager.GetObject("Pondposy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pondposz {
+            get {
+                object obj = ResourceManager.GetObject("Pondposz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap posx {
+            get {
+                object obj = ResourceManager.GetObject("posx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap posy {
+            get {
+                object obj = ResourceManager.GetObject("posy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap posz {
+            get {
+                object obj = ResourceManager.GetObject("posz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -190,7 +1017,7 @@ namespace ThreePlus.Properties {
         ///				this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
         ///				this.material = new THREE.ShaderMaterial( {
         ///					defines: Object.assign( {}, shader.defines ),
-        ///					 [rest of string was truncated]&quot;;.
+        ///					uniforms: this.unif [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ShaderPass {
             get {
@@ -217,11 +1044,131 @@ namespace ThreePlus.Properties {
         ///
         ///		constructor( r = Math ) {
         ///
-        ///			this.grad3 = [[ 1, 1, 0 ], [ - 1, 1, 0 ], [  [rest of string was truncated]&quot;;.
+        ///			this.grad3 = [[ 1, 1, 0 ], [ - 1, 1, 0 ], [ 1, - 1, 0 ], [ - 1 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SimplexNoise {
             get {
                 return ResourceManager.GetString("SimplexNoise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Skansennegx {
+            get {
+                object obj = ResourceManager.GetObject("Skansennegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Skansennegy {
+            get {
+                object obj = ResourceManager.GetObject("Skansennegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Skansennegz {
+            get {
+                object obj = ResourceManager.GetObject("Skansennegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Skansenposx {
+            get {
+                object obj = ResourceManager.GetObject("Skansenposx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Skansenposy {
+            get {
+                object obj = ResourceManager.GetObject("Skansenposy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Skansenposz {
+            get {
+                object obj = ResourceManager.GetObject("Skansenposz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SnowParknegx {
+            get {
+                object obj = ResourceManager.GetObject("SnowParknegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SnowParknegy {
+            get {
+                object obj = ResourceManager.GetObject("SnowParknegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SnowParknegz {
+            get {
+                object obj = ResourceManager.GetObject("SnowParknegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SnowParkposx {
+            get {
+                object obj = ResourceManager.GetObject("SnowParkposx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SnowParkposy {
+            get {
+                object obj = ResourceManager.GetObject("SnowParkposy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SnowParkposz {
+            get {
+                object obj = ResourceManager.GetObject("SnowParkposz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -245,7 +1192,9 @@ namespace ThreePlus.Properties {
         ///			this.output = 0;
         ///			this.minDistance = 0.005;
         ///			this.maxDistance = 0.1;
-        ///			this._visibilityCache  [rest of string was truncated]&quot;;.
+        ///			this._visibilityCache = new Map(); //
+        ///
+        ///		 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SSAOPass {
             get {
@@ -279,7 +1228,9 @@ namespace ThreePlus.Properties {
         ///				value: null
         ///			},
         ///			&apos;tNoise&apos;: {
-        ///				value [rest of string was truncated]&quot;;.
+        ///				value: null
+        ///			},
+        ///			&apos;kernel&apos;: [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SSAOShader {
             get {
@@ -288,25 +1239,292 @@ namespace ThreePlus.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /**
-        /// * @license
-        /// * Copyright 2010-2021 Three.js Authors
-        /// * SPDX-License-Identifier: MIT
-        /// */
-        ///(function (global, factory) {
-        ///	typeof exports === &apos;object&apos; &amp;&amp; typeof module !== &apos;undefined&apos; ? factory(exports) :
-        ///	typeof define === &apos;function&apos; &amp;&amp; define.amd ? define([&apos;exports&apos;], factory) :
-        ///	(global = typeof globalThis !== &apos;undefined&apos; ? globalThis : global || self, factory(global.THREE = {}));
-        ///}(this, (function (exports) { &apos;use strict&apos;;
-        ///
-        ///	const REVISION = &apos;131&apos;;
-        ///	const MOUSE = {
-        ///		LEFT: 0,
-        ///		MIDDLE: 1,        /// [rest of string was truncated]&quot;;.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string three {
+        internal static System.Drawing.Bitmap SwedishRoyalCastlenegx {
             get {
-                return ResourceManager.GetString("three", resourceCulture);
+                object obj = ResourceManager.GetObject("SwedishRoyalCastlenegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SwedishRoyalCastlenegy {
+            get {
+                object obj = ResourceManager.GetObject("SwedishRoyalCastlenegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SwedishRoyalCastlenegz {
+            get {
+                object obj = ResourceManager.GetObject("SwedishRoyalCastlenegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SwedishRoyalCastleposx {
+            get {
+                object obj = ResourceManager.GetObject("SwedishRoyalCastleposx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SwedishRoyalCastleposy {
+            get {
+                object obj = ResourceManager.GetObject("SwedishRoyalCastleposy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SwedishRoyalCastleposz {
+            get {
+                object obj = ResourceManager.GetObject("SwedishRoyalCastleposz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tallinnnegx {
+            get {
+                object obj = ResourceManager.GetObject("Tallinnnegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tallinnnegy {
+            get {
+                object obj = ResourceManager.GetObject("Tallinnnegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tallinnnegz {
+            get {
+                object obj = ResourceManager.GetObject("Tallinnnegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tallinnposx {
+            get {
+                object obj = ResourceManager.GetObject("Tallinnposx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tallinnposy {
+            get {
+                object obj = ResourceManager.GetObject("Tallinnposy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tallinnposz {
+            get {
+                object obj = ResourceManager.GetObject("Tallinnposz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tantolundennegx {
+            get {
+                object obj = ResourceManager.GetObject("Tantolundennegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tantolundennegy {
+            get {
+                object obj = ResourceManager.GetObject("Tantolundennegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tantolundennegz {
+            get {
+                object obj = ResourceManager.GetObject("Tantolundennegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tantolundenposx {
+            get {
+                object obj = ResourceManager.GetObject("Tantolundenposx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tantolundenposy {
+            get {
+                object obj = ResourceManager.GetObject("Tantolundenposy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tantolundenposz {
+            get {
+                object obj = ResourceManager.GetObject("Tantolundenposz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Teidenegx {
+            get {
+                object obj = ResourceManager.GetObject("Teidenegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Teidenegy {
+            get {
+                object obj = ResourceManager.GetObject("Teidenegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Teidenegz {
+            get {
+                object obj = ResourceManager.GetObject("Teidenegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Teideposx {
+            get {
+                object obj = ResourceManager.GetObject("Teideposx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Teideposy {
+            get {
+                object obj = ResourceManager.GetObject("Teideposy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Teideposz {
+            get {
+                object obj = ResourceManager.GetObject("Teideposz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_AssetEnvironment_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_AssetEnvironment_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Assets_Cube_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Assets_Cube_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Assets_Cube2_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Assets_Cube2_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Assets_Env01_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Assets_Env01_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Assets_Env03_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Assets_Env03_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -323,9 +1541,59 @@ namespace ThreePlus.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Three_Helper_Boundary_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Helper_Boundary_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Three_Helper_Grid_01 {
             get {
                 object obj = ResourceManager.GetObject("Three_Helper_Grid_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Helper_GridPolar_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Helper_GridPolar_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Helper_Light_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Helper_Light_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Helper_Normals_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Helper_Normals_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Helper_Tangents_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Helper_Tangents_01", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -383,9 +1651,189 @@ namespace ThreePlus.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Three_Light_Probe_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Light_Probe_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Light_Shadow_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Light_Shadow_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Three_Light_Spot_01 {
             get {
                 object obj = ResourceManager.GetObject("Three_Light_Spot_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Bump_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Bump_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Clearcoat1_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Clearcoat1_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Clearcoat2_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Clearcoat2_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Clearcoat3 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Clearcoat3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Displacement {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Displacement", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Displacement_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Displacement_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Emissive_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Emissive_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_FlatShaded_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_FlatShaded_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Metalness_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Metalness_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Normal_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Normal_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Opacity2_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Opacity2_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Roughness_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Roughness_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Sheen_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Sheen_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Texture2_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Texture2_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Volume_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Volume_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Wireframe_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Wireframe_01", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -453,6 +1901,16 @@ namespace ThreePlus.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Three_Materials_Shadow_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Materials_Shadow_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Three_Materials_Standard_01 {
             get {
                 object obj = ResourceManager.GetObject("Three_Materials_Standard_01", resourceCulture);
@@ -466,6 +1924,80 @@ namespace ThreePlus.Properties {
         internal static System.Drawing.Bitmap Three_Materials_Toon_01 {
             get {
                 object obj = ResourceManager.GetObject("Three_Materials_Toon_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /**
+        /// * @license
+        /// * Copyright 2010-2021 Three.js Authors
+        /// * SPDX-License-Identifier: MIT
+        /// */
+        ///!function(t,e){&quot;object&quot;==typeof exports&amp;&amp;&quot;undefined&quot;!=typeof module?e(exports):&quot;function&quot;==typeof define&amp;&amp;define.amd?define([&quot;exports&quot;],e):e((t=&quot;undefined&quot;!=typeof globalThis?globalThis:t||self).THREE={})}(this,(function(t){&quot;use strict&quot;;const e=&quot;136&quot;,n=100,i=300,r=301,s=302,a=303,o=304,l=306,c=307,h=1e3,u=1001,d=1002,p=1003,m=1004,f=1005,g=1006,v=1007,y=1008,x=1009,_=1012,b=1014,M=1015,w=1016,S=1020,T=1022,E=1023,A=1 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string three_min {
+            get {
+                return ResourceManager.GetString("three_min", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_SceneAO_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_SceneAO_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_SceneAtmosphere_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_SceneAtmosphere_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_SceneCompile_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_SceneCompile_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_SceneEnvironment_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_SceneEnvironment_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_SceneGround_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_SceneGround_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_SceneOutline_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_SceneOutline_01", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -500,6 +2032,66 @@ namespace ThreePlus.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Vasanegx {
+            get {
+                object obj = ResourceManager.GetObject("Vasanegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Vasanegy {
+            get {
+                object obj = ResourceManager.GetObject("Vasanegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Vasanegz {
+            get {
+                object obj = ResourceManager.GetObject("Vasanegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Vasaposx {
+            get {
+                object obj = ResourceManager.GetObject("Vasaposx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Vasaposy {
+            get {
+                object obj = ResourceManager.GetObject("Vasaposy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Vasaposz {
+            get {
+                object obj = ResourceManager.GetObject("Vasaposz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ( function () {
         ///
         ///	const _v1 = new THREE.Vector3();
@@ -520,7 +2112,7 @@ namespace ThreePlus.Properties {
         ///				console.error( &apos;THREE.VertexNormalsHelper no longer supports Geometry. Use THREE.BufferGeometry instead.&apos; );
         ///				return;
         ///
-        ///			} else [rest of string was truncated]&quot;;.
+        ///			} else if ( objGeometry &amp;&amp; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string VertexNormalsHelper {
             get {
@@ -557,7 +2149,9 @@ namespace ThreePlus.Properties {
         ///
         ///			}
         ///
-        ///			const nTangents = objGeometry.attributes.tangent.cou [rest of string was truncated]&quot;;.
+        ///			const nTangents = objGeometry.attributes.tangent.count; //
+        ///
+        ///			const ge [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string VertexTangentsHelper {
             get {
@@ -591,6 +2185,126 @@ namespace ThreePlus.Properties {
         internal static string VRButton {
             get {
                 return ResourceManager.GetString("VRButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YokohamaParknegx {
+            get {
+                object obj = ResourceManager.GetObject("YokohamaParknegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YokohamaParknegy {
+            get {
+                object obj = ResourceManager.GetObject("YokohamaParknegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YokohamaParknegz {
+            get {
+                object obj = ResourceManager.GetObject("YokohamaParknegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YokohamaParkposx {
+            get {
+                object obj = ResourceManager.GetObject("YokohamaParkposx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YokohamaParkposy {
+            get {
+                object obj = ResourceManager.GetObject("YokohamaParkposy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YokohamaParkposz {
+            get {
+                object obj = ResourceManager.GetObject("YokohamaParkposz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YokohamaPiernegx {
+            get {
+                object obj = ResourceManager.GetObject("YokohamaPiernegx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YokohamaPiernegy {
+            get {
+                object obj = ResourceManager.GetObject("YokohamaPiernegy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YokohamaPiernegz {
+            get {
+                object obj = ResourceManager.GetObject("YokohamaPiernegz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YokohamaPierposx {
+            get {
+                object obj = ResourceManager.GetObject("YokohamaPierposx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YokohamaPierposy {
+            get {
+                object obj = ResourceManager.GetObject("YokohamaPierposy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YokohamaPierposz {
+            get {
+                object obj = ResourceManager.GetObject("YokohamaPierposz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

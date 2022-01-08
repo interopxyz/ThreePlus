@@ -35,7 +35,7 @@ namespace ThreePlus.Components.Materials
             pManager.AddGenericParameter("Model", "M", "A Model, Mesh, or Brep", GH_ParamAccess.item);
             pManager.AddColourParameter("Color", "C", "The material's color", GH_ParamAccess.item, Color.Wheat);
             pManager[1].Optional = true;
-            pManager.AddNumberParameter("Roughness", "R", "How rough the material appears. 0.0 means a smooth mirror reflection, 1.0 means fully diffuse.", GH_ParamAccess.item, 1.0);
+            pManager.AddNumberParameter("Roughness", "X", "How rough the material appears. 0.0 means a smooth mirror reflection, 1.0 means fully diffuse.", GH_ParamAccess.item, 1.0);
             pManager[2].Optional = true;
             pManager.AddNumberParameter("Metalness", "M", "How much the material is like a metal. Non-metallic materials such as wood or stone use 0.0, metallic use 1.0, with nothing (usually) in between.", GH_ParamAccess.item, 1.0);
             pManager[3].Optional = true;

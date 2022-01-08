@@ -25,6 +25,8 @@ namespace ThreePlus
         protected int filmGauge = 35;
         protected int filmOffset = 0;
 
+        protected bool isDefault = true;
+
         #endregion
 
         #region constructors
@@ -48,6 +50,8 @@ namespace ThreePlus
             this.aspect = camera.aspect;
             this.filmGauge = camera.filmGauge;
             this.filmOffset = camera.filmOffset;
+
+            this.isDefault = camera.isDefault;
     }
 
         #endregion
@@ -57,11 +61,13 @@ namespace ThreePlus
         public virtual Rg.Point3d Position
         {
             get { return position; }
+            set { position = value; }
         }
 
         public virtual Rg.Point3d Target
         {
             get { return target; }
+            set { target = value; }
         }
 
         public virtual int FOV
@@ -95,6 +101,11 @@ namespace ThreePlus
         public virtual int FilmOffset
         {
             get { return filmOffset; }
+        }
+
+        public virtual bool IsDefault
+        {
+            get { return isDefault; }
         }
 
         #endregion

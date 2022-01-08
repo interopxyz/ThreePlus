@@ -166,12 +166,12 @@ namespace ThreePlus
 
             output.AppendLine(SetItem("uuid", input.Uuid));
             output.AppendLine(SetItem("type", input.Type));
-            output.AppendLine(SetItem("color", input.Color));
+            output.AppendLine(SetItem("color", input.DiffuseColor));
             output.AppendLine(SetItem("transparent", input.Transparent));
             output.AppendLine(SetItem("opacity", input.Opacity));
             output.AppendLine(SetItem("roughness", input.Roughness));
             output.AppendLine(SetItem("metalness", input.Metalness));
-            output.AppendLine(SetItem("emissive", input.Emissive));
+            output.AppendLine(SetItem("emissive", input.EmissiveColor));
             output.AppendLine(SetItem("emissiveIntensity", input.EmissiveIntensity,false));
 
             output.AppendLine(CloseObject(comma));

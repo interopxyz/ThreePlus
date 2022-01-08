@@ -3,6 +3,8 @@ using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
 
+using Sd = System.Drawing;
+
 namespace ThreePlus.Classes
 {
     public class GH_Ground : GH_Component
@@ -22,7 +24,7 @@ namespace ThreePlus.Classes
         /// </summary>
         public override GH_Exposure Exposure
         {
-            get { return GH_Exposure.primary; }
+            get { return GH_Exposure.secondary; }
         }
 
         /// <summary>
@@ -56,8 +58,11 @@ namespace ThreePlus.Classes
             double height = 0.0;
             DA.GetData(1, ref height);
 
-            Ground ground = new Ground(size,height);
+            Plane plane = new Plane();
+            plane.OriginZ = height;
 
+            Model ground = new Model(plane, size);
+            ground.Material = Material.PhongMaterial(Sd.Color.LightGray, 0.5);
             DA.SetData(0, ground);
         }
 
@@ -70,7 +75,7 @@ namespace ThreePlus.Classes
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.Three_SceneGround_01;
             }
         }
 

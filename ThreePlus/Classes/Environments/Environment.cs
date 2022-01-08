@@ -12,11 +12,16 @@ namespace ThreePlus
     {
 
         #region members
+        public enum EnvironmentModes { Color,Environment,CubeMap};
+        protected EnvironmentModes environmentMode = EnvironmentModes.Color;
 
         protected Sd.Bitmap envMap = null;
+        protected CubeMap cubeMap = null;
         protected Sd.Color background = Sd.Color.White;
+
         public bool IsBackground = true;
         public bool IsEnvironment = true;
+        public bool IsIllumination = true;
 
         #endregion
 
@@ -29,23 +34,39 @@ namespace ThreePlus
 
         public Environment(Environment environment) : base()
         {
-            this.envMap = environment.EnvMap;
+            this.environmentMode = environment.environmentMode;
+
             this.background = environment.background;
+            this.envMap = environment.EnvMap;
+            this.cubeMap = environment.cubeMap;
+
             this.IsBackground = environment.IsBackground;
             this.IsEnvironment = environment.IsEnvironment;
+            this.IsIllumination = environment.IsIllumination;
+        }
+
+        public Environment(Sd.Color background) : base()
+        {
+            this.environmentMode = EnvironmentModes.Color;
+            this.background = background;
         }
 
         public Environment(Sd.Bitmap envMap) : base()
         {
+            this.environmentMode = EnvironmentModes.Environment;
             this.envMap = new Sd.Bitmap(envMap);
         }
 
-
-        public Environment(Sd.Color background) : base()
+        public Environment(CubeMap cubeMap) : base()
         {
-            this.background = background;
+            this.environmentMode = EnvironmentModes.CubeMap;
+            this.cubeMap = cubeMap;
         }
 
+        public virtual EnvironmentModes EnvironmentMode
+        {
+            get { return environmentMode; }
+        }
 
         #endregion
 
@@ -70,6 +91,11 @@ namespace ThreePlus
             }
         }
 
+        public virtual CubeMap CubeMap
+        {
+            get { return new CubeMap(cubeMap); }
+        }
+
         public virtual bool HasEnvMap
         {
             get { return (envMap!=null); }
@@ -87,7 +113,7 @@ namespace ThreePlus
 
         public override string ToString()
         {
-            return "Environment | ";
+            return "Environment | "+this.environmentMode.ToString();
         }
 
         #endregion
