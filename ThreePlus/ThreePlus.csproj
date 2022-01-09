@@ -62,11 +62,13 @@
     <Compile Include="Classes\CubeMap.cs" />
     <Compile Include="Classes\Environments\Atmosphere.cs" />
     <Compile Include="Classes\Environments\Environment.cs" />
+    <Compile Include="Classes\Graphic.cs" />
     <Compile Include="Classes\PostProcessing\AmbientOcclusion.cs" />
     <Compile Include="Classes\PostProcessing\Outline.cs" />
     <Compile Include="Components\Assets\GH_Assets_CubeMap.cs" />
     <Compile Include="Components\Assets\GH_Assets_CubeMaps.cs" />
     <Compile Include="Components\Assets\GH_Assets_Environments.cs" />
+    <Compile Include="Components\Graphics\GH_Graphics.cs" />
     <Compile Include="Components\Helpers\GH_DisplayBoundary.cs" />
     <Compile Include="Components\Helpers\GH_DisplayLight.cs" />
     <Compile Include="Components\Lights\GH_LightShadows.cs" />

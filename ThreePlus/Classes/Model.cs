@@ -24,6 +24,7 @@ namespace ThreePlus
         protected Rg.NurbsCurve curve = null;
 
         public Material Material = new Material();
+        public Graphic Graphic = new Graphic();
         public TangentDisplay Tangents = new TangentDisplay();
         public NormalDisplay Normals = new NormalDisplay();
 
@@ -51,6 +52,7 @@ namespace ThreePlus
             this.Normals = new NormalDisplay(model.Normals);
 
             this.Material = new Material(model.Material);
+            this.Graphic = new Graphic(model.Graphic);
             this.hasHelper = model.hasHelper;
             this.helperColor = model.helperColor;
 

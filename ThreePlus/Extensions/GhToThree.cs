@@ -68,7 +68,7 @@ namespace ThreePlus
                         Rg.NurbsCurve nCurve = null;
                         if (goo.CastTo<Rg.NurbsCurve>(out nCurve))
                         {
-                            curve = nCurve.DuplicateCurve().ToNurbsCurve();
+                            curve = nCurve.ToNurbsCurve();
                             curve.SetUserString("name", "curve");
                             model = new Model(curve);
                         }

@@ -702,7 +702,7 @@ namespace ThreePlus
             return output.ToString();
         }
 
-        public static string ToJavascript(this Rg.NurbsCurve input, string index)
+        public static string ToJavascript(this Rg.NurbsCurve input, string index, Graphic graphic = null)
         {
             StringBuilder output = new StringBuilder();
             string name = "curve" + index;
@@ -712,14 +712,30 @@ namespace ThreePlus
 
             int count = input.Points.Count;
             var points = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count);
+            var colors = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count);
+
             Parallel.For(0, count, k =>
             {
                 points[k] = input.Points[k].Location.ToJs();
             }
             );
-
             output.AppendLine("const positions" + index + " = new Float32Array( [" + string.Join(",", points.Values) + "] );");
             output.AppendLine(name + ".setAttribute( 'position', new THREE.BufferAttribute( positions" + index + ", 3 ) );");
+
+            if(graphic!=null)
+            { 
+            if (graphic.HasColors)
+            {
+                Parallel.For(0, count, k =>
+            {
+                colors[k] = graphic.Colors[k].ToJs();
+            }
+            );
+                output.AppendLine("const colors" + index + " = new Float32Array( [" + string.Join(",", colors.Values) + "] );");
+                output.AppendLine(name + ".setAttribute( 'color', new THREE.BufferAttribute( colors" + index + ", 3 ) );");
+            }
+            }
+
             output.AppendLine("const line"+index+" = new THREE.Line( "+name+", lineMat" + index +" );");
 
             return output.ToString();
@@ -744,7 +760,6 @@ namespace ThreePlus
             var normals = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count * 3);
             var uvs = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count * 3);
             var colors = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count * 3);
-
 
             Parallel.For(0, count, k =>
             {
@@ -825,12 +840,12 @@ namespace ThreePlus
 
         public static string ToJs(this Rg.Point3d value, int digits = 5)
         {
-            return Math.Round(value.X, digits) + "," + Math.Round(value.Z, digits) + "," + Math.Round(value.Y, digits);
+            return Math.Round(value.Y, digits) + "," + Math.Round(value.Z, digits) + "," + Math.Round(value.X, digits);
         }
 
         public static string ToJs(this Rg.Point3f value, int digits = 5)
         {
-            return Math.Round(value.X, digits) + "," + Math.Round(value.Z, digits) + "," + Math.Round(value.Y, digits);
+            return Math.Round(value.Y, digits) + "," + Math.Round(value.Z, digits) + "," + Math.Round(value.X, digits);
         }
 
         public static string ToJs(this Rg.Vector3d value, int digits = 5)
