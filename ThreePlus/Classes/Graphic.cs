@@ -17,7 +17,8 @@ namespace ThreePlus
         protected Sd.Color color = Sd.Color.Black;
 
         protected double width = 1.0;
-        protected List<double> pattern = new List<double>();
+        protected double dashLength = 0.0;
+        protected double gapLength = 1.0;
 
         #endregion
 
@@ -30,13 +31,12 @@ namespace ThreePlus
 
         public Graphic(Graphic graphic) : base()
         {
-            this.colors.Clear();
             this.Colors = graphic.colors;
             this.color = Sd.Color.FromArgb(graphic.color.A, graphic.color.R, graphic.color.G, graphic.color.B);
 
-            this.pattern.Clear();
-            foreach (double num in graphic.pattern) this.pattern.Add(num);
             this.width = graphic.width;
+            this.dashLength = graphic.dashLength;
+            this.gapLength = graphic.gapLength;
         }
 
         #endregion
@@ -53,19 +53,33 @@ namespace ThreePlus
             }
         }
 
-        public virtual List<double> Pattern
+        public virtual Sd.Color Color
         {
-            get { return pattern; }
-            set
-            {
-                this.pattern.Clear();
-                foreach (double num in value) this.pattern.Add(num);
-            }
+            get { return color; }
+            set { color = value; }
         }
 
         public virtual bool HasColors
         {
             get { return colors.Count > 0; }
+        }
+
+        public virtual double Width
+        {
+            get { return width; }
+            set { width = value; }
+        }
+
+        public virtual double DashLength
+        {
+            get { return dashLength; }
+            set { dashLength = value; }
+        }
+
+        public virtual double GapLength
+        {
+            get { return gapLength; }
+            set { gapLength = value; }
         }
 
         #endregion

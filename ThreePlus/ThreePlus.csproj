@@ -63,15 +63,18 @@
     <Compile Include="Classes\Environments\Atmosphere.cs" />
     <Compile Include="Classes\Environments\Environment.cs" />
     <Compile Include="Classes\Graphic.cs" />
+    <Compile Include="Classes\PointCloud.cs" />
     <Compile Include="Classes\PostProcessing\AmbientOcclusion.cs" />
     <Compile Include="Classes\PostProcessing\Outline.cs" />
     <Compile Include="Components\Assets\GH_Assets_CubeMap.cs" />
     <Compile Include="Components\Assets\GH_Assets_CubeMaps.cs" />
     <Compile Include="Components\Assets\GH_Assets_Environments.cs" />
-    <Compile Include="Components\Graphics\GH_Graphics.cs" />
+    <Compile Include="Components\Assets\GH_Assets_Icons.cs" />
+    <Compile Include="Components\Graphics\GH_GraphicsPaths.cs" />
     <Compile Include="Components\Helpers\GH_DisplayBoundary.cs" />
     <Compile Include="Components\Helpers\GH_DisplayLight.cs" />
     <Compile Include="Components\Lights\GH_LightShadows.cs" />
+    <Compile Include="Components\Graphics\GH_GraphicsPoints.cs" />
     <Compile Include="Components\Materials\GH_MaterialShadow.cs" />
     <Compile Include="Components\Materials\Maps\GH_Map_Metalness.cs" />
     <Compile Include="Components\Materials\Maps\GH_Map_Opacity.cs" />
@@ -150,9 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\VRButton.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\three.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ThreePlus_16.png" />
@@ -747,6 +747,66 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Three_MaterialMaps_Normal-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Line2.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LineGeometry.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LineMaterial.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GeometryUtils.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LineSegmentsGeometry.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\three.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LineSegments2.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprite-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Graphics_Stroke-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Graphics_Points-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Ring-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Frame-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Diamond-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Circle-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Cross-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Marker-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Square-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Triangle-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Assets_Marker-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Assets_Marker2-01.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

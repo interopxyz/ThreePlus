@@ -181,6 +181,9 @@
   <data name="GamlaStanPosz" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GamlaStanPosz.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="GeometryUtils" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GeometryUtils.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="HeroesSquarenegx" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\HeroesSquarenegx.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -199,11 +202,50 @@
   <data name="HeroesSquareposz" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\HeroesSquareposz.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Icons_Circle_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons_Circle-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icons_Cross_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons_Cross-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icons_Diamond_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons_Diamond-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icons_Frame_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons_Frame-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icons_Marker_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons_Marker-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icons_Ring_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons_Ring-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icons_Square_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons_Square-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icons_Triangle_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons_Triangle-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="LightProbeGenerator" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LightProbeGenerator.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="LightProbeHelper" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LightProbeHelper.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Line2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Line2.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="LineGeometry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LineGeometry.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="LineMaterial" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LineMaterial.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="LineSegments2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LineSegments2.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="LineSegmentsGeometry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LineSegmentsGeometry.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="Lyckselenegx" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lyckselenegx.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -397,6 +439,9 @@
   <data name="SnowParkposz" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SnowParkposz.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Sprite_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sprite-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="SSAOPass" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SSAOPass.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
@@ -475,6 +520,9 @@
   <data name="Teideposz" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Teideposz.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="three" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\three.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="ThreeJsHeader" xml:space="preserve">
     <value>import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/build/three.module.js';</value>
   </data>
@@ -498,6 +546,18 @@
   </data>
   <data name="Three_Assets_Env03_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Three_Assets_Env03-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Assets_Marker2_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Assets_Marker2-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Assets_Marker_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Assets_Marker-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Graphics_Points_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Graphics_Points-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Graphics_Stroke_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Graphics_Stroke-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Three_Helper_Axis_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Three_Helper_Axis-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

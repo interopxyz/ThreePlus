@@ -33,6 +33,13 @@ namespace ThreePlus
                 output.AppendLine("<script src=\"js/VertexNormalsHelper.js\"></script>");
                 output.AppendLine("<script src=\"js/VertexTangentsHelper.js\"></script>");
 
+                //output.AppendLine("<script src=\"js/GeometryUtils.js\"></script>");
+                output.AppendLine("<script src=\"js/LineSegmentsGeometry.js\"></script>");
+                output.AppendLine("<script src=\"js/LineSegments2.js\"></script>");
+                output.AppendLine("<script src=\"js/LineGeometry.js\"></script>");
+                output.AppendLine("<script src=\"js/LineMaterial.js\"></script>");
+                output.AppendLine("<script src=\"js/Line2.js\"></script>");
+
                 if (input.AmbientOcclusion.HasAO)
                 {
                     output.AppendLine("<script src=\"js/EffectComposer.js\"></script>");
@@ -75,6 +82,13 @@ namespace ThreePlus
                     output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lights/LightProbeGenerator.js\" ></script>");
                     output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/helpers/LightProbeHelper.js\" ></script>");
                 }
+
+                //output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/utils/GeometryUtils.js\" ></script>");
+                output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineSegmentsGeometry.js\" ></script>");
+                output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineSegments2.js\" ></script>");
+                output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineGeometry.js\" ></script>");
+                output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineMaterial.js\" ></script>");
+                output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/Line2.js\" ></script>");
             }
             output.AppendLine("<script type=\"text/javascript\" src=\"app.js\"></script>");
             output.AppendLine("</body>");
@@ -128,6 +142,20 @@ namespace ThreePlus
                         }
                     }
                 }
+                else if (model.IsCloud)
+                {
+                    if(model.Cloud.HasBitmap)
+                    {
+                        string key = model.Cloud.Map.GetHash(crypt);
+                        if (!maps.ContainsKey(key))
+                        {
+                            string name = "map" + maps.Count;
+                            maps.Add(key, name);
+                            output.AppendLine(model.Cloud.Map.ToJsObjMap(name));
+                        }
+                        model.Cloud.MapName= maps[key];
+                    }
+                }
             }
 
             int i = 0;
@@ -149,11 +177,15 @@ namespace ThreePlus
 
                 if (model.IsCurve)
                 {
-                    output.AppendLine(model.Curve.ToJavascript(index));
+                    output.AppendLine(model.Curve.ToJavascript(index,model.Graphic));
                     bbox.Union(model.Curve.GetBoundingBox(false));
 
                     output.Append(model.Tangents.ToJavascript(index));
-                    output.AppendLine("scene.add(line" + index + ");");
+                }
+                else if (model.IsCloud)
+                {
+                    output.AppendLine(model.Cloud.ToJavascript(index));
+                    bbox.Union(new Rg.BoundingBox( model.Cloud.Points));
                 }
                 else
                 {
@@ -174,7 +206,6 @@ namespace ThreePlus
                         if (model.Material.MaterialType != Material.Types.Toon) output.AppendLine("model" + index + ".receiveShadow = true;");
                     }
 
-                    output.AppendLine("scene.add(model" + index + ");");
                     if (model.HasHelper)
                     {
                         output.AppendLine("const bbox" + index + " = new THREE.BoxHelper( model" + index + ", " + model.HelperColor.ToJs() + " );");
@@ -182,9 +213,10 @@ namespace ThreePlus
                     }
 
                     if (model.IsMesh) output.Append(model.Normals.ToJavascript(index));
-
                 }
-                    i++;
+
+                output.AppendLine("scene.add(model" + index + ");");
+                i++;
             }
 
             if (input.Camera.IsDefault)
@@ -577,7 +609,7 @@ namespace ThreePlus
         {
             StringBuilder output = new StringBuilder();
 
-            output.Append("color: " + input.DiffuseColor.ToJs());
+            output.Append("color: " + input.DiffuseColor.ToJs()+ ", side:THREE.DoubleSide");
             if (input.HasTextureMap) output.Append(", map : " + input.TextureMapName);
 
             return output.ToString();
@@ -702,13 +734,46 @@ namespace ThreePlus
             return output.ToString();
         }
 
-        public static string ToJavascript(this Rg.NurbsCurve input, string index, Graphic graphic = null)
+        public static string ToJavascript(this PointCloud input, string index)
+        {
+            StringBuilder output = new StringBuilder();
+            string name = "cloud" + index;
+
+            output.AppendLine("const " + name + " = new THREE.BufferGeometry();");
+
+            int count = input.Points.Count;
+            var points = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count);
+            var colors = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count);
+
+            Parallel.For(0, count, k =>
+            {
+                points[k] = input.Points[k].ToJs();
+                colors[k] = input.Colors[k].ToJsArray();
+            }
+            );
+
+            output.AppendLine("const positions" + index + " = new Float32Array( [" + string.Join(",", points.Values) + "] );");
+            output.AppendLine("const colors" + index + " = new Float32Array( [" + string.Join(",", colors.Values) + "] );");
+            //if(input.IsSprite)output.AppendLine("const scales" + index + " = new Float32Array( [" + string.Join(",", input.Scales) + "] );");
+            
+            output.AppendLine(name + ".setAttribute( 'position', new THREE.BufferAttribute( positions" + index + ", 3 ) );");
+            output.AppendLine(name + ".setAttribute( 'color', new THREE.BufferAttribute( colors" + index + ", 3 ) );");
+            //if (input.IsSprite) output.AppendLine(name + ".setAttribute( 'scale', new THREE.BufferAttribute( scales" + index + ", 1 ) );");
+
+                output.Append("const material" + index + " = new THREE.PointsMaterial( { size: " + Math.Round(input.Scale, 5) + ", depthTest: true, transparent: true, color: 0xffffff, vertexColors: true ");
+                if (input.HasBitmap) output.Append(", map: "+ input.MapName + ", alphaMap: " + input.MapName+ ", alphaTest:"+Math.Round(input.Threshold,5));
+                    output.AppendLine(" } );");
+                output.AppendLine("const model" + index + " = new THREE.Points( " + name + ", material" + index + " );");
+
+            return output.ToString();
+        }
+
+        public static string ToJavascript(this Rg.NurbsCurve input, string index, Graphic graphic)
         {
             StringBuilder output = new StringBuilder();
             string name = "curve" + index;
 
-            output.AppendLine("const " + name + " = new THREE.BufferGeometry();");
-            output.AppendLine("const lineMat"+index+" = new THREE.LineBasicMaterial({ color: 0x0000ff });");
+            output.AppendLine("const " + name + " = new THREE.LineGeometry();");
 
             int count = input.Points.Count;
             var points = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count);
@@ -720,23 +785,44 @@ namespace ThreePlus
             }
             );
             output.AppendLine("const positions" + index + " = new Float32Array( [" + string.Join(",", points.Values) + "] );");
-            output.AppendLine(name + ".setAttribute( 'position', new THREE.BufferAttribute( positions" + index + ", 3 ) );");
+            output.AppendLine(name + ".setPositions( positions" + index + ");");
 
-            if(graphic!=null)
-            { 
+            output.Append("const lineMat" + index + " = new THREE.LineMaterial({ linewidth: " + Math.Round(graphic.Width / 100.0, 5) + ", alphaToCoverage: true");
+
+
+            if (graphic.HasColors)
+            {
+                output.Append(", color: 0xffffff , vertexColors: true ");
+            }
+            else
+            {
+                output.Append(", color: " + graphic.Color.ToJs()+ ", vertexColors: false");
+            }
+
+            if (graphic.DashLength > 0)
+            {
+                output.Append(", dashed: true, dashSize: "+graphic.DashLength+", gapSize: "+graphic.GapLength);
+            }
+            else
+            {
+                output.Append(", dashed: false");
+            }
+
+            output.AppendLine(" });"); ;
+
             if (graphic.HasColors)
             {
                 Parallel.For(0, count, k =>
             {
-                colors[k] = graphic.Colors[k].ToJs();
+                colors[k] = graphic.Colors[k].ToJsArray();
             }
             );
                 output.AppendLine("const colors" + index + " = new Float32Array( [" + string.Join(",", colors.Values) + "] );");
-                output.AppendLine(name + ".setAttribute( 'color', new THREE.BufferAttribute( colors" + index + ", 3 ) );");
-            }
+                output.AppendLine(name + ".setColors( colors" + index + " );");
             }
 
-            output.AppendLine("const line"+index+" = new THREE.Line( "+name+", lineMat" + index +" );");
+            output.AppendLine("const model"+index+" = new THREE.Line2( "+name+", lineMat" + index +" );");
+            output.AppendLine("model" + index + ".computeLineDistances();");
 
             return output.ToString();
         }
@@ -831,6 +917,11 @@ namespace ThreePlus
         public static string ToJsOpacity(this Sd.Color value, int digits = 5)
         {
             return "'" + Math.Round(((double)value.A) / 255.0, digits) + "'";
+        }
+
+        public static string ToJsArray(this Sd.Color value, int digits = 5)
+        {
+            return Math.Round(value.R/255.0,digits) +", "+Math.Round(value.G / 255.0,digits) + ", "+Math.Round(value.B / 255.0,digits);
         }
 
         public static string ToJs(this Sd.Color value)

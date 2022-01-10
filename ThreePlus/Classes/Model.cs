@@ -22,6 +22,7 @@ namespace ThreePlus
         protected double size = double.NaN;
         protected Rg.Mesh mesh = null;
         protected Rg.NurbsCurve curve = null;
+        protected PointCloud cloud = null;
 
         public Material Material = new Material();
         public Graphic Graphic = new Graphic();
@@ -47,6 +48,7 @@ namespace ThreePlus
             if (model.mesh != null) this.mesh = model.mesh.DuplicateMesh();
             if (model.curve != null) this.curve = model.curve.DuplicateCurve().ToNurbsCurve();
             if (model.plane != Rg.Plane.Unset) this.plane= (Rg.Plane)model.plane.Clone();
+            if (model.cloud != null) this.cloud = new PointCloud(model.cloud);
 
             this.Tangents = new TangentDisplay(model.Tangents);
             this.Normals = new NormalDisplay(model.Normals);
@@ -92,6 +94,16 @@ namespace ThreePlus
             this.curve = curve.DuplicateCurve().ToNurbsCurve();
         }
 
+        public Model(PointCloud cloud):base()
+        {
+            this.geoId = Guid.NewGuid();
+            this.geometryType = GeometryTypes.Cloud;
+
+            this.name = "unnamed";
+
+            this.cloud = new PointCloud(cloud);
+        }
+
         #endregion
 
         #region properties
@@ -109,6 +121,11 @@ namespace ThreePlus
         public virtual bool IsPlane
         {
             get { return this.geometryType == GeometryTypes.Plane; }
+        }
+
+        public virtual bool IsCloud
+        {
+            get { return this.geometryType == GeometryTypes.Cloud; }
         }
 
         private string GeometryType
@@ -129,6 +146,11 @@ namespace ThreePlus
         public virtual Rg.Plane Plane
         {
             get { return plane; }
+        }
+
+        public virtual PointCloud Cloud
+        {
+            get { return cloud; }
         }
 
         public virtual double Size
@@ -167,7 +189,15 @@ namespace ThreePlus
 
         public override string ToString()
         {
-            return "Model | "+ GeometryType.ToString() + " | "+Material.MaterialType.ToString();
+            switch (geometryType)
+            {
+                case GeometryTypes.Mesh:
+                    return "Model | " + GeometryType.ToString() + " | " + Material.MaterialType.ToString();
+                case GeometryTypes.Curve:
+                    return "Model | " + GeometryType.ToString() + " | " + Graphic.Colors.Count+" colors";
+                default:
+                    return "Model | empty";
+            }
         }
 
         #endregion

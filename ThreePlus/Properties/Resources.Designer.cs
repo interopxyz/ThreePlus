@@ -325,6 +325,32 @@ namespace ThreePlus.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	/**
+        /// * Generates 2D-Coordinates in a very fast way.
+        /// *
+        /// * Based on work by:
+        /// * @link http://www.openprocessing.org/sketch/15493
+        /// *
+        /// * @param center     Center of Hilbert curve.
+        /// * @param size       Total width of Hilbert curve.
+        /// * @param iterations Number of subdivisions.
+        /// * @param v0         Corner index -X, -Z.
+        /// * @param v1         Corner index -X, +Z.
+        /// * @param v2         Corner index +X, +Z.
+        /// * @param v3         Corner index +X, -Z.
+        /// */
+        ///
+        ///	function hilbert2D( center = new THREE.Vector3( [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string GeometryUtils {
+            get {
+                return ResourceManager.GetString("GeometryUtils", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap HeroesSquarenegx {
@@ -385,6 +411,86 @@ namespace ThreePlus.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Icons_Circle_01 {
+            get {
+                object obj = ResourceManager.GetObject("Icons_Circle_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Icons_Cross_01 {
+            get {
+                object obj = ResourceManager.GetObject("Icons_Cross_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Icons_Diamond_01 {
+            get {
+                object obj = ResourceManager.GetObject("Icons_Diamond_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Icons_Frame_01 {
+            get {
+                object obj = ResourceManager.GetObject("Icons_Frame_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Icons_Marker_01 {
+            get {
+                object obj = ResourceManager.GetObject("Icons_Marker_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Icons_Ring_01 {
+            get {
+                object obj = ResourceManager.GetObject("Icons_Ring_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Icons_Square_01 {
+            get {
+                object obj = ResourceManager.GetObject("Icons_Square_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Icons_Triangle_01 {
+            get {
+                object obj = ResourceManager.GetObject("Icons_Triangle_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ( function () {
         ///
         ///	class LightProbeGenerator {
@@ -433,6 +539,165 @@ namespace ThreePlus.Properties {
         internal static string LightProbeHelper {
             get {
                 return ResourceManager.GetString("LightProbeHelper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	class Line2 extends THREE.LineSegments2 {
+        ///
+        ///		constructor( geometry = new THREE.LineGeometry(), material = new THREE.LineMaterial( {
+        ///			color: Math.random() * 0xffffff
+        ///		} ) ) {
+        ///
+        ///			super( geometry, material );
+        ///			this.type = &apos;Line2&apos;;
+        ///
+        ///		}
+        ///
+        ///	}
+        ///
+        ///	Line2.prototype.isLine2 = true;
+        ///
+        ///	THREE.Line2 = Line2;
+        ///
+        ///} )();
+        ///.
+        /// </summary>
+        internal static string Line2 {
+            get {
+                return ResourceManager.GetString("Line2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	class LineGeometry extends THREE.LineSegmentsGeometry {
+        ///
+        ///		constructor() {
+        ///
+        ///			super();
+        ///			this.type = &apos;LineGeometry&apos;;
+        ///
+        ///		}
+        ///
+        ///		setPositions( array ) {
+        ///
+        ///			// converts [ x1, y1, z1,  x2, y2, z2, ... ] to pairs format
+        ///			var length = array.length - 3;
+        ///			var points = new Float32Array( 2 * length );
+        ///
+        ///			for ( var i = 0; i &lt; length; i += 3 ) {
+        ///
+        ///				points[ 2 * i ] = array[ i ];
+        ///				points[ 2 * i + 1 ] = array[ i + 1 ];
+        ///				points[ 2 * i + 2 ] = array[ i + 2 ];
+        ///				points[ 2 * i + 3 ] = array[  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LineGeometry {
+            get {
+                return ResourceManager.GetString("LineGeometry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	/**
+        /// * parameters = {
+        /// *  color: &lt;hex&gt;,
+        /// *  linewidth: &lt;float&gt;,
+        /// *  dashed: &lt;boolean&gt;,
+        /// *  dashScale: &lt;float&gt;,
+        /// *  dashSize: &lt;float&gt;,
+        /// *  dashOffset: &lt;float&gt;,
+        /// *  gapSize: &lt;float&gt;,
+        /// *  resolution: &lt;Vector2&gt;, // to be set by renderer
+        /// * }
+        /// */
+        ///	THREE.UniformsLib.line = {
+        ///		worldUnits: {
+        ///			value: 1
+        ///		},
+        ///		linewidth: {
+        ///			value: 1
+        ///		},
+        ///		resolution: {
+        ///			value: new THREE.Vector2( 1, 1 )
+        ///		},
+        ///		dashOffset: {
+        ///			value: 0
+        ///		},
+        ///		dashScale: {
+        ///			value: 1
+        ///		},
+        ///		dashSize: {
+        ///			value: 1
+        ///		},
+        ///		gapS [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LineMaterial {
+            get {
+                return ResourceManager.GetString("LineMaterial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	const _start = new THREE.Vector3();
+        ///
+        ///	const _end = new THREE.Vector3();
+        ///
+        ///	const _start4 = new THREE.Vector4();
+        ///
+        ///	const _end4 = new THREE.Vector4();
+        ///
+        ///	const _ssOrigin = new THREE.Vector4();
+        ///
+        ///	const _ssOrigin3 = new THREE.Vector3();
+        ///
+        ///	const _mvMatrix = new THREE.Matrix4();
+        ///
+        ///	const _line = new THREE.Line3();
+        ///
+        ///	const _closestPoint = new THREE.Vector3();
+        ///
+        ///	const _box = new THREE.Box3();
+        ///
+        ///	const _sphere = new THREE.Sphere();
+        ///
+        ///	const _clipToWorldVector = new THREE.Vector4(); // Returns the margin [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LineSegments2 {
+            get {
+                return ResourceManager.GetString("LineSegments2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	const _box = new THREE.Box3();
+        ///
+        ///	const _vector = new THREE.Vector3();
+        ///
+        ///	class LineSegmentsGeometry extends THREE.InstancedBufferGeometry {
+        ///
+        ///		constructor() {
+        ///
+        ///			super();
+        ///			this.type = &apos;LineSegmentsGeometry&apos;;
+        ///			const positions = [ - 1, 2, 0, 1, 2, 0, - 1, 1, 0, 1, 1, 0, - 1, 0, 0, 1, 0, 0, - 1, - 1, 0, 1, - 1, 0 ];
+        ///			const uvs = [ - 1, 2, 1, 2, - 1, 1, 1, 1, - 1, - 1, 1, - 1, - 1, - 2, 1, - 2 ];
+        ///			const index = [ 0, 2, 1, 2, 3, 1, 2, 4, 3, 4, 5, 3, 4, 6, 5, 6, 7, 5 ];
+        ///			this.setIndex( [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LineSegmentsGeometry {
+            get {
+                return ResourceManager.GetString("LineSegmentsGeometry", resourceCulture);
             }
         }
         
@@ -1173,6 +1438,16 @@ namespace ThreePlus.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Sprite_01 {
+            get {
+                object obj = ResourceManager.GetObject("Sprite_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ( function () {
         ///
         ///	class SSAOPass extends THREE.Pass {
@@ -1479,6 +1754,31 @@ namespace ThreePlus.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /**
+        /// * @license
+        /// * Copyright 2010-2021 Three.js Authors
+        /// * SPDX-License-Identifier: MIT
+        /// */
+        ///(function (global, factory) {
+        ///	typeof exports === &apos;object&apos; &amp;&amp; typeof module !== &apos;undefined&apos; ? factory(exports) :
+        ///	typeof define === &apos;function&apos; &amp;&amp; define.amd ? define([&apos;exports&apos;], factory) :
+        ///	(global = typeof globalThis !== &apos;undefined&apos; ? globalThis : global || self, factory(global.THREE = {}));
+        ///})(this, (function (exports) { &apos;use strict&apos;;
+        ///
+        ///	const REVISION = &apos;136&apos;;
+        ///	const MOUSE = {
+        ///		LEFT: 0,
+        ///		MIDDLE: 1,
+        ///		RIGHT: 2,
+        ///	 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string three {
+            get {
+                return ResourceManager.GetString("three", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Three_AssetEnvironment_01 {
@@ -1524,6 +1824,46 @@ namespace ThreePlus.Properties {
         internal static System.Drawing.Bitmap Three_Assets_Env03_01 {
             get {
                 object obj = ResourceManager.GetObject("Three_Assets_Env03_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Assets_Marker_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Assets_Marker_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Assets_Marker2_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Assets_Marker2_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Graphics_Points_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Graphics_Points_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Graphics_Stroke_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Graphics_Stroke_01", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

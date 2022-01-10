@@ -54,7 +54,7 @@ namespace ThreePlus
         {
             Rg.Mesh mesh = null;
             Rg.NurbsCurve curve = null;
-
+            Rg.Point3d point3d = Rg.Point3d.Unset;
             Model model = null;
             if (goo.CastTo<Model>(out model))
             {
@@ -160,6 +160,13 @@ namespace ThreePlus
                             mesh = mesh.DuplicateMesh();
                             mesh.SetUserString("name", "mesh");
                             model = new Model(mesh);
+                        }
+                        break;
+                    case "Point3d":
+                        if(goo.CastTo<Rg.Point3d>(out point3d))
+                        {
+                            PointCloud cloud = new PointCloud(point3d, Sd.Color.Black);
+                            model = new Model(cloud);
                         }
                         break;
                 }

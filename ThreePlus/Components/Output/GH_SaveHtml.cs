@@ -100,6 +100,13 @@ namespace ThreePlus.Components.Output
                 File.WriteAllText(child + "VertexTangentsHelper.js", Properties.Resources.VertexTangentsHelper);
                 File.WriteAllText(child + "VertexNormalsHelper.js", Properties.Resources.VertexNormalsHelper);
 
+                //File.WriteAllText(child + "GeometryUtils.js", Properties.Resources.GeometryUtils);
+                File.WriteAllText(child + "LineSegmentsGeometry.js", Properties.Resources.LineSegmentsGeometry);
+                File.WriteAllText(child + "LineSegments2.js", Properties.Resources.LineSegments2);
+                File.WriteAllText(child + "LineGeometry.js", Properties.Resources.LineGeometry);
+                File.WriteAllText(child + "LineMaterial.js", Properties.Resources.LineMaterial);
+                File.WriteAllText(child + "Line2.js", Properties.Resources.Line2);
+
                 if (scene.AmbientOcclusion.HasAO)
                 {
                     File.WriteAllText(child + "EffectComposer.js", Properties.Resources.EffectComposer);
