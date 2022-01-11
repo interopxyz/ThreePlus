@@ -15,7 +15,7 @@ namespace ThreePlus.Components.Assets
         public GH_Assets_Icons()
           : base("Icon Images", "Icons",
               "A series of preselected icons",
-              Constants.ShortName, "Scene")
+              Constants.ShortName, "Assets")
         {
         }
 

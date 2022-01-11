@@ -1,21 +1,19 @@
 ﻿using Grasshopper.Kernel;
-using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 
-namespace ThreePlus.Components.Helpers
+namespace ThreePlus.Components.Cameras
 {
-    public class GH_DisplayTangent : GH_Component
+    public class GH_Camera_Perspective : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the GH_DisplayTangent class.
+        /// Initializes a new instance of the GH_Camera_Perspective class.
         /// </summary>
-        public GH_DisplayTangent()
-          : base("Display Tangents", "Tangents",
+        public GH_Camera_Perspective()
+          : base("Camera Perspective", "Persp Cam",
               "Description",
-              Constants.ShortName, "Helpers")
+              Constants.ShortName, "Cameras")
         {
         }
 
@@ -24,7 +22,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         public override GH_Exposure Exposure
         {
-            get { return GH_Exposure.tertiary; }
+            get { return GH_Exposure.primary; }
         }
 
         /// <summary>
@@ -32,13 +30,16 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "A Model or Curve, Mesh, or Brep", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Size", "S", "The length of the vector line", GH_ParamAccess.item, 10);
+            pManager.AddPointParameter("Position", "P", "The position of the camera", GH_ParamAccess.item);
+            pManager[0].Optional = true;
+            pManager.AddPointParameter("Target", "T", "The target of the camera", GH_ParamAccess.item);
             pManager[1].Optional = true;
-            pManager.AddNumberParameter("Width", "D", "The width of the vector line", GH_ParamAccess.item, 1);
+            pManager.AddIntegerParameter("FOV", "V", "The camera field of view.", GH_ParamAccess.item);
             pManager[2].Optional = true;
-            pManager.AddColourParameter("Color", "C", "The color of the vector line", GH_ParamAccess.item, Color.Magenta);
+            pManager.AddNumberParameter("Near", "N", "The camera frustrum near plane.", GH_ParamAccess.item);
             pManager[3].Optional = true;
+            pManager.AddNumberParameter("Far", "F", "The camera frustrum far plane.", GH_ParamAccess.item);
+            pManager[4].Optional = true;
         }
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "The updated Model", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Camera", "C", "A Perspective camera", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -55,33 +56,25 @@ namespace ThreePlus.Components.Helpers
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            IGH_Goo goo = null;
-            if (!DA.GetData(0, ref goo)) return;
+            Camera camera = new Camera();
+            Point3d position = camera.Position;
+            DA.GetData(0, ref position);
 
-            Model model = null;
+            Point3d target = camera.Target;
+            DA.GetData(1, ref target);
 
-                if (goo.CastTo<Model>(out model))
-                {
-                    model = new Model(model);
-                }
-                else
-                {
-                model = goo.ToModel();
-                }
+            int fov = camera.FOV;
+            DA.GetData(2, ref fov);
 
-            double size = 10;
-            DA.GetData(1, ref size);
+            double nearPlane = camera.Near;
+            DA.GetData(3, ref nearPlane);
 
-            double width = 1;
-            DA.GetData(2, ref width);
+            double farPlane = camera.Far;
+            DA.GetData(4, ref farPlane);
 
-            Color color = Color.Magenta;
-            DA.GetData(3, ref color);
+            camera = new Camera(position,target,fov,nearPlane,farPlane);
 
-            model.Tangents = new TangentDisplay(size, width, color);
-
-            DA.SetData(0, model);
-
+            DA.SetData(0, camera);
         }
 
         /// <summary>
@@ -93,7 +86,7 @@ namespace ThreePlus.Components.Helpers
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.Three_Helper_Tangents_01;
+                return null;
             }
         }
 
@@ -102,7 +95,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("436c2ce7-0fbb-442c-9e0f-e16279ea1d1d"); }
+            get { return new Guid("6da34c35-9c0c-450f-8551-50a30ed8171a"); }
         }
     }
 }

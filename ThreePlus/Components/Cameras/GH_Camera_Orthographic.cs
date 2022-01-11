@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-
-using Grasshopper.Kernel;
+﻿using Grasshopper.Kernel;
 using Rhino.Geometry;
+using System;
+using System.Collections.Generic;
 
-namespace ThreePlus.Components.Helpers
+namespace ThreePlus.Components.Cameras
 {
-    public class GH_DisplayLight : GH_Component
+    public class GH_Camera_Orthographic : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the GH_DisplayLight class.
+        /// Initializes a new instance of the GH_Camera_Orthographic class.
         /// </summary>
-        public GH_DisplayLight()
-          : base("Display Lights", "Display Light",
+        public GH_Camera_Orthographic()
+          : base("Camera Orthographic", "Ortho Cam",
               "Description",
-              Constants.ShortName, "Helpers")
+              Constants.ShortName, "Cameras")
         {
         }
 
@@ -24,7 +22,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         public override GH_Exposure Exposure
         {
-            get { return GH_Exposure.quarternary; }
+            get { return GH_Exposure.primary; }
         }
 
         /// <summary>
@@ -32,11 +30,14 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Light", "L", "A light object", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Size", "S", "The preview size", GH_ParamAccess.item, 5);
+            pManager.AddPointParameter("Position", "P", "The position of the camera", GH_ParamAccess.item);
+            pManager[0].Optional = true;
+            pManager.AddPointParameter("Target", "T", "The target of the camera", GH_ParamAccess.item);
             pManager[1].Optional = true;
-            pManager.AddColourParameter("Color", "C", "The preview color", GH_ParamAccess.item, Color.Gray);
+            pManager.AddNumberParameter("Near", "N", "The camera frustrum near plane.", GH_ParamAccess.item);
             pManager[2].Optional = true;
+            pManager.AddNumberParameter("Far", "F", "The camera frustrum far plane.", GH_ParamAccess.item);
+            pManager[3].Optional = true;
         }
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Light", "L", "An updated light object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Camera", "C", "A Perspective camera", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -53,20 +54,22 @@ namespace ThreePlus.Components.Helpers
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            Light light = new Light();
-            if (!DA.GetData(0, ref light)) return;
+            Camera camera = new Camera();
+            Point3d position = camera.Position;
+            DA.GetData(0, ref position);
 
-            light = new Light(light);
+            Point3d target = camera.Target;
+            DA.GetData(1, ref target);
 
-            double size = 5;
-            DA.GetData(1, ref size);
+            double nearPlane = camera.Near;
+            DA.GetData(2, ref nearPlane);
 
-            Color color = Color.Gray;
-            DA.GetData(2, ref color);
+            double farPlane = camera.Far;
+            DA.GetData(3, ref farPlane);
 
-            light.SetHelper(size, color);
+            camera = new Camera(position, target, nearPlane, farPlane);
 
-            DA.SetData(0, light);
+            DA.SetData(0, camera);
         }
 
         /// <summary>
@@ -78,7 +81,7 @@ namespace ThreePlus.Components.Helpers
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.Three_Helper_Light_01;
+                return null;
             }
         }
 
@@ -87,7 +90,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("58CB6685-8A28-4903-AA82-FB1A301D340A"); }
+            get { return new Guid("694ffbc6-aaec-47b9-b188-4ef928bf1456"); }
         }
     }
 }

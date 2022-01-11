@@ -15,7 +15,7 @@ namespace ThreePlus.Components.Assets
         public GH_Assets_CubeMap()
           : base("Cube Map", "CubeMap",
               "Create a CubeMap from six images",
-              Constants.ShortName, "Scene")
+              Constants.ShortName, "Assets")
         {
         }
 

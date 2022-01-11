@@ -16,7 +16,7 @@ namespace ThreePlus.Components.Helpers
         public GH_DisplayNormal()
           : base("Display Normals", "Normals",
               "Description",
-              Constants.ShortName, "Helper")
+              Constants.ShortName, "Helpers")
         {
         }
 

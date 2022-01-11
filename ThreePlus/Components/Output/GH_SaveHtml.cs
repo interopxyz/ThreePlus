@@ -14,10 +14,18 @@ namespace ThreePlus.Components.Output
         /// Initializes a new instance of the GH_SaveHtml class.
         /// </summary>
         public GH_SaveHtml()
-          : base("SaveHtml", "SaveHtml",
+          : base("Save Html", "SaveHtml",
               "Description",
               Constants.ShortName, "Output")
         {
+        }
+
+        /// <summary>
+        /// Set Exposure level for the component.
+        /// </summary>
+        public override GH_Exposure Exposure
+        {
+            get { return GH_Exposure.primary; }
         }
 
         /// <summary>
@@ -39,8 +47,8 @@ namespace ThreePlus.Components.Output
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("HTML path", "H", "The html text", GH_ParamAccess.item);
-            pManager.AddTextParameter("JS path", "J", "The javascript text", GH_ParamAccess.item);
+            pManager.AddTextParameter("Html path", "H", "The html file path location", GH_ParamAccess.item);
+            pManager.AddTextParameter("Javascript path", "J", "The javascript file path location", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -49,6 +57,7 @@ namespace ThreePlus.Components.Output
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+
             Scene scene = new Scene();
             if (!DA.GetData(0, ref scene)) return;
 
@@ -141,7 +150,7 @@ namespace ThreePlus.Components.Output
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.Three_Output_Html_File_01;
             }
         }
 

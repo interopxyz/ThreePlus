@@ -2,6 +2,7 @@
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ThreePlus.Components
 {
@@ -13,8 +14,16 @@ namespace ThreePlus.Components
         public GH_ToJson()
           : base("ToJson", "ToJson",
               "Description",
-              Constants.ShortName, "Subcategory")
+              Constants.ShortName, "Output")
         {
+        }
+
+        /// <summary>
+        /// Set Exposure level for the component.
+        /// </summary>
+        public override GH_Exposure Exposure
+        {
+            get { return GH_Exposure.secondary; }
         }
 
         /// <summary>
@@ -30,7 +39,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Text", "T", "The json text", GH_ParamAccess.item);
+            pManager.AddTextParameter("Text", "T", "The json text", GH_ParamAccess.list);
         }
 
         /// <summary>
@@ -39,10 +48,15 @@ namespace ThreePlus.Components
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            this.AddRuntimeMessage(GH_RuntimeMessageLevel.Remark, "Caution: Only use for smaller text files. Visualizing larger text output can cause Grasshopper to crash.");
+
             Scene scene = new Scene();
             if (!DA.GetData(0,ref scene)) return;
 
-            DA.SetData(0, scene.ToJson());
+            string json = scene.ToJson();
+            List<string> jsons = json.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None).ToList();
+
+            DA.SetDataList(0, jsons);
         }
 
         /// <summary>
@@ -54,7 +68,7 @@ namespace ThreePlus.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.Three_Output_Json_Text_01;
             }
         }
 

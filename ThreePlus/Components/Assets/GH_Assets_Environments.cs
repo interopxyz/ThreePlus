@@ -15,7 +15,7 @@ namespace ThreePlus.Components.Assets
         public GH_Assets_Environments()
           : base("Environment Maps", "EnvMaps",
               "A series of preselected public domain environment maps sourced from: https://polyhaven.com/",
-              Constants.ShortName, "Scene")
+              Constants.ShortName, "Assets")
         {
         }
 

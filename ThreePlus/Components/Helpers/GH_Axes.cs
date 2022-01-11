@@ -15,7 +15,7 @@ namespace ThreePlus.Components.Helpers
         public GH_Axes()
           : base("Axes", "Axes",
               "Description",
-              Constants.ShortName, "Helper")
+              Constants.ShortName, "Helpers")
         {
         }
 

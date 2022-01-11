@@ -13,6 +13,8 @@ namespace ThreePlus
 
         #region members
 
+        protected bool isPolar = false;
+
         bool show = false;
 
         protected double size = 10;
@@ -38,7 +40,7 @@ namespace ThreePlus
             this.divisions = divisions;
         }
 
-        public Grid(double size, double divisions, Sd.Color axisColor, Sd.Color gridColor) : base()
+        public Grid(double size, double divisions, Sd.Color axisColor, Sd.Color gridColor, bool isPolar) : base()
         {
             this.show = true;
 
@@ -47,6 +49,8 @@ namespace ThreePlus
 
             this.axisColor = axisColor;
             this.gridColor = gridColor;
+
+            this.isPolar = isPolar;
         }
 
         public Grid(Grid grid) : base(grid)
@@ -54,6 +58,7 @@ namespace ThreePlus
             this.show = grid.show;
 
             this.size = grid.size;
+            this.isPolar = grid.isPolar;
             this.divisions = grid.divisions;
 
             this.axisColor = grid.axisColor;
@@ -63,6 +68,12 @@ namespace ThreePlus
         #endregion
 
         #region properties
+
+        public virtual bool IsPolar
+        {
+            get { return isPolar; }
+            set { isPolar = value; }
+        }
 
         public virtual bool Show
         {
@@ -101,7 +112,9 @@ namespace ThreePlus
 
         public override string ToString()
         {
-            return "Grid | ";
+            string gridType = "Square";
+            if (isPolar) gridType = "Polar";
+            return "Grid | "+gridType;
         }
 
         #endregion

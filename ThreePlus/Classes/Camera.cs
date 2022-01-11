@@ -13,6 +13,9 @@ namespace ThreePlus
 
         #region members
 
+        public enum CameraModes { Perspective, Orthographic}
+        protected CameraModes cameraMode = CameraModes.Perspective;
+
         protected Rg.Point3d position = new Rg.Point3d(100,100,100);
         protected Rg.Point3d target = new Rg.Point3d(0, 0, 0);
 
@@ -39,6 +42,8 @@ namespace ThreePlus
 
         public Camera(Camera camera) : base(camera)
         {
+            this.cameraMode = camera.cameraMode;
+
             this.position = new Rg.Point3d(camera.position);
             this.target = new Rg.Point3d(camera.target);
 
@@ -54,9 +59,35 @@ namespace ThreePlus
             this.isDefault = camera.isDefault;
     }
 
+        public Camera(Rg.Point3d position, Rg.Point3d target, int fov, double near, double far)
+        {
+            this.isDefault = false;
+            this.cameraMode = CameraModes.Perspective;
+            this.position = new Rg.Point3d(position);
+            this.target = new Rg.Point3d(target);
+            this.fov = fov;
+            this.near = near;
+            this.far = far;
+        }
+
+        public Camera(Rg.Point3d position, Rg.Point3d target, double near, double far)
+        {
+            this.isDefault = false;
+            this.cameraMode = CameraModes.Orthographic;
+            this.position = new Rg.Point3d(position);
+            this.target = new Rg.Point3d(target);
+            this.near = near;
+            this.far = far;
+        }
+
         #endregion
 
         #region properties
+
+        public virtual bool IsOrthographic
+        {
+            get { return cameraMode == CameraModes.Orthographic; }
+        }
 
         public virtual Rg.Point3d Position
         {

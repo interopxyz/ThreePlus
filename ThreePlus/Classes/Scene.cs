@@ -73,6 +73,15 @@ namespace ThreePlus
 
         #region properties
 
+        public virtual bool HasCurves
+        {
+            get
+            {
+                foreach (Model model in this.Models) if (model.IsCurve) return true;
+                return false;
+            }
+        }
+
         public List<Light> Lights
         {
             get { return lights; }

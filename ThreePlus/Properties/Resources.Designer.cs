@@ -2285,6 +2285,46 @@ namespace ThreePlus.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Three_Output_Html_File_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Output_Html_File_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Output_Html_Text_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Output_Html_Text_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Output_Json_File_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Output_Json_File_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Output_Json_Text_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Output_Json_Text_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Three_SceneAO_01 {
             get {
                 object obj = ResourceManager.GetObject("Three_SceneAO_01", resourceCulture);

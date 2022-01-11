@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-
-using Grasshopper.Kernel;
+﻿using Grasshopper.Kernel;
 using Rhino.Geometry;
+using System;
+using System.Collections.Generic;
 
-namespace ThreePlus.Components.Helpers
+namespace ThreePlus.Components.Output
 {
-    public class GH_DisplayLight : GH_Component
+    public class GH_SaveJson : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the GH_DisplayLight class.
+        /// Initializes a new instance of the GH_SaveJson class.
         /// </summary>
-        public GH_DisplayLight()
-          : base("Display Lights", "Display Light",
+        public GH_SaveJson()
+          : base("Save Json", "SaveJson",
               "Description",
-              Constants.ShortName, "Helpers")
+              Constants.ShortName, "Output")
         {
         }
 
@@ -24,7 +22,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         public override GH_Exposure Exposure
         {
-            get { return GH_Exposure.quarternary; }
+            get { return GH_Exposure.secondary; }
         }
 
         /// <summary>
@@ -32,11 +30,13 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Light", "L", "A light object", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Size", "S", "The preview size", GH_ParamAccess.item, 5);
+            pManager.AddGenericParameter("Scene", "S", "Scene", GH_ParamAccess.item);
+            pManager.AddTextParameter("Folder Path", "F", "The folderpath to save the file", GH_ParamAccess.item);
             pManager[1].Optional = true;
-            pManager.AddColourParameter("Color", "C", "The preview color", GH_ParamAccess.item, Color.Gray);
+            pManager.AddTextParameter("Folder Name", "N", "The new export folder name", GH_ParamAccess.item);
             pManager[2].Optional = true;
+            pManager.AddBooleanParameter("Save", "S", "If true, the new file will be writter or overwritten", GH_ParamAccess.item, false);
+            pManager[3].Optional = true;
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Light", "L", "An updated light object", GH_ParamAccess.item);
+            pManager.AddTextParameter("Json path", "J", "The json file path location", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -53,20 +53,6 @@ namespace ThreePlus.Components.Helpers
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            Light light = new Light();
-            if (!DA.GetData(0, ref light)) return;
-
-            light = new Light(light);
-
-            double size = 5;
-            DA.GetData(1, ref size);
-
-            Color color = Color.Gray;
-            DA.GetData(2, ref color);
-
-            light.SetHelper(size, color);
-
-            DA.SetData(0, light);
         }
 
         /// <summary>
@@ -78,7 +64,7 @@ namespace ThreePlus.Components.Helpers
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.Three_Helper_Light_01;
+                return Properties.Resources.Three_Output_Json_File_01;
             }
         }
 
@@ -87,7 +73,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("58CB6685-8A28-4903-AA82-FB1A301D340A"); }
+            get { return new Guid("f66092ca-e857-4fc6-8cf2-16a6426f04e5"); }
         }
     }
 }

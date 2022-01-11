@@ -15,7 +15,7 @@ namespace ThreePlus.Components.Helpers
         public GH_DisplayBoundary()
           : base("Display Boundary", "Display Bounds",
               "Description",
-              Constants.ShortName, "Helper")
+              Constants.ShortName, "Helpers")
         {
         }
 

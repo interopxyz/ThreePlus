@@ -70,6 +70,8 @@
     <Compile Include="Components\Assets\GH_Assets_CubeMaps.cs" />
     <Compile Include="Components\Assets\GH_Assets_Environments.cs" />
     <Compile Include="Components\Assets\GH_Assets_Icons.cs" />
+    <Compile Include="Components\Cameras\GH_Camera_Orthographic.cs" />
+    <Compile Include="Components\Cameras\GH_Camera_Perspective.cs" />
     <Compile Include="Components\Graphics\GH_GraphicsPaths.cs" />
     <Compile Include="Components\Helpers\GH_DisplayBoundary.cs" />
     <Compile Include="Components\Helpers\GH_DisplayLight.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Components\Materials\Maps\GH_Map_Texture.cs" />
     <Compile Include="Components\Materials\Maps\GH_Map_Volume.cs" />
     <Compile Include="Components\Materials\Maps\GH_Map_Wireframe.cs" />
+    <Compile Include="Components\Output\GH_SaveJson.cs" />
     <Compile Include="Components\Scene\GH_AmbientOcclusion.cs" />
     <Compile Include="Components\Scene\GH_Ground.cs" />
     <Compile Include="Classes\Helpers\Axes.cs" />
@@ -807,6 +810,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Three_Assets_Marker2-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Output_Json_Text-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Output_Json_File-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Output_Html_Text-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Output_Html_File-01.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

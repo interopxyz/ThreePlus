@@ -14,7 +14,7 @@ namespace ThreePlus.Components.Helpers
         public GH_Grid()
           : base("Grid", "Grid",
               "Description",
-              Constants.ShortName, "Helper")
+              Constants.ShortName, "Helpers")
         {
         }
 
@@ -23,7 +23,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddNumberParameter("Size", "S", "The width and height of the grid", GH_ParamAccess.item, 100);
+            pManager.AddNumberParameter("Size", "S", "The size of the grid", GH_ParamAccess.item, 100);
             pManager[0].Optional = true;
             pManager.AddNumberParameter("Divisions", "D", "The number of divisions in the grid", GH_ParamAccess.item, 10);
             pManager[1].Optional = true;
@@ -31,6 +31,8 @@ namespace ThreePlus.Components.Helpers
             pManager[2].Optional = true;
             pManager.AddColourParameter("Grid Color", "G", "The grid line color", GH_ParamAccess.item, Color.DarkGray);
             pManager[3].Optional = true;
+            pManager.AddBooleanParameter("Polar", "P", "If true the grid will be displayed in a polar configuration", GH_ParamAccess.item, false);
+            pManager[4].Optional = true;
         }
 
         /// <summary>
@@ -60,7 +62,10 @@ namespace ThreePlus.Components.Helpers
             Color gridColor = Color.DarkGray;
             DA.GetData(3, ref gridColor);
 
-            Grid grid = new Grid(size, divisions, axisColor, gridColor);
+            bool isPolar = false;
+            DA.GetData(4, ref isPolar);
+
+            Grid grid = new Grid(size, divisions, axisColor, gridColor,isPolar);
 
             DA.SetData(0, grid);
 

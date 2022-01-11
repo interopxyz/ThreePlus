@@ -15,7 +15,7 @@ namespace ThreePlus.Components.Assets
         public GH_Assets_CubeMaps()
           : base("Cube Maps", "CubeMaps",
               "A series of preselected public domain cube maps sourced from: http://www.humus.name/",
-              Constants.ShortName, "Scene")
+              Constants.ShortName, "Assets")
         {
         }
 

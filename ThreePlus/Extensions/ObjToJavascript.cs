@@ -33,12 +33,15 @@ namespace ThreePlus
                 output.AppendLine("<script src=\"js/VertexNormalsHelper.js\"></script>");
                 output.AppendLine("<script src=\"js/VertexTangentsHelper.js\"></script>");
 
-                //output.AppendLine("<script src=\"js/GeometryUtils.js\"></script>");
-                output.AppendLine("<script src=\"js/LineSegmentsGeometry.js\"></script>");
-                output.AppendLine("<script src=\"js/LineSegments2.js\"></script>");
-                output.AppendLine("<script src=\"js/LineGeometry.js\"></script>");
-                output.AppendLine("<script src=\"js/LineMaterial.js\"></script>");
-                output.AppendLine("<script src=\"js/Line2.js\"></script>");
+                if (input.HasCurves)
+                {
+                    //output.AppendLine("<script src=\"js/GeometryUtils.js\"></script>");
+                    output.AppendLine("<script src=\"js/LineSegmentsGeometry.js\"></script>");
+                    output.AppendLine("<script src=\"js/LineSegments2.js\"></script>");
+                    output.AppendLine("<script src=\"js/LineGeometry.js\"></script>");
+                    output.AppendLine("<script src=\"js/LineMaterial.js\"></script>");
+                    output.AppendLine("<script src=\"js/Line2.js\"></script>");
+                }
 
                 if (input.AmbientOcclusion.HasAO)
                 {
@@ -83,12 +86,15 @@ namespace ThreePlus
                     output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/helpers/LightProbeHelper.js\" ></script>");
                 }
 
+                if (input.HasCurves) 
+                {
                 //output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/utils/GeometryUtils.js\" ></script>");
                 output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineSegmentsGeometry.js\" ></script>");
                 output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineSegments2.js\" ></script>");
                 output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineGeometry.js\" ></script>");
                 output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineMaterial.js\" ></script>");
                 output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/Line2.js\" ></script>");
+                }
             }
             output.AppendLine("<script type=\"text/javascript\" src=\"app.js\"></script>");
             output.AppendLine("</body>");
@@ -480,7 +486,14 @@ namespace ThreePlus
 
             if (input.Show)
             {
-                output.AppendLine("var grid = new THREE.GridHelper(" + input.Size + "," + input.Divisions + "," + input.AxisColor.ToJs() + "," + input.GridColor.ToJs() + ");");
+                if (input.IsPolar)
+                {
+                    output.AppendLine("var grid = new THREE.PolarGridHelper(" + input.Size + ", " + input.Divisions + ", " + input.Divisions + ", 64, " + input.AxisColor.ToJs() + ", " + input.GridColor.ToJs() + ");");
+                }
+                else
+                {
+                    output.AppendLine("var grid = new THREE.GridHelper(" + input.Size + "," + input.Divisions + "," + input.AxisColor.ToJs() + "," + input.GridColor.ToJs() + ");");
+                }
                 output.AppendLine("scene.add(grid);");
             }
 
@@ -491,7 +504,14 @@ namespace ThreePlus
         {
             StringBuilder output = new StringBuilder();
 
-            output.AppendLine("const camera = new THREE.PerspectiveCamera(" + input.FOV + ", window.innerWidth / window.innerHeight, " + input.Near + "," + input.Far + ");");
+            if (input.IsOrthographic)
+            {
+                output.AppendLine("const camera = new THREE.OrthographicCamera( window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / -2, window.innerHeight / 2 , " + input.Near + "," + input.Far + ");");
+            }
+            else
+            {
+                output.AppendLine("const camera = new THREE.PerspectiveCamera(" + input.FOV + ", window.innerWidth / window.innerHeight, " + input.Near + "," + input.Far + ");");
+            }
             output.AppendLine("camera.position.set(" + input.Position.ToJs() + ");");
             output.AppendLine("camera.lookAt (new THREE.Vector3(" + input.Target.X + "," + input.Target.Z + "," + input.Target.Y + "));");
 
