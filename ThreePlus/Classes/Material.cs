@@ -15,6 +15,8 @@ namespace ThreePlus
 
         public enum Types { None, Basic, Lambert, Standard, Phong, Toon, Physical, Normal, Depth, Shadow }
 
+        protected bool isDefault = true;
+
         protected Sd.Bitmap[] maps = new Sd.Bitmap[14];
         public string[] MapNames = new string[14];
 
@@ -43,7 +45,7 @@ namespace ThreePlus
 
         protected bool hasEmissive = false;
         protected Sd.Color emissiveColor = Sd.Color.White;
-        protected double emissiveIntensity = 1.0;
+        protected double emissiveIntensity = 0;
 
         protected bool isMetalic = false;
         protected double metalness = 0.5;
@@ -55,7 +57,7 @@ namespace ThreePlus
         protected double opacity = 1;
 
         protected bool hasRoughness = false;
-        protected double roughness = 1;
+        protected double roughness = 0.25;
 
         protected bool hasSheen = false;
         protected bool hasSheenRoughness = false;
@@ -72,13 +74,18 @@ namespace ThreePlus
 
         #region constructors
 
-        public Material() : base()
+        public Material(bool isDefault = true) : base()
         {
-            this.type = "MeshBasicMaterial";
+            this.isDefault = isDefault;
+            this.type = "MeshPhongMaterial";
+            this.materialType = Types.Phong;
+            this.color = Sd.Color.LightGray;
+            this.shininess = 0.5;
         }
 
         public Material(Material material) : base(material)
         {
+            this.isDefault = material.isDefault;
             
             for (int i = 0; i < 14; i++) if(material.maps[i]!=null) this.maps[i] = material.maps[i];
                 for (int i =0;i<14;i++) this.MapNames[i] = material.MapNames[i];
@@ -136,7 +143,7 @@ namespace ThreePlus
 
         public static Material ShadowMaterial(Sd.Color color)
         {
-            Material material = new Material();
+            Material material = new Material(true);
 
             material.type = "MeshShadowMaterial";
             material.materialType = Types.Shadow;
@@ -147,7 +154,7 @@ namespace ThreePlus
 
         public static Material BasicMaterial(Sd.Color color)
         {
-            Material material = new Material();
+            Material material = new Material(true);
 
             material.type = "MeshBasicMaterial";
             material.materialType = Types.Basic;
@@ -158,7 +165,7 @@ namespace ThreePlus
 
         public static Material LambertMaterial(Sd.Color color)
         {
-            Material material = new Material();
+            Material material = new Material(true);
 
             material.type = "MeshLambertMaterial";
             material.materialType = Types.Lambert;
@@ -169,7 +176,7 @@ namespace ThreePlus
 
         public static Material PhongMaterial(Sd.Color color, double shininess)
         {
-            Material material = new Material();
+            Material material = new Material(true);
 
             material.type = "MeshPhongMaterial";
             material.materialType = Types.Phong;
@@ -181,7 +188,7 @@ namespace ThreePlus
 
         public static Material ToonMaterial(Sd.Color color, int steps)
         {
-            Material material = new Material();
+            Material material = new Material(true);
 
             material.type = "MeshToonMaterial";
             material.materialType = Types.Toon;
@@ -200,7 +207,7 @@ namespace ThreePlus
 
         public static Material StandardMaterial(Sd.Color color, double roughness, double metalness)
         {
-            Material material = new Material();
+            Material material = new Material(true);
 
             material.type = "MeshStandardMaterial";
             material.materialType = Types.Standard;
@@ -215,7 +222,7 @@ namespace ThreePlus
 
         public static Material PhysicalMaterial(Sd.Color color, double roughness, double metalness, double sheen, Sd.Color sheenColor, double sheenRoughness, double reflectivity, double clearcoat, double clearcoatRoughness)
         {
-            Material material = new Material();
+            Material material = new Material(true);
 
             material.type = "MeshPhysicalMaterial";
             material.materialType = Types.Physical;
@@ -235,7 +242,7 @@ namespace ThreePlus
 
         public static Material NormalMaterial()
         {
-            Material material = new Material();
+            Material material = new Material(true);
 
             material.type = "MeshNormalMaterial";
             material.materialType = Types.Normal;
@@ -245,7 +252,7 @@ namespace ThreePlus
 
         public static Material DepthMaterial()
         {
-            Material material = new Material();
+            Material material = new Material(true);
 
             material.type = "MeshDepthMaterial";
             material.materialType = Types.Depth;
@@ -257,6 +264,11 @@ namespace ThreePlus
         #endregion
 
         #region properties
+
+        public virtual bool IsDefault
+        {
+            get { return isDefault; }
+        }
 
         public virtual Sd.Bitmap[] Maps
         {

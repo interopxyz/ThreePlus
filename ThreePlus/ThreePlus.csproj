@@ -70,6 +70,7 @@
     <Compile Include="Components\Assets\GH_Assets_CubeMaps.cs" />
     <Compile Include="Components\Assets\GH_Assets_Environments.cs" />
     <Compile Include="Components\Assets\GH_Assets_Icons.cs" />
+    <Compile Include="Components\Cameras\GH_Camera_Animate.cs" />
     <Compile Include="Components\Cameras\GH_Camera_Orthographic.cs" />
     <Compile Include="Components\Cameras\GH_Camera_Perspective.cs" />
     <Compile Include="Components\Graphics\GH_GraphicsPaths.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Components\Scene\GH_Scene.cs" />
     <Compile Include="Components\Output\GH_ToJson.cs" />
     <Compile Include="Components\Materials\GH_MaterialBasic.cs" />
+    <Compile Include="Components\Transform\GH_TransformModel.cs" />
     <Compile Include="Extensions\GhToThree.cs" />
     <Compile Include="Extensions\ObjToJavascript.cs" />
     <Compile Include="Extensions\ObjToJson.cs" />
@@ -822,6 +824,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Three_Output_Html_File-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Camera_Perspective-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Camera_Orbit-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Camera_Ortho-01.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

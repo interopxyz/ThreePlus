@@ -1,20 +1,20 @@
 ﻿using Grasshopper.Kernel;
+using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ThreePlus.Components
 {
-    public class GH_ToJson : GH_Component
+    public class GH_TransformModel : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the GH_ToJson class.
+        /// Initializes a new instance of the GH_TransformModel class.
         /// </summary>
-        public GH_ToJson()
-          : base("ToJson", "ToJson",
+        public GH_TransformModel()
+          : base("Transform Model", "Xform Model",
               "Description",
-              Constants.ShortName, "Output")
+              Constants.ShortName, "Transform")
         {
         }
 
@@ -23,7 +23,7 @@ namespace ThreePlus.Components
         /// </summary>
         public override GH_Exposure Exposure
         {
-            get { return GH_Exposure.secondary; }
+            get { return GH_Exposure.hidden; }
         }
 
         /// <summary>
@@ -31,7 +31,8 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Scene", "S", "Scene", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model", "M", "A Model, Mesh, or Brep", GH_ParamAccess.item);
+            pManager.AddTransformParameter("Transform", "X", "The transforms to be applied to the model", GH_ParamAccess.list);
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Text", "T", "The json text", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model", "M", "The updated Model", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -48,15 +49,25 @@ namespace ThreePlus.Components
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            this.AddRuntimeMessage(GH_RuntimeMessageLevel.Remark, "Caution: Only use for smaller text files. Visualizing larger text output can cause Grasshopper to crash.");
+            IGH_Goo goo = null;
+            if (!DA.GetData(0, ref goo)) return;
 
-            Scene scene = new Scene();
-            if (!DA.GetData(0,ref scene)) return;
+            Model model = null;
+            if (goo.CastTo<Model>(out model))
+            {
+                model = new Model(model);
+            }
+            else
+            {
+                model = goo.ToModel();
+            }
 
-            string json = scene.ToJson();
-            //List<string> jsons = json.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None).ToList();
+            List<Transform> transforms = new List<Transform>();
+            DA.GetDataList(1, transforms);
 
-            DA.SetData(0, json);
+            model.SetTransforms(transforms);
+
+            DA.SetData(0, model);
         }
 
         /// <summary>
@@ -68,7 +79,7 @@ namespace ThreePlus.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.Three_Output_Json_Text_01;
+                return null;
             }
         }
 
@@ -77,7 +88,7 @@ namespace ThreePlus.Components
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("fbd75605-555c-443d-98c9-90ad3c6d8cea"); }
+            get { return new Guid("4dfaf548-cef9-48b3-911d-e5587c31cda6"); }
         }
     }
 }

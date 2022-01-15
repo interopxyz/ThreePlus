@@ -76,6 +76,7 @@ namespace ThreePlus
             Light light = new Light();
 
             light.lightType = Types.Spot;
+            light.objectType = "SpotLight";
 
             light.position = new Rg.Point3d(position);
             light.target = new Rg.Point3d(target);
@@ -96,6 +97,7 @@ namespace ThreePlus
             Light light = new Light();
 
             light.lightType = Types.Directional;
+            light.objectType = "DirectionalLight";
 
             light.position = new Rg.Point3d(position);
             light.target = new Rg.Point3d(target);
@@ -109,6 +111,7 @@ namespace ThreePlus
         public static Light AmbientLight(double intensity, Sd.Color color)
         {
             Light light = new Light();
+            light.objectType = "AmbientLight";
 
             light.lightType = Types.Ambient;
 
@@ -123,6 +126,8 @@ namespace ThreePlus
             Light light = new Light();
 
             light.lightType = Types.Hemisphere;
+            light.objectType = "HemisphereLight";
+            light.position = new Rg.Point3d(0, 0, 1);
 
             light.intensity = intensity;
             light.color = zenithColor;
@@ -136,6 +141,7 @@ namespace ThreePlus
             Light light = new Light();
 
             light.lightType = Types.Point;
+            light.objectType = "PointLight";
 
             light.intensity = intensity;
             light.distance = distance;

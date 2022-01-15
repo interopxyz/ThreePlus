@@ -15,6 +15,7 @@ namespace ThreePlus
 
         protected string title = string.Empty;
         protected string type = string.Empty;
+        protected string objectType = string.Empty;
 
         #endregion
 
@@ -35,6 +36,7 @@ namespace ThreePlus
             this.uuid = new Guid(sceneObject.uuid.ToString());
             this.title = sceneObject.title;
             this.type = sceneObject.type;
+            this.objectType = sceneObject.objectType;
 
         }
 
@@ -55,6 +57,11 @@ namespace ThreePlus
         public virtual string Title
         {
             get { return this.title; }
+        }
+
+        public virtual string ObjectType
+        {
+            get { return this.objectType; }
         }
 
         #endregion

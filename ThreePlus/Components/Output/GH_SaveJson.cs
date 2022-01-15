@@ -2,6 +2,7 @@
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ThreePlus.Components.Output
 {
@@ -53,6 +54,48 @@ namespace ThreePlus.Components.Output
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+
+            Scene scene = new Scene();
+            if (!DA.GetData(0, ref scene)) return;
+
+            string path = "C:\\Users\\Public\\Documents\\";
+            bool hasPath = DA.GetData(1, ref path);
+
+            string name = DateTime.UtcNow.ToString("yyyy-dd-M_HH-mm-ss");
+            bool hasName = DA.GetData(2, ref name);
+
+            scene.Name = name;
+
+            bool save = false;
+            if (!DA.GetData(3, ref save)) return;
+
+            if (!hasPath)
+            {
+                if (this.OnPingDocument().FilePath != null)
+                {
+                    path = Path.GetDirectoryName(this.OnPingDocument().FilePath) + "\\";
+                }
+            }
+
+            if(path[path.Length-1] != '\\')path+="\\";
+
+            if (save)
+            {
+
+                string filepath = path + name;
+
+
+                if (!Directory.Exists(path))
+                {
+                    this.AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "The provided folder path does not exist. Please verify this is a valid path.");
+                    return;
+                }
+
+                string json = scene.ToJson();
+                File.WriteAllText(filepath + ".json", json);
+
+                DA.SetData(0, path + ".json");
+            }
         }
 
         /// <summary>

@@ -37,8 +37,9 @@ namespace ThreePlus
 
         public Scene():base()
         {
-            type = "Scene";
-            name = "Scene";
+            this.type = "Scene";
+            this.objectType = "Scene";
+            this.name = "Scene";
         }
 
         public Scene(Scene scene):base(scene)

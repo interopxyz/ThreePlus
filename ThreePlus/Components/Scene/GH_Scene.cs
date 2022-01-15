@@ -58,6 +58,7 @@ namespace ThreePlus.Components
             Grid grid = new Grid();
             Axes axes = new Axes();
             Light light = new Light();
+            Camera camera = new Camera();
             Environment environment = new Environment();
             Atmosphere atmosphere = new Atmosphere()
                 ;
@@ -81,6 +82,10 @@ namespace ThreePlus.Components
                 else if (goo.CastTo<Light>(out light))
                 {
                     scene.AddLight(new Light(light));
+                }
+                else if (goo.CastTo<Camera>(out camera))
+                {
+                    scene.Camera = new Camera(camera);
                 }
                 else if (goo.CastTo<Environment>(out environment))
                 {

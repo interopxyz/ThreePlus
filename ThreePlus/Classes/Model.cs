@@ -24,6 +24,8 @@ namespace ThreePlus
         protected Rg.NurbsCurve curve = null;
         protected PointCloud cloud = null;
 
+        protected List<Rg.Transform> tweens = new List<Rg.Transform>();
+
         public Material Material = new Material();
         public Graphic Graphic = new Graphic();
         public TangentDisplay Tangents = new TangentDisplay();
@@ -58,6 +60,8 @@ namespace ThreePlus
             this.hasHelper = model.hasHelper;
             this.helperColor = model.helperColor;
 
+            this.tweens = model.tweens;
+
             this.geometryType = model.geometryType;
             this.size = model.size;
         }
@@ -66,9 +70,10 @@ namespace ThreePlus
         {
             this.geoId = Guid.NewGuid();
             this.geometryType = GeometryTypes.Plane;
+            this.objectType = "Plane";
 
-            this.name = plane.ToString();
-            
+            this.name = this.geoId.ToString();
+
             this.plane = (Rg.Plane)plane;
             this.size = size;
         }
@@ -77,9 +82,9 @@ namespace ThreePlus
         {
             this.geoId = Guid.NewGuid();
             this.geometryType = GeometryTypes.Mesh;
+            this.objectType = "Mesh";
 
             this.type = "BufferGeometry";
-            this.name = mesh.GetUserString("name");
 
             this.mesh = mesh.DuplicateMesh();
         }
@@ -88,8 +93,7 @@ namespace ThreePlus
         {
             this.geoId = Guid.NewGuid();
             this.geometryType = GeometryTypes.Curve;
-
-            this.name = curve.GetUserString("name");
+            this.objectType = "Curve";
 
             this.curve = curve.DuplicateCurve().ToNurbsCurve();
         }
@@ -98,8 +102,9 @@ namespace ThreePlus
         {
             this.geoId = Guid.NewGuid();
             this.geometryType = GeometryTypes.Cloud;
+            this.objectType = "Points";
 
-            this.name = "unnamed";
+            this.name = this.geoId.ToString();
 
             this.cloud = new PointCloud(cloud);
         }
@@ -173,6 +178,16 @@ namespace ThreePlus
             get { return helperColor; }
         }
 
+        public virtual List<Rg.Transform> Tweens
+        {
+            get { return tweens; }
+        }
+
+        public virtual bool HasTweens
+        {
+            get { return tweens.Count > 0; }
+        }
+
         #endregion
 
         #region methods
@@ -181,6 +196,12 @@ namespace ThreePlus
         {
             this.hasHelper = true;
             this.helperColor = helperColor;
+        }
+
+        public void SetTransforms(List<Rg.Transform> transforms)
+        {
+            tweens.Clear();
+            foreach (Rg.Transform xform in transforms) this.tweens.Add(new Rg.Transform(xform));
         }
 
         #endregion

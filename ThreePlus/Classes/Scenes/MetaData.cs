@@ -13,7 +13,7 @@ namespace ThreePlus
 
         protected double version = 4.5;
         protected string name = string.Empty;
-        protected string generator = "Object3D.toJSON";
+        protected string generator = "ThreePlus";
 
         protected int layers = 1;
         protected double[] matrix = new double[] { 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 };
@@ -25,6 +25,7 @@ namespace ThreePlus
         public MetaData() : base()
         {
             this.title = "metadata";
+            this.name = uuid.ToString();
         }
 
         public MetaData(MetaData metaData) : base(metaData)

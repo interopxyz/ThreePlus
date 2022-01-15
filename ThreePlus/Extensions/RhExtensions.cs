@@ -7,10 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Sd = System.Drawing;
 
+using Rg = Rhino.Geometry;
+
 namespace ThreePlus
 {
     public static class RhExtensions
     {
+        public static string ToHex(this Sd.Color input)
+        {
+            return "#" + input.R.ToString("X2") + input.G.ToString("X2") + input.B.ToString("X2");
+        }
+
         public static bool GetBitmapFromFile(this string FilePath, out Sd.Bitmap bitmap)
         {
             bitmap = null;
@@ -53,5 +60,91 @@ namespace ThreePlus
             return sBuilder.ToString();
         }
 
+        public static string ToVertexString(this Rg.Mesh input)
+        {
+            int count = input.Faces.Count;
+            var values = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count * 3);
+
+            Parallel.For(0, count, k =>
+            {
+                Rg.MeshFace face = input.Faces[k];
+
+                values[k * 3] = input.Vertices[face.A].ToJs();
+                values[k * 3 + 1] = input.Vertices[face.B].ToJs();
+                values[k * 3 + 2] = input.Vertices[face.C].ToJs();
+            }
+);
+            return string.Join(",", values.Values);
+        }
+
+        public static string ToNormalString(this Rg.Mesh input)
+        {
+            int count = input.Faces.Count;
+            var values = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count * 3);
+
+            Parallel.For(0, count, k =>
+            {
+                Rg.MeshFace face = input.Faces[k];
+
+                values[k * 3] = input.Normals[face.A].ToJs();
+                values[k * 3 + 1] = input.Normals[face.B].ToJs();
+                values[k * 3 + 2] = input.Normals[face.C].ToJs();
+            }
+);
+            return string.Join(",", values.Values);
+        }
+
+        public static string ToUvString(this Rg.Mesh input)
+        {
+            int count = input.Faces.Count;
+            var values = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count * 3);
+            if(input.TextureCoordinates.Count > 0)return string.Empty;
+            Parallel.For(0, count, k =>
+            {
+                Rg.MeshFace face = input.Faces[k];
+
+                values[k * 3] = input.TextureCoordinates[face.A].ToJs();
+                values[k * 3 + 1] = input.TextureCoordinates[face.B].ToJs();
+                values[k * 3 + 2] = input.TextureCoordinates[face.C].ToJs();
+            }
+);
+            return string.Join(",", values.Values);
+        }
+
+        public static string ToColorString(this Rg.Mesh input)
+        {
+            int count = input.Faces.Count;
+            var values = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count * 3);
+
+            if (input.VertexColors.Count < input.Vertices.Count) return string.Empty;
+            Parallel.For(0, count, k =>
+            {
+                Rg.MeshFace face = input.Faces[k];
+
+                values[k * 3] = input.VertexColors[face.A].ToJsSet();
+                values[k * 3 + 1] = input.VertexColors[face.B].ToJsSet();
+                values[k * 3 + 2] = input.VertexColors[face.C].ToJsSet();
+            }
+);
+            return string.Join(",", values.Values);
+        }
+
+        public static string ToFaceString(this Rg.Mesh input)
+        {
+            int count = input.Faces.Count;
+            var values = new System.Collections.Concurrent.ConcurrentDictionary<int, string>(System.Environment.ProcessorCount, count * 3);
+
+            if (input.VertexColors.Count < input.Vertices.Count) return string.Empty;
+            Parallel.For(0, count, k =>
+            {
+                Rg.MeshFace face = input.Faces[k];
+
+                values[k * 3] = face.A.ToString();
+                values[k * 3 + 1] = face.B.ToString();
+                values[k * 3 + 2] = face.C.ToString();
+            }
+);
+            return string.Join(",", values.Values);
+        }
     }
 }

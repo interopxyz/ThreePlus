@@ -19,6 +19,10 @@ namespace ThreePlus
         protected Rg.Point3d position = new Rg.Point3d(100,100,100);
         protected Rg.Point3d target = new Rg.Point3d(0, 0, 0);
 
+        protected bool isAnimated = false;
+        protected List<Rg.Line> tweens = new List<Rg.Line>();
+        protected double speed = 1.0;
+
         protected int fov = 50;
         protected double zoom = 1;
         protected double near = 0.1;
@@ -36,8 +40,8 @@ namespace ThreePlus
 
         public Camera():base()
         {
-            this.type = "PerspectiveCamera";
-            this.name = "Camera";
+            this.type = "Camera";
+            this.objectType = "PerspectiveCamera";
         }
 
         public Camera(Camera camera) : base(camera)
@@ -46,6 +50,9 @@ namespace ThreePlus
 
             this.position = new Rg.Point3d(camera.position);
             this.target = new Rg.Point3d(camera.target);
+
+            this.isAnimated = camera.isAnimated;
+            this.tweens = camera.tweens;
 
             this.fov = camera.fov;
             this.zoom = camera.zoom;
@@ -61,6 +68,8 @@ namespace ThreePlus
 
         public Camera(Rg.Point3d position, Rg.Point3d target, int fov, double near, double far)
         {
+            this.objectType = "PerspectiveCamera";
+
             this.isDefault = false;
             this.cameraMode = CameraModes.Perspective;
             this.position = new Rg.Point3d(position);
@@ -72,6 +81,8 @@ namespace ThreePlus
 
         public Camera(Rg.Point3d position, Rg.Point3d target, double near, double far)
         {
+            this.objectType = "OrthographicCamera";
+
             this.isDefault = false;
             this.cameraMode = CameraModes.Orthographic;
             this.position = new Rg.Point3d(position);
@@ -139,11 +150,31 @@ namespace ThreePlus
             get { return isDefault; }
         }
 
+        public virtual bool IsAnimated
+        {
+            get { return isAnimated; }
+        }
+
+        public virtual List<Rg.Line> Tweens
+        {
+            get { return tweens; }
+        }
+
+        public virtual double Speed
+        {
+            get { return speed; }
+        }
+
         #endregion
 
         #region methods
 
-
+        public virtual void SetTweens(List<Rg.Line> lines, double speed)
+        {
+            this.tweens = lines;
+            this.speed = speed;
+            if(lines.Count>0)this.isAnimated = true;
+        }
 
         #endregion
 

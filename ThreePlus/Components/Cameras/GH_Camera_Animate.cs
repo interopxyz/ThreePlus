@@ -2,19 +2,18 @@
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace ThreePlus.Components
+namespace ThreePlus.Components.Cameras
 {
-    public class GH_ToJson : GH_Component
+    public class GH_Camera_Animate : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the GH_ToJson class.
+        /// Initializes a new instance of the GH_Camera_Animate class.
         /// </summary>
-        public GH_ToJson()
-          : base("ToJson", "ToJson",
+        public GH_Camera_Animate()
+          : base("Camera Animate", "Move Cam",
               "Description",
-              Constants.ShortName, "Output")
+              Constants.ShortName, "Cameras")
         {
         }
 
@@ -31,7 +30,10 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Scene", "S", "Scene", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Camera", "C", "A camera object", GH_ParamAccess.item);
+            pManager.AddLineParameter("Positions", "P", "A series of lines specifying the position and target of the camera", GH_ParamAccess.list);
+            pManager.AddNumberParameter("Speed", "S", "The animation speed multiplier", GH_ParamAccess.item, 1.0);
+            pManager[2].Optional = true;
         }
 
         /// <summary>
@@ -39,7 +41,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Text", "T", "The json text", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Camera", "C", "An updated camera", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -48,15 +50,19 @@ namespace ThreePlus.Components
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            this.AddRuntimeMessage(GH_RuntimeMessageLevel.Remark, "Caution: Only use for smaller text files. Visualizing larger text output can cause Grasshopper to crash.");
+            Camera camera = new Camera();
+            if (!DA.GetData(0, ref camera)) return;
+            camera = new Camera(camera);
 
-            Scene scene = new Scene();
-            if (!DA.GetData(0,ref scene)) return;
+            List<Line> lines = new List<Line>();
+            DA.GetDataList(1, lines);
 
-            string json = scene.ToJson();
-            //List<string> jsons = json.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None).ToList();
+            double speed = 1.0;
+            DA.GetData(2, ref speed);
 
-            DA.SetData(0, json);
+            camera.SetTweens(lines,speed);
+
+            DA.SetData(0, camera);
         }
 
         /// <summary>
@@ -68,7 +74,7 @@ namespace ThreePlus.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.Three_Output_Json_Text_01;
+                return Properties.Resources.Three_Camera_Orbit_01;
             }
         }
 
@@ -77,7 +83,7 @@ namespace ThreePlus.Components
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("fbd75605-555c-443d-98c9-90ad3c6d8cea"); }
+            get { return new Guid("7d7e0f2e-b101-4a99-8cc8-0d16bb445c81"); }
         }
     }
 }

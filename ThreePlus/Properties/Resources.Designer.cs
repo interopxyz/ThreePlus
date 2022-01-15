@@ -1851,6 +1851,36 @@ namespace ThreePlus.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Three_Camera_Orbit_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Camera_Orbit_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Camera_Ortho_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Camera_Ortho_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Camera_Perspective_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Camera_Perspective_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Three_Graphics_Points_01 {
             get {
                 object obj = ResourceManager.GetObject("Three_Graphics_Points_01", resourceCulture);
