@@ -6,14 +6,14 @@ using System.Drawing;
 
 namespace ThreePlus.Components.Lights
 {
-    public class GH_LightHemisphere : GH_Component
+    public class GH_LightHemisphere : GH_Preview
     {
         /// <summary>
         /// Initializes a new instance of the GH_LightHemisphere class.
         /// </summary>
         public GH_LightHemisphere()
           : base("Hemisphere Light", "Hemisphere Light",
-              "Description",
+              "A light source positioned directly above the scene, with color fading from the sky color to the ground color.",
               Constants.ShortName, "Lights")
         {
         }
@@ -65,6 +65,7 @@ namespace ThreePlus.Components.Lights
             Light light = Light.HemisphereLight(intensity, zenith,horizon);
 
             DA.SetData(0, light);
+            prevLights.Add(light);
         }
 
         /// <summary>

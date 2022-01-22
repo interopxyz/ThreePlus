@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace ThreePlus.Components.Lights
 {
-    public class GH_LightShadows : GH_Component
+    public class GH_LightShadows : GH_Preview
     {
         /// <summary>
         /// Initializes a new instance of the GH_LightShadows class.
         /// </summary>
         public GH_LightShadows()
           : base("Add Shadows", "Shadows",
-              "Description",
+              "Apply to most lights to enable shadows",
               Constants.ShortName, "Lights")
         {
         }
@@ -65,6 +65,7 @@ namespace ThreePlus.Components.Lights
             light.SetShadow(samples);
 
             DA.SetData(0, light);
+            prevLights.Add(light);
         }
 
         /// <summary>

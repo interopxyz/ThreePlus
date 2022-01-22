@@ -44,6 +44,27 @@ namespace ThreePlus
             return "\"" + title + "\": [";
         }
 
+        private static string SetItem(string title, double[] value, bool comma = true)
+        {
+            string txt = "\"" + title + "\": [" + String.Join(",",value) + "] ";
+            if (comma) txt += ", ";
+            return txt;
+        }
+
+        private static string SetItem(string title, float[] value, bool comma = true)
+        {
+            string txt = "\"" + title + "\": [" + String.Join(",", value) + "] ";
+            if (comma) txt += ", ";
+            return txt;
+        }
+
+        private static string SetItem(string title, Rg.Transform value, bool comma = true)
+        {
+            string txt = "\"" + title + "\": [" + String.Join(",", value.ToFloatArray(false)) + "] ";
+            if (comma) txt += ", ";
+            return txt;
+        }
+
         private static string SetItem(string title, string value, bool comma = true)
         {
             string txt = "\"" + title + "\": \"" + value + "\" ";
@@ -79,13 +100,6 @@ namespace ThreePlus
             return txt;
         }
 
-        private static string SetItem(string title, double[] value, bool comma = true)
-        {
-            string txt = "\"" + title + "\": [" + string.Join(",", value) + "] ";
-            if (comma) txt += ", ";
-            return txt;
-        }
-
         private static string SetItem(string title, Sd.Color value, bool comma = true, bool isHex = true)
         {
             string txt = "\"" + title + "\": " + Sd.ColorTranslator.ToOle(value).ToString() + " ";
@@ -117,7 +131,7 @@ namespace ThreePlus
 
         #endregion
 
-        #region objects
+        #region scene
 
         public static string ToJson(this Scene input)
         {
@@ -127,7 +141,7 @@ namespace ThreePlus
 
             output.Append(StartProject("Object",4.3,"ThreePlus"));
             output.Append(input.Settings.ToJson());
-            output.Append(input.Camera.ToJsonCamera());
+           // output.Append(input.Camera.ToJsonCamera());
 
             //output.AppendLine(OpenObject("scene"));
             //output.Append(((MetaData)input).ToJsonElementMeta());
@@ -155,6 +169,7 @@ namespace ThreePlus
             output.AppendLine(SetItem("background", input.Environment.Background));
 
             output.AppendLine(OpenArray("children"));
+            output.Append(input.Camera.ToJsonCamera());
             output.AppendLine(input.Lights.ToJsonObjects(input.Camera));
             output.Append(input.Models.ToJsonObjects());
 
@@ -162,6 +177,10 @@ namespace ThreePlus
 
             return output.ToString();
         }
+
+        #endregion
+
+        #region models
 
         private static string ToJson(this Model input, bool comma = true)
         {
@@ -176,71 +195,121 @@ namespace ThreePlus
             {
                 output.Append(input.Mesh.ToJson());
             }
+            else if(input.IsCloud)
+            {
+                output.Append(input.Cloud.ToJson());
+            }
+            else if(input.IsCurve)
+            {
+                output.Append(input.Curve.ToJson(input.Graphic));
+            }
             output.AppendLine(CloseObject(comma));
 
             return output.ToString();
         }
 
-        private static string ToJson(this Material input, bool comma = true)
+        #endregion
+
+        #region materials
+
+        private static string ToJsonMaterial(this Model input, bool comma = true)
         {
             StringBuilder output = new StringBuilder();
+            Material material = new Material(input.Material);
+            Graphic graphic = new Graphic(input.Graphic);
+
             output.AppendLine("{");
+                output.AppendLine(SetItem("uuid", material.Uuid));
 
-            output.AppendLine(SetItem("uuid", input.Uuid));
-            output.AppendLine(SetItem("type", input.Type));
-
-            switch (input.MaterialType)
+            if (input.IsMesh) 
             {
-                case Material.Types.Basic:
-                case Material.Types.Lambert:
-                case Material.Types.Phong:
-                case Material.Types.Standard:
-                case Material.Types.Physical:
-            output.AppendLine(SetItem("transparent", input.Transparent));
-            output.AppendLine(SetItem("opacity", input.Opacity));
-                    break;
-            }
 
-            switch (input.MaterialType)
+            if (material.IsDefault)
             {
-                case Material.Types.Lambert:
-                case Material.Types.Phong:
-                case Material.Types.Standard:
-                case Material.Types.Physical:
-            output.AppendLine(SetItem("emissive", input.EmissiveColor));
-            output.AppendLine(SetItem("emissiveIntensity", input.EmissiveIntensity));
-                    break;
+                output.AppendLine(SetItem("type", "MeshBasicMaterial"));
+                output.AppendLine(SetItem("vertexColors", true));
+                output.AppendLine(SetItem("side", 2));
+                output.AppendLine(SetItem("color", Sd.Color.White, false, false));
             }
-
-            switch (input.MaterialType)
+            else
             {
-                case Material.Types.Basic:
-                    break;
-                case Material.Types.Lambert:
-                    break;
-                case Material.Types.Phong:
-                    output.AppendLine(SetItem("shininess", input.Shininess*100.0));
-                    break;
-                case Material.Types.Standard:
-                    output.AppendLine(SetItem("roughness", input.Roughness));
-                    output.AppendLine(SetItem("metalness", input.Metalness));
-                    break;
-                case Material.Types.Physical:
-                    output.AppendLine(SetItem("clearcoat", input.Clearcoat));
-                    output.AppendLine(SetItem("clearcoatRoughness", input.ClearcoatRoughness));
-                    output.AppendLine(SetItem("metalness", input.Metalness));
-                    output.AppendLine(SetItem("roughness", input.Roughness));
-                    output.AppendLine(SetItem("sheen", input.Sheen));
-                    output.AppendLine(SetItem("sheenRoughness", input.SheenRoughness));
-                    output.AppendLine(SetItem("reflectivity", input.Reflectivity));
-                    break;
+                output.AppendLine(SetItem("type", material.Type));
+                if (material.IsWireframe) output.AppendLine(SetItem("wireframe",true));
+                switch (material.MaterialType)
+                {
+                    case Material.Types.Basic:
+                    case Material.Types.Lambert:
+                    case Material.Types.Phong:
+                    case Material.Types.Standard:
+                    case Material.Types.Physical:
+                        output.AppendLine(SetItem("transparent", material.Transparent));
+                        output.AppendLine(SetItem("opacity", material.Opacity));
+                        break;
+                }
+
+                switch (material.MaterialType)
+                {
+                    case Material.Types.Lambert:
+                    case Material.Types.Phong:
+                    case Material.Types.Standard:
+                    case Material.Types.Physical:
+                        output.AppendLine(SetItem("emissive", material.EmissiveColor));
+                        output.AppendLine(SetItem("emissiveIntensity", material.EmissiveIntensity));
+                        break;
+                }
+
+                switch (material.MaterialType)
+                {
+                    case Material.Types.Basic:
+                        break;
+                    case Material.Types.Lambert:
+                        break;
+                    case Material.Types.Phong:
+                        output.AppendLine(SetItem("shininess", material.Shininess * 100.0));
+                        break;
+                    case Material.Types.Standard:
+                        output.AppendLine(SetItem("roughness", material.Roughness));
+                        output.AppendLine(SetItem("metalness", material.Metalness));
+                        break;
+                    case Material.Types.Physical:
+                        output.AppendLine(SetItem("clearcoat", material.Clearcoat));
+                        output.AppendLine(SetItem("clearcoatRoughness", material.ClearcoatRoughness));
+                        output.AppendLine(SetItem("metalness", material.Metalness));
+                        output.AppendLine(SetItem("roughness", material.Roughness));
+                        output.AppendLine(SetItem("sheen", material.Sheen));
+                        output.AppendLine(SetItem("sheenRoughness", material.SheenRoughness));
+                        output.AppendLine(SetItem("reflectivity", material.Reflectivity));
+                        break;
+                }
+
+                output.AppendLine(SetItem("color", material.DiffuseColor, false, false));
             }
+            }
+            else if (input.IsCurve)
+            {
+                string materialType = "LineBasicMaterial";
+                if (graphic.HasDash) materialType = "LineDashedMaterial";
+                output.AppendLine(SetItem("type", materialType));
+                output.AppendLine("\"color\" : " + Sd.ColorTranslator.ToOle(Sd.Color.White).ToString() + ",");
+                output.AppendLine(SetItem("linewidth", graphic.Width));
+                if (graphic.HasDash) output.AppendLine(SetItem("dashSize", graphic.DashLength));
+                if (graphic.HasDash) output.AppendLine(SetItem("gapSize", graphic.GapLength));
+                output.AppendLine(SetItem("vertexColors", true, false));
 
-            output.AppendLine(SetItem("color", input.DiffuseColor, false, false));
-
+            }
+            else if (input.IsCloud)
+            {
+                output.AppendLine(SetItem("type", "PointsMaterial"));
+                output.AppendLine("\"color\" : " + Sd.ColorTranslator.ToOle(Sd.Color.White).ToString() + ",");
+                output.AppendLine(SetItem("vertexColors", true, false));
+            }
             output.AppendLine(CloseObject(comma));
             return output.ToString();
         }
+
+        #endregion
+
+        #region lights
 
         private static string ToJson(this Light input)
         {
@@ -260,7 +329,10 @@ namespace ThreePlus
                     output.AppendLine(SetItem("matrix", input.Matrix));
                     break;
                 case Light.Types.Directional:
-                    output.AppendLine(SetMatrixItem("matrix", input,false));
+                    Rg.Vector3d normal = new Rg.Vector3d(input.Position-input.Target);
+                    Rg.Plane frame = new Rg.Plane(input.Position, normal);
+                    
+                    output.AppendLine(SetItem("matrix", Rg.Transform.PlaneToPlane(Rg.Plane.WorldXY, frame)));
                     break;
                 case Light.Types.Hemisphere:
                     output.AppendLine(SetMatrixItem("matrix", input, false));
@@ -286,23 +358,47 @@ namespace ThreePlus
         {
             if(absolute)
             {
-                return "[1,0,0,0,0,1,0,0,0,01,0," + Math.Round(-input.Position.X,digits) + "," 
+                return "[1,0,0,0,0,1,0,0,0,0,1,0," + Math.Round(-input.Position.X,digits) + "," 
                     + Math.Round(input.Position.Z, digits) + "," 
                     + Math.Round(input.Position.Y, digits) + ",1]";
             }
             else
             {
-                return "[1,0,0,0,0,1,0,0,0,01,0," + Math.Round(-(input.Position.X-input.Target.X), digits) + ","
+                return "[1,0,0,0,0,1,0,0,0,0,1,0," + Math.Round(-(input.Position.X-input.Target.X), digits) + ","
                     + Math.Round(input.Position.Z-input.Target.Z, digits) + ","
                     + Math.Round(input.Position.Y - input.Target.Y, digits) + ",1]";
             }
         }
 
+        #endregion
+
+        #region cameras
+
+        private static string ToJsonCamera(this Camera input)
+        {
+            StringBuilder output = new StringBuilder();
+            //output.AppendLine(OpenObject("camera"));
+
+            //output.Append(((MetaData)input).ToJsonElementMeta());
+
+            //output.AppendLine(OpenObject("object"));
+            output.Append(input.ToJson());
+
+            //output.AppendLine("},");
+
+            return output.ToString();
+        }
+
         private static string ToJson(this Camera input)
         {
             StringBuilder output = new StringBuilder();
+            output.AppendLine("{");
+            output.Append(((MetaData)input).ToJsonObjectMeta(false));
 
-            output.Append(((MetaData)input).ToJsonObjectMeta());
+            Rg.Vector3d normal = new Rg.Vector3d(input.Position - input.Target);
+            Rg.Plane frame = new Rg.Plane(input.Position, normal);
+            frame.XAxis = Rg.Vector3d.ZAxis;
+            output.AppendLine(SetItem("matrix", Rg.Transform.PlaneToPlane(Rg.Plane.WorldXY, frame)));
 
             output.AppendLine(SetItem("fov", input.FOV));
             output.AppendLine(SetItem("zoom", input.Zoom));
@@ -311,9 +407,9 @@ namespace ThreePlus
             output.AppendLine(SetItem("focus", input.Focus));
             output.AppendLine(SetItem("aspect", input.Aspect));
             output.AppendLine(SetItem("filmGauge", input.FilmGauge));
-            output.AppendLine(SetItem("filmOffset", input.FilmOffset,false));
+            output.AppendLine(SetItem("filmOffset", input.FilmOffset, false));
 
-            output.AppendLine("}");
+            output.AppendLine("},");
 
             return output.ToString();
         }
@@ -334,13 +430,15 @@ namespace ThreePlus
             output.AppendLine(SetItem("focus", input.Focus));
             output.AppendLine(SetItem("aspect", input.Aspect));
             output.AppendLine(SetItem("filmGauge", input.FilmGauge));
-            output.AppendLine(SetItem("filmOffset", input.FilmOffset,false));
+            output.AppendLine(SetItem("filmOffset", input.FilmOffset, false));
 
             output.AppendLine("}");
             output.AppendLine("},");
 
             return output.ToString();
         }
+
+        #endregion
 
         #region metadata
 
@@ -402,6 +500,8 @@ namespace ThreePlus
 
         #endregion
 
+        #region scripts
+
         private static string ToJson(this Script input, bool comma=true)
         {
             StringBuilder output = new StringBuilder();
@@ -437,22 +537,8 @@ namespace ThreePlus
 
         #endregion
 
+
         #region collections
-
-        private static string ToJsonCamera(this Camera input)
-        {
-            StringBuilder output = new StringBuilder();
-            output.AppendLine(OpenObject("camera"));
-
-            output.Append(((MetaData)input).ToJsonElementMeta());
-
-            output.AppendLine(OpenObject("object"));
-            output.Append(input.ToJson());
-
-            output.AppendLine("},");
-
-            return output.ToString();
-        }
 
         private static string ToJsonGeometries(this List<Model> inputs)
         {
@@ -509,8 +595,7 @@ namespace ThreePlus
             int i = 1;
             foreach (Model input in inputs)
             {
-                Material material = input.Material;
-                output.Append(material.ToJson(i<inputs.Count));
+                    output.Append(input.ToJsonMaterial(i < inputs.Count));
                 i++;
             }
 
@@ -569,6 +654,83 @@ namespace ThreePlus
 
         #region geometry
 
+        private static string ToJson(this Rg.NurbsCurve input, Graphic graphic)
+        {
+            StringBuilder output = new StringBuilder();
+
+            //input.Flip(true, true, true);
+            output.AppendLine(OpenObject("data"));
+            output.AppendLine(OpenObject("attributes"));
+
+            //Color
+            if (graphic.HasColors) 
+            { 
+            output.AppendLine(OpenObject("color"));
+            output.AppendLine(SetItem("itemSize", 3));
+            output.AppendLine(SetItem("type", "Float32Array"));
+            output.AppendLine(SetItem("normalized", false));
+            output.Append(OpenArray("array"));
+            output.Append(graphic.ToColorsString());
+            output.AppendLine("]");
+            output.AppendLine("},");
+            }
+
+            //Vertices
+            output.AppendLine(OpenObject("position"));
+            output.AppendLine(SetItem("itemSize", 3));
+            output.AppendLine(SetItem("type", "Float32Array"));
+            output.AppendLine(SetItem("normalized", false));
+            output.Append(OpenArray("array"));
+            output.Append(input.Points.ControlPolygon().ToList().ToVertexString());
+            output.AppendLine("]");
+            output.AppendLine("}");
+
+            //Closes Attributes
+            output.AppendLine("}");
+
+            //Closes Data
+            output.AppendLine("}");
+
+            return output.ToString();
+        }
+
+        private static string ToJson(this PointCloud input)
+        {
+            StringBuilder output = new StringBuilder();
+
+            //input.Flip(true, true, true);
+            output.AppendLine(OpenObject("data"));
+            output.AppendLine(OpenObject("attributes"));
+
+            //Vertices
+            output.AppendLine(OpenObject("position"));
+            output.AppendLine(SetItem("itemSize", 3));
+            output.AppendLine(SetItem("type", "Float32Array"));
+            output.AppendLine(SetItem("normalized", false));
+            output.Append(OpenArray("array"));
+            output.Append(input.Points.ToVertexString());
+            output.AppendLine("]");
+            output.AppendLine("},");
+
+            //Color
+            output.AppendLine(OpenObject("color"));
+            output.AppendLine(SetItem("itemSize", 3));
+            output.AppendLine(SetItem("type", "Float32Array"));
+            output.AppendLine(SetItem("normalized", false));
+            output.Append(OpenArray("array"));
+            output.Append(input.Colors.ToColorFloatString());
+            output.AppendLine("]");
+            output.AppendLine("}");
+
+            //Closes Attributes
+            output.AppendLine("}");
+
+            //Closes Data
+            output.AppendLine("}");
+
+            return output.ToString();
+        }
+
         private static string ToJson(this Rg.Mesh input)
         {
             StringBuilder output = new StringBuilder();
@@ -609,13 +771,13 @@ namespace ThreePlus
             output.AppendLine("]");
             output.AppendLine("},");
 
-            //UV
+            //Color
             output.AppendLine(OpenObject("color"));
             output.AppendLine(SetItem("itemSize", 3));
             output.AppendLine(SetItem("type", "Float32Array"));
             output.AppendLine(SetItem("normalized", false));
             output.Append(OpenArray("array"));
-            output.Append(input.ToColorString());
+            output.Append(input.ToColorFloatString());
             output.AppendLine("]");
             output.AppendLine("},");
 

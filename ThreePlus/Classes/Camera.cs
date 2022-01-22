@@ -18,6 +18,7 @@ namespace ThreePlus
 
         protected Rg.Point3d position = new Rg.Point3d(100,100,100);
         protected Rg.Point3d target = new Rg.Point3d(0, 0, 0);
+        protected Rg.Plane frame = Rg.Plane.Unset;
 
         protected bool isAnimated = false;
         protected List<Rg.Line> tweens = new List<Rg.Line>();
@@ -51,6 +52,8 @@ namespace ThreePlus
             this.position = new Rg.Point3d(camera.position);
             this.target = new Rg.Point3d(camera.target);
 
+            this.frame = new Rg.Plane(camera.frame);
+
             this.isAnimated = camera.isAnimated;
             this.tweens = camera.tweens;
 
@@ -74,6 +77,8 @@ namespace ThreePlus
             this.cameraMode = CameraModes.Perspective;
             this.position = new Rg.Point3d(position);
             this.target = new Rg.Point3d(target);
+            SetFrame();
+
             this.fov = fov;
             this.near = near;
             this.far = far;
@@ -87,6 +92,8 @@ namespace ThreePlus
             this.cameraMode = CameraModes.Orthographic;
             this.position = new Rg.Point3d(position);
             this.target = new Rg.Point3d(target);
+            SetFrame();
+
             this.near = near;
             this.far = far;
         }
@@ -110,6 +117,11 @@ namespace ThreePlus
         {
             get { return target; }
             set { target = value; }
+        }
+
+        public virtual Rg.Plane Frame
+        {
+            get { return frame; }
         }
 
         public virtual int FOV
@@ -168,6 +180,13 @@ namespace ThreePlus
         #endregion
 
         #region methods
+
+        private void SetFrame()
+        {
+            Rg.Vector3d normal = new Rg.Vector3d(this.target-this.position);
+            Rg.Plane plane = new Rg.Plane(this.position, normal, Rg.Vector3d.ZAxis);
+            this.frame = new Rg.Plane(this.position, plane.YAxis, plane.ZAxis);
+        }
 
         public virtual void SetTweens(List<Rg.Line> lines, double speed)
         {

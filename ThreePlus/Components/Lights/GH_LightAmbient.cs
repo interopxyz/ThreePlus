@@ -2,18 +2,19 @@
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using Sd = System.Drawing;
 
 namespace ThreePlus.Components.Lights
 {
-    public class GH_LightAmbient : GH_Component
+    public class GH_LightAmbient : GH_Preview
     {
+
         /// <summary>
         /// Initializes a new instance of the GH_LightAmbient class.
         /// </summary>
         public GH_LightAmbient()
           : base("Ambient Light", "Ambient Light",
-              "Description",
+              "This light globally illuminates all objects in the scene equally.",
               Constants.ShortName, "Lights")
         {
         }
@@ -31,7 +32,7 @@ namespace ThreePlus.Components.Lights
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddColourParameter("Color", "C", "The lights color", GH_ParamAccess.item, Color.White);
+            pManager.AddColourParameter("Color", "C", "The lights color", GH_ParamAccess.item, Sd.Color.White);
             pManager[0].Optional = true;
             pManager.AddNumberParameter("Intensity", "I", "The light's strength/intensity.", GH_ParamAccess.item, 1);
             pManager[1].Optional = true;
@@ -51,7 +52,7 @@ namespace ThreePlus.Components.Lights
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            Color color = Color.White;
+            Sd.Color color = Sd.Color.White;
             DA.GetData(0, ref color);
 
             double intensity = 1;
@@ -60,6 +61,7 @@ namespace ThreePlus.Components.Lights
             Light light = Light.AmbientLight(intensity, color);
 
             DA.SetData(0, light);
+            prevLights.Add(light);
         }
 
         /// <summary>

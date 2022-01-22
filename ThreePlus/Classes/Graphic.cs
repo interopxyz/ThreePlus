@@ -82,6 +82,11 @@ namespace ThreePlus
             set { gapLength = value; }
         }
 
+        public virtual bool HasDash
+        {
+            get { return dashLength != 0.0; }
+        }
+
         #endregion
 
         #region methods

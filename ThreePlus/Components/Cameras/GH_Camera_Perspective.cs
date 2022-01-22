@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ThreePlus.Components.Cameras
 {
-    public class GH_Camera_Perspective : GH_Component
+    public class GH_Camera_Perspective : GH_Preview
     {
         /// <summary>
         /// Initializes a new instance of the GH_Camera_Perspective class.
@@ -75,6 +75,7 @@ namespace ThreePlus.Components.Cameras
             camera = new Camera(position,target,fov,nearPlane,farPlane);
 
             DA.SetData(0, camera);
+            prevCameras.Add(camera);
         }
 
         /// <summary>

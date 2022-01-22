@@ -6,14 +6,14 @@ using System.Drawing;
 
 namespace ThreePlus.Components.Lights
 {
-    public class GH_LightSpot : GH_Component
+    public class GH_LightSpot : GH_Preview
     {
         /// <summary>
         /// Initializes a new instance of the GH_LightSpot class.
         /// </summary>
         public GH_LightSpot()
           : base("Spot Light", "Spot Light",
-              "Description",
+              "This light gets emitted from a single point in one direction, along a cone that increases in size the further from the light it gets.",
               Constants.ShortName, "Lights")
         {
         }
@@ -39,14 +39,12 @@ namespace ThreePlus.Components.Lights
             pManager[2].Optional = true;
             pManager.AddNumberParameter("Intensity", "I", "The light's strength/intensity.", GH_ParamAccess.item, 1);
             pManager[3].Optional = true;
-            pManager.AddNumberParameter("Distance", "D", "Maximum range of the light.", GH_ParamAccess.item, 0);
+            pManager.AddNumberParameter("Decay", "D", "The amount the light dims along the distance of the light.", GH_ParamAccess.item, 1);
             pManager[4].Optional = true;
-            pManager.AddNumberParameter("Decay", "F", "The amount the light dims along the distance of the light.", GH_ParamAccess.item, 1);
-            pManager[5].Optional = true;
             pManager.AddNumberParameter("Angle", "A", "Maximum angle of light dispersion from its direction.", GH_ParamAccess.item, Math.PI/3.0);
-            pManager[6].Optional = true;
+            pManager[5].Optional = true;
             pManager.AddNumberParameter("Penumbra", "P", "Percent of the spotlight cone that is attenuated due to penumbra.", GH_ParamAccess.item, 0);
-            pManager[7].Optional = true;
+            pManager[6].Optional = true;
         }
 
         /// <summary>
@@ -75,21 +73,21 @@ namespace ThreePlus.Components.Lights
             double intensity = 1;
             DA.GetData(3, ref intensity);
 
-            double distance = 0;
-            DA.GetData(4, ref distance);
+            double distance = position.DistanceTo(target);
 
             double decay = 1;
-            DA.GetData(5, ref decay);
+            DA.GetData(4, ref decay);
 
             double angle = Math.PI/3.0;
-            DA.GetData(6, ref angle);
+            DA.GetData(5, ref angle);
 
             double penumbra = 0;
-            DA.GetData(7, ref penumbra);
+            DA.GetData(6, ref penumbra);
 
             Light light = Light.SpotLight(position, target, intensity, distance, angle, penumbra, decay, color);
 
             DA.SetData(0, light);
+            prevLights.Add(light);
         }
 
         /// <summary>

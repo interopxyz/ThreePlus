@@ -36,7 +36,7 @@ namespace ThreePlus.Components.Output
             pManager[1].Optional = true;
             pManager.AddTextParameter("Folder Name", "N", "The new export folder name", GH_ParamAccess.item);
             pManager[2].Optional = true;
-            pManager.AddBooleanParameter("Save", "S", "If true, the new file will be writter or overwritten", GH_ParamAccess.item, false);
+            pManager.AddBooleanParameter("Save", "S", "If true, the new file will be written or overwritten", GH_ParamAccess.item, false);
             pManager[3].Optional = true;
         }
 
@@ -54,6 +54,7 @@ namespace ThreePlus.Components.Output
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            GH_RuntimeMessageLevel runtimeLevel = GH_RuntimeMessageLevel.Warning;
 
             Scene scene = new Scene();
             if (!DA.GetData(0, ref scene)) return;
@@ -65,6 +66,21 @@ namespace ThreePlus.Components.Output
             bool hasName = DA.GetData(2, ref name);
 
             scene.Name = name;
+
+            //if(!scene.Camera.IsDefault) this.AddRuntimeMessage(runtimeLevel, "The Camera will be ignored.");
+
+            foreach(Light light in scene.Lights)
+            {
+                switch(light.LightType)
+                {
+                    case Light.Types.Directional:
+                        this.AddRuntimeMessage(runtimeLevel, "Directional Lights will be centered at 0,0,0.");
+                        break;
+                    case Light.Types.Spot:
+                        this.AddRuntimeMessage(runtimeLevel, "Spot Lights will be centered at 0,0,0.");
+                        break;
+                }
+            }
 
             bool save = false;
             if (!DA.GetData(3, ref save)) return;

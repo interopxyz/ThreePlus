@@ -6,14 +6,14 @@ using System.Drawing;
 
 namespace ThreePlus.Components
 {
-    public class GH_LightPoint : GH_Component
+    public class GH_LightPoint : GH_Preview
     {
         /// <summary>
         /// Initializes a new instance of the GH_Light class.
         /// </summary>
         public GH_LightPoint()
           : base("Point Light", "Point Light",
-              "Description",
+              "A light that gets emitted from a single point in all directions. A common use case for this is to replicate the light emitted from a bare lightbulb.",
               Constants.ShortName, "Lights")
         {
         }
@@ -75,6 +75,7 @@ namespace ThreePlus.Components
             Light light = Light.PointLight(position, intensity, distance, decay, color);
 
             DA.SetData(0, light);
+            prevLights.Add(light);
         }
 
         /// <summary>

@@ -73,6 +73,7 @@
     <Compile Include="Components\Cameras\GH_Camera_Animate.cs" />
     <Compile Include="Components\Cameras\GH_Camera_Orthographic.cs" />
     <Compile Include="Components\Cameras\GH_Camera_Perspective.cs" />
+    <Compile Include="Components\GH_Preview.cs" />
     <Compile Include="Components\Graphics\GH_GraphicsPaths.cs" />
     <Compile Include="Components\Helpers\GH_DisplayBoundary.cs" />
     <Compile Include="Components\Helpers\GH_DisplayLight.cs" />

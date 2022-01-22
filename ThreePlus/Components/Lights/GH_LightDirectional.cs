@@ -6,14 +6,14 @@ using System.Drawing;
 
 namespace ThreePlus.Components.Lights
 {
-    public class GH_LightDirectional : GH_Component
+    public class GH_LightDirectional : GH_Preview
     {
         /// <summary>
         /// Initializes a new instance of the GH_LightDirectional class.
         /// </summary>
         public GH_LightDirectional()
           : base("Directional Light", "Directional Light",
-              "Description",
+              "A light that gets emitted in a specific direction. This light will behave as though it is infinitely far away and the rays produced from it are all parallel.",
               Constants.ShortName, "Lights")
         {
         }
@@ -70,6 +70,7 @@ namespace ThreePlus.Components.Lights
             Light light = Light.DirectionalLight(position, target, intensity, color);
 
             DA.SetData(0, light);
+            prevLights.Add(light);
         }
 
         /// <summary>

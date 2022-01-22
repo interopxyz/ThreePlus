@@ -143,7 +143,7 @@ namespace ThreePlus
 
         public static Material ShadowMaterial(Sd.Color color)
         {
-            Material material = new Material(true);
+            Material material = new Material(false);
 
             material.type = "MeshShadowMaterial";
             material.materialType = Types.Shadow;
@@ -154,7 +154,7 @@ namespace ThreePlus
 
         public static Material BasicMaterial(Sd.Color color)
         {
-            Material material = new Material(true);
+            Material material = new Material(false);
 
             material.type = "MeshBasicMaterial";
             material.materialType = Types.Basic;
@@ -165,7 +165,7 @@ namespace ThreePlus
 
         public static Material LambertMaterial(Sd.Color color)
         {
-            Material material = new Material(true);
+            Material material = new Material(false);
 
             material.type = "MeshLambertMaterial";
             material.materialType = Types.Lambert;
@@ -176,7 +176,7 @@ namespace ThreePlus
 
         public static Material PhongMaterial(Sd.Color color, double shininess)
         {
-            Material material = new Material(true);
+            Material material = new Material(false);
 
             material.type = "MeshPhongMaterial";
             material.materialType = Types.Phong;
@@ -188,7 +188,7 @@ namespace ThreePlus
 
         public static Material ToonMaterial(Sd.Color color, int steps)
         {
-            Material material = new Material(true);
+            Material material = new Material(false);
 
             material.type = "MeshToonMaterial";
             material.materialType = Types.Toon;
@@ -207,7 +207,7 @@ namespace ThreePlus
 
         public static Material StandardMaterial(Sd.Color color, double roughness, double metalness)
         {
-            Material material = new Material(true);
+            Material material = new Material(false);
 
             material.type = "MeshStandardMaterial";
             material.materialType = Types.Standard;
@@ -222,7 +222,7 @@ namespace ThreePlus
 
         public static Material PhysicalMaterial(Sd.Color color, double roughness, double metalness, double sheen, Sd.Color sheenColor, double sheenRoughness, double reflectivity, double clearcoat, double clearcoatRoughness)
         {
-            Material material = new Material(true);
+            Material material = new Material(false);
 
             material.type = "MeshPhysicalMaterial";
             material.materialType = Types.Physical;
@@ -242,7 +242,7 @@ namespace ThreePlus
 
         public static Material NormalMaterial()
         {
-            Material material = new Material(true);
+            Material material = new Material(false);
 
             material.type = "MeshNormalMaterial";
             material.materialType = Types.Normal;
@@ -252,7 +252,7 @@ namespace ThreePlus
 
         public static Material DepthMaterial()
         {
-            Material material = new Material(true);
+            Material material = new Material(false);
 
             material.type = "MeshDepthMaterial";
             material.materialType = Types.Depth;

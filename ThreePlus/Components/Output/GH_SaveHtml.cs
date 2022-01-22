@@ -38,7 +38,7 @@ namespace ThreePlus.Components.Output
             pManager[1].Optional = true;
             pManager.AddTextParameter("Folder Name", "N", "The new export folder name", GH_ParamAccess.item);
             pManager[2].Optional = true;
-            pManager.AddBooleanParameter("Save", "S", "If true, the new file will be writter or overwritten", GH_ParamAccess.item, false);
+            pManager.AddBooleanParameter("Save", "S", "If true, the new file will be written or overwritten", GH_ParamAccess.item, false);
             pManager[3].Optional = true;
         }
 

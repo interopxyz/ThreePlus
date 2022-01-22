@@ -11,7 +11,7 @@ namespace ThreePlus
 {
     public class Model : MetaData
     {
-
+        
         #region members
         public enum GeometryTypes { None,Cloud,Plane,Curve,Mesh}
         protected GeometryTypes geometryType = GeometryTypes.None;
@@ -64,6 +64,7 @@ namespace ThreePlus
 
             this.geometryType = model.geometryType;
             this.size = model.size;
+
         }
 
         public Model(Rg.Plane plane, double size) : base()
@@ -93,7 +94,9 @@ namespace ThreePlus
         {
             this.geoId = Guid.NewGuid();
             this.geometryType = GeometryTypes.Curve;
-            this.objectType = "Curve";
+            this.objectType = "Line";
+
+            this.type = "BufferGeometry";
 
             this.curve = curve.DuplicateCurve().ToNurbsCurve();
         }
@@ -103,6 +106,8 @@ namespace ThreePlus
             this.geoId = Guid.NewGuid();
             this.geometryType = GeometryTypes.Cloud;
             this.objectType = "Points";
+
+            this.type = "BufferGeometry";
 
             this.name = this.geoId.ToString();
 
