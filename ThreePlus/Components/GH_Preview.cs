@@ -102,20 +102,21 @@ namespace ThreePlus.Components
 
                 if (camera.IsOrthographic)
                 {
-                    args.Display.DrawArrow(new Line(camera.Position, camera.Target), Sd.Color.DarkGray);
-                    args.Display.DrawLine(new Line(ptsN[0], ptsF[0]), Sd.Color.DarkGray);
-                    args.Display.DrawLine(new Line(ptsN[1], ptsF[1]), Sd.Color.DarkGray);
-                    args.Display.DrawLine(new Line(ptsN[2], ptsF[2]), Sd.Color.DarkGray);
-                    args.Display.DrawLine(new Line(ptsN[3], ptsF[3]), Sd.Color.DarkGray);
-                    args.Display.DrawPolyline( ptsO, Sd.Color.DarkGray);
-                    args.Display.DrawPolyline(ptsF, Sd.Color.DarkGray);
-                    args.Display.DrawPolyline(ptsN, Sd.Color.DarkGray);
+                    args.Display.DrawArrow(new Line(camera.Position, camera.Target), Sd.Color.Black);
+                    args.Display.DrawLine(new Line(ptsO[0], ptsF[0]), Sd.Color.Black);
+                    args.Display.DrawLine(new Line(ptsO[1], ptsF[1]), Sd.Color.Black);
+                    args.Display.DrawLine(new Line(ptsO[2], ptsF[2]), Sd.Color.Black);
+                    args.Display.DrawLine(new Line(ptsO[3], ptsF[3]), Sd.Color.Black);
+                    args.Display.DrawPolyline( ptsO, Sd.Color.Black);
+                    args.Display.DrawPolyline(ptsF, Sd.Color.Black);
+                    args.Display.DrawPolyline(ptsN, Sd.Color.Black);
                 }
                 else
                 {
                     ptsN = new List<Point3d> { plnN.PointAt(-r, -r), plnN.PointAt(-r, r), plnN.PointAt(r, r), plnN.PointAt(r, -r), plnN.PointAt(-r, -r) };
 
                     args.Display.DrawArrow(new Line(camera.Position, camera.Target), Sd.Color.Black);
+                    args.Display.DrawLine(new Line(camera.Position, ptsF[0]), Sd.Color.Black);
                     args.Display.DrawLine(new Line(camera.Position, ptsF[1]), Sd.Color.Black);
                     args.Display.DrawLine(new Line(camera.Position, ptsF[2]), Sd.Color.Black);
                     args.Display.DrawLine(new Line(camera.Position, ptsF[3]), Sd.Color.Black);

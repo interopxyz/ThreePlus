@@ -21,7 +21,7 @@ namespace ThreePlus
 
         public AmbientOcclusion AmbientOcclusion = new AmbientOcclusion();
 
-        public Camera Camera = new Camera();
+        public List<Camera> Cameras = new List<Camera>();
         public Grid Grid = new Grid();
         public Axes Axes = new Axes();
 
@@ -44,11 +44,15 @@ namespace ThreePlus
 
         public Scene(Scene scene):base(scene)
         {
-            this.Camera = new Camera(scene.Camera);
             this.Grid = new Grid(scene.Grid);
             this.Axes = new Axes(scene.Axes);
 
-            foreach(Model model in scene.Models)
+            foreach (Camera camera in scene.Cameras)
+            {
+                this.Cameras.Add(new Camera(camera));
+            }
+
+            foreach (Model model in scene.Models)
             {
                 this.Models.Add(new Model(model));
             }
@@ -91,6 +95,11 @@ namespace ThreePlus
         public bool HasShadows
         {
             get { return hasShadows; }
+        }
+
+        public Camera Camera
+        {
+            get { return this.Cameras[this.Cameras.Count - 1]; }
         }
 
         #endregion

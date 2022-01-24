@@ -85,7 +85,7 @@ namespace ThreePlus.Components
                 }
                 else if (goo.CastTo<Camera>(out camera))
                 {
-                    scene.Camera = new Camera(camera);
+                    scene.Cameras.Add(new Camera(camera));
                 }
                 else if (goo.CastTo<Environment>(out environment))
                 {

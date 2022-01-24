@@ -60,7 +60,28 @@ namespace ThreePlus
 
         private static string SetItem(string title, Rg.Transform value, bool comma = true)
         {
-            string txt = "\"" + title + "\": [" + String.Join(",", value.ToFloatArray(false)) + "] ";
+            float[] t = value.ToFloatArray(false);
+            string txt = "\"" + title + "\": ["
+                + t[0] + ","
+                + t[1] + ","
+                + t[2] + ","
+                + t[3] + ","
+
+                + (t[4]) + ","
+                + t[5] + ","
+                + t[6] + ","
+                + t[7] + ","
+
+                + (t[8]) + ","
+                + t[9] + ","
+                + t[10] + ","
+                + t[11] + ","
+
+                + (-t[12]) + ","
+                + t[14] + ","
+                + t[13] + ","
+                + t[15]
+                + "] ";
             if (comma) txt += ", ";
             return txt;
         }
@@ -169,7 +190,7 @@ namespace ThreePlus
             output.AppendLine(SetItem("background", input.Environment.Background));
 
             output.AppendLine(OpenArray("children"));
-            output.Append(input.Camera.ToJsonCamera());
+            output.Append(input.Cameras.ToJsonObjects());
             output.AppendLine(input.Lights.ToJsonObjects(input.Camera));
             output.Append(input.Models.ToJsonObjects());
 
@@ -395,10 +416,7 @@ namespace ThreePlus
             output.AppendLine("{");
             output.Append(((MetaData)input).ToJsonObjectMeta(false));
 
-            Rg.Vector3d normal = new Rg.Vector3d(input.Position - input.Target);
-            Rg.Plane frame = new Rg.Plane(input.Position, normal);
-            frame.XAxis = Rg.Vector3d.ZAxis;
-            output.AppendLine(SetItem("matrix", Rg.Transform.PlaneToPlane(Rg.Plane.WorldXY, frame)));
+            output.AppendLine(SetItem("matrix", Rg.Transform.PlaneToPlane(Rg.Plane.WorldXY, input.Frame)));
 
             output.AppendLine(SetItem("fov", input.FOV));
             output.AppendLine(SetItem("zoom", input.Zoom));
@@ -570,6 +588,18 @@ namespace ThreePlus
                 output.AppendLine(SetItem("material", input.Material.Uuid,false));
                 output.AppendLine(CloseObject(i<inputs.Count));
                 i++;
+            }
+
+            return output.ToString();
+        }
+
+        private static string ToJsonObjects(this List<Camera> inputs)
+        {
+            StringBuilder output = new StringBuilder();
+
+            foreach (Camera input in inputs)
+            {
+                output.Append(input.ToJson());
             }
 
             return output.ToString();
