@@ -21,11 +21,11 @@ namespace ThreePlus
 
         public AmbientOcclusion AmbientOcclusion = new AmbientOcclusion();
 
-        public List<Camera> Cameras = new List<Camera>();
         public Grid Grid = new Grid();
         public Axes Axes = new Axes();
 
         public List<Model> Models = new List<Model>();
+        public List<Camera> Cameras = new List<Camera> {new Camera() };
         protected List<Light> lights = new List<Light>();
         public List<Script> Scripts = new List<Script>();
 

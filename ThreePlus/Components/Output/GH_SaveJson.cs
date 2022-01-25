@@ -54,8 +54,6 @@ namespace ThreePlus.Components.Output
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            GH_RuntimeMessageLevel runtimeLevel = GH_RuntimeMessageLevel.Warning;
-
             Scene scene = new Scene();
             if (!DA.GetData(0, ref scene)) return;
 
@@ -63,24 +61,9 @@ namespace ThreePlus.Components.Output
             bool hasPath = DA.GetData(1, ref path);
 
             string name = DateTime.UtcNow.ToString("yyyy-dd-M_HH-mm-ss");
-            bool hasName = DA.GetData(2, ref name);
+            DA.GetData(2, ref name);
 
             scene.Name = name;
-
-            //if(!scene.Camera.IsDefault) this.AddRuntimeMessage(runtimeLevel, "The Camera will be ignored.");
-
-            foreach(Light light in scene.Lights)
-            {
-                switch(light.LightType)
-                {
-                    case Light.Types.Directional:
-                        this.AddRuntimeMessage(runtimeLevel, "Directional Lights will be centered at 0,0,0.");
-                        break;
-                    case Light.Types.Spot:
-                        this.AddRuntimeMessage(runtimeLevel, "Spot Lights will be centered at 0,0,0.");
-                        break;
-                }
-            }
 
             bool save = false;
             if (!DA.GetData(3, ref save)) return;

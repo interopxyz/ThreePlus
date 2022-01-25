@@ -29,6 +29,7 @@ namespace ThreePlus
 
         protected Rg.Point3d position = new Rg.Point3d(100, 100, 100);
         protected Rg.Point3d target = new Rg.Point3d(0, 0, 0);
+        protected Rg.Plane frame = Rg.Plane.WorldXY;
 
         protected bool hasHelper = false;
         protected Sd.Color helperColor = Sd.Color.Gray;
@@ -61,6 +62,7 @@ namespace ThreePlus
 
             this.position = new Rg.Point3d(light.position);
             this.target = new Rg.Point3d(light.target);
+            this.frame = new Rg.Plane(light.frame);
 
             this.hasHelper = light.hasHelper;
             this.helperColor = light.helperColor;
@@ -80,6 +82,7 @@ namespace ThreePlus
 
             light.position = new Rg.Point3d(position);
             light.target = new Rg.Point3d(target);
+            light.SetFrame();
 
             light.intensity = intensity;
             light.distance = distance;
@@ -101,6 +104,7 @@ namespace ThreePlus
 
             light.position = new Rg.Point3d(position);
             light.target = new Rg.Point3d(target);
+            light.SetFrame();
 
             light.intensity = intensity;
             light.color = color;
@@ -208,6 +212,11 @@ namespace ThreePlus
             get { return new Rg.Point3d(target); }
         }
 
+        public virtual Rg.Plane Frame
+        {
+            get { return frame; }
+        }
+
         public virtual bool HasHelper
         {
             get { return hasHelper; }
@@ -244,6 +253,16 @@ namespace ThreePlus
             this.helperSize = size;
             this.helperColor = color;
         }
+
+        private void SetFrame()
+        {
+            Rg.Vector3d normal = new Rg.Vector3d(this.target - this.position);
+            Rg.Plane plane = new Rg.Plane(this.position, normal, Rg.Vector3d.ZAxis);
+
+            this.frame = new Rg.Plane(this.position, plane.ZAxis, plane.YAxis);
+            this.frame.Flip();
+        }
+
         #endregion
 
         #region overrides

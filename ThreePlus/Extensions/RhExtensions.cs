@@ -13,6 +13,20 @@ namespace ThreePlus
 {
     public static class RhExtensions
     {
+        public static Rg.BoundingBox GetBoundary(this List<Model> input)
+        {
+            Rg.BoundingBox bbox = Rg.BoundingBox.Unset;
+
+            foreach (Model model in input)
+            {
+                if (model.IsMesh) bbox.Union(model.Mesh.GetBoundingBox(false));
+                if (model.IsCurve) bbox.Union(model.Curve.GetBoundingBox(false));
+                if (model.IsCloud) bbox.Union(new Rg.BoundingBox(model.Cloud.Points));
+            }
+
+            return bbox;
+        }
+
         public static string ToHex(this Sd.Color input)
         {
             return "#" + input.R.ToString("X2") + input.G.ToString("X2") + input.B.ToString("X2");

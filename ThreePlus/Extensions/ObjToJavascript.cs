@@ -166,7 +166,6 @@ namespace ThreePlus
             }
 
             int i = 0;
-            Rg.BoundingBox bbox = Rg.BoundingBox.Unset;
             foreach (Model model in input.Models)
             {
                 string index = i.ToString();
@@ -185,14 +184,12 @@ namespace ThreePlus
                 if (model.IsCurve)
                 {
                     output.AppendLine(model.Curve.ToJavascript(index,model.Graphic));
-                    bbox.Union(model.Curve.GetBoundingBox(false));
 
                     output.Append(model.Tangents.ToJavascript(index));
                 }
                 else if (model.IsCloud)
                 {
                     output.AppendLine(model.Cloud.ToJavascript(index));
-                    bbox.Union(new Rg.BoundingBox( model.Cloud.Points));
                 }
                 else
                 {
@@ -204,7 +201,6 @@ namespace ThreePlus
                     if (model.IsMesh)
                     {
                         output.Append(model.Mesh.ToJavascript(index));
-                        bbox.Union(model.Mesh.GetBoundingBox(false));
                     }
 
                     if (input.HasShadows)
@@ -237,6 +233,7 @@ namespace ThreePlus
                 output.AppendLine("scene.add(model" + index + ");");
                 i++;
             }
+            Rg.BoundingBox bbox = input.Models.GetBoundary();
 
             if (input.Camera.IsDefault)
             {

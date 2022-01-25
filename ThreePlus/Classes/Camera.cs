@@ -51,7 +51,6 @@ namespace ThreePlus
 
             this.position = new Rg.Point3d(camera.position);
             this.target = new Rg.Point3d(camera.target);
-
             this.frame = new Rg.Plane(camera.frame);
 
             this.isAnimated = camera.isAnimated;
@@ -110,13 +109,21 @@ namespace ThreePlus
         public virtual Rg.Point3d Position
         {
             get { return position; }
-            set { position = value; }
+            set 
+            { 
+                position = value;
+                SetFrame();
+            }
         }
 
         public virtual Rg.Point3d Target
         {
             get { return target; }
-            set { target = value; }
+            set 
+            { 
+                target = value;
+                SetFrame();
+            }
         }
 
         public virtual Rg.Plane Frame
@@ -185,7 +192,9 @@ namespace ThreePlus
         {
             Rg.Vector3d normal = new Rg.Vector3d(this.target-this.position);
             Rg.Plane plane = new Rg.Plane(this.position, normal, Rg.Vector3d.ZAxis);
-            this.frame = new Rg.Plane(this.position, plane.YAxis, plane.ZAxis);
+
+            this.frame = new Rg.Plane(this.position, plane.ZAxis, plane.YAxis);
+            this.frame.Flip();
         }
 
         public virtual void SetTweens(List<Rg.Line> lines, double speed)

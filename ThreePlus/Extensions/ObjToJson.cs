@@ -60,27 +60,25 @@ namespace ThreePlus
 
         private static string SetItem(string title, Rg.Transform value, bool comma = true)
         {
+            int digits = 5;
             float[] t = value.ToFloatArray(false);
+
             string txt = "\"" + title + "\": ["
-                + t[0] + ","
-                + t[1] + ","
-                + t[2] + ","
-                + t[3] + ","
+                + Math.Round(t[1], digits) + ", "
+                + Math.Round(t[2], digits) + ", "
+                + Math.Round(t[0], digits) + ", 0, "
 
-                + (t[4]) + ","
-                + t[5] + ","
-                + t[6] + ","
-                + t[7] + ","
+                + Math.Round(t[9], digits) + ", "
+                + Math.Round(t[10], digits) + ", "
+                + Math.Round(t[8], digits) + ", 0, "
 
-                + (t[8]) + ","
-                + t[9] + ","
-                + t[10] + ","
-                + t[11] + ","
+                + Math.Round(t[5], digits) + ", "
+                + Math.Round(t[6], digits) + ", "
+                + Math.Round(t[4], digits) + ", 0, "
 
-                + (-t[12]) + ","
-                + t[14] + ","
-                + t[13] + ","
-                + t[15]
+                + Math.Round(t[13], digits) + ", "
+                + Math.Round(t[14], digits) + ", "
+                + Math.Round(t[12], digits) + ", 1"
                 + "] ";
             if (comma) txt += ", ";
             return txt;
@@ -162,16 +160,12 @@ namespace ThreePlus
 
             output.Append(StartProject("Object",4.3,"ThreePlus"));
             output.Append(input.Settings.ToJson());
-           // output.Append(input.Camera.ToJsonCamera());
 
-            //output.AppendLine(OpenObject("scene"));
-            //output.Append(((MetaData)input).ToJsonElementMeta());
             output.AppendLine(input.Models.ToJsonGeometries());
             output.Append(input.Models.ToJsonMaterials());
 
             output.AppendLine(OpenObject("object"));
             output.AppendLine(input.ToJsonObjects());
-            //output.AppendLine("},");
 
             output.AppendLine(input.Scripts.ToJson());
 
@@ -184,6 +178,15 @@ namespace ThreePlus
         {
             StringBuilder output = new StringBuilder();
 
+            Rg.BoundingBox bbox = input.Models.GetBoundary();
+            for (int i =0;i<input.Cameras.Count;i++)
+            {
+                if (input.Cameras[i].IsDefault)
+                {
+                    input.Cameras[i].Position = bbox.Max + bbox.Diagonal;
+                    input.Cameras[i].Target = bbox.Center;
+                }
+            }
 
             output.Append("\t"+((MetaData)input).ToJsonObjectMeta());
 
@@ -336,6 +339,10 @@ namespace ThreePlus
         {
             StringBuilder output = new StringBuilder();
 
+            Rg.Plane frame = Rg.Plane.WorldZX;
+            //frame.Rotate(Math.PI, frame.ZAxis);
+            frame.Rotate(Math.PI, frame.YAxis);
+
             output.AppendLine("{");
             output.Append(((MetaData)input).ToJsonObjectMeta(false));
 
@@ -350,17 +357,14 @@ namespace ThreePlus
                     output.AppendLine(SetItem("matrix", input.Matrix));
                     break;
                 case Light.Types.Directional:
-                    Rg.Vector3d normal = new Rg.Vector3d(input.Position-input.Target);
-                    Rg.Plane frame = new Rg.Plane(input.Position, normal);
-                    
-                    output.AppendLine(SetItem("matrix", Rg.Transform.PlaneToPlane(Rg.Plane.WorldXY, frame)));
+                    output.AppendLine(SetItem("matrix", Rg.Transform.PlaneToPlane(frame, input.Frame)));
                     break;
                 case Light.Types.Hemisphere:
                     output.AppendLine(SetMatrixItem("matrix", input, false));
                     output.AppendLine(SetItem("groundColor", input.ColorB));
                     break;
                 case Light.Types.Spot:
-                    output.AppendLine(SetMatrixItem("matrix", input, false));
+                    output.AppendLine(SetItem("matrix", Rg.Transform.PlaneToPlane(frame, input.Frame)));
                     output.AppendLine(SetItem("angle", input.Angle));
                     output.AppendLine(SetItem("distance", input.Distance));
                     output.AppendLine(SetItem("decay", input.Decay));
@@ -398,14 +402,8 @@ namespace ThreePlus
         private static string ToJsonCamera(this Camera input)
         {
             StringBuilder output = new StringBuilder();
-            //output.AppendLine(OpenObject("camera"));
 
-            //output.Append(((MetaData)input).ToJsonElementMeta());
-
-            //output.AppendLine(OpenObject("object"));
             output.Append(input.ToJson());
-
-            //output.AppendLine("},");
 
             return output.ToString();
         }
@@ -416,7 +414,11 @@ namespace ThreePlus
             output.AppendLine("{");
             output.Append(((MetaData)input).ToJsonObjectMeta(false));
 
-            output.AppendLine(SetItem("matrix", Rg.Transform.PlaneToPlane(Rg.Plane.WorldXY, input.Frame)));
+            Rg.Plane frame = Rg.Plane.WorldZX;
+            frame.Rotate(Math.PI, frame.ZAxis);
+            frame.Rotate(Math.PI, frame.YAxis);
+
+            output.AppendLine(SetItem("matrix", Rg.Transform.PlaneToPlane(frame, input.Frame)));
 
             output.AppendLine(SetItem("fov", input.FOV));
             output.AppendLine(SetItem("zoom", input.Zoom));
