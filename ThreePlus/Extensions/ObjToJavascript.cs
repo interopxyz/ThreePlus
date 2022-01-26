@@ -215,7 +215,11 @@ namespace ThreePlus
                         output.AppendLine("scene.add( bbox" + index + " );");
                     }
 
-                    if (model.IsMesh) output.Append(model.Normals.ToJavascript(index));
+                    if (model.IsMesh)
+                    {
+                        output.Append(model.Normals.ToJavascript(index));
+                        output.Append(model.ToJsEdges(index));
+                    }
                 }
 
                 if (model.HasTweens)
@@ -506,6 +510,21 @@ namespace ThreePlus
             return output.ToString();
         }
 
+        public static string ToJsEdges(this Model input, string index)
+        {
+            StringBuilder output = new StringBuilder();
+
+            if (input.HasEdges)
+            {
+                output.AppendLine("const edges"+index+ " = new THREE.EdgesGeometry(mesh" + index + ");");
+                output.AppendLine("edges" + index + ".thresholdAngle = "+input.EdgeThreshold+";");
+                output.AppendLine("const edge" + index + " = new THREE.LineSegments(edges" + index + ", new THREE.LineBasicMaterial({ color:" + input.Graphic.Color.ToStr() + ", linewidth: "+input.Graphic.Width+"}));");
+                output.AppendLine("scene.add(edge" + index + ");");
+            }
+
+            return output.ToString();
+        }
+
         public static string ToJavascript(this NormalDisplay input, string index)
         {
             StringBuilder output = new StringBuilder();
@@ -526,7 +545,7 @@ namespace ThreePlus
             if (input.Show)
             {
                 output.AppendLine("const axes = new THREE.AxesHelper(" + input.Scale + ");");
-                output.AppendLine("axes.setColors (" + input.XAxis.ToStr() + ");");
+                output.AppendLine("axes.setColors ( "+input.YAxis.ToStr() +", "+input.ZAxis.ToStr() + ", "+input.XAxis.ToStr()+" );");
                 output.AppendLine("scene.add(axes);");
             }
 

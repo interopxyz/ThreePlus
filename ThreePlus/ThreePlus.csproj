@@ -80,6 +80,7 @@
     <Compile Include="Components\Lights\GH_LightShadows.cs" />
     <Compile Include="Components\Graphics\GH_GraphicsPoints.cs" />
     <Compile Include="Components\Materials\GH_MaterialShadow.cs" />
+    <Compile Include="Components\Materials\Maps\GH_Map_Edges.cs" />
     <Compile Include="Components\Materials\Maps\GH_Map_Metalness.cs" />
     <Compile Include="Components\Materials\Maps\GH_Map_Opacity.cs" />
     <Compile Include="Components\Materials\Maps\GH_Map_Bump.cs" />

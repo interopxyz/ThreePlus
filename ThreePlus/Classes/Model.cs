@@ -34,6 +34,9 @@ namespace ThreePlus
         protected bool hasHelper = false;
         protected Color helperColor = Color.Gray;
 
+        protected bool hasEdges = false;
+        protected double edgeThreshold = 1.0;
+
         #endregion
 
         #region constructors
@@ -57,8 +60,12 @@ namespace ThreePlus
 
             this.Material = new Material(model.Material);
             this.Graphic = new Graphic(model.Graphic);
+
             this.hasHelper = model.hasHelper;
             this.helperColor = model.helperColor;
+
+            this.hasEdges = model.hasEdges;
+            this.edgeThreshold = model.edgeThreshold;
 
             this.tweens = model.tweens;
 
@@ -193,9 +200,27 @@ namespace ThreePlus
             get { return tweens.Count > 0; }
         }
 
+        public virtual bool HasEdges
+        {
+            get { return hasEdges; }
+        }
+
+        public virtual double EdgeThreshold
+        {
+            get { return edgeThreshold; }
+        }
+
         #endregion
 
         #region methods
+
+        public void SetEdges(double threshold, Color edgeColor, double edgeWeight)
+        {
+            this.hasEdges = true;
+            this.edgeThreshold = threshold;
+            this.Graphic.Color = edgeColor;
+            this.Graphic.Width = edgeWeight;
+        }
 
         public void SetHelper(Color helperColor)
         {
