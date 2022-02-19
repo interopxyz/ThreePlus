@@ -36,10 +36,8 @@ namespace ThreePlus.Components.Helpers
             pManager.AddGenericParameter("Model", "M", "A Model or Curve, Mesh, or Brep", GH_ParamAccess.item);
             pManager.AddNumberParameter("Size", "S", "The length of the vector line", GH_ParamAccess.item, 10);
             pManager[1].Optional = true;
-            pManager.AddNumberParameter("Width", "D", "The width of the vector line", GH_ParamAccess.item, 1);
-            pManager[2].Optional = true;
             pManager.AddColourParameter("Color", "C", "The color of the vector line", GH_ParamAccess.item, Color.Magenta);
-            pManager[3].Optional = true;
+            pManager[2].Optional = true;
         }
 
         /// <summary>
@@ -73,13 +71,10 @@ namespace ThreePlus.Components.Helpers
             double size = 10;
             DA.GetData(1, ref size);
 
-            double width = 1;
-            DA.GetData(2, ref width);
-
             Color color = Color.Magenta;
-            DA.GetData(3, ref color);
+            DA.GetData(2, ref color);
 
-            model.Normals = new NormalDisplay(size, width, color);
+            model.Normals = new NormalDisplay(size, size, color);
 
             DA.SetData(0, model);
 

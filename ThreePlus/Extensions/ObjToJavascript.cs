@@ -77,7 +77,7 @@ namespace ThreePlus
 
                     output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/postprocessing/SSAOPass.js\" ></script>");
                     output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/math/SimplexNoise.js\" ></script>");
-                    output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/shaders/SAOShader.js\" ></script>");
+                    output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/shaders/SSAOShader.js\" ></script>");
                 }
 
                 if (input.Outline.HasOutline) output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/effects/OutlineEffect.js\" ></script>");
