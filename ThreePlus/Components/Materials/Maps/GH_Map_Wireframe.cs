@@ -48,9 +48,18 @@ namespace ThreePlus.Components.Materials.Maps
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            Model model = new Model();
-            if (!DA.GetData(0, ref model)) return;
-            model = new Model(model);
+            IGH_Goo goo = null;
+            if (!DA.GetData(0, ref goo)) return;
+
+            Model model = null;
+            if (goo.CastTo<Model>(out model))
+            {
+                model = new Model(model);
+            }
+            else
+            {
+                model = goo.ToModel();
+            }
 
             model.Material.IsWireframe = true;
 

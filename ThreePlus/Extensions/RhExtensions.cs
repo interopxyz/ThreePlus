@@ -13,6 +13,12 @@ namespace ThreePlus
 {
     public static class RhExtensions
     {
+
+        public static Sd.Color ToDrawingColor(this Rhino.Display.Color4f input)
+        {
+            return Sd.Color.FromArgb((int)(255.0*input.A), (int)(255.0 * input.R), (int)(255.0 * input.G), (int)(255.0 * input.B));
+        }
+
         public static Rg.BoundingBox GetBoundary(this List<Model> input)
         {
             Rg.BoundingBox bbox = Rg.BoundingBox.Unset;
@@ -220,7 +226,7 @@ namespace ThreePlus
 
         public static string ToStrOpacity(this Sd.Color value, int digits = 5)
         {
-            return "'" + Math.Round(((double)value.A) / 255.0, digits) + "'";
+            return Math.Round(((double)value.A) / 255.0, digits).ToString();
         }
 
         public static string ToStrArray(this Sd.Color value, int digits = 5)
@@ -286,6 +292,7 @@ namespace ThreePlus
 
             return Convert.ToBase64String(data);
         }
+
 
     }
 }

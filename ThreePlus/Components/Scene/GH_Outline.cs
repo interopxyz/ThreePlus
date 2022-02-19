@@ -13,7 +13,7 @@ namespace ThreePlus.Components
         /// </summary>
         public GH_Outline()
           : base("Outline", "Outline",
-              "Description",
+              "Applies an outline post processing effect to elements",
               Constants.ShortName, "Scene")
         {
         }

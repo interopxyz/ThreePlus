@@ -37,10 +37,10 @@ namespace ThreePlus.Components.Materials.Maps
             pManager.AddGenericParameter("Model", "M", "A Model, Mesh, or Brep", GH_ParamAccess.item);
             pManager.AddColourParameter("Color", "C", "The edge color", GH_ParamAccess.item);
             pManager[1].Optional = true;
-            pManager.AddNumberParameter("Width", "W", "The edge display width", GH_ParamAccess.item);
-            pManager[2].Optional = true;
+            //pManager.AddNumberParameter("Width", "W", "The edge display width", GH_ParamAccess.item);
+            //pManager[2].Optional = true;
             pManager.AddNumberParameter("Threshold", "T", "The cutoff angle threshold for edge display", GH_ParamAccess.item);
-            pManager[3].Optional = true;
+            pManager[2].Optional = true;
         }
 
         /// <summary>
@@ -73,13 +73,10 @@ namespace ThreePlus.Components.Materials.Maps
             Sd.Color color = model.Graphic.Color;
             DA.GetData(1, ref color);
 
-            double weight = model.Graphic.Width;
-            DA.GetData(2, ref weight);
-
             double threshold = model.EdgeThreshold;
-            DA.GetData(3, ref threshold);
+            DA.GetData(2, ref threshold);
 
-            model.SetEdges(threshold,color,weight);
+            model.SetEdges(threshold,color);
 
             DA.SetData(0, model);
         }
@@ -93,7 +90,7 @@ namespace ThreePlus.Components.Materials.Maps
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.Three_MaterialMaps_Edges_01;
             }
         }
 

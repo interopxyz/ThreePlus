@@ -59,6 +59,24 @@ namespace ThreePlus
             this.threshold = threshold;
         }
 
+        public PointCloud(Rg.PointCloud pointCloud, double scale = 1, double threshold = 0.6)
+        {
+            //this.cloudType = CloudTypes.Point;
+
+            this.points.AddRange(pointCloud.GetPoints());
+            if(pointCloud.ContainsColors)
+            {
+            this.colors.AddRange(pointCloud.GetColors());
+            }
+            else
+            {
+                for (int i = 0; i < this.points.Count; i++) this.colors.Add(Sd.Color.Black);
+            }
+
+            this.scale = scale;
+            this.threshold = threshold;
+        }
+
         public PointCloud(List<Rg.Point3d> points, List<Sd.Color> colors, double scale, double threshold = 0.6)
         {
             //this.cloudType = CloudTypes.Point;
@@ -88,6 +106,7 @@ namespace ThreePlus
 
             if(bitmap!=null)this.map = new Sd.Bitmap(bitmap);
         }
+
         #endregion
 
         #region properties

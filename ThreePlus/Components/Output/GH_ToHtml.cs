@@ -14,7 +14,7 @@ namespace ThreePlus.Components.Output
         /// </summary>
         public GH_ToHtml()
           : base("ToHtml", "ToHtml",
-              "Description",
+              "Create text outputs for Html and Javascript App representation of the scene",
               Constants.ShortName, "Output")
         {
         }

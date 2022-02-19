@@ -14,7 +14,7 @@ namespace ThreePlus.Components.Materials
         /// </summary>
         public GH_MaterialPhong()
           : base("Phong Material", "Phong Material",
-              "Description",
+              "A material for shiny surfaces with specular highlights.",
               Constants.ShortName, "Materials")
         {
         }

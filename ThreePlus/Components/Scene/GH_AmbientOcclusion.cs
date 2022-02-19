@@ -12,7 +12,7 @@ namespace ThreePlus.Components
         /// </summary>
         public GH_AmbientOcclusion()
           : base("Ambient Occlusion", "AO",
-              "Description",
+            "Applies an ambient occlusion post processing effect to the scene",
               Constants.ShortName, "Scene")
         {
         }

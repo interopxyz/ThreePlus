@@ -1,14 +1,17 @@
-﻿using Grasshopper.Kernel;
+﻿using Grasshopper.GUI.Canvas;
+using Grasshopper.Kernel;
+using Grasshopper.Kernel.Attributes;
 using Grasshopper.Kernel.Parameters;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using Sd = System.Drawing;
 
 namespace ThreePlus.Components.Assets
 {
-    public class GH_Assets_Environments : GH_Component
+    public class GH_Assets_Environments : GH_BaseImage
     {
+
         /// <summary>
         /// Initializes a new instance of the GH_Assets_Environments class.
         /// </summary>
@@ -25,6 +28,12 @@ namespace ThreePlus.Components.Assets
         public override GH_Exposure Exposure
         {
             get { return GH_Exposure.primary; }
+        }
+
+        public override void CreateAttributes()
+        {
+            img = new Sd.Bitmap(Properties.Resources.polyhaven_studio_small_03);
+            m_attributes = new Attributes_Custom(this);
         }
 
         /// <summary>
@@ -66,40 +75,42 @@ namespace ThreePlus.Components.Assets
             int index = 0;
             DA.GetData(0, ref index);
             
-            Bitmap bitmap = new Bitmap(Properties.Resources.polyhaven_studio_small_03);
+            Sd.Bitmap bitmap = new Sd.Bitmap(Properties.Resources.polyhaven_studio_small_03);
             switch (index)
             {
                 case 1:
-                    bitmap = new Bitmap(Properties.Resources.polyhaven_studio_country_hall);
+                    bitmap = new Sd.Bitmap(Properties.Resources.polyhaven_studio_country_hall);
                     break;
                 case 2:
-                    bitmap = new Bitmap(Properties.Resources.polyhaven_photo_studio_loft_hall);
+                    bitmap = new Sd.Bitmap(Properties.Resources.polyhaven_photo_studio_loft_hall);
                     break;
                 case 3:
-                    bitmap = new Bitmap(Properties.Resources.polyhaven_autoshop);
+                    bitmap = new Sd.Bitmap(Properties.Resources.polyhaven_autoshop);
                     break;
                 case 4:
-                    bitmap = new Bitmap(Properties.Resources.polyhaven_spruit_sunrise);
+                    bitmap = new Sd.Bitmap(Properties.Resources.polyhaven_spruit_sunrise);
                     break;
                 case 5:
-                    bitmap = new Bitmap(Properties.Resources.polyhaven_venice_sunset);
+                    bitmap = new Sd.Bitmap(Properties.Resources.polyhaven_venice_sunset);
                     break;
                 case 6:
-                    bitmap = new Bitmap(Properties.Resources.polyhaven_sunset_in_the_chalk_quarry);
+                    bitmap = new Sd.Bitmap(Properties.Resources.polyhaven_sunset_in_the_chalk_quarry);
                     break;
                 case 7:
-                    bitmap = new Bitmap(Properties.Resources.polyhaven_pink_sunrise);
+                    bitmap = new Sd.Bitmap(Properties.Resources.polyhaven_pink_sunrise);
                     break;
                 case 8:
-                    bitmap = new Bitmap(Properties.Resources.polyhaven_the_sky_is_on_fire);
+                    bitmap = new Sd.Bitmap(Properties.Resources.polyhaven_the_sky_is_on_fire);
                     break;
                 case 9:
-                    bitmap = new Bitmap(Properties.Resources.polyhaven_snowy_park);
+                    bitmap = new Sd.Bitmap(Properties.Resources.polyhaven_snowy_park);
                     break;
                 case 10:
-                    bitmap = new Bitmap(Properties.Resources.polyhaven_satara_night);
+                    bitmap = new Sd.Bitmap(Properties.Resources.polyhaven_satara_night);
                     break;
             }
+
+            img = new Sd.Bitmap(bitmap);
 
             DA.SetData(0, bitmap);
         }
@@ -124,5 +135,6 @@ namespace ThreePlus.Components.Assets
         {
             get { return new Guid("808ff243-5137-4d2e-bff2-6e77461bc33b"); }
         }
+        
     }
 }

@@ -14,7 +14,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         public GH_DisplayTangent()
           : base("Display Tangents", "Tangents",
-              "Description",
+              "Renders arrows to visualize an object's vertex tangent vectors. ",
               Constants.ShortName, "Helpers")
         {
         }

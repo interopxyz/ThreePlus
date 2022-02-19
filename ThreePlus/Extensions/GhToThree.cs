@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Rd = Rhino.DocObjects;
 using Rg = Rhino.Geometry;
 using Sd = System.Drawing;
 
@@ -13,6 +14,32 @@ namespace ThreePlus
 {
     public static class GhToThree
     {
+
+        public static Sd.Bitmap GetBitmap(this Rd.Material input, Rd.TextureType type)
+        {
+            Sd.Bitmap output = null;
+
+            Rd.Texture texture = input.GetTexture(type);
+
+            if(texture!=null)
+            {
+                texture.FileName.GetBitmapFromFile(out output);
+            }
+            return output;
+        }
+
+        public static double GetIntensity(this Rd.Material input, Rd.TextureType type)
+        {
+
+            Rd.Texture texture = input.GetTexture(type);
+            double constant, a0, a1, a2, a3;
+            if (texture != null)
+            {
+                texture.GetAlphaBlendValues(out constant,out a0,out a1,out a2,out a3);
+                return constant;
+            }
+            return 1.0;
+        }
 
         public static bool TryGetBitmap(this IGH_Goo goo, out Sd.Bitmap bitmap, out string message)
         {

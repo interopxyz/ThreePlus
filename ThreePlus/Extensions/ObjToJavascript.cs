@@ -60,6 +60,7 @@ namespace ThreePlus
                     output.AppendLine("<script src=\"js/LightProbeGenerator.js\"></script>");//
                     output.AppendLine("<script src=\"js/LightProbeHelper.js\"></script>");//
                 }
+                if(input.Sky.HasSky) output.AppendLine("<script src=\"js/Sky.js\"></script>");
             }
             else
             {
@@ -95,6 +96,11 @@ namespace ThreePlus
                 output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineMaterial.js\" ></script>");
                 output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/Line2.js\" ></script>");
                 }
+
+                if(input.Sky.HasSky)
+                {
+                    output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/objects/Sky.js\" ></script>");
+                }
             }
             output.AppendLine("<script type=\"text/javascript\" src=\"app.js\"></script>");
             output.AppendLine("</body>");
@@ -107,8 +113,11 @@ namespace ThreePlus
         {
             Dictionary<string, string> maps = new Dictionary<string, string>();
             StringBuilder output = new StringBuilder();
+            StringBuilder sceneModifiers = new StringBuilder();
             bool hasMaterial = false;
             List<string> tweenIndices = new List<string>();
+
+            Rg.BoundingBox bbox = input.Models.GetBoundary();
 
             output.AppendLine("const scene = new THREE.Scene();");
 
@@ -123,6 +132,8 @@ namespace ThreePlus
                 output.AppendLine("renderer.shadowMap.enabled = true;");
                 output.AppendLine("renderer.shadowMap.type = THREE.PCFSoftShadowMap;");
             }
+            output.AppendLine(input.Sky.ToJavascript(bbox.Diagonal.Length*1000.0));
+
             output.AppendLine("document.body.appendChild(renderer.domElement);");
 
             output.AppendLine(input.Grid.ToJavascript());
@@ -184,7 +195,7 @@ namespace ThreePlus
                 if (model.IsCurve)
                 {
                     output.AppendLine(model.Curve.ToJavascript(index,model.Graphic));
-
+                    sceneModifiers.AppendLine("lineMat" + index + ".resolution.set(window.innerWidth, window.innerHeight);");
                     output.Append(model.Tangents.ToJavascript(index));
                 }
                 else if (model.IsCloud)
@@ -205,8 +216,11 @@ namespace ThreePlus
 
                     if (input.HasShadows)
                     {
-                        output.AppendLine("model" + index + ".castShadow = true;");
-                        if (model.Material.MaterialType != Material.Types.Toon) output.AppendLine("model" + index + ".receiveShadow = true;");
+                        if (model.Material.DiffuseColor.A > (input.ShadowThreshold*255.0))
+                        { 
+                            output.AppendLine("model" + index + ".castShadow = true;");
+                            if (model.Material.MaterialType != Material.Types.Toon) output.AppendLine("model" + index + ".receiveShadow = true;");
+                        }
                     }
 
                     if (model.HasHelper)
@@ -222,26 +236,26 @@ namespace ThreePlus
                     }
                 }
 
-                if (model.HasTweens)
-                {
-                    List<string> matrix = new List<string>();
-                    foreach (Rg.Transform xform in model.Tweens)
-                    {
-                        matrix.Add("[" + xform.ToJavascript()
-                            + "]");
-                    }
-                    tweenIndices.Add(index);
-                    output.AppendLine("const mtx"+index+" = [" + String.Join(",", matrix) + "];");
-                }
+                //if (model.HasTweens)
+                //{
+                //    List<string> matrix = new List<string>();
+                //    foreach (Rg.Transform xform in model.Tweens)
+                //    {
+                //        matrix.Add("[" + xform.ToJavascript()
+                //            + "]");
+                //    }
+                //    tweenIndices.Add(index);
+                //    output.AppendLine("const mtx"+index+" = [" + String.Join(",", matrix) + "];");
+                //}
 
                 output.AppendLine("scene.add(model" + index + ");");
                 i++;
             }
-            Rg.BoundingBox bbox = input.Models.GetBoundary();
 
             if (input.Camera.IsDefault)
             {
                 input.Camera.Position = bbox.Max + bbox.Diagonal;
+                input.Camera.Far = bbox.Diagonal.Length * 100;
                 input.Camera.Target = bbox.Center;
             }
 
@@ -273,7 +287,10 @@ namespace ThreePlus
             output.AppendLine("controls = new THREE.OrbitControls (camera, renderer.domElement);");
             output.AppendLine("controls.target.set(" + input.Camera.Target.ToStr() + ");");
 
-            if (input.Camera.IsAnimated)output.AppendLine("var camStep = 0;");
+            if (input.Camera.IsAnimated)
+            {
+                output.AppendLine("var camStep = 0;");
+            }
             foreach (string ind in tweenIndices)
             {
                 output.AppendLine("var quatStep"+ind+" = 0;");
@@ -286,8 +303,8 @@ namespace ThreePlus
 
             if (input.Camera.IsAnimated)
             {
-                output.AppendLine("camStep = (increment*" + input.Camera.Speed+")%" + input.Camera.Tweens.Count + ";");
-                output.AppendLine("camera.position.set(quat[camStep][0],tweenB[camStep][1],tweenB[camStep][2]);");
+                output.AppendLine("camStep = Math.ceil(increment)%" + input.Camera.Tweens.Count + ";");
+                output.AppendLine("camera.position.set(tweenB[camStep][0],tweenB[camStep][1],tweenB[camStep][2]);");
                 output.AppendLine("camera.lookAt (new THREE.Vector3(tweenA[camStep][0],tweenA[camStep][1],tweenA[camStep][2]));");
                 output.AppendLine("camera.updateProjectionMatrix();");
             }
@@ -318,12 +335,20 @@ namespace ThreePlus
 
             output.AppendLine("controls.update();");
             output.AppendLine("requestAnimationFrame ( animate ); ");
+            if (sceneModifiers.Length > 0)
+            {
+                output.AppendLine("renderer.clearDepth();");
+                output.AppendLine(sceneModifiers.ToString());
+            }
+
+            output.AppendLine(input.Environment.ToLightProbeClose());
+
             output.AppendLine("renderer.render (scene, camera);");
 
             if (input.AmbientOcclusion.HasAO) output.AppendLine("composer.render();");
             if (input.Outline.HasOutline) output.AppendLine("outline.render(scene,camera);");
 
-            output.AppendLine("increment=increment+1;");
+            output.AppendLine("increment=increment+"+ input.Camera.Speed + ";");
             output.AppendLine("};");
             output.AppendLine("animate();");
 
@@ -454,20 +479,32 @@ namespace ThreePlus
             return output.ToString();
         }
 
+        public static string ToLightProbeClose(this Environment input)
+        {
+            StringBuilder output = new StringBuilder();
+            if (input.EnvironmentMode == Environment.EnvironmentModes.CubeMap)
+            {
+                if(input.IsIllumination) output.AppendLine("lightProbe.intensity = "+Math.Round(input.CubeMap.Intensity,5)+";");
+            }
+            return output.ToString();
+        }
+
         public static string ToJavascript(this Environment input)
         {
             StringBuilder output = new StringBuilder();
 
+            output.AppendLine("scene.background = new THREE.Color(" + input.Background.ToStr() + ");");
             switch (input.EnvironmentMode)
             {
                 default:
-                    output.AppendLine("scene.background = new THREE.Color(" + input.Background.ToStr() + ");");
                     break;
                 case Environment.EnvironmentModes.Environment:
                     output.AppendLine("var envMap = new THREE.TextureLoader().load(\"data:image/png;base64," + input.EnvMap.ToStr() + "\");");
                     output.AppendLine("envMap.mapping = THREE.EquirectangularReflectionMapping;");
-                    if (input.IsBackground) output.AppendLine("scene.background = envMap;");
+
+                    if (input.IsBackground)output.AppendLine("scene.background = envMap;");
                     if (input.IsEnvironment) output.AppendLine("scene.environment = envMap;");
+
                     break;
                 case Environment.EnvironmentModes.CubeMap:
                     StringBuilder images = new StringBuilder();
@@ -485,14 +522,14 @@ namespace ThreePlus
                     output.AppendLine("envMap.encoding = THREE.sRGBEncoding;");
 
                     output.AppendLine("lightProbe.copy( THREE.LightProbeGenerator.fromCubeTexture( envMap ) );");
+
                     if (input.IsBackground) output.AppendLine("scene.background = envMap;");
                     if (input.IsEnvironment) output.AppendLine("scene.environment = envMap;");
+
                     output.AppendLine("});");
                     break;
             }
-            if (input.EnvironmentMode != Environment.EnvironmentModes.Color)
-            {
-            }
+
 
             return output.ToString();
         }
@@ -516,9 +553,8 @@ namespace ThreePlus
 
             if (input.HasEdges)
             {
-                output.AppendLine("const edges"+index+ " = new THREE.EdgesGeometry(mesh" + index + ");");
-                output.AppendLine("edges" + index + ".thresholdAngle = "+input.EdgeThreshold+";");
-                output.AppendLine("const edge" + index + " = new THREE.LineSegments(edges" + index + ", new THREE.LineBasicMaterial({ color:" + input.Graphic.Color.ToStr() + ", linewidth: "+input.Graphic.Width+"}));");
+                output.AppendLine("const edges"+index+ " = new THREE.EdgesGeometry(mesh" + index + ", "+ input.EdgeThreshold+");");
+                output.AppendLine("const edge" + index + " = new THREE.LineSegments(edges" + index + ", new THREE.LineBasicMaterial({ color:" + input.Graphic.Color.ToStr() + "}));");
                 output.AppendLine("scene.add(edge" + index + ");");
             }
 
@@ -533,6 +569,45 @@ namespace ThreePlus
             {
                 output.AppendLine("const nrmHelper" + index + " = new THREE.VertexNormalsHelper(model" + index + "," + input.Width + "," + input.Color.ToStr() + "," + input.Width + ");");
                 output.AppendLine("scene.add(nrmHelper" + index + ");");
+            }
+
+            return output.ToString();
+        }
+
+        public static string ToJavascript(this Sky input, double scale = 500000)
+        {
+            StringBuilder output = new StringBuilder();
+
+            if (input.HasSky)
+            {
+            output.AppendLine("const sky = new THREE.Sky();");
+            output.AppendLine("const sun = new THREE.Vector3();");
+            output.AppendLine("sky.scale.setScalar("+Math.Ceiling(scale)+");");
+            output.AppendLine("scene.add(sky);");
+            output.AppendLine("const uniforms = sky.material.uniforms;");
+            output.AppendLine("uniforms['turbidity'].value = " + input.Turbidity + ";");
+            output.AppendLine("uniforms['rayleigh'].value = " + input.Rayleigh + ";");
+            output.AppendLine("uniforms['mieCoefficient'].value = " + input.Coefficient + ";");
+            output.AppendLine("uniforms['mieDirectionalG'].value = " + input.Directional + ";");
+
+            output.AppendLine("const phi = THREE.MathUtils.degToRad(90 - " + input.Altitude + ");");
+            output.AppendLine("const theta = THREE.MathUtils.degToRad(" + input.Azimuth + ");");
+            output.AppendLine("sun.setFromSphericalCoords(1, phi, theta);");
+
+            output.AppendLine("uniforms['sunPosition'].value.copy(sun);");
+
+            output.AppendLine("renderer.toneMapping = THREE.ACESFilmicToneMapping;");
+            output.AppendLine("renderer.toneMappingExposure = " + Math.Round(input.Exposure, 5) + ";");
+
+            if (input.Environment)
+            {
+                output.AppendLine("const pmremGenerator = new THREE.PMREMGenerator(renderer);");
+                output.AppendLine("scene.environment = pmremGenerator.fromScene(sky).texture;");
+            }
+                //output.AppendLine("const sunlight = new THREE.DirectionalLight("+input.SunColor.ToStr()+", 1.0);");
+                //output.AppendLine("sunlight.position.set(sun.x, sun.y, sun.z);");
+                //output.AppendLine("scene.add(sunlight);");
+
             }
 
             return output.ToString();
@@ -646,6 +721,7 @@ namespace ThreePlus
                         + input.ToJsBump(index)
                         + input.ToJsDisplacement(index)
                         + input.ToJsEmissive(index)
+                        + input.ToJsAmbient(index)
                         + input.ToJsMetalness(index)
                         + input.ToJsNormal(index)
                         + input.ToJsRoughness(index)
@@ -659,8 +735,9 @@ namespace ThreePlus
                         + input.ToJsClearcoat(index)
                         + input.ToJsDisplacement(index)
                         + input.ToJsEmissive(index)
+                        + input.ToJsAmbient(index)
                         + input.ToJsMetalness(index)
-                        + input.ToJsNormal(index)
+                        + input.ToJsBump(index)
                         + input.ToJsRoughness(index)
                         + input.ToJsSheen(index)
                         + input.ToJsOpacity(index)
@@ -721,7 +798,8 @@ namespace ThreePlus
         {
             StringBuilder output = new StringBuilder();
 
-            output.Append("color: " + input.DiffuseColor.ToStr()+ ", side:THREE.DoubleSide");
+            output.Append("color: " + input.DiffuseColor.ToStr());
+            //output.Append(", side:THREE.DoubleSide");
             if (input.HasTextureMap) output.Append(", map : " + input.TextureMapName);
 
             return output.ToString();
@@ -764,7 +842,7 @@ namespace ThreePlus
             StringBuilder output = new StringBuilder();
 
             if (input.HasSheen) output.Append(", sheen : " + input.Sheen + ", sheenColor : " + input.SheenColor.ToStr());
-            if (input.HasSheenMap) output.Append(", sheenColorMap : " + input.SheenColorMapName);
+            if (input.HasSheenMap) output.Append(", sheenColorMap : " + input.SheenMapName);
             if (input.HasSheenRoughness) output.Append(", sheenRoughness : " + input.SheenRoughness);
             if (input.HasSheenRoughnessMap) output.Append(", sheenRoughnessMap : " + input.SheenRoughnessMapName);
 
@@ -781,13 +859,25 @@ namespace ThreePlus
             return output.ToString();
         }
 
+        public static string ToJsAmbient(this Material input, string index)
+        {
+            StringBuilder output = new StringBuilder();
+
+            if (input.HasAmbientOcclusionMap) output.Append(", aoMapIntensity : " + input.AmbientOcclusion + ", aoMap : " + input.AmbientOcclusionMapName);
+
+            return output.ToString();
+        }
+
         public static string ToJsOpacity(this Material input, string index)
         {
             StringBuilder output = new StringBuilder();
 
             output.Append(", opacity : " + input.DiffuseColor.ToStrOpacity());
-            output.Append(", transparent: " + input.IsTransparent.ToString().ToLower());
             if (input.HasOpacityMap) output.Append(", alphaMap : " + input.OpacityMapName);
+            output.Append(", transparent: " + input.IsTransparent.ToString().ToLower());
+            if(input.HasOpacityIor) output.Append(", ior: " + input.OpacityIor);
+            if (input.HasOpacityIorMap) output.Append(", transmission : " + input.Transmission);
+            if (input.HasOpacityIorMap) output.Append(", transmissionMap : " + input.TransmissionMapName);
 
 
             return output.ToString();
@@ -818,7 +908,7 @@ namespace ThreePlus
                     break;
                 case Light.Types.Hemisphere:
                     output.AppendLine(starter + "HemisphereLight(" + input.Color.ToStr() + ", " + input.ColorB.ToStr() + ", " + input.Intensity + " );");
-                    output.AppendLine(name + ".position.set(0,-1,0);");
+                    output.AppendLine(name + ".position.set(0,1,0);");
                     if (input.HasHelper) output.AppendLine(helperStart + "HemisphereLightHelper(" + name + ", " + input.HelperSize + ", " + input.HelperColor.ToStr() + " );");
                     break;
                 case Light.Types.Spot:
@@ -828,7 +918,7 @@ namespace ThreePlus
                     if (input.HasHelper) output.AppendLine(helperStart + "SpotLightHelper(" + name + ", " + input.HelperColor.ToStr() + " );");
                     break;
             }
-            if (input.HasHelper) output.AppendLine("scene.add(" + hName + ");");
+            if ((input.HasHelper) &(input.LightType!= Light.Types.Ambient)) output.AppendLine("scene.add(" + hName + ");");
             return output.ToString();
         }
 
@@ -900,7 +990,7 @@ namespace ThreePlus
             output.AppendLine("const positions" + index + " = new Float32Array( [" + string.Join(",", points.Values) + "] );");
             output.AppendLine(name + ".setPositions( positions" + index + ");");
 
-            output.Append("const lineMat" + index + " = new THREE.LineMaterial({ linewidth: " + Math.Round(graphic.Width / 100.0, 5) + ", alphaToCoverage: true");
+            output.Append("const lineMat" + index + " = new THREE.LineMaterial({ linewidth: " + Math.Round(graphic.Width, 5) + ", alphaToCoverage: true");
 
 
             if (graphic.HasColors)
@@ -927,7 +1017,8 @@ namespace ThreePlus
             {
                 Parallel.For(0, count, k =>
             {
-                colors[k] = graphic.Colors[k].ToStrArray();
+                int m = k % graphic.Colors.Count;
+                colors[k] = graphic.Colors[m].ToStrArray();
             }
             );
                 output.AppendLine("const colors" + index + " = new Float32Array( [" + string.Join(",", colors.Values) + "] );");

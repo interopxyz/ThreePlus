@@ -1,4 +1,5 @@
 ﻿using Grasshopper.Kernel;
+using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
@@ -30,11 +31,11 @@ namespace ThreePlus.Components.Lights
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Light", "L", "A light object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Light / Sky", "L", "A light or sky object", GH_ParamAccess.item);
             pManager.AddIntegerParameter("Samples", "S", "The shadow resolution samples", GH_ParamAccess.item, 20);
             pManager[1].Optional = true;
-            //pManager.AddNumberParameter("Opacity", "O", "The shadow opacity", GH_ParamAccess.item, 1.0);
-            //pManager[1].Optional = true;
+            pManager.AddNumberParameter("Threshold", "T", "The opacity threshold for casting shadows", GH_ParamAccess.item, 0.5);
+            pManager[2].Optional = true;
         }
 
         /// <summary>
@@ -51,21 +52,40 @@ namespace ThreePlus.Components.Lights
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            Light light = new Light();
-            if (!DA.GetData(0, ref light)) return;
+            IGH_Goo goo = null;
+            if (!DA.GetData(0, ref goo)) return;
 
             int samples = 20;
             DA.GetData(1, ref samples);
 
-            //double opacity = 1.0;
-            //DA.GetData(1, ref opacity);
+            double threshold = 0.5;
+            DA.GetData(2, ref threshold);
 
-            light = new Light(light);
+            Light light = new Light();
+            Sky sky = new Sky();
 
-            light.SetShadow(samples);
+            if (goo.CastTo<Light>(out light))
+            {
+                light = new Light(light);
+                light.SetShadow(samples, threshold);
 
-            DA.SetData(0, light);
-            prevLights.Add(light);
+                DA.SetData(0, light);
+                prevLights.Add(light);
+            }
+            else if (goo.CastTo<Sky>(out sky))
+            {
+                if (sky.HasLight)
+                {
+                    sky = new Sky(sky);
+                    light = new Light(sky.SunLight);
+                    light.SetShadow(samples, threshold);
+
+                    sky.SunLight = light;
+                    prevLights.Add(light);
+                }
+                DA.SetData(0, sky);
+            }
+
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         public GH_DisplayNormal()
           : base("Display Normals", "Normals",
-              "Description",
+              "Renders arrows to visualize an object's vertex normal vectors.",
               Constants.ShortName, "Helpers")
         {
         }

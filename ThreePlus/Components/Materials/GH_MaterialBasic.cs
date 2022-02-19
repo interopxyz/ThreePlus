@@ -14,7 +14,7 @@ namespace ThreePlus.Components.Materials
         /// </summary>
         public GH_MaterialBasic()
           : base("Basic Material", "Basic Material",
-              "Description",
+              "A material for drawing geometries in a simple shaded (flat or wireframe) way. This material is not affected by lights.",
               Constants.ShortName, "Materials")
         {
         }

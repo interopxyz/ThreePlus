@@ -14,7 +14,7 @@ namespace ThreePlus.Components.Materials
         /// </summary>
         public GH_MaterialToon()
           : base("Toon Material", "Toon Material",
-              "Description",
+              "A material emulating cell or toon shading with a specified color and number of shading variants",
               Constants.ShortName, "Materials")
         {
         }

@@ -14,6 +14,8 @@ namespace ThreePlus
 
         #region members
 
+        protected double intensity = 1.0;
+
         protected Sd.Bitmap negX = null;
         protected Sd.Bitmap negY = null;
         protected Sd.Bitmap negZ = null;
@@ -37,6 +39,8 @@ namespace ThreePlus
 
         public CubeMap(CubeMap cubeMap) : base(cubeMap)
         {
+            this.intensity = cubeMap.intensity;
+
             this.negX = new Sd.Bitmap(cubeMap.negX);
             this.negY = new Sd.Bitmap(cubeMap.negY);
             this.negZ = new Sd.Bitmap(cubeMap.negZ);
@@ -45,9 +49,11 @@ namespace ThreePlus
             this.posZ = new Sd.Bitmap(cubeMap.posZ);
         }
 
-        public CubeMap(string name, Sd.Bitmap negX, Sd.Bitmap negY, Sd.Bitmap negZ, Sd.Bitmap posX, Sd.Bitmap posY, Sd.Bitmap posZ) : base()
+        public CubeMap(string name, Sd.Bitmap negX, Sd.Bitmap negY, Sd.Bitmap negZ, Sd.Bitmap posX, Sd.Bitmap posY, Sd.Bitmap posZ, double intensity = 1.0) : base()
         {
             this.name = name;
+            this.intensity = intensity;
+
             this.negX = negX;
             this.negY = negY;
             this.negZ = negZ;
@@ -56,8 +62,10 @@ namespace ThreePlus
             this.posZ = posZ;
         }
 
-        public CubeMap(Sd.Bitmap negX, Sd.Bitmap negY, Sd.Bitmap negZ, Sd.Bitmap posX, Sd.Bitmap posY, Sd.Bitmap posZ ) : base()
+        public CubeMap(Sd.Bitmap negX, Sd.Bitmap negY, Sd.Bitmap negZ, Sd.Bitmap posX, Sd.Bitmap posY, Sd.Bitmap posZ, double intensity = 1.0) : base()
         {
+            this.intensity = intensity;
+
             this.negX = negX;
             this.negY = negY;
             this.negZ = negZ;
@@ -88,6 +96,12 @@ namespace ThreePlus
         #endregion
 
         #region properties
+
+        public virtual double Intensity
+        {
+            get { return intensity; }
+            set { intensity = value; }
+        }
 
         public virtual Sd.Bitmap NegX
         {

@@ -12,7 +12,7 @@ namespace ThreePlus.Components.Cameras
         /// </summary>
         public GH_Camera_Animate()
           : base("Camera Animate", "Move Cam",
-              "Description",
+              "Sets sequential camera positions to animate between",
               Constants.ShortName, "Cameras")
         {
         }

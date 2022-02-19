@@ -121,6 +121,19 @@ namespace ThreePlus
             this.cloud = new PointCloud(cloud);
         }
 
+        public Model(Rg.Point3d point) : base()
+        {
+            this.geoId = Guid.NewGuid();
+            this.geometryType = GeometryTypes.Cloud;
+            this.objectType = "Points";
+
+            this.type = "BufferGeometry";
+
+            this.name = this.geoId.ToString();
+
+            this.cloud = new PointCloud(point,Color.Black);
+        }
+
         #endregion
 
         #region properties
@@ -214,12 +227,11 @@ namespace ThreePlus
 
         #region methods
 
-        public void SetEdges(double threshold, Color edgeColor, double edgeWeight)
+        public void SetEdges(double threshold, Color edgeColor)
         {
             this.hasEdges = true;
             this.edgeThreshold = threshold;
             this.Graphic.Color = edgeColor;
-            this.Graphic.Width = edgeWeight;
         }
 
         public void SetHelper(Color helperColor)
@@ -243,9 +255,13 @@ namespace ThreePlus
             switch (geometryType)
             {
                 case GeometryTypes.Mesh:
-                    return "Model | " + GeometryType.ToString() + " | " + Material.MaterialType.ToString();
+                    return "Model | " + GeometryType.ToString() + " | " + this.Material.MaterialType.ToString();
                 case GeometryTypes.Curve:
-                    return "Model | " + GeometryType.ToString() + " | " + Graphic.Colors.Count+" colors";
+                    return "Model | " + GeometryType.ToString() + " | " + this.Graphic.Colors.Count+" colors";
+                case GeometryTypes.Cloud:
+                    return "Model | " + GeometryType.ToString() + " | " + this.Cloud.Points.Count + " points";
+                case GeometryTypes.Plane:
+                    return "Model | " + GeometryType.ToString() + " | " + this.size + " size";
                 default:
                     return "Model | empty";
             }

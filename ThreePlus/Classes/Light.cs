@@ -37,6 +37,7 @@ namespace ThreePlus
 
         protected bool hasShadow = false;
         protected int shadowSamples = 20;
+        protected double shadowThreshold = 0.5;
 
         #endregion
 
@@ -70,6 +71,7 @@ namespace ThreePlus
 
             this.hasShadow = light.hasShadow;
             this.shadowSamples = light.shadowSamples;
+            this.shadowThreshold = light.shadowThreshold;
 
         }
 
@@ -237,14 +239,20 @@ namespace ThreePlus
             get { return hasShadow; }
         }
 
+        public double Threshold
+        {
+            get { return shadowThreshold; }
+        }
+
         #endregion
 
         #region methods
 
-        public void SetShadow(int samples)
+        public void SetShadow(int samples, double threshold)
         {
             hasShadow = true;
             this.shadowSamples = samples;
+            this.shadowThreshold = threshold;
         }
 
         public void SetHelper(double size, Sd.Color color)

@@ -14,7 +14,7 @@ namespace ThreePlus.Components.Materials
         /// </summary>
         public GH_MaterialStandard()
           : base("Standard Material", "Standard Material",
-              "Description",
+              "A standard physically based material, using Metallic-Roughness workflow.",
               Constants.ShortName, "Materials")
         {
         }

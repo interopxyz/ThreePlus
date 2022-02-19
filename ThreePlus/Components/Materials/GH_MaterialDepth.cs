@@ -14,7 +14,7 @@ namespace ThreePlus.Components.Materials
         /// </summary>
         public GH_MaterialDepth()
           : base("Depth Material", "Depth Material",
-              "Description",
+              "A material for drawing geometry by depth. Depth is based off of the camera near and far plane. White is nearest, black is farthest.",
               Constants.ShortName, "Materials")
         {
         }

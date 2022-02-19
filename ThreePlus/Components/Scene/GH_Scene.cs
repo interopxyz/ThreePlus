@@ -13,8 +13,8 @@ namespace ThreePlus.Components
         /// Initializes a new instance of the GH_Scene class.
         /// </summary>
         public GH_Scene()
-          : base("Assemble Scene", "Scene",
-              "Description",
+          : base("Scene", "Scene",
+              "Compiles scene elements into a single scene.",
               Constants.ShortName, "Scene")
         {
         }
@@ -60,8 +60,8 @@ namespace ThreePlus.Components
             Light light = new Light();
             Camera camera = new Camera();
             Environment environment = new Environment();
-            Atmosphere atmosphere = new Atmosphere()
-                ;
+            Atmosphere atmosphere = new Atmosphere();
+            Sky sky = new Sky();
             AmbientOcclusion ambientOcclusion = new AmbientOcclusion();
             Outline outline = new Outline();
 
@@ -90,6 +90,11 @@ namespace ThreePlus.Components
                 else if (goo.CastTo<Environment>(out environment))
                 {
                     scene.Environment = new Environment(environment);
+                }
+                else if (goo.CastTo<Sky>(out sky))
+                {
+                    scene.Sky = new Sky(sky);
+                    if (sky.HasLight) scene.AddLight(sky.SunLight);
                 }
                 else if (goo.CastTo<Atmosphere>(out atmosphere))
                 {

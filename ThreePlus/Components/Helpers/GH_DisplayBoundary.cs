@@ -14,7 +14,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         public GH_DisplayBoundary()
           : base("Display Boundary", "Display Bounds",
-              "Description",
+              "Helper object to graphically show the world-axis-aligned bounding box around an object.",
               Constants.ShortName, "Helpers")
         {
         }

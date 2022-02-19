@@ -13,7 +13,7 @@ namespace ThreePlus.Components
         /// </summary>
         public GH_Atmosphere()
           : base("Atmosphere", "Atmosphere",
-              "Description",
+              "Adds a fog effect from the horizon",
               Constants.ShortName, "Scene")
         {
         }

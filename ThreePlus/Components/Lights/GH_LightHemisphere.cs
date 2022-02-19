@@ -33,7 +33,7 @@ namespace ThreePlus.Components.Lights
         {
             pManager.AddColourParameter("Zenith Color", "Z", "The lights color at the Zenith", GH_ParamAccess.item, Color.White);
             pManager[0].Optional = true;
-            pManager.AddColourParameter("Horizon Color", "H", "The lights color at the Horizon", GH_ParamAccess.item, Color.White);
+            pManager.AddColourParameter("Horizon Color", "H", "The lights color at the Horizon", GH_ParamAccess.item, Color.Gray);
             pManager[1].Optional = true;
             pManager.AddNumberParameter("Intensity", "I", "The light's strength/intensity.", GH_ParamAccess.item, 1);
             pManager[2].Optional = true;

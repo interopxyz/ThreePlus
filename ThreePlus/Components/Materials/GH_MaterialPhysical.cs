@@ -14,7 +14,7 @@ namespace ThreePlus.Components.Materials
         /// </summary>
         public GH_MaterialPhysical()
           : base("Physical Material", "Physical Material",
-              "Description",
+              "Physically based rendering (PBR) materials use a physically correct shading to create a material that will react 'correctly' under all lighting scenarios",
               Constants.ShortName, "Materials")
         {
         }

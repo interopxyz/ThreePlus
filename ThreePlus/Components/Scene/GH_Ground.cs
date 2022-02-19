@@ -14,7 +14,7 @@ namespace ThreePlus.Classes
         /// </summary>
         public GH_Ground()
           : base("Ground", "Ground",
-              "Description",
+              "Add a ground plane to the scene.",
               Constants.ShortName, "Scene")
         {
         }
@@ -62,7 +62,7 @@ namespace ThreePlus.Classes
             plane.OriginZ = height;
 
             Model ground = new Model(plane, size);
-            ground.Material = Material.PhongMaterial(Sd.Color.LightGray, 0.5);
+
             DA.SetData(0, ground);
         }
 

@@ -18,6 +18,7 @@ namespace ThreePlus
         public Environment Environment = new Environment();
         public Atmosphere Atmosphere = new Atmosphere();
         public Outline Outline = new Outline();
+        public Sky Sky = new Sky();
 
         public AmbientOcclusion AmbientOcclusion = new AmbientOcclusion();
 
@@ -30,6 +31,7 @@ namespace ThreePlus
         public List<Script> Scripts = new List<Script>();
 
         protected bool hasShadows = false;
+        protected double shadowThreshold = 0.0;
 
         #endregion
 
@@ -72,6 +74,7 @@ namespace ThreePlus
             this.Outline = scene.Outline;
 
             this.hasShadows = scene.hasShadows;
+            this.shadowThreshold = scene.shadowThreshold;
     }
 
         #endregion
@@ -97,9 +100,47 @@ namespace ThreePlus
             get { return hasShadows; }
         }
 
+        public double ShadowThreshold
+        {
+            get { return shadowThreshold; }
+        }
+
         public Camera Camera
         {
             get { return this.Cameras[this.Cameras.Count - 1]; }
+        }
+
+        public bool ContainsSpotLights
+        {
+            get {
+                bool isType = false;
+                foreach(Light light in lights)
+                {
+                    if(light.LightType == Light.Types.Spot)
+                    {
+                        isType = true;
+                        break;
+                    }
+                }
+                return isType;
+            }
+        }
+
+        public bool ContainsDirectionalLights
+        {
+            get
+            {
+                bool isType = false;
+                foreach (Light light in lights)
+                {
+                    if (light.LightType == Light.Types.Directional)
+                    {
+                        isType = true;
+                        break;
+                    }
+                }
+                return isType;
+            }
         }
 
         #endregion
@@ -116,7 +157,11 @@ namespace ThreePlus
 
         public void AddLight(Light light)
         {
-            if (light.HasShadow) hasShadows = true;
+            if (light.HasShadow)
+            {
+                hasShadows = true;
+                if (light.Threshold > this.shadowThreshold) shadowThreshold = light.Threshold;
+            }
                 lights.Add(new Light(light));
         }
 

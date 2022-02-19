@@ -15,7 +15,7 @@ namespace ThreePlus.Components.Output
         /// </summary>
         public GH_SaveHtml()
           : base("Save Html", "SaveHtml",
-              "Description",
+              "Export a standalone html and javascript file which can be loaded locally to view the scene.",
               Constants.ShortName, "Output")
         {
         }
@@ -38,8 +38,10 @@ namespace ThreePlus.Components.Output
             pManager[1].Optional = true;
             pManager.AddTextParameter("Folder Name", "N", "The new export folder name", GH_ParamAccess.item);
             pManager[2].Optional = true;
-            pManager.AddBooleanParameter("Save", "S", "If true, the new file will be written or overwritten", GH_ParamAccess.item, false);
+            pManager.AddBooleanParameter("Local", "L", "If true, referenced packages will be copied locally and can be run offline. If false, packages will be referenced via cdn and can only be viewed when connected to the internet.", GH_ParamAccess.item, true);
             pManager[3].Optional = true;
+            pManager.AddBooleanParameter("Save", "S", "If true, the new file will be written or overwritten", GH_ParamAccess.item, false);
+            pManager[4].Optional = true;
         }
 
         /// <summary>
@@ -69,8 +71,11 @@ namespace ThreePlus.Components.Output
 
             scene.Name = name;
 
+            bool local = true;
+            if (!DA.GetData(3, ref local)) return;
+
             bool save = false;
-            if (!DA.GetData(3, ref save)) return;
+            if (!DA.GetData(4, ref save)) return;
 
             if (!hasPath)
             {
@@ -96,14 +101,16 @@ namespace ThreePlus.Components.Output
                 string child = parent + "js" + "\\";
 
                 Directory.CreateDirectory(parent);
-                Directory.CreateDirectory(child);
+                if(local)Directory.CreateDirectory(child);
 
-            string html = scene.ToHtml(true);
+            string html = scene.ToHtml(local);
             string js = scene.ToJavascript();
 
                 File.WriteAllText(parent + "index.html", html);
                 File.WriteAllText(parent + "app.js", js);
 
+                if(local)
+                {
                 File.WriteAllText(child + "three.min.js", Properties.Resources.three_min);
                 File.WriteAllText(child + "OrbitControls.js", Properties.Resources.OrbitControls);
                 File.WriteAllText(child + "VertexTangentsHelper.js", Properties.Resources.VertexTangentsHelper);
@@ -132,6 +139,8 @@ namespace ThreePlus.Components.Output
                 {
                     File.WriteAllText(child + "LightProbeGenerator.js", Properties.Resources.LightProbeGenerator);
                     File.WriteAllText(child + "LightProbeHelper.js", Properties.Resources.LightProbeHelper);
+                }
+                if(scene.Sky.HasSky) File.WriteAllText(child + "Sky.js", Properties.Resources.Sky);
                 }
 
                 DA.SetData(0, parent + "index.html");

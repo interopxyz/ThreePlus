@@ -34,6 +34,8 @@ namespace ThreePlus.Components.Assets
         {
             pManager.AddTextParameter("Name", "N", "An optional Name", GH_ParamAccess.item, "Custom");
             pManager[0].Optional = true;
+            pManager.AddNumberParameter("Intensity", "I", "The intensity of a light probe", GH_ParamAccess.item, 1.0);
+            pManager[1].Optional = true;
             pManager.AddGenericParameter("Positive X", "X+", "The positive X image", GH_ParamAccess.item);
             pManager.AddGenericParameter("Negative X", "X-", "The negative X image", GH_ParamAccess.item);
             pManager.AddGenericParameter("Positive Y", "Y+", "The positive Y image", GH_ParamAccess.item);
@@ -60,20 +62,24 @@ namespace ThreePlus.Components.Assets
             string name = "Custom";
             DA.GetData(0, ref name);
 
+            double intensity = 1.0;
+            bool hasIntensity = DA.GetData(1, ref intensity);
+
             Sd.Bitmap posX = null;
-            if (!DA.GetData(1, ref posX))return;
+            if (!DA.GetData(2, ref posX))return;
             Sd.Bitmap negX = null;
-            if (!DA.GetData(2, ref negX)) return;
+            if (!DA.GetData(3, ref negX)) return;
             Sd.Bitmap posY = null;
-            if (!DA.GetData(3, ref posY)) return;
+            if (!DA.GetData(4, ref posY)) return;
             Sd.Bitmap negY = null;
-            if (!DA.GetData(4, ref negY)) return;
+            if (!DA.GetData(5, ref negY)) return;
             Sd.Bitmap posZ = null;
-            if (!DA.GetData(5, ref posZ)) return;
+            if (!DA.GetData(6, ref posZ)) return;
             Sd.Bitmap negZ = null;
-            if (!DA.GetData(6, ref negZ)) return;
+            if (!DA.GetData(7, ref negZ)) return;
 
             CubeMap cubeMap = new CubeMap(name, posX, negX, posY, negY, posZ, negZ);
+            if (hasIntensity) cubeMap.Intensity = intensity;
 
             DA.SetData(0, cubeMap);
         }

@@ -421,6 +421,9 @@
   <data name="Skansenposz" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Skansenposz.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Sky" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sky.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="SnowParknegx" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SnowParknegx.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -631,6 +634,9 @@
   <data name="Three_MaterialMaps_Displacement_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Three_MaterialMaps_Displacement-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Three_MaterialMaps_Edges_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_MaterialMaps_Edges-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Three_MaterialMaps_Emissive_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Three_MaterialMaps_Emissive-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -691,6 +697,9 @@
   <data name="three_min" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\three.min.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="Three_Output_DeSerializeBitmap_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Output_DeSerializeBitmap-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Three_Output_Html_File_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Three_Output_Html_File-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -702,6 +711,30 @@
   </data>
   <data name="Three_Output_Json_Text_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Three_Output_Json_Text-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Output_SerializeBitmap_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Output_SerializeBitmap-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_PBR_Base_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_PBR-Base-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_PBR_Finishes_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_PBR-Finishes-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_PBR_Opacity_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_PBR-Opacity-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_PBR_Surface_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_PBR-Surface-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_PBR_Volume_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_PBR-Volume-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Reference_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Reference-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Reference_Camera_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Reference-Camera-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Three_SceneAO_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Three_SceneAO-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -720,6 +753,9 @@
   </data>
   <data name="Three_SceneOutline_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Three_SceneOutline-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_SceneSky_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_SceneSky-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Vasanegx" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Vasanegx.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

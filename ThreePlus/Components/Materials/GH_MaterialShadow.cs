@@ -14,7 +14,7 @@ namespace ThreePlus.Components.Materials
         /// </summary>
         public GH_MaterialShadow()
           : base("Shadow Material", "Shadow Material",
-              "Description",
+              "This material can receive shadows, but otherwise is completely transparent.",
               Constants.ShortName, "Materials")
         {
         }

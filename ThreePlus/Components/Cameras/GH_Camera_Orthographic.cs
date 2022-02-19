@@ -12,7 +12,7 @@ namespace ThreePlus.Components.Cameras
         /// </summary>
         public GH_Camera_Orthographic()
           : base("Camera Orthographic", "Ortho Cam",
-              "Description",
+              "Camera that uses orthographic projection.",
               Constants.ShortName, "Cameras")
         {
         }

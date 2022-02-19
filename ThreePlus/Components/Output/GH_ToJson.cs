@@ -13,7 +13,7 @@ namespace ThreePlus.Components
         /// </summary>
         public GH_ToJson()
           : base("ToJson", "ToJson",
-              "Description",
+              "Create a Json string in the Three.js Object Scene format 4 compatible with the https://threejs.org/editor/",
               Constants.ShortName, "Output")
         {
         }

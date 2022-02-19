@@ -1378,6 +1378,28 @@ namespace ThreePlus.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ( function () {
+        ///
+        ///	/**
+        /// * Based on &quot;A Practical Analytic Model for Daylight&quot;
+        /// * aka The Preetham Model, the de facto standard analytic skydome model
+        /// * https://www.researchgate.net/publication/220720443_A_Practical_Analytic_Model_for_Daylight
+        /// *
+        /// * First implemented by Simon Wallner
+        /// * http://simonwallner.at/project/atmospheric-scattering/
+        /// *
+        /// * Improved by Martin Upitis
+        /// * http://blenderartists.org/forum/showthread.php?245954-preethams-sky-impementation-HDR
+        /// *
+        /// * Three.js integration by zz85 http://twitter. [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Sky {
+            get {
+                return ResourceManager.GetString("Sky", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap SnowParknegx {
@@ -2111,6 +2133,16 @@ namespace ThreePlus.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Three_MaterialMaps_Edges_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_MaterialMaps_Edges_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Three_MaterialMaps_Emissive_01 {
             get {
                 object obj = ResourceManager.GetObject("Three_MaterialMaps_Emissive_01", resourceCulture);
@@ -2315,6 +2347,16 @@ namespace ThreePlus.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Three_Output_DeSerializeBitmap_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Output_DeSerializeBitmap_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Three_Output_Html_File_01 {
             get {
                 object obj = ResourceManager.GetObject("Three_Output_Html_File_01", resourceCulture);
@@ -2348,6 +2390,86 @@ namespace ThreePlus.Properties {
         internal static System.Drawing.Bitmap Three_Output_Json_Text_01 {
             get {
                 object obj = ResourceManager.GetObject("Three_Output_Json_Text_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Output_SerializeBitmap_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Output_SerializeBitmap_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_PBR_Base_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_PBR_Base_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_PBR_Finishes_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_PBR_Finishes_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_PBR_Opacity_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_PBR_Opacity_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_PBR_Surface_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_PBR_Surface_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_PBR_Volume_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_PBR_Volume_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Reference_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Reference_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Reference_Camera_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Reference_Camera_01", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2408,6 +2530,16 @@ namespace ThreePlus.Properties {
         internal static System.Drawing.Bitmap Three_SceneOutline_01 {
             get {
                 object obj = ResourceManager.GetObject("Three_SceneOutline_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_SceneSky_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_SceneSky_01", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

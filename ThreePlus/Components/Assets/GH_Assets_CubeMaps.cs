@@ -3,11 +3,11 @@ using Grasshopper.Kernel.Parameters;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using Sd = System.Drawing;
 
 namespace ThreePlus.Components.Assets
 {
-    public class GH_Assets_CubeMaps : GH_Component
+    public class GH_Assets_CubeMaps : GH_BaseImage
     {
         /// <summary>
         /// Initializes a new instance of the GH_Assets_CubeMaps class.
@@ -27,6 +27,12 @@ namespace ThreePlus.Components.Assets
             get { return GH_Exposure.primary; }
         }
 
+        public override void CreateAttributes()
+        {
+            img = new Sd.Bitmap(Properties.Resources.EarthPosx);
+            m_attributes = new Attributes_Custom(this);
+        }
+
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
@@ -34,6 +40,8 @@ namespace ThreePlus.Components.Assets
         {
             pManager.AddIntegerParameter("Index", "I", "The index of the default Cube Map", GH_ParamAccess.item, 11);
             pManager[0].Optional = true;
+            pManager.AddNumberParameter("Intensity", "T", "The intensity of a light probe", GH_ParamAccess.item, 1.0);
+            pManager[1].Optional = true;
 
             Param_Integer paramA = (Param_Integer)pManager[0];
             paramA.AddNamedValue("Earth", 0);
@@ -72,6 +80,9 @@ namespace ThreePlus.Components.Assets
         {
             int index = 11;
             DA.GetData(0, ref index);
+
+            double intensity = 1.0;
+            bool hasIntensity = DA.GetData(1, ref intensity);
 
             CubeMap cubeMap = new CubeMap();
             switch (index)
@@ -131,6 +142,10 @@ namespace ThreePlus.Components.Assets
                     cubeMap = CubeMap.SnowPark();
                     break;
             }
+
+            img = new Sd.Bitmap(cubeMap.PosX);
+
+            if (hasIntensity) cubeMap.Intensity = intensity;
 
             DA.SetData(0, cubeMap);
         }

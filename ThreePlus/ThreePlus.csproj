@@ -66,10 +66,13 @@
     <Compile Include="Classes\PointCloud.cs" />
     <Compile Include="Classes\PostProcessing\AmbientOcclusion.cs" />
     <Compile Include="Classes\PostProcessing\Outline.cs" />
+    <Compile Include="Classes\Sky.cs" />
     <Compile Include="Components\Assets\GH_Assets_CubeMap.cs" />
     <Compile Include="Components\Assets\GH_Assets_CubeMaps.cs" />
     <Compile Include="Components\Assets\GH_Assets_Environments.cs" />
     <Compile Include="Components\Assets\GH_Assets_Icons.cs" />
+    <Compile Include="Components\Assets\GH_BaseImage.cs" />
+    <Compile Include="Components\Assets\GH_Viewer.cs" />
     <Compile Include="Components\Cameras\GH_Camera_Animate.cs" />
     <Compile Include="Components\Cameras\GH_Camera_Orthographic.cs" />
     <Compile Include="Components\Cameras\GH_Camera_Perspective.cs" />
@@ -94,7 +97,16 @@
     <Compile Include="Components\Materials\Maps\GH_Map_Texture.cs" />
     <Compile Include="Components\Materials\Maps\GH_Map_Volume.cs" />
     <Compile Include="Components\Materials\Maps\GH_Map_Wireframe.cs" />
+    <Compile Include="Components\Output\GH_BitmapDeSerialize.cs" />
+    <Compile Include="Components\Output\GH_BitmapSerialize.cs" />
     <Compile Include="Components\Output\GH_SaveJson.cs" />
+    <Compile Include="Components\RhinoObjects\GH_RefCamera.cs" />
+    <Compile Include="Components\RhinoObjects\GH_RefGeometry.cs" />
+    <Compile Include="Components\RhinoObjects\GH_RefPbrOpacity.cs" />
+    <Compile Include="Components\RhinoObjects\GH_RefPbrSurface.cs" />
+    <Compile Include="Components\RhinoObjects\GH_RefPbrVolumetrics.cs" />
+    <Compile Include="Components\RhinoObjects\GH_RefPbrBase.cs" />
+    <Compile Include="Components\RhinoObjects\GH_RefPbrFinishes.cs" />
     <Compile Include="Components\Scene\GH_AmbientOcclusion.cs" />
     <Compile Include="Components\Scene\GH_Ground.cs" />
     <Compile Include="Classes\Helpers\Axes.cs" />
@@ -134,6 +146,7 @@
     <Compile Include="Components\Scene\GH_Scene.cs" />
     <Compile Include="Components\Output\GH_ToJson.cs" />
     <Compile Include="Components\Materials\GH_MaterialBasic.cs" />
+    <Compile Include="Components\Scene\GH_Sky.cs" />
     <Compile Include="Components\Transform\GH_TransformModel.cs" />
     <Compile Include="Extensions\GhToThree.cs" />
     <Compile Include="Extensions\ObjToJavascript.cs" />
@@ -835,6 +848,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Three_Camera_Ortho-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Edges-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sky.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_SceneSky-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Reference-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Reference-Camera-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Output_DeSerializeBitmap-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Output_SerializeBitmap-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_PBR-Volume-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_PBR-Surface-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_PBR-Opacity-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_PBR-Finishes-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_PBR-Base-01.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

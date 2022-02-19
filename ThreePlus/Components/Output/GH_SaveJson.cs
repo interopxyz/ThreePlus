@@ -13,7 +13,7 @@ namespace ThreePlus.Components.Output
         /// </summary>
         public GH_SaveJson()
           : base("Save Json", "SaveJson",
-              "Description",
+              "Save a Json file in the Three.js Object Scene format 4 compatible with the https://threejs.org/editor/",
               Constants.ShortName, "Output")
         {
         }
@@ -57,6 +57,9 @@ namespace ThreePlus.Components.Output
             Scene scene = new Scene();
             if (!DA.GetData(0, ref scene)) return;
 
+            if(scene.ContainsDirectionalLights) this.AddRuntimeMessage(GH_RuntimeMessageLevel.Remark, "Due to limitations in the object model, the JSON export will normalize the target of Directional Lights to the scene origin");
+            if (scene.ContainsSpotLights) this.AddRuntimeMessage(GH_RuntimeMessageLevel.Remark, "Due to limitations in the object model, the JSON export will normalize the target of Spot Lights to the scene origin.");
+
             string path = "C:\\Users\\Public\\Documents\\";
             bool hasPath = DA.GetData(1, ref path);
 
@@ -82,7 +85,6 @@ namespace ThreePlus.Components.Output
             {
 
                 string filepath = path + name;
-
 
                 if (!Directory.Exists(path))
                 {

@@ -15,7 +15,7 @@ namespace ThreePlus.Components
         /// </summary>
         public GH_GraphicsPoints()
           : base("Point Cloud", "Cloud",
-              "Description",
+              "Apply colors to a list of points represented by optional bitmap symbols.",
               Constants.ShortName, "Materials")
         {
         }

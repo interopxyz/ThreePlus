@@ -16,7 +16,7 @@ namespace ThreePlus.Components.Graphics
         /// </summary>
         public GH_GraphicsPaths()
           : base("Graphics", "Graphics",
-              "Description",
+              "A material for drawing wireframe-style geometries with dashed lines. ",
               Constants.ShortName, "Materials")
         {
         }
@@ -35,7 +35,7 @@ namespace ThreePlus.Components.Graphics
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Model", "M", "A Model, Mesh, or Brep", GH_ParamAccess.item);
-            pManager.AddColourParameter("Colors", "C", "The graphic colors", GH_ParamAccess.list);
+            pManager.AddColourParameter("Colors", "C", "The graphic colors. A single color or list of colors corresponding to each control point.", GH_ParamAccess.list);
             pManager[1].Optional = true;
             pManager.AddNumberParameter("Width", "W", "The stroke width",GH_ParamAccess.item);
             pManager[2].Optional = true;

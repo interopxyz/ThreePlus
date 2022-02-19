@@ -13,7 +13,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         public GH_Grid()
           : base("Grid", "Grid",
-              "Description",
+              "The GridHelper is an object to define grids. Grids are two-dimensional arrays of lines.",
               Constants.ShortName, "Helpers")
         {
         }

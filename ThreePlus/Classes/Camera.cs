@@ -65,6 +65,8 @@ namespace ThreePlus
             this.filmGauge = camera.filmGauge;
             this.filmOffset = camera.filmOffset;
 
+            this.speed = camera.speed;
+
             this.isDefault = camera.isDefault;
     }
 
@@ -142,10 +144,12 @@ namespace ThreePlus
         public virtual double Near
         {
             get { return near; }
+            set { near = value; }
         }
         public virtual double Far
         {
             get { return far; }
+            set { far = value; }
         }
         public virtual int Focus
         {

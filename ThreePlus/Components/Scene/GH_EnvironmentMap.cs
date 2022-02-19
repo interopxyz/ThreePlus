@@ -15,7 +15,7 @@ namespace ThreePlus.Components
         /// </summary>
         public GH_EnvironmentMap()
           : base("Environment Map", "EnvMap",
-              "Description",
+              "Adds an environment map to the scene for reflections and background as well as a light probe for box maps.",
               Constants.ShortName, "Scene")
         {
         }

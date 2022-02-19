@@ -14,7 +14,7 @@ namespace ThreePlus.Components.Materials
         /// </summary>
         public GH_MaterialNormal()
           : base("Normal Material", "Normal Material",
-              "Description",
+              "A material that maps the normal vectors to RGB colors.",
               Constants.ShortName, "Materials")
         {
         }

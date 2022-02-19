@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 
 namespace ThreePlus.Components.Helpers
@@ -14,7 +15,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         public GH_DisplayLight()
           : base("Display Lights", "Display Light",
-              "Description",
+              "Apply to helper object to visualize light type specific properties.",
               Constants.ShortName, "Helpers")
         {
         }
@@ -53,10 +54,8 @@ namespace ThreePlus.Components.Helpers
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            Light light = new Light();
-            if (!DA.GetData(0, ref light)) return;
-
-            light = new Light(light);
+            IGH_Goo goo = null;
+            if (!DA.GetData(0, ref goo)) return;
 
             double size = 5;
             DA.GetData(1, ref size);
@@ -64,9 +63,28 @@ namespace ThreePlus.Components.Helpers
             Color color = Color.Gray;
             DA.GetData(2, ref color);
 
-            light.SetHelper(size, color);
+            Light light = new Light();
+            Sky sky = new Sky();
 
-            DA.SetData(0, light);
+            if (goo.CastTo<Light>(out light))
+            {
+                light = new Light(light);
+                light.SetHelper(size, color);
+
+                DA.SetData(0, light);
+            }
+            else if (goo.CastTo<Sky>(out sky))
+            {
+                if (sky.HasLight)
+                {
+                    sky = new Sky(sky);
+                    light = new Light(sky.SunLight);
+                    light.SetHelper(size, color);
+
+                    sky.SunLight = light;
+                }
+                DA.SetData(0, sky);
+            }
         }
 
         /// <summary>

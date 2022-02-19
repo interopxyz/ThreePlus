@@ -14,7 +14,7 @@ namespace ThreePlus.Components.Materials
         /// </summary>
         public GH_MaterialLambert()
           : base("Lambert Material", "Lambert Material",
-              "Description",
+              "A material for non-shiny surfaces, without specular highlights.",
               Constants.ShortName, "Materials")
         {
         }

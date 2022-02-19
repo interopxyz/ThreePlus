@@ -12,7 +12,7 @@ namespace ThreePlus.Components.Cameras
         /// </summary>
         public GH_Camera_Perspective()
           : base("Camera Perspective", "Persp Cam",
-              "Description",
+              "Camera that uses perspective projection.",
               Constants.ShortName, "Cameras")
         {
         }

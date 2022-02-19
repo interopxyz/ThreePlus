@@ -58,32 +58,6 @@ namespace ThreePlus
             return txt;
         }
 
-        private static string SetItem(string title, Rg.Transform value, bool comma = true)
-        {
-            int digits = 5;
-            float[] t = value.ToFloatArray(false);
-
-            string txt = "\"" + title + "\": ["
-                + Math.Round(t[1], digits) + ", "
-                + Math.Round(t[2], digits) + ", "
-                + Math.Round(t[0], digits) + ", 0, "
-
-                + Math.Round(t[9], digits) + ", "
-                + Math.Round(t[10], digits) + ", "
-                + Math.Round(t[8], digits) + ", 0, "
-
-                + Math.Round(t[5], digits) + ", "
-                + Math.Round(t[6], digits) + ", "
-                + Math.Round(t[4], digits) + ", 0, "
-
-                + Math.Round(t[13], digits) + ", "
-                + Math.Round(t[14], digits) + ", "
-                + Math.Round(t[12], digits) + ", 1"
-                + "] ";
-            if (comma) txt += ", ";
-            return txt;
-        }
-
         private static string SetItem(string title, string value, bool comma = true)
         {
             string txt = "\"" + title + "\": \"" + value + "\" ";
@@ -133,7 +107,7 @@ namespace ThreePlus
             if (absolute)
             {
                 matrix = "[1,0,0,0,0,1,0,0,0,0,1,0," + Math.Round(-input.Position.X, digits) + ","
-                    + Math.Round(input.Position.Z, digits) + ","
+                    + Math.Round(-input.Position.Z, digits) + ","
                     + Math.Round(input.Position.Y, digits) + ",1]";
             }
             else
@@ -144,6 +118,58 @@ namespace ThreePlus
             }
 
             string txt = "\"" + title + "\": " + matrix + " ";
+            if (comma) txt += ", ";
+            return txt;
+        }
+
+        private static string SetItem(string title, Rg.Transform value, bool comma = true)
+        {
+            int digits = 5;
+            float[] t = value.ToFloatArray(false);
+
+            string txt = "\"" + title + "\": ["
+                + Math.Round(t[1], digits) + ", "
+                + Math.Round(t[2], digits) + ", "
+                + Math.Round(t[0], digits) + ", 0, "
+
+                + Math.Round(t[9], digits) + ", "
+                + Math.Round(t[10], digits) + ", "
+                + Math.Round(t[8], digits) + ", 0, "
+
+                + Math.Round(t[5], digits) + ", "
+                + Math.Round(t[6], digits) + ", "
+                + Math.Round(t[4], digits) + ", 0, "
+
+                + Math.Round(t[13], digits) + ", "
+                + Math.Round(t[14], digits) + ", "
+                + Math.Round(t[12], digits) + ", 1"
+                + "] ";
+            if (comma) txt += ", ";
+            return txt;
+        }
+
+        private static string SetItem2(string title, Rg.Transform value, bool comma = true)
+        {
+            int digits = 5;
+            float[] t = value.ToFloatArray(false);
+
+            string txt = "\"" + title + "\": ["
+                + Math.Round(t[1], digits) + ", "
+                + Math.Round(t[2], digits) + ", "
+                + Math.Round(t[0], digits) + ", 0, "
+
+                + Math.Round(t[5], digits) + ", "
+                + Math.Round(t[6], digits) + ", "
+                + Math.Round(t[4], digits) + ", 0, "
+
+                + Math.Round(t[9], digits) + ", "
+                + Math.Round(t[10], digits) + ", "
+                + Math.Round(t[8], digits) + ", 0, "
+
+                + Math.Round(t[13], digits) + ", "
+                + Math.Round(t[14], digits) + ", "
+                + Math.Round(t[12], digits) + ", 1"
+                + "] ";
             if (comma) txt += ", ";
             return txt;
         }
@@ -311,14 +337,22 @@ namespace ThreePlus
             }
             else if (input.IsCurve)
             {
+                bool hasVertexColors = graphic.Colors.Count > 1;
                 string materialType = "LineBasicMaterial";
                 if (graphic.HasDash) materialType = "LineDashedMaterial";
                 output.AppendLine(SetItem("type", materialType));
-                output.AppendLine("\"color\" : " + Sd.ColorTranslator.ToOle(Sd.Color.White).ToString() + ",");
+                if (hasVertexColors)
+                {
+                    output.AppendLine("\"color\" : " + Sd.ColorTranslator.ToOle(Sd.Color.White).ToString() + ",");
+                }
+                else
+                {
+                    output.AppendLine("\"color\" : " + Sd.ColorTranslator.ToOle(graphic.Color).ToString() + ",");
+                }
                 output.AppendLine(SetItem("linewidth", graphic.Width));
                 if (graphic.HasDash) output.AppendLine(SetItem("dashSize", graphic.DashLength));
                 if (graphic.HasDash) output.AppendLine(SetItem("gapSize", graphic.GapLength));
-                output.AppendLine(SetItem("vertexColors", true, false));
+                output.AppendLine(SetItem("vertexColors", hasVertexColors, false));
 
             }
             else if (input.IsCloud)
@@ -340,11 +374,17 @@ namespace ThreePlus
             StringBuilder output = new StringBuilder();
 
             Rg.Plane frame = Rg.Plane.WorldZX;
-            //frame.Rotate(Math.PI, frame.ZAxis);
+            frame.Rotate(Math.PI, frame.ZAxis);
             frame.Rotate(Math.PI, frame.YAxis);
+
+            Rg.Plane plane = new Rg.Plane(input.Frame);
+            plane.Origin = new Rg.Point3d(plane.Origin-new Rg.Point3d(input.Target.X, input.Target.Y, input.Target.Z));
+            //frame.Origin = new Rg.Point3d(input.Target);
 
             output.AppendLine("{");
             output.Append(((MetaData)input).ToJsonObjectMeta(false));
+            Rg.Transform xform = Rg.Transform.PlaneToPlane(frame, plane);
+            //Rg.Transform xform = Rg.Transform.Multiply(Rg.Transform.PlaneToPlane(frame, input.Frame),Rg.Transform.Translation(new Rg.Vector3d(input.Target)));
 
             switch (input.LightType)
             {
@@ -357,14 +397,14 @@ namespace ThreePlus
                     output.AppendLine(SetItem("matrix", input.Matrix));
                     break;
                 case Light.Types.Directional:
-                    output.AppendLine(SetItem("matrix", Rg.Transform.PlaneToPlane(frame, input.Frame)));
+                    output.AppendLine(SetItem2("matrix", xform));
                     break;
                 case Light.Types.Hemisphere:
                     output.AppendLine(SetMatrixItem("matrix", input, false));
                     output.AppendLine(SetItem("groundColor", input.ColorB));
                     break;
                 case Light.Types.Spot:
-                    output.AppendLine(SetItem("matrix", Rg.Transform.PlaneToPlane(frame, input.Frame)));
+                    output.AppendLine(SetItem2("matrix", xform));
                     output.AppendLine(SetItem("angle", input.Angle));
                     output.AppendLine(SetItem("distance", input.Distance));
                     output.AppendLine(SetItem("decay", input.Decay));
