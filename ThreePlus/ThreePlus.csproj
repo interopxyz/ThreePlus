@@ -1,0 +1,918 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0F140621-06B7-4BE9-B528-0B37F590E215}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ThreePlus</RootNamespace>
+    <AssemblyName>ThreePlus</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Eto, Version=2.6.0.0, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
+      <HintPath>packages\RhinoCommon.7.13.21348.13001\lib\net48\Eto.dll</HintPath>
+    </Reference>
+    <Reference Include="GH_IO, Version=7.13.21348.13000, Culture=neutral, PublicKeyToken=6a29997d2e6b4f97, processorArchitecture=MSIL">
+      <HintPath>packages\Grasshopper.7.13.21348.13001\lib\net48\GH_IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Grasshopper, Version=7.13.21348.13000, Culture=neutral, PublicKeyToken=dda4f5ec2cd80803, processorArchitecture=MSIL">
+      <HintPath>packages\Grasshopper.7.13.21348.13001\lib\net48\Grasshopper.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.UI, Version=7.13.21348.13000, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
+      <HintPath>packages\RhinoCommon.7.13.21348.13001\lib\net48\Rhino.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="RhinoCommon, Version=7.13.21348.13000, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
+      <HintPath>packages\RhinoCommon.7.13.21348.13001\lib\net48\RhinoCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\CubeMap.cs" />
+    <Compile Include="Classes\Environments\Atmosphere.cs" />
+    <Compile Include="Classes\Environments\Environment.cs" />
+    <Compile Include="Classes\Graphic.cs" />
+    <Compile Include="Classes\PointCloud.cs" />
+    <Compile Include="Classes\PostProcessing\AmbientOcclusion.cs" />
+    <Compile Include="Classes\PostProcessing\Outline.cs" />
+    <Compile Include="Classes\Sky.cs" />
+    <Compile Include="Components\Assets\GH_Assets_CubeMap.cs" />
+    <Compile Include="Components\Assets\GH_Assets_CubeMaps.cs" />
+    <Compile Include="Components\Assets\GH_Assets_Environments.cs" />
+    <Compile Include="Components\Assets\GH_Assets_Icons.cs" />
+    <Compile Include="Components\Assets\GH_BaseImage.cs" />
+    <Compile Include="Components\Assets\GH_Viewer.cs" />
+    <Compile Include="Components\Cameras\GH_Camera_Animate.cs" />
+    <Compile Include="Components\Cameras\GH_Camera_Orthographic.cs" />
+    <Compile Include="Components\Cameras\GH_Camera_Perspective.cs" />
+    <Compile Include="Components\GH_Preview.cs" />
+    <Compile Include="Components\Graphics\GH_GraphicsPaths.cs" />
+    <Compile Include="Components\Helpers\GH_DisplayBoundary.cs" />
+    <Compile Include="Components\Helpers\GH_DisplayLight.cs" />
+    <Compile Include="Components\Lights\GH_LightShadows.cs" />
+    <Compile Include="Components\Graphics\GH_GraphicsPoints.cs" />
+    <Compile Include="Components\Materials\GH_MaterialShadow.cs" />
+    <Compile Include="Components\Materials\Maps\GH_Map_Edges.cs" />
+    <Compile Include="Components\Materials\Maps\GH_Map_Metalness.cs" />
+    <Compile Include="Components\Materials\Maps\GH_Map_Opacity.cs" />
+    <Compile Include="Components\Materials\Maps\GH_Map_Bump.cs" />
+    <Compile Include="Components\Materials\Maps\GH_Map_Clearcoat.cs" />
+    <Compile Include="Components\Materials\Maps\GH_Map_Displacement.cs" />
+    <Compile Include="Components\Materials\Maps\GH_Map_Emissive.cs" />
+    <Compile Include="Components\Materials\Maps\GH_Map_Flat.cs" />
+    <Compile Include="Components\Materials\Maps\GH_Map_Normal.cs" />
+    <Compile Include="Components\Materials\Maps\GH_Map_Roughness.cs" />
+    <Compile Include="Components\Materials\Maps\GH_Map_Sheen.cs" />
+    <Compile Include="Components\Materials\Maps\GH_Map_Texture.cs" />
+    <Compile Include="Components\Materials\Maps\GH_Map_Volume.cs" />
+    <Compile Include="Components\Materials\Maps\GH_Map_Wireframe.cs" />
+    <Compile Include="Components\Output\GH_BitmapDeSerialize.cs" />
+    <Compile Include="Components\Output\GH_BitmapSerialize.cs" />
+    <Compile Include="Components\Output\GH_SaveJson.cs" />
+    <Compile Include="Components\RhinoObjects\GH_RefCamera.cs" />
+    <Compile Include="Components\RhinoObjects\GH_RefGeometry.cs" />
+    <Compile Include="Components\RhinoObjects\GH_RefPbrOpacity.cs" />
+    <Compile Include="Components\RhinoObjects\GH_RefPbrSurface.cs" />
+    <Compile Include="Components\RhinoObjects\GH_RefPbrVolumetrics.cs" />
+    <Compile Include="Components\RhinoObjects\GH_RefPbrBase.cs" />
+    <Compile Include="Components\RhinoObjects\GH_RefPbrFinishes.cs" />
+    <Compile Include="Components\Scene\GH_AmbientOcclusion.cs" />
+    <Compile Include="Components\Scene\GH_Ground.cs" />
+    <Compile Include="Classes\Helpers\Axes.cs" />
+    <Compile Include="Classes\Camera.cs" />
+    <Compile Include="Classes\Helpers\Grid.cs" />
+    <Compile Include="Classes\Helpers\TangentDisplay.cs" />
+    <Compile Include="Classes\Light.cs" />
+    <Compile Include="Classes\Material.cs" />
+    <Compile Include="Classes\Model.cs" />
+    <Compile Include="Classes\Helpers\NormalDisplay.cs" />
+    <Compile Include="Classes\Scene.cs" />
+    <Compile Include="Classes\SceneObject.cs" />
+    <Compile Include="Classes\Scenes\MetaData.cs" />
+    <Compile Include="Classes\Scenes\Settings.cs" />
+    <Compile Include="Classes\Script.cs" />
+    <Compile Include="Components\Scene\GH_Atmosphere.cs" />
+    <Compile Include="Components\Scene\GH_EnvironmentMap.cs" />
+    <Compile Include="Components\Helpers\GH_Axes.cs" />
+    <Compile Include="Components\Helpers\GH_DisplayNormal.cs" />
+    <Compile Include="Components\Helpers\GH_DisplayTangent.cs" />
+    <Compile Include="Components\Helpers\GH_Grid.cs" />
+    <Compile Include="Components\Lights\GH_LightAmbient.cs" />
+    <Compile Include="Components\Lights\GH_LightDirectional.cs" />
+    <Compile Include="Components\Lights\GH_LightHemisphere.cs" />
+    <Compile Include="Components\Lights\GH_LightPoint.cs" />
+    <Compile Include="Components\Lights\GH_LightSpot.cs" />
+    <Compile Include="Components\Materials\GH_MaterialDepth.cs" />
+    <Compile Include="Components\Materials\GH_MaterialLambert.cs" />
+    <Compile Include="Components\Materials\GH_MaterialNormal.cs" />
+    <Compile Include="Components\Materials\GH_MaterialPhong.cs" />
+    <Compile Include="Components\Materials\GH_MaterialPhysical.cs" />
+    <Compile Include="Components\Materials\GH_MaterialStandard.cs" />
+    <Compile Include="Components\Materials\GH_MaterialToon.cs" />
+    <Compile Include="Components\Output\GH_SaveHtml.cs" />
+    <Compile Include="Components\Output\GH_ToHtml.cs" />
+    <Compile Include="Components\Scene\GH_Outline.cs" />
+    <Compile Include="Components\Scene\GH_Scene.cs" />
+    <Compile Include="Components\Output\GH_ToJson.cs" />
+    <Compile Include="Components\Materials\GH_MaterialBasic.cs" />
+    <Compile Include="Components\Scene\GH_Sky.cs" />
+    <Compile Include="Components\Transform\GH_TransformModel.cs" />
+    <Compile Include="Extensions\GhToThree.cs" />
+    <Compile Include="Extensions\ObjToJavascript.cs" />
+    <Compile Include="Extensions\ObjToJson.cs" />
+    <Compile Include="Extensions\RhExtensions.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ThreePlusInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Constants.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\three.module.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VRButton.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThreePlus_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThreePlus_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\Environments\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Helper_Axis-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Helper_Grid-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Light_Ambient-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Light_Directional-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Light_Hemisphere-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Light_Linear-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Light_Point-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Light_Spot-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Basic-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Depth-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Lambert-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Normal-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Phong-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Physical-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Standard-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Toon-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Helper_Tangents-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Helper_Normals-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Helper_Light-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Helper_GridPolar-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Helper_Boundary-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_SceneCompile-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OrbitControls.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShaderPass.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SimplexNoise.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SSAOPass.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SSAOShader.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\three.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VertexNormalsHelper.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VertexTangentsHelper.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CopyShader.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EffectComposer.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Environments-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Light_Shadow-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_AO-02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Environment2-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_AO-01-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_SceneFog-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OutlinePass.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_SceneAO-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_SceneOutline-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_SceneGround-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_SceneEnvironment-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_SceneAtmosphere-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OutlineEffect.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\polyhaven_venice_sunset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\polyhaven_autoshop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\polyhaven_photo_studio_loft_hall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\polyhaven_pink_sunrise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\polyhaven_satara_night.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\polyhaven_snowy_park.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\polyhaven_spruit_sunrise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\polyhaven_studio_country_hall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\polyhaven_studio_small_03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\polyhaven_sunset_in_the_chalk_quarry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\polyhaven_the_sky_is_on_fire.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_AssetEnvironment-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Assets_Env01-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Assets_Env03-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Materials_Shadow-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Light_Probe-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LightProbeGenerator.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LightProbeHelper.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\posz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\negx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\negy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\negz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\posx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\posy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Assets_Cube-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EarthPosx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EarthPosy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EarthPosz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ForestNegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ForestNegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ForestNegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ForestPosx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ForestPosy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ForestPosz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GamlaStanNegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GamlaStanNegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GamlaStanNegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GamlaStanPosx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GamlaStanPosy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GamlaStanPosz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HeroesSquarenegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HeroesSquarenegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HeroesSquarenegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HeroesSquareposx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HeroesSquareposy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HeroesSquareposz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lyckselenegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lyckselenegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lyckselenegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lyckseleposx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lyckseleposy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lyckseleposz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NissiBeachnegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NissiBeachnegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NissiBeachnegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NissiBeachposx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NissiBeachposy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NissiBeachposz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Parknegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Parknegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Parknegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Parkposx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Parkposy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Parkposz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PereaBeachnegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PereaBeachnegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PereaBeachnegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PereaBeachposx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PereaBeachposy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PereaBeachposz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pondnegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pondnegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pondnegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pondposx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pondposy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pondposz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Skansennegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Skansennegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Skansennegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Skansenposx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Skansenposy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Skansenposz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SnowParknegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SnowParknegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SnowParknegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SnowParkposx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SnowParkposy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SnowParkposz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwedishRoyalCastlenegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwedishRoyalCastlenegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwedishRoyalCastlenegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwedishRoyalCastleposx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwedishRoyalCastleposy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwedishRoyalCastleposz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tallinnnegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tallinnnegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tallinnnegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tallinnposx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tallinnposy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tallinnposz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tantolundennegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tantolundennegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tantolundennegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tantolundenposx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tantolundenposy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tantolundenposz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Teidenegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Teidenegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Teidenegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Teideposx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Teideposy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Teideposz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vasanegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vasanegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vasanegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vasaposx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vasaposy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vasaposz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YokohamaParknegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YokohamaParknegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YokohamaParknegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YokohamaParkposx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YokohamaParkposy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YokohamaParkposz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YokohamaPiernegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YokohamaPiernegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YokohamaPiernegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YokohamaPierposx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YokohamaPierposy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YokohamaPierposz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EarthNegx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EarthNegy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EarthNegz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Assets_Cube2-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Wireframe-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Emissive-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Roughness-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Bump-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_FlatShaded-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Opacity2-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Metalness-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Clearcoat2-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Clearcoat1-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Clearcoat3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Volume-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Texture2-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Displacement.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Displacement-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Sheen-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Normal-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Line2.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LineGeometry.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LineMaterial.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GeometryUtils.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LineSegmentsGeometry.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\three.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LineSegments2.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sprite-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Graphics_Stroke-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Graphics_Points-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Ring-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Frame-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Diamond-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Circle-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Cross-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Marker-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Square-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons_Triangle-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Assets_Marker-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Assets_Marker2-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Output_Json_Text-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Output_Json_File-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Output_Html_Text-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Output_Html_File-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Camera_Perspective-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Camera_Orbit-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Camera_Ortho-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_MaterialMaps_Edges-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sky.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_SceneSky-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Reference-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Reference-Camera-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Output_DeSerializeBitmap-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Output_SerializeBitmap-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_PBR-Volume-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_PBR-Surface-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_PBR-Opacity-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_PBR-Finishes-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_PBR-Base-01.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).gha"
+Erase "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <FallbackCulture>en-US</FallbackCulture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartProgram>C:\Program Files\Rhino 6\System\Rhino.exe</StartProgram>
+    <StartArguments>
+    </StartArguments>
+    <StartAction>Program</StartAction>
+  </PropertyGroup>
+  <Import Project="packages\RhinoCommon.7.13.21348.13001\build\RhinoCommon.targets" Condition="Exists('packages\RhinoCommon.7.13.21348.13001\build\RhinoCommon.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\RhinoCommon.7.13.21348.13001\build\RhinoCommon.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\RhinoCommon.7.13.21348.13001\build\RhinoCommon.targets'))" />
+    <Error Condition="!Exists('packages\Grasshopper.7.13.21348.13001\build\Grasshopper.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Grasshopper.7.13.21348.13001\build\Grasshopper.targets'))" />
+  </Target>
+  <Import Project="packages\Grasshopper.7.13.21348.13001\build\Grasshopper.targets" Condition="Exists('packages\Grasshopper.7.13.21348.13001\build\Grasshopper.targets')" />
+</Project>
