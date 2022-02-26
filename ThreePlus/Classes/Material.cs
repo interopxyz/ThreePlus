@@ -14,7 +14,7 @@ namespace ThreePlus
 
         #region members
 
-        public enum Types { None, Basic, Lambert, Standard, Phong, Toon, Physical, Normal, Depth, Shadow };
+        public enum Types { None, Basic, Lambert, Standard, Phong, Toon, Physical, Normal, Depth, Shadow, Shader };
 
         protected bool isDefault = true;
 
@@ -76,6 +76,9 @@ namespace ThreePlus
         protected double opacityIor = 1.5;
         protected double refractionRatio = 1.5;
 
+        protected bool hasShader = false;
+        protected Shader shader = null;
+
         #endregion
 
         #region constructors
@@ -131,9 +134,9 @@ namespace ThreePlus
         public Material(Material material) : base(material)
         {
             this.isDefault = material.isDefault;
-            
-            for (int i = 0; i < material.maps.Length; i++) if(material.maps[i]!=null) this.maps[i] = material.maps[i];
-                for (int i =0;i< material.maps.Length; i++) this.MapNames[i] = material.MapNames[i];
+
+            for (int i = 0; i < material.maps.Length; i++) if (material.maps[i] != null) this.maps[i] = material.maps[i];
+            for (int i = 0; i < material.maps.Length; i++) this.MapNames[i] = material.MapNames[i];
 
             this.materialType = material.materialType;
 
@@ -188,6 +191,8 @@ namespace ThreePlus
             this.hasOpacityIor = material.hasOpacityIor;
             this.opacityIor = material.opacityIor;
             this.refractionRatio = material.refractionRatio;
+
+            this.shader = material.shader; // Not sure if should create a new one (with new uuid)
         }
 
         public static Material ShadowMaterial(Sd.Color color)
@@ -316,6 +321,18 @@ namespace ThreePlus
             return material;
         }
 
+        public static Material ShaderMaterial(Shader shader)
+        {
+            Material material = new Material(false);
+
+            material.type = "MeshShaderMaterial";
+            material.materialType = Types.Shader;
+
+            material.hasShader = true;
+            material.shader = shader;
+
+            return material;
+        }
 
         #endregion
 
@@ -329,7 +346,7 @@ namespace ThreePlus
         public virtual Sd.Bitmap[] Maps
         {
             get { return maps; }
-            }
+        }
 
         public virtual Types MaterialType
         {
@@ -376,7 +393,7 @@ namespace ThreePlus
 
         public virtual bool HasTextureMap
         {
-            get { return (Maps[0]!=null); }
+            get { return (Maps[0] != null); }
         }
 
         public virtual string TextureMapName
@@ -387,7 +404,7 @@ namespace ThreePlus
         public virtual Sd.Bitmap TextureMap
         {
             set { maps[0] = new Sd.Bitmap(value); }
-            get 
+            get
             {
                 if (maps[0] != null)
                 {
@@ -1267,6 +1284,23 @@ namespace ThreePlus
             get { return refractionRatio; }
         }
 
+        #region 26 | SHADER
+        public virtual bool HasShader
+        {
+            get
+            {
+                return shader != null;
+            }
+        }
+        public virtual Shader Shader
+        {
+            get
+            {
+                return shader;
+            }
+        }
+        #endregion
+
         #endregion
 
         #region methods
@@ -1284,7 +1318,7 @@ namespace ThreePlus
         public void SetBumpMap(Sd.Bitmap map, double intensity = 1.0)
         {
             this.bumpIntensity = intensity;
-            if(map!=null) this.BumpMap = new Sd.Bitmap(map);
+            if (map != null) this.BumpMap = new Sd.Bitmap(map);
         }
 
         public void SetClearcoatMap(double clearcoat, Sd.Bitmap map = null)
@@ -1312,7 +1346,7 @@ namespace ThreePlus
         {
             this.hasDisplacement = (map != null);
             this.displacementScale = scale;
-            if(map != null)this.DisplacementMap = new Sd.Bitmap(map);
+            if (map != null) this.DisplacementMap = new Sd.Bitmap(map);
         }
 
         public void SetEmissivity(double intensity, Sd.Color color, Sd.Bitmap map = null)
@@ -1403,7 +1437,7 @@ namespace ThreePlus
 
         public override string ToString()
         {
-            return "Material | "+ materialType.ToString();
+            return "Material | " + materialType.ToString();
         }
 
         #endregion

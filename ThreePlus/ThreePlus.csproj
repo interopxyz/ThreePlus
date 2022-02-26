@@ -66,6 +66,7 @@
     <Compile Include="Classes\PointCloud.cs" />
     <Compile Include="Classes\PostProcessing\AmbientOcclusion.cs" />
     <Compile Include="Classes\PostProcessing\Outline.cs" />
+    <Compile Include="Classes\Shader.cs" />
     <Compile Include="Classes\Sky.cs" />
     <Compile Include="Components\Assets\GH_Assets_CubeMap.cs" />
     <Compile Include="Components\Assets\GH_Assets_CubeMaps.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Components\Helpers\GH_DisplayLight.cs" />
     <Compile Include="Components\Lights\GH_LightShadows.cs" />
     <Compile Include="Components\Graphics\GH_GraphicsPoints.cs" />
+    <Compile Include="Components\Materials\GH_MaterialShader.cs" />
     <Compile Include="Components\Materials\GH_MaterialShadow.cs" />
     <Compile Include="Components\Materials\Maps\GH_Map_Edges.cs" />
     <Compile Include="Components\Materials\Maps\GH_Map_Metalness.cs" />
@@ -894,8 +896,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).gha"
-Erase "$(TargetPath)"</PostBuildEvent>
+    <PostBuildEvent>copy  /Y "$(TargetDir)$(ProjectName).dll" "$(USERPROFILE)\AppData\Roaming\Grasshopper\Libraries\$(ProjectName).gha"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <FallbackCulture>en-US</FallbackCulture>
