@@ -60,7 +60,7 @@ namespace ThreePlus
                     output.AppendLine("<script src=\"js/LightProbeGenerator.js\"></script>");//
                     output.AppendLine("<script src=\"js/LightProbeHelper.js\"></script>");//
                 }
-                if(input.Sky.HasSky) output.AppendLine("<script src=\"js/Sky.js\"></script>");
+                if (input.Sky.HasSky) output.AppendLine("<script src=\"js/Sky.js\"></script>");
             }
             else
             {
@@ -87,21 +87,36 @@ namespace ThreePlus
                     output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/helpers/LightProbeHelper.js\" ></script>");
                 }
 
-                if (input.HasCurves) 
+                if (input.HasCurves)
                 {
-                //output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/utils/GeometryUtils.js\" ></script>");
-                output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineSegmentsGeometry.js\" ></script>");
-                output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineSegments2.js\" ></script>");
-                output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineGeometry.js\" ></script>");
-                output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineMaterial.js\" ></script>");
-                output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/Line2.js\" ></script>");
+                    //output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/utils/GeometryUtils.js\" ></script>");
+                    output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineSegmentsGeometry.js\" ></script>");
+                    output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineSegments2.js\" ></script>");
+                    output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineGeometry.js\" ></script>");
+                    output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/LineMaterial.js\" ></script>");
+                    output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/lines/Line2.js\" ></script>");
                 }
 
-                if(input.Sky.HasSky)
+                if (input.Sky.HasSky)
                 {
                     output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/objects/Sky.js\" ></script>");
                 }
             }
+
+            if (input.HasShaders)
+            {
+                for (int i = 0; i < input.Models.Count; i++)
+                {
+                    Model model = input.Models[i];
+                    if (model.Material.HasShader)
+                    {
+                        Shader shader = model.Material.Shader;
+                        output.AppendLine($"<script type=\"x-shader/x-vertex\" id=\"vertexShader{i}\">{shader.VertexShaderCode}</script>");
+                        output.AppendLine($"<script type=\"x-shader/x-fragment\" id=\"fragmentShader{i}\">{shader.FragmentShaderCode}</script>");
+                    }
+                }
+            }
+
             output.AppendLine("<script type=\"text/javascript\" src=\"app.js\"></script>");
             output.AppendLine("</body>");
             output.AppendLine("</html>");
@@ -132,7 +147,7 @@ namespace ThreePlus
                 output.AppendLine("renderer.shadowMap.enabled = true;");
                 output.AppendLine("renderer.shadowMap.type = THREE.PCFSoftShadowMap;");
             }
-            output.AppendLine(input.Sky.ToJavascript(bbox.Diagonal.Length*1000.0));
+            output.AppendLine(input.Sky.ToJavascript(bbox.Diagonal.Length * 1000.0));
 
             output.AppendLine("document.body.appendChild(renderer.domElement);");
 
@@ -162,7 +177,7 @@ namespace ThreePlus
                 }
                 else if (model.IsCloud)
                 {
-                    if(model.Cloud.HasBitmap)
+                    if (model.Cloud.HasBitmap)
                     {
                         string key = model.Cloud.Map.GetHash(crypt);
                         if (!maps.ContainsKey(key))
@@ -171,7 +186,7 @@ namespace ThreePlus
                             maps.Add(key, name);
                             output.AppendLine(model.Cloud.Map.ToJsObjMap(name));
                         }
-                        model.Cloud.MapName= maps[key];
+                        model.Cloud.MapName = maps[key];
                     }
                 }
             }
@@ -194,7 +209,7 @@ namespace ThreePlus
 
                 if (model.IsCurve)
                 {
-                    output.AppendLine(model.Curve.ToJavascript(index,model.Graphic));
+                    output.AppendLine(model.Curve.ToJavascript(index, model.Graphic));
                     sceneModifiers.AppendLine("lineMat" + index + ".resolution.set(window.innerWidth, window.innerHeight);");
                     output.Append(model.Tangents.ToJavascript(index));
                 }
@@ -216,8 +231,8 @@ namespace ThreePlus
 
                     if (input.HasShadows)
                     {
-                        if (model.Material.DiffuseColor.A > (input.ShadowThreshold*255.0))
-                        { 
+                        if (model.Material.DiffuseColor.A > (input.ShadowThreshold * 255.0))
+                        {
                             output.AppendLine("model" + index + ".castShadow = true;");
                             if (model.Material.MaterialType != Material.Types.Toon) output.AppendLine("model" + index + ".receiveShadow = true;");
                         }
@@ -293,7 +308,7 @@ namespace ThreePlus
             }
             foreach (string ind in tweenIndices)
             {
-                output.AppendLine("var quatStep"+ind+" = 0;");
+                output.AppendLine("var quatStep" + ind + " = 0;");
             }
 
             output.AppendLine("var increment = 0;");
@@ -309,28 +324,28 @@ namespace ThreePlus
                 output.AppendLine("camera.updateProjectionMatrix();");
             }
 
-            foreach(string ind in tweenIndices)
+            foreach (string ind in tweenIndices)
             {
                 output.AppendLine("const matrix" + ind + " = new THREE.Matrix4()");
-                    output.AppendLine("matrix"+ind+".set(mtx" 
-                    + ind + "[mtrx" + ind + "][0],mtx" 
-                    + ind + "[mtrx" + ind + "][1],mtx"
-                    + ind + "[mtrx" + ind + "][2],mtx"
-                    + ind + "[mtrx" + ind + "][3],mtx"
-                    + ind + "[mtrx" + ind + "][4],mtx"
-                    + ind + "[mtrx" + ind + "][5],mtx"
-                    + ind + "[mtrx" + ind + "][6],mtx"
-                    + ind + "[mtrx" + ind + "][7],mtx"
-                    + ind + "[mtrx" + ind + "][8],mtx"
-                    + ind + "[mtrx" + ind + "][9],mtx"
-                    + ind + "[mtrx" + ind + "][10],mtx"
-                    + ind + "[mtrx" + ind + "][11],mtx"
-                    + ind + "[mtrx" + ind + "][12],mtx"
-                    + ind + "[mtrx" + ind + "][13],mtx"
-                    + ind + "[mtrx" + ind + "][14],mtx"
-                    + ind + "[mtrx" + ind + "][15]"
-                    + ");");
-                output.AppendLine("model"+ ind + ".applyMatrix4(matrix" + ind + ");");
+                output.AppendLine("matrix" + ind + ".set(mtx"
+                + ind + "[mtrx" + ind + "][0],mtx"
+                + ind + "[mtrx" + ind + "][1],mtx"
+                + ind + "[mtrx" + ind + "][2],mtx"
+                + ind + "[mtrx" + ind + "][3],mtx"
+                + ind + "[mtrx" + ind + "][4],mtx"
+                + ind + "[mtrx" + ind + "][5],mtx"
+                + ind + "[mtrx" + ind + "][6],mtx"
+                + ind + "[mtrx" + ind + "][7],mtx"
+                + ind + "[mtrx" + ind + "][8],mtx"
+                + ind + "[mtrx" + ind + "][9],mtx"
+                + ind + "[mtrx" + ind + "][10],mtx"
+                + ind + "[mtrx" + ind + "][11],mtx"
+                + ind + "[mtrx" + ind + "][12],mtx"
+                + ind + "[mtrx" + ind + "][13],mtx"
+                + ind + "[mtrx" + ind + "][14],mtx"
+                + ind + "[mtrx" + ind + "][15]"
+                + ");");
+                output.AppendLine("model" + ind + ".applyMatrix4(matrix" + ind + ");");
             }
 
             output.AppendLine("controls.update();");
@@ -348,7 +363,19 @@ namespace ThreePlus
             if (input.AmbientOcclusion.HasAO) output.AppendLine("composer.render();");
             if (input.Outline.HasOutline) output.AppendLine("outline.render(scene,camera);");
 
-            output.AppendLine("increment=increment+"+ input.Camera.Speed + ";");
+            output.AppendLine("increment=increment+" + input.Camera.Speed + ";");
+            if (input.HasShaders)
+            {
+                for (int j = 0; j < input.Models.Count; j++)
+                {
+                    var model = input.Models[j];
+                    if (model.Material.HasShader && model.Material.Shader.HasUniforms)
+                    {
+                        output.AppendLine($"uniforms{j}.uTime.value++;");
+                    }
+                }
+            }
+
             output.AppendLine("};");
             output.AppendLine("animate();");
 
@@ -484,7 +511,7 @@ namespace ThreePlus
             StringBuilder output = new StringBuilder();
             if (input.EnvironmentMode == Environment.EnvironmentModes.CubeMap)
             {
-                if(input.IsIllumination) output.AppendLine("lightProbe.intensity = "+Math.Round(input.CubeMap.Intensity,5)+";");
+                if (input.IsIllumination) output.AppendLine("lightProbe.intensity = " + Math.Round(input.CubeMap.Intensity, 5) + ";");
             }
             return output.ToString();
         }
@@ -502,7 +529,7 @@ namespace ThreePlus
                     output.AppendLine("var envMap = new THREE.TextureLoader().load(\"data:image/png;base64," + input.EnvMap.ToStr() + "\");");
                     output.AppendLine("envMap.mapping = THREE.EquirectangularReflectionMapping;");
 
-                    if (input.IsBackground)output.AppendLine("scene.background = envMap;");
+                    if (input.IsBackground) output.AppendLine("scene.background = envMap;");
                     if (input.IsEnvironment) output.AppendLine("scene.environment = envMap;");
 
                     break;
@@ -553,7 +580,7 @@ namespace ThreePlus
 
             if (input.HasEdges)
             {
-                output.AppendLine("const edges"+index+ " = new THREE.EdgesGeometry(mesh" + index + ", "+ input.EdgeThreshold+");");
+                output.AppendLine("const edges" + index + " = new THREE.EdgesGeometry(mesh" + index + ", " + input.EdgeThreshold + ");");
                 output.AppendLine("const edge" + index + " = new THREE.LineSegments(edges" + index + ", new THREE.LineBasicMaterial({ color:" + input.Graphic.Color.ToStr() + "}));");
                 output.AppendLine("scene.add(edge" + index + ");");
             }
@@ -580,30 +607,30 @@ namespace ThreePlus
 
             if (input.HasSky)
             {
-            output.AppendLine("const sky = new THREE.Sky();");
-            output.AppendLine("const sun = new THREE.Vector3();");
-            output.AppendLine("sky.scale.setScalar("+Math.Ceiling(scale)+");");
-            output.AppendLine("scene.add(sky);");
-            output.AppendLine("const uniforms = sky.material.uniforms;");
-            output.AppendLine("uniforms['turbidity'].value = " + input.Turbidity + ";");
-            output.AppendLine("uniforms['rayleigh'].value = " + input.Rayleigh + ";");
-            output.AppendLine("uniforms['mieCoefficient'].value = " + input.Coefficient + ";");
-            output.AppendLine("uniforms['mieDirectionalG'].value = " + input.Directional + ";");
+                output.AppendLine("const sky = new THREE.Sky();");
+                output.AppendLine("const sun = new THREE.Vector3();");
+                output.AppendLine("sky.scale.setScalar(" + Math.Ceiling(scale) + ");");
+                output.AppendLine("scene.add(sky);");
+                output.AppendLine("const uniforms = sky.material.uniforms;");
+                output.AppendLine("uniforms['turbidity'].value = " + input.Turbidity + ";");
+                output.AppendLine("uniforms['rayleigh'].value = " + input.Rayleigh + ";");
+                output.AppendLine("uniforms['mieCoefficient'].value = " + input.Coefficient + ";");
+                output.AppendLine("uniforms['mieDirectionalG'].value = " + input.Directional + ";");
 
-            output.AppendLine("const phi = THREE.MathUtils.degToRad(90 - " + input.Altitude + ");");
-            output.AppendLine("const theta = THREE.MathUtils.degToRad(" + input.Azimuth + ");");
-            output.AppendLine("sun.setFromSphericalCoords(1, phi, theta);");
+                output.AppendLine("const phi = THREE.MathUtils.degToRad(90 - " + input.Altitude + ");");
+                output.AppendLine("const theta = THREE.MathUtils.degToRad(" + input.Azimuth + ");");
+                output.AppendLine("sun.setFromSphericalCoords(1, phi, theta);");
 
-            output.AppendLine("uniforms['sunPosition'].value.copy(sun);");
+                output.AppendLine("uniforms['sunPosition'].value.copy(sun);");
 
-            output.AppendLine("renderer.toneMapping = THREE.ACESFilmicToneMapping;");
-            output.AppendLine("renderer.toneMappingExposure = " + Math.Round(input.Exposure, 5) + ";");
+                output.AppendLine("renderer.toneMapping = THREE.ACESFilmicToneMapping;");
+                output.AppendLine("renderer.toneMappingExposure = " + Math.Round(input.Exposure, 5) + ";");
 
-            if (input.Environment)
-            {
-                output.AppendLine("const pmremGenerator = new THREE.PMREMGenerator(renderer);");
-                output.AppendLine("scene.environment = pmremGenerator.fromScene(sky).texture;");
-            }
+                if (input.Environment)
+                {
+                    output.AppendLine("const pmremGenerator = new THREE.PMREMGenerator(renderer);");
+                    output.AppendLine("scene.environment = pmremGenerator.fromScene(sky).texture;");
+                }
                 //output.AppendLine("const sunlight = new THREE.DirectionalLight("+input.SunColor.ToStr()+", 1.0);");
                 //output.AppendLine("sunlight.position.set(sun.x, sun.y, sun.z);");
                 //output.AppendLine("scene.add(sunlight);");
@@ -620,7 +647,7 @@ namespace ThreePlus
             if (input.Show)
             {
                 output.AppendLine("const axes = new THREE.AxesHelper(" + input.Scale + ");");
-                output.AppendLine("axes.setColors ( "+input.YAxis.ToStr() +", "+input.ZAxis.ToStr() + ", "+input.XAxis.ToStr()+" );");
+                output.AppendLine("axes.setColors ( " + input.YAxis.ToStr() + ", " + input.ZAxis.ToStr() + ", " + input.XAxis.ToStr() + " );");
                 output.AppendLine("scene.add(axes);");
             }
 
@@ -660,7 +687,7 @@ namespace ThreePlus
                 output.AppendLine("const camera = new THREE.PerspectiveCamera(" + input.FOV + ", window.innerWidth / window.innerHeight, " + input.Near + "," + input.Far + ");");
             }
 
-            if(input.IsAnimated)
+            if (input.IsAnimated)
             {
                 output.AppendLine("camera.position.set(" + input.Tweens[0].From.ToStr() + ");");
                 output.AppendLine("camera.lookAt (new THREE.Vector3(" + input.Tweens[0].To.X + "," + input.Tweens[0].To.Z + "," + input.Tweens[0].To.Y + "));");
@@ -678,8 +705,8 @@ namespace ThreePlus
             }
             else
             {
-            output.AppendLine("camera.position.set(" + input.Position.ToStr() + ");");
-            output.AppendLine("camera.lookAt (new THREE.Vector3(" + input.Target.X + "," + input.Target.Z + "," + input.Target.Y + "));");
+                output.AppendLine("camera.position.set(" + input.Position.ToStr() + ");");
+                output.AppendLine("camera.lookAt (new THREE.Vector3(" + input.Target.X + "," + input.Target.Z + "," + input.Target.Y + "));");
             }
 
             return output.ToString();
@@ -767,12 +794,65 @@ namespace ThreePlus
                 case Material.Types.Depth:
                     output.AppendLine(starter + "MeshDepthMaterial();");
                     break;
+                case Material.Types.Shader:
+                    string uniforms = string.Empty;
+                    if (input.HasShader && input.Shader.HasUniforms)
+                    {
+                        output.AppendLine($"const uniforms{index} = {{ {input.ToJsShaderUniforms(index)} }}"); // k
+                        uniforms = $"uniforms: uniforms{index}, ";
+                    }
+
+                    output.AppendLine(starter + "ShaderMaterial( { " + uniforms +
+                    $"vertexShader: document.getElementById('vertexShader{index}').textContent, " +
+                    $"fragmentShader: document.getElementById('fragmentShader{index}').textContent " +
+                    "} ); ");
+                    break;
             }
 
             if (input.IsWireframe) output.AppendLine("material" + index + ".wireframe = true;");
             if (input.IsFlatShaded) output.AppendLine("material" + index + ".flatShading = true;");
 
             return output.ToString();
+        }
+
+        public static string ToJsShaderUniforms(this Material input, string index)
+        {
+            if (input.HasShader && input.Shader.HasUniforms)
+            {
+                var uniforms = new List<string>();
+                uniforms.Add("uTime: { value: 0 }"); // Default uniform
+                foreach (var kvp in input.Shader.Uniforms)
+                {
+                    uniforms.Add($"{kvp.Key}: {{ value: {ToJsShaderUniformValue(kvp.Value)} }}");
+                }
+                return string.Join(", ", uniforms);
+            }
+            else
+            {
+                return string.Empty;
+            }
+
+            string ToJsShaderUniformValue(object obj)
+            {
+                if (obj is Rg.Point3d p3d)
+                {
+                    return $"new THREE.Vector3({p3d.X}, {p3d.Y}, {p3d.Z})";
+                }
+                else if (obj is Rg.Vector3d v3d)
+                {
+                    return $"new THREE.Vector3({v3d.X}, {v3d.Y}, {v3d.Z})";
+                }
+                else if (obj is Sd.Color color)
+                {
+                    return $"new THREE.Color(\"rgb({color.R}, {color.G}, {color.B})\")";
+                }
+
+                //TODO support other formats
+
+                return obj.ToString();
+            }
+
+
         }
 
         public static string ToJsClearcoat(this Material input, string index)
@@ -875,7 +955,7 @@ namespace ThreePlus
             output.Append(", opacity : " + input.DiffuseColor.ToStrOpacity());
             if (input.HasOpacityMap) output.Append(", alphaMap : " + input.OpacityMapName);
             output.Append(", transparent: " + input.IsTransparent.ToString().ToLower());
-            if(input.HasOpacityIor) output.Append(", ior: " + input.OpacityIor);
+            if (input.HasOpacityIor) output.Append(", ior: " + input.OpacityIor);
             if (input.HasOpacityIorMap) output.Append(", transmission : " + input.Transmission);
             if (input.HasOpacityIorMap) output.Append(", transmissionMap : " + input.TransmissionMapName);
 
@@ -918,7 +998,7 @@ namespace ThreePlus
                     if (input.HasHelper) output.AppendLine(helperStart + "SpotLightHelper(" + name + ", " + input.HelperColor.ToStr() + " );");
                     break;
             }
-            if ((input.HasHelper) &(input.LightType!= Light.Types.Ambient)) output.AppendLine("scene.add(" + hName + ");");
+            if ((input.HasHelper) & (input.LightType != Light.Types.Ambient)) output.AppendLine("scene.add(" + hName + ");");
             return output.ToString();
         }
 
@@ -958,15 +1038,15 @@ namespace ThreePlus
             output.AppendLine("const positions" + index + " = new Float32Array( [" + string.Join(",", points.Values) + "] );");
             output.AppendLine("const colors" + index + " = new Float32Array( [" + string.Join(",", colors.Values) + "] );");
             //if(input.IsSprite)output.AppendLine("const scales" + index + " = new Float32Array( [" + string.Join(",", input.Scales) + "] );");
-            
+
             output.AppendLine(name + ".setAttribute( 'position', new THREE.BufferAttribute( positions" + index + ", 3 ) );");
             output.AppendLine(name + ".setAttribute( 'color', new THREE.BufferAttribute( colors" + index + ", 3 ) );");
             //if (input.IsSprite) output.AppendLine(name + ".setAttribute( 'scale', new THREE.BufferAttribute( scales" + index + ", 1 ) );");
 
-                output.Append("const material" + index + " = new THREE.PointsMaterial( { size: " + Math.Round(input.Scale, 5) + ", depthTest: true, transparent: true, color: 0xffffff, vertexColors: true ");
-                if (input.HasBitmap) output.Append(", map: "+ input.MapName + ", alphaMap: " + input.MapName+ ", alphaTest:"+Math.Round(input.Threshold,5));
-                    output.AppendLine(" } );");
-                output.AppendLine("const model" + index + " = new THREE.Points( " + name + ", material" + index + " );");
+            output.Append("const material" + index + " = new THREE.PointsMaterial( { size: " + Math.Round(input.Scale, 5) + ", depthTest: true, transparent: true, color: 0xffffff, vertexColors: true ");
+            if (input.HasBitmap) output.Append(", map: " + input.MapName + ", alphaMap: " + input.MapName + ", alphaTest:" + Math.Round(input.Threshold, 5));
+            output.AppendLine(" } );");
+            output.AppendLine("const model" + index + " = new THREE.Points( " + name + ", material" + index + " );");
 
             return output.ToString();
         }
@@ -999,12 +1079,12 @@ namespace ThreePlus
             }
             else
             {
-                output.Append(", color: " + graphic.Color.ToStr()+ ", vertexColors: false");
+                output.Append(", color: " + graphic.Color.ToStr() + ", vertexColors: false");
             }
 
             if (graphic.DashLength > 0)
             {
-                output.Append(", dashed: true, dashSize: "+graphic.DashLength+", gapSize: "+graphic.GapLength);
+                output.Append(", dashed: true, dashSize: " + graphic.DashLength + ", gapSize: " + graphic.GapLength);
             }
             else
             {
@@ -1016,16 +1096,16 @@ namespace ThreePlus
             if (graphic.HasColors)
             {
                 Parallel.For(0, count, k =>
-            {
-                int m = k % graphic.Colors.Count;
-                colors[k] = graphic.Colors[m].ToStrArray();
-            }
+                {
+                    int m = k % graphic.Colors.Count;
+                    colors[k] = graphic.Colors[m].ToStrArray();
+                }
             );
                 output.AppendLine("const colors" + index + " = new Float32Array( [" + string.Join(",", colors.Values) + "] );");
                 output.AppendLine(name + ".setColors( colors" + index + " );");
             }
 
-            output.AppendLine("const model"+index+" = new THREE.Line2( "+name+", lineMat" + index +" );");
+            output.AppendLine("const model" + index + " = new THREE.Line2( " + name + ", lineMat" + index + " );");
             output.AppendLine("model" + index + ".computeLineDistances();");
 
             return output.ToString();

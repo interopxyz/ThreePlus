@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Sd=System.Drawing;
+using Sd = System.Drawing;
 
 namespace ThreePlus
 {
-    public class Scene:MetaData
+    public class Scene : MetaData
     {
 
         #region members
@@ -26,7 +26,7 @@ namespace ThreePlus
         public Axes Axes = new Axes();
 
         public List<Model> Models = new List<Model>();
-        public List<Camera> Cameras = new List<Camera> {new Camera() };
+        public List<Camera> Cameras = new List<Camera> { new Camera() };
         protected List<Light> lights = new List<Light>();
         public List<Script> Scripts = new List<Script>();
 
@@ -37,14 +37,14 @@ namespace ThreePlus
 
         #region constructors
 
-        public Scene():base()
+        public Scene() : base()
         {
             this.type = "Scene";
             this.objectType = "Scene";
             this.name = "Scene";
         }
 
-        public Scene(Scene scene):base(scene)
+        public Scene(Scene scene) : base(scene)
         {
             this.Grid = new Grid(scene.Grid);
             this.Axes = new Axes(scene.Axes);
@@ -66,7 +66,6 @@ namespace ThreePlus
             {
                 this.Scripts.Add(new Script(script));
             }
-
             this.Environment = new Environment(scene.Environment);
             this.Atmosphere = new Atmosphere(scene.Atmosphere);
 
@@ -75,7 +74,7 @@ namespace ThreePlus
 
             this.hasShadows = scene.hasShadows;
             this.shadowThreshold = scene.shadowThreshold;
-    }
+        }
 
         #endregion
 
@@ -87,6 +86,14 @@ namespace ThreePlus
             {
                 foreach (Model model in this.Models) if (model.IsCurve) return true;
                 return false;
+            }
+        }
+
+        public virtual bool HasShaders
+        {
+            get
+            {
+                return Models.Any(m => m.Material.MaterialType == Material.Types.Shader);
             }
         }
 
@@ -112,11 +119,12 @@ namespace ThreePlus
 
         public bool ContainsSpotLights
         {
-            get {
+            get
+            {
                 bool isType = false;
-                foreach(Light light in lights)
+                foreach (Light light in lights)
                 {
-                    if(light.LightType == Light.Types.Spot)
+                    if (light.LightType == Light.Types.Spot)
                     {
                         isType = true;
                         break;
@@ -162,7 +170,7 @@ namespace ThreePlus
                 hasShadows = true;
                 if (light.Threshold > this.shadowThreshold) shadowThreshold = light.Threshold;
             }
-                lights.Add(new Light(light));
+            lights.Add(new Light(light));
         }
 
         #endregion
@@ -171,10 +179,11 @@ namespace ThreePlus
 
         public override string ToString()
         {
-            return "Image(m:" + this.Models.Count + " l:" + this.lights.Count+ ")";
+            return "Image(m:" + this.Models.Count + " l:" + this.lights.Count + ")";
         }
 
         #endregion
 
     }
 }
+
