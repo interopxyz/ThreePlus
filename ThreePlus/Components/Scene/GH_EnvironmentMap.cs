@@ -35,7 +35,7 @@ namespace ThreePlus.Components
         {
             pManager.AddColourParameter("Background Color", "C", "The background color if an image is not used.", GH_ParamAccess.item, Color.White);
             pManager[0].Optional = true;
-            pManager.AddGenericParameter("Bitmap", "Img", "A bitmap image", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Image", "Img", "A bitmap, cubemap, or file path to an image", GH_ParamAccess.item);
             pManager[1].Optional = true;
             pManager.AddBooleanParameter("Is Background", "B", "If true the image will be used as the background", GH_ParamAccess.item, true);
             pManager[2].Optional = true;
@@ -105,6 +105,7 @@ namespace ThreePlus.Components
                             return;
                         }
                     }
+                    environment = new Environment(bitmap);
                 }
                 else
                 {

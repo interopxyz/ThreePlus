@@ -58,7 +58,7 @@ namespace ThreePlus.Components.Output
             string html = scene.ToHtml(false);
             List<string> htmls = html.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None).ToList();
 
-            string js = scene.ToJavascript();
+            string js = scene.ToJavascript("",false);
             List<string> jss = js.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None).ToList();
 
 

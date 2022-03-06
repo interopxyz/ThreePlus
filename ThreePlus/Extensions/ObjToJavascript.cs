@@ -109,7 +109,7 @@ namespace ThreePlus
             return output.ToString();
         }
 
-        public static string ToJavascript(this Scene input)
+        public static string ToJavascript(this Scene input, string path, bool assets = false)
         {
             Dictionary<string, string> maps = new Dictionary<string, string>();
             StringBuilder output = new StringBuilder();
@@ -121,7 +121,7 @@ namespace ThreePlus
 
             output.AppendLine("const scene = new THREE.Scene();");
 
-            output.AppendLine(input.Environment.ToJavascript());
+            output.AppendLine(input.Environment.ToJavascript(path,assets));
             if (input.Atmosphere.HasFog) output.AppendLine(input.Atmosphere.ToJavascript());
 
             output.AppendLine("const renderer = new THREE.WebGLRenderer({ antialias: true });");
@@ -154,7 +154,7 @@ namespace ThreePlus
                             {
                                 string name = "map" + maps.Count;
                                 maps.Add(key, name);
-                                output.AppendLine(model.Material.Maps[j].ToJsObjMap(name));
+                                output.AppendLine(model.Material.Maps[j].ToJsObjMap(path,name, assets));
                             }
                             model.Material.MapNames[j] = maps[key];
                         }
@@ -169,7 +169,7 @@ namespace ThreePlus
                         {
                             string name = "map" + maps.Count;
                             maps.Add(key, name);
-                            output.AppendLine(model.Cloud.Map.ToJsObjMap(name));
+                            output.AppendLine(model.Cloud.Map.ToJsObjMap(path, name, assets));
                         }
                         model.Cloud.MapName= maps[key];
                     }
@@ -442,16 +442,15 @@ namespace ThreePlus
             return output.ToString();
         }
 
-        public static string ToJsObjMap(this Sd.Bitmap input, string name)
+        public static string ToJsObjMap(this Sd.Bitmap input, string path, string name, bool assets = false)
         {
             StringBuilder output = new StringBuilder();
-
-            output.AppendLine("var " + name + " = new THREE.TextureLoader().load(\"data:image/png;base64," + input.ToStr() + "\");");
+            string mapName = "./assets/"+input.SavePng(path,name); 
+            if (!assets) mapName = "data:image / png; base64," + input.ToStr();
+            output.AppendLine("var " + name + " = new THREE.TextureLoader().load(\""+ mapName + "\");");
             output.AppendLine(name + ".mapping = THREE.UVMapping;");
 
-
             return output.ToString();
-
         }
 
         public static string ToJavascript(this CubeMap input)
@@ -489,7 +488,7 @@ namespace ThreePlus
             return output.ToString();
         }
 
-        public static string ToJavascript(this Environment input)
+        public static string ToJavascript(this Environment input,string path, bool assets = false)
         {
             StringBuilder output = new StringBuilder();
 
@@ -499,21 +498,37 @@ namespace ThreePlus
                 default:
                     break;
                 case Environment.EnvironmentModes.Environment:
-                    output.AppendLine("var envMap = new THREE.TextureLoader().load(\"data:image/png;base64," + input.EnvMap.ToStr() + "\");");
+
+                    string envMap = "./assets/"+ input.EnvMap.SavePng(path, "envMapImg");
+                    if(!assets)envMap = "data:image / png; base64," + input.EnvMap.ToStr(); 
+                    output.AppendLine("var envMap = new THREE.TextureLoader().load(\""+ envMap + "\");");
+
                     output.AppendLine("envMap.mapping = THREE.EquirectangularReflectionMapping;");
 
-                    if (input.IsBackground)output.AppendLine("scene.background = envMap;");
+                    if (input.IsBackground) output.AppendLine("scene.background = envMap;");
                     if (input.IsEnvironment) output.AppendLine("scene.environment = envMap;");
 
                     break;
                 case Environment.EnvironmentModes.CubeMap:
                     StringBuilder images = new StringBuilder();
+                    if (assets)
+                    {
+                        images.Append("\"./assets/" + input.CubeMap.PosX.SavePng(path, "CubeMapPosX") + "\", ");
+                        images.Append("\"./assets/" + input.CubeMap.NegX.SavePng(path, "CubeMapNegX") + "\", ");
+                        images.Append("\"./assets/" + input.CubeMap.PosY.SavePng(path, "CubeMapPosY") + "\", ");
+                        images.Append("\"./assets/" + input.CubeMap.NegY.SavePng(path, "CubeMapNegY") + "\", ");
+                        images.Append("\"./assets/" + input.CubeMap.PosZ.SavePng(path, "CubeMapPosZ") + "\", ");
+                        images.Append("\"./assets/" + input.CubeMap.NegZ.SavePng(path, "CubeMapNegZ") + "\"");
+                    }
+                    else
+                    {
                     images.Append("\"data:image/png;base64," + input.CubeMap.PosX.ToStr() + "\", ");
                     images.Append("\"data:image/png;base64," + input.CubeMap.NegX.ToStr() + "\", ");
                     images.Append("\"data:image/png;base64," + input.CubeMap.PosY.ToStr() + "\", ");
                     images.Append("\"data:image/png;base64," + input.CubeMap.NegY.ToStr() + "\", ");
                     images.Append("\"data:image/png;base64," + input.CubeMap.PosZ.ToStr() + "\", ");
                     images.Append("\"data:image/png;base64," + input.CubeMap.NegZ.ToStr() + "\"");
+                    }
 
                     output.AppendLine("let lightProbe = new THREE.LightProbe();");
                     output.AppendLine("scene.add( lightProbe );");

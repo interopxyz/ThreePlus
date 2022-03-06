@@ -1,4 +1,5 @@
 ﻿using Grasshopper.Kernel;
+using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 using System;
@@ -38,10 +39,25 @@ namespace ThreePlus.Components.Output
             pManager[1].Optional = true;
             pManager.AddTextParameter("Folder Name", "N", "The new export folder name", GH_ParamAccess.item);
             pManager[2].Optional = true;
-            pManager.AddBooleanParameter("Local", "L", "If true, referenced packages will be copied locally and can be run offline. If false, packages will be referenced via cdn and can only be viewed when connected to the internet.", GH_ParamAccess.item, true);
+            pManager.AddIntegerParameter("Target", "T", 
+                "Select the scenario to open the scene" + System.Environment.NewLine
+                + "0: Offline (Lg)" + System.Environment.NewLine
+                + "Run locally and with no internet connection. Writes all the scene assets to the app file and copy the dependencies to a sub folder." + System.Environment.NewLine
+                + "1: Local (Md)" + System.Environment.NewLine
+                + "Runs locally, but requires an internet connection. Writes all the scene assets to the app file and references dependencies via cdn." + System.Environment.NewLine
+                + "2: Server (Sm)" + System.Environment.NewLine 
+                + "Requires a server or online hosting. Assets are saved seperately in an assets folder and references dependencies via cdn." + System.Environment.NewLine
+                + "   (Note: Server output can be hosted on Amazon S3 static hosting, etc., but will not run locally due to to modern browsers \"Cross-Origin Resource Sharing (CORS)\" restrictions"
+                , GH_ParamAccess.item, 1);
             pManager[3].Optional = true;
             pManager.AddBooleanParameter("Save", "S", "If true, the new file will be written or overwritten", GH_ParamAccess.item, false);
             pManager[4].Optional = true;
+
+            Param_Integer paramA = (Param_Integer)pManager[3];
+            paramA.AddNamedValue("Offline", 0);
+            paramA.AddNamedValue("Local", 1);
+            paramA.AddNamedValue("Server", 2);
+
         }
 
         /// <summary>
@@ -72,7 +88,24 @@ namespace ThreePlus.Components.Output
             scene.Name = name;
 
             bool local = true;
-            if (!DA.GetData(3, ref local)) return;
+            bool assets = false;
+            int mode = 1;
+            if (!DA.GetData(3, ref mode)) return;
+            switch (mode)
+            {
+                case 0:
+                    local = true;
+                    assets = false;
+                    break;
+                case 1:
+                    local = false;
+                    assets = false;
+                    break;
+                case 2:
+                    local = false;
+                    assets = true;
+                    break;
+            }
 
             bool save = false;
             if (!DA.GetData(4, ref save)) return;
@@ -99,12 +132,14 @@ namespace ThreePlus.Components.Output
 
                 string parent = path + "\\" + name + "\\";
                 string child = parent + "js" + "\\";
+                string asset = parent + "assets" + "\\";
 
-                Directory.CreateDirectory(parent);
+                PurgeDirectory(parent);
                 if(local)Directory.CreateDirectory(child);
+                if (assets) Directory.CreateDirectory(asset);
 
-            string html = scene.ToHtml(local);
-            string js = scene.ToJavascript();
+                string html = scene.ToHtml(local);
+                string js = scene.ToJavascript(asset, assets);
 
                 File.WriteAllText(parent + "index.html", html);
                 File.WriteAllText(parent + "app.js", js);
@@ -169,6 +204,21 @@ namespace ThreePlus.Components.Output
         public override Guid ComponentGuid
         {
             get { return new Guid("e5eae6d4-3943-4b60-9eec-a949ed5fcaf5"); }
+        }
+
+        public void PurgeDirectory(string path)
+        {
+            Directory.CreateDirectory(path);
+            DirectoryInfo di = new DirectoryInfo(path);
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.GetDirectories())
+            {
+                dir.Delete(true);
+            }
         }
     }
 }

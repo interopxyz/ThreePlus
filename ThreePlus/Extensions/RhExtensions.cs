@@ -293,6 +293,12 @@ namespace ThreePlus
             return Convert.ToBase64String(data);
         }
 
+        public static string SavePng(this Sd.Bitmap input, string path, string name)
+        {
+            string filename= name+".png";
+            input.Save(path + filename, Sd.Imaging.ImageFormat.Png);
 
+            return filename;
+        }
     }
 }
