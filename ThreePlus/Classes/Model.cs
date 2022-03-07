@@ -31,6 +31,8 @@ namespace ThreePlus
         public TangentDisplay Tangents = new TangentDisplay();
         public NormalDisplay Normals = new NormalDisplay();
 
+        public Dictionary<string, string> Data = new Dictionary<string, string>();
+
         protected bool hasHelper = false;
         protected Color helperColor = Color.Gray;
 
@@ -54,6 +56,8 @@ namespace ThreePlus
             if (model.curve != null) this.curve = model.curve.DuplicateCurve().ToNurbsCurve();
             if (model.plane != Rg.Plane.Unset) this.plane= (Rg.Plane)model.plane.Clone();
             if (model.cloud != null) this.cloud = new PointCloud(model.cloud);
+
+            this.Data = model.Data;
 
             this.Tangents = new TangentDisplay(model.Tangents);
             this.Normals = new NormalDisplay(model.Normals);

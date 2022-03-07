@@ -14,6 +14,9 @@ namespace ThreePlus
 
         #region members
 
+        public enum ClickEvents { None=0,Data=1,Link=2};
+        public ClickEvents ClickEvent = ClickEvents.None;
+
         public Settings Settings = new Settings();
         public Environment Environment = new Environment();
         public Atmosphere Atmosphere = new Atmosphere();
@@ -46,6 +49,8 @@ namespace ThreePlus
 
         public Scene(Scene scene):base(scene)
         {
+            this.ClickEvent = scene.ClickEvent;
+
             this.Grid = new Grid(scene.Grid);
             this.Axes = new Axes(scene.Axes);
 
@@ -80,6 +85,11 @@ namespace ThreePlus
         #endregion
 
         #region properties
+
+        public virtual bool HasClickEvent
+        {
+            get { return (this.ClickEvent!= ClickEvents.None); }
+        }
 
         public virtual bool HasCurves
         {
@@ -171,7 +181,7 @@ namespace ThreePlus
 
         public override string ToString()
         {
-            return "Image(m:" + this.Models.Count + " l:" + this.lights.Count+ ")";
+            return "Scene(m:" + this.Models.Count + " l:" + this.lights.Count+ ")";
         }
 
         #endregion

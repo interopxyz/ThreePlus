@@ -78,6 +78,8 @@
     <Compile Include="Components\Cameras\GH_Camera_Perspective.cs" />
     <Compile Include="Components\GH_Preview.cs" />
     <Compile Include="Components\Graphics\GH_GraphicsPaths.cs" />
+    <Compile Include="Components\Helpers\GH_AddModelData.cs" />
+    <Compile Include="Components\Helpers\GH_AddModelLink.cs" />
     <Compile Include="Components\Helpers\GH_DisplayBoundary.cs" />
     <Compile Include="Components\Helpers\GH_DisplayLight.cs" />
     <Compile Include="Components\Lights\GH_LightShadows.cs" />
@@ -884,6 +886,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Three_PBR-Base-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Helper_Link-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Helper_Select-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Helper_Data-01.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

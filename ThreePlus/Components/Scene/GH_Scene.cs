@@ -1,4 +1,5 @@
 ﻿using Grasshopper.Kernel;
+using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 using System;
@@ -33,6 +34,13 @@ namespace ThreePlus.Components
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Scene Objects", "O", "Scene Objects including (Curves, Breps, Meshes, Lights, Cameras, Three Objects)", GH_ParamAccess.list);
+            pManager.AddIntegerParameter("Click Modes", "C", "Add click events to model elements", GH_ParamAccess.item, 0);
+            pManager[1].Optional = true;
+
+            Param_Integer paramA = (Param_Integer)pManager[1];
+            paramA.AddNamedValue("None", 0);
+            paramA.AddNamedValue("Display Data", 1);
+            paramA.AddNamedValue("Open Link", 2);
         }
 
         /// <summary>
@@ -51,6 +59,9 @@ namespace ThreePlus.Components
         {
             List<IGH_Goo> goos = new List<IGH_Goo>();
             if (!DA.GetDataList(0, goos)) return;
+
+            int click = 0;
+            DA.GetData(1, ref click);
 
             Scene scene = new Scene();
 
@@ -113,7 +124,7 @@ namespace ThreePlus.Components
                     scene.Models.Add(goo.ToModel());
                 }
             }
-
+            scene.ClickEvent = (Scene.ClickEvents)click;
 
             DA.SetData(0, scene);
         }
