@@ -121,6 +121,12 @@ namespace ThreePlus
 
             output.AppendLine("const scene = new THREE.Scene();");
 
+            if(input.HasClickEvent)
+            {
+                output.AppendLine("var raycaster = new THREE.Raycaster();");
+                output.AppendLine("var mouse = new THREE.Vector2();");
+            }
+
             output.AppendLine(input.Environment.ToJavascript(path,assets));
             if (input.Atmosphere.HasFog) output.AppendLine(input.Atmosphere.ToJavascript());
 
@@ -249,6 +255,9 @@ namespace ThreePlus
                 //}
 
                 output.AppendLine("scene.add(model" + index + ");");
+                output.AppendLine("model" + index + ".name = \"" + model.Name + "\";");
+                output.AppendLine(model.ToUserData(index));
+
                 i++;
             }
 
@@ -277,6 +286,7 @@ namespace ThreePlus
             output.AppendLine(input.Outline.ToJavascript());
 
             output.AppendLine("window.addEventListener('resize', onWindowResize);");
+            if(input.HasClickEvent) output.AppendLine("renderer.domElement.addEventListener('click', onClick, false);");
             output.AppendLine("function onWindowResize()");
             output.AppendLine("{");
             output.AppendLine("camera.aspect = window.innerWidth / window.innerHeight;");
@@ -350,9 +360,67 @@ namespace ThreePlus
 
             output.AppendLine("increment=increment+"+ input.Camera.Speed + ";");
             output.AppendLine("};");
+
+            if(input.HasClickEvent)
+            {
+                output.AppendLine("function onClick() {");
+                output.AppendLine("event.preventDefault();");
+                output.AppendLine("mouse.x = (event.clientX / window.innerWidth) * 2 - 1;");
+                output.AppendLine("mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;");
+                output.AppendLine("raycaster.setFromCamera(mouse, camera);");
+                output.AppendLine("var intersects = raycaster.intersectObject(scene, true);");
+
+                output.AppendLine("if (intersects.length > 0) {");
+                output.AppendLine("var object = intersects[0].object;");
+                output.AppendLine("var objData = object.userData;");
+
+                //If Link
+                if(input.ClickEvent == Scene.ClickEvents.Link)
+                {
+                    output.AppendLine("if ('URL' in objData) {");
+                    output.AppendLine("window.open(objData.URL);");
+                    output.AppendLine("}");
+                }
+
+                //If Data
+                if (input.ClickEvent == Scene.ClickEvents.Data)
+                {
+                    output.AppendLine("var dataSet = (`${object.name} | Data \n`);");
+                    output.AppendLine("for (const key in objData) {");
+                    output.AppendLine("dataSet+=(`${key}: ${objData[key]} \n`);");
+                    output.AppendLine("}");
+                    output.AppendLine("navigator.clipboard.writeText(dataSet);");
+                    output.AppendLine("window.alert(dataSet);");
+                }
+
+                output.AppendLine("}");
+                output.AppendLine("animate();");
+                output.AppendLine("}");
+
+            }
+
+
             output.AppendLine("animate();");
 
             return output.ToString();
+        }
+
+        public static string ToUserData(this Model input, string index)
+        {
+
+            if (input.Data.Count > 0)
+            {
+                List<string> data = new List<string>();
+                foreach(string key in input.Data.Keys)
+                {
+                    data.Add(key+": \"" + input.Data[key] + "\"");
+                }
+                return "model" + index + ".userData = {" + string.Join(",",data) + "};";
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
 
         //public static string ToJsVertexMaterial(this Rg.Mesh mesh, string name)

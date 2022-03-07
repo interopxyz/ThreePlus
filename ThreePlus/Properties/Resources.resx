@@ -577,6 +577,9 @@
   <data name="Three_Helper_Boundary_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Three_Helper_Boundary-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Three_Helper_Data_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Helper_Data-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Three_Helper_GridPolar_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Three_Helper_GridPolar-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -586,8 +589,14 @@
   <data name="Three_Helper_Light_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Three_Helper_Light-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Three_Helper_Link_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Helper_Link-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Three_Helper_Normals_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Three_Helper_Normals-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Helper_Select_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Helper_Select-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Three_Helper_Tangents_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Three_Helper_Tangents-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -134,8 +134,8 @@ namespace ThreePlus.Components.Output
                 string child = parent + "js" + "\\";
                 string asset = parent + "assets" + "\\";
 
-                PurgeDirectory(parent);
-                if(local)Directory.CreateDirectory(child);
+                Directory.CreateDirectory(parent);
+                if (local)Directory.CreateDirectory(child);
                 if (assets) Directory.CreateDirectory(asset);
 
                 string html = scene.ToHtml(local);

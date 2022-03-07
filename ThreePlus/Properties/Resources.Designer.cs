@@ -1943,6 +1943,16 @@ namespace ThreePlus.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Three_Helper_Data_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Helper_Data_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Three_Helper_Grid_01 {
             get {
                 object obj = ResourceManager.GetObject("Three_Helper_Grid_01", resourceCulture);
@@ -1973,9 +1983,29 @@ namespace ThreePlus.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Three_Helper_Link_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Helper_Link_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Three_Helper_Normals_01 {
             get {
                 object obj = ResourceManager.GetObject("Three_Helper_Normals_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Helper_Select_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Helper_Select_01", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
