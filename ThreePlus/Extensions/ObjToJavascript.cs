@@ -11,7 +11,7 @@ namespace ThreePlus
 {
     public static class ObjToJavascript
     {
-        public static string ToHtml(this Scene input, bool local = false)
+        public static string ToHtml(this Scene input, bool local = false, bool embed = false)
         {
             // https://cdn.jsdelivr.net/npm/three@0.131.3/examples/js/
             StringBuilder output = new StringBuilder();
@@ -102,7 +102,17 @@ namespace ThreePlus
                     output.AppendLine("<script src=\"https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/objects/Sky.js\" ></script>");
                 }
             }
+
+            if (embed)
+            {
+                output.AppendLine("<script>");
+                output.AppendLine(input.ToJavascript("", false));
+                output.AppendLine("</script>");
+            }
+            else
+            {
             output.AppendLine("<script type=\"text/javascript\" src=\"app.js\"></script>");
+            }
             output.AppendLine("</body>");
             output.AppendLine("</html>");
 

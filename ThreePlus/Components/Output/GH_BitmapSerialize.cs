@@ -15,7 +15,7 @@ namespace ThreePlus.Components.Output
         /// </summary>
         public GH_BitmapSerialize()
           : base("Serialize Bitmap", "SerBmp",
-              "Serialize a bitmap to a byte array string. Useful for internalizing in a definition.",
+              "Serialize a Bitmap to a byte array string. Useful for internalizing a Bitmsp in a definition.",
               Constants.ShortName, "Output")
         {
         }
@@ -33,7 +33,7 @@ namespace ThreePlus.Components.Output
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Bitmap", "B", "A System Drawing Bitmap or full filepath to an image.", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Bitmap", "B", "A System.Drawing.Bitmap image object or full file path to an image.", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace ThreePlus.Components.Output
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Text", "T", "The serialized bitmap text", GH_ParamAccess.item);
+            pManager.AddTextParameter("Text", "T", "The serialized Bitmap text.", GH_ParamAccess.item);
         }
 
         /// <summary>

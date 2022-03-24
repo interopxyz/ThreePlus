@@ -34,7 +34,7 @@ namespace ThreePlus.Components.RhinoObjects
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddTextParameter("Material Name", "N", "The name of the material to reference", GH_ParamAccess.item);
+            pManager.AddTextParameter("Material Name", "N", "The name of the Rhino Material to reference", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -42,17 +42,17 @@ namespace ThreePlus.Components.RhinoObjects
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddNumberParameter("Subsurface", "SS", "", GH_ParamAccess.item);//0
-            pManager.AddGenericParameter("Subsurface Map", "SM", "", GH_ParamAccess.item);//1
-            pManager.AddColourParameter("Subsurface Scattering Color", "SC", "", GH_ParamAccess.item);//2
-            pManager.AddNumberParameter("Subsurface Scattering Value", "SV", "", GH_ParamAccess.item);//3
-            pManager.AddGenericParameter("Subsurface Scattering Map", "CM", "", GH_ParamAccess.item);//4
-            pManager.AddNumberParameter("Subsurface Scattering Radius", "SR", "", GH_ParamAccess.item);//5
-            pManager.AddGenericParameter("Subsurface Scattering Radius Map", "RM", "", GH_ParamAccess.item);//6
-            pManager.AddNumberParameter("Specular", "SP", "", GH_ParamAccess.item);//7
-            pManager.AddGenericParameter("Specular Map", "PM", "", GH_ParamAccess.item);//8
-            pManager.AddNumberParameter("Specular Tint", "ST", "", GH_ParamAccess.item);//9
-            pManager.AddGenericParameter("Specular Tint Map", "TM", "", GH_ParamAccess.item);//10
+            pManager.AddNumberParameter("Subsurface", "SS", "Subsurface scattering (0.0 = pure diffuse to 1.0 = subsurface scattering)", GH_ParamAccess.item);//0
+            pManager.AddGenericParameter("Subsurface Map", "SM", "The Bitmap used to alter the subsurface value of the material.", GH_ParamAccess.item);//1
+            pManager.AddColourParameter("Subsurface Scattering Color", "SC", "Subsurface scattering base color.", GH_ParamAccess.item);//2
+            pManager.AddNumberParameter("Subsurface Scattering Value", "SV", "Subsurface scattering multiplier value.", GH_ParamAccess.item);//3
+            pManager.AddGenericParameter("Subsurface Scattering Map", "CM", "The Bitmap used to alter the subsurface scattering value of the material.", GH_ParamAccess.item);//4
+            pManager.AddNumberParameter("Subsurface Scattering Radius", "SR", "Average distance that light scatters below the surface. Higher radius gives a softer appearance, as light bleeds into shadows and through the object.", GH_ParamAccess.item);//5
+            pManager.AddGenericParameter("Subsurface Scattering Radius Map", "RM", "The Bitmap used to alter the subsurface scattering radius value of the material.", GH_ParamAccess.item);//6
+            pManager.AddNumberParameter("Specular", "SP", "The reflectivity at the incident vector.", GH_ParamAccess.item);//7
+            pManager.AddGenericParameter("Specular Map", "PM", "The Bitmap used to alter the specular value of the material.", GH_ParamAccess.item);//8
+            pManager.AddNumberParameter("Specular Tint", "ST", "The reflectivity color at the incident vector.", GH_ParamAccess.item);//9
+            pManager.AddGenericParameter("Specular Tint Map", "TM", "The Bitmap used to alter the specular tint value of the material.", GH_ParamAccess.item);//10
         }
 
         /// <summary>

@@ -32,9 +32,9 @@ namespace ThreePlus.Components.Lights
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddColourParameter("Color", "C", "The lights color", GH_ParamAccess.item, Sd.Color.White);
+            pManager.AddColourParameter("Color", "C", "The light color.", GH_ParamAccess.item, Sd.Color.White);
             pManager[0].Optional = true;
-            pManager.AddNumberParameter("Intensity", "I", "The light's strength/intensity.", GH_ParamAccess.item, 1);
+            pManager.AddNumberParameter("Intensity", "I", "The light strength/intensity.", GH_ParamAccess.item, 1);
             pManager[1].Optional = true;
         }
 
@@ -43,7 +43,7 @@ namespace ThreePlus.Components.Lights
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Light", "L", "An Ambient light", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Light Element", "L", "A Three Plus Light Element", GH_ParamAccess.item);
         }
 
         /// <summary>

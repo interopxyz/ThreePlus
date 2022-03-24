@@ -125,7 +125,7 @@
     <Compile Include="Classes\Scenes\Settings.cs" />
     <Compile Include="Classes\Script.cs" />
     <Compile Include="Components\Scene\GH_Atmosphere.cs" />
-    <Compile Include="Components\Scene\GH_EnvironmentMap.cs" />
+    <Compile Include="Components\Scene\GH_Environment.cs" />
     <Compile Include="Components\Helpers\GH_Axes.cs" />
     <Compile Include="Components\Helpers\GH_DisplayNormal.cs" />
     <Compile Include="Components\Helpers\GH_DisplayTangent.cs" />

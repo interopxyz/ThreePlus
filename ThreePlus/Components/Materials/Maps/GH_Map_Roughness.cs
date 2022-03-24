@@ -33,8 +33,8 @@ namespace ThreePlus.Components.Materials.Maps
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "The Model with a Material to update", GH_ParamAccess.item);
-            pManager.AddGenericParameter("Roughness Map", "Img", "The green channel of this texture is used to alter the roughness of the material." + System.Environment.NewLine + "(A System Drawing Bitmap or full filepath to an image.)", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model Element", "M", "A Three Plus Model Element to update", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Roughness Map", "Rm", "The green channel of this texture is used to alter the roughness of the material." + System.Environment.NewLine + "(A System Drawing Bitmap or full filepath to an image.)", GH_ParamAccess.item);
             pManager[1].Optional = true;
             pManager.AddNumberParameter("Roughness", "R", "How rough the material appears. 0.0 means a smooth mirror reflection, 1.0 means fully diffuse. 0-1.0", GH_ParamAccess.item);
             pManager[2].Optional = true;
@@ -45,7 +45,7 @@ namespace ThreePlus.Components.Materials.Maps
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "The updated Model", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model Element", "M", "The updated Three Plus Model Element", GH_ParamAccess.item);
         }
 
         /// <summary>

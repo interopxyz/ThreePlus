@@ -38,9 +38,9 @@ namespace ThreePlus.Components.Assets
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddIntegerParameter("Index", "I", "The index of the default Cube Map", GH_ParamAccess.item, 11);
+            pManager.AddIntegerParameter("Map Index", "M", "The index of the default Cube Map", GH_ParamAccess.item, 11);
             pManager[0].Optional = true;
-            pManager.AddNumberParameter("Intensity", "T", "The intensity of a light probe", GH_ParamAccess.item, 1.0);
+            pManager.AddNumberParameter("Intensity", "I", "The intensity of a light probe", GH_ParamAccess.item, 1.0);
             pManager[1].Optional = true;
 
             Param_Integer paramA = (Param_Integer)pManager[0];

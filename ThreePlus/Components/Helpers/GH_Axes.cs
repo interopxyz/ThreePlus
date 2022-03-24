@@ -14,7 +14,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         public GH_Axes()
           : base("Axes", "Axes",
-              "An axis object to visualize the 3 axes in a simple way.",
+              "Simply Visualize the 3 axes.",
               Constants.ShortName, "Helpers")
         {
         }
@@ -39,7 +39,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Axes", "A", "The Axes object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Axes", "A", "A Three Plus Helper Element", GH_ParamAccess.item);
         }
 
         /// <summary>

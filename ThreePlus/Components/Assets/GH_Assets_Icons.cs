@@ -32,7 +32,7 @@ namespace ThreePlus.Components.Assets
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddIntegerParameter("Index", "I", "The index of the default bitmap", GH_ParamAccess.item, 0);
+            pManager.AddIntegerParameter("Map Index", "M", "The index of the default bitmap", GH_ParamAccess.item, 0);
             pManager[0].Optional = true;
 
             Param_Integer paramA = (Param_Integer)pManager[0];
@@ -51,7 +51,7 @@ namespace ThreePlus.Components.Assets
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Bitmap", "Img", "The selected icon bitmap", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Bitmap", "Img", "The selected icon Bitmap", GH_ParamAccess.item);
         }
 
         /// <summary>

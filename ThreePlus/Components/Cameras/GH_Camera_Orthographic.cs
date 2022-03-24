@@ -34,9 +34,9 @@ namespace ThreePlus.Components.Cameras
             pManager[0].Optional = true;
             pManager.AddPointParameter("Target", "T", "The target of the camera", GH_ParamAccess.item);
             pManager[1].Optional = true;
-            pManager.AddNumberParameter("Near", "N", "The camera frustrum near plane.", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Near", "N", "The camera frustum  near plane.", GH_ParamAccess.item);
             pManager[2].Optional = true;
-            pManager.AddNumberParameter("Far", "F", "The camera frustrum far plane.", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Far", "F", "The camera frustum far plane.", GH_ParamAccess.item);
             pManager[3].Optional = true;
         }
 
@@ -45,7 +45,7 @@ namespace ThreePlus.Components.Cameras
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Camera", "C", "A Perspective camera", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Camera Element", "C", "A Three Plus Camera Element", GH_ParamAccess.item);
         }
 
         /// <summary>

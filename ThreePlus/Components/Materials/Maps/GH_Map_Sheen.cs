@@ -33,14 +33,14 @@ namespace ThreePlus.Components.Materials.Maps
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "The Model with a Material to update", GH_ParamAccess.item);
-            pManager.AddGenericParameter("Sheen Map", "Img", "The RGB channels of this texture are multiplied against the Sheen Color, for per-pixel control over sheen tint." + System.Environment.NewLine + "(A System Drawing Bitmap or full filepath to an image.)", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model Element", "M", "A Three Plus Model Element to update", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Sheen Map", "Sm", "The RGB channels of this texture are multiplied against the Sheen Color, for per-pixel control over sheen tint." + System.Environment.NewLine + "(A System Drawing Bitmap or full filepath to an image.)", GH_ParamAccess.item);
             pManager[1].Optional = true;
             pManager.AddNumberParameter("Sheen", "S", "The intensity of the sheen layer 0-1.", GH_ParamAccess.item);
             pManager[2].Optional = true;
             pManager.AddColourParameter("Sheen Color", "C", "The sheen tint.", GH_ParamAccess.item);
             pManager[3].Optional = true;
-            pManager.AddGenericParameter("Sheen Roughness Map", "Img", "The alpha channel of this texture is multiplied against the Sheen Roughness, for per-pixel control over sheen roughness." + System.Environment.NewLine + "(A System Drawing Bitmap or full filepath to an image.)", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Sheen Roughness Map", "Rm", "The alpha channel of this texture is multiplied against the Sheen Roughness, for per-pixel control over sheen roughness." + System.Environment.NewLine + "(A System Drawing Bitmap or full filepath to an image.)", GH_ParamAccess.item);
             pManager[4].Optional = true;
             pManager.AddNumberParameter("Sheen Roughness", "R", "The effect factor between 0-1.", GH_ParamAccess.item);
             pManager[5].Optional = true;
@@ -51,7 +51,7 @@ namespace ThreePlus.Components.Materials.Maps
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "The updated Model", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model Element", "M", "The updated Three Plus Model Element", GH_ParamAccess.item);
         }
 
         /// <summary>

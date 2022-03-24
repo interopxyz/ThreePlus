@@ -14,7 +14,7 @@ namespace ThreePlus.Classes
         /// </summary>
         public GH_Ground()
           : base("Ground", "Ground",
-              "Add a ground plane to the scene.",
+              "Add a ground plane to a scene.",
               Constants.ShortName, "Scene")
         {
         }
@@ -32,9 +32,9 @@ namespace ThreePlus.Classes
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddNumberParameter("Size", "S", "The width / height of the ground plane.", GH_ParamAccess.item, 10000);
+            pManager.AddNumberParameter("Size", "S", "The ground plane width / height.", GH_ParamAccess.item, 10000);
             pManager[0].Optional = true;
-            pManager.AddNumberParameter("Z Offset", "Z", "The ground plane", GH_ParamAccess.item, 0);
+            pManager.AddNumberParameter("Z Offset", "Z", "The ground plane Z position.", GH_ParamAccess.item, 0);
             pManager[1].Optional = true;
         }
 
@@ -43,7 +43,7 @@ namespace ThreePlus.Classes
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Ground", "G", "A Scene Ground object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model Element", "E", "A Ground Plane Three Plus Model Element", GH_ParamAccess.item);
         }
 
         /// <summary>

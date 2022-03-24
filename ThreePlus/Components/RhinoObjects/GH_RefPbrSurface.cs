@@ -35,7 +35,7 @@ namespace ThreePlus.Components.RhinoObjects
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddTextParameter("Material Name", "N", "The name of the material to reference", GH_ParamAccess.item);
+            pManager.AddTextParameter("Material Name", "N", "The name of the Rhino Material to reference", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -43,13 +43,13 @@ namespace ThreePlus.Components.RhinoObjects
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddColourParameter("Emission Color", "EC", "", GH_ParamAccess.item);//0
-            pManager.AddColourParameter("PBR Emission Color", "PC", "", GH_ParamAccess.item);//1
-            pManager.AddNumberParameter("PBR Emission Value", "PV", "", GH_ParamAccess.item);//2
-            pManager.AddGenericParameter("Emission Map", "EM", "", GH_ParamAccess.item);//3
-            pManager.AddGenericParameter("Bump Map", "BM", "", GH_ParamAccess.item);//4
-            pManager.AddGenericParameter("Displacement Map", "DM", "", GH_ParamAccess.item);//5
-            pManager.AddGenericParameter("AO Map", "AM", "", GH_ParamAccess.item);//6
+            pManager.AddColourParameter("Emission Color", "EC", "Light emission color from the surface.", GH_ParamAccess.item);//0
+            pManager.AddColourParameter("PBR Emission Color", "PC", "Light emission color from the surface.", GH_ParamAccess.item);//1
+            pManager.AddNumberParameter("PBR Emission Value", "PV", "Light emission intensity from the surface.", GH_ParamAccess.item);//2
+            pManager.AddGenericParameter("Emission Map", "EM", "The Bitmap used to alter the emission value of the material.", GH_ParamAccess.item);//3
+            pManager.AddGenericParameter("Bump Map", "BM", "The Bitmap used to alter the bump value of the material.", GH_ParamAccess.item);//4
+            pManager.AddGenericParameter("Displacement Map", "DM", "The Bitmap used to alter the displacement value of the material.", GH_ParamAccess.item);//5
+            pManager.AddGenericParameter("AO Map", "AM", "The Bitmap used to alter the ambient occlusion value of the material.", GH_ParamAccess.item);//6
         }
 
         /// <summary>

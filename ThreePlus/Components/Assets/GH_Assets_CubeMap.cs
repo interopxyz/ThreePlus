@@ -1,4 +1,5 @@
 ﻿using Grasshopper.Kernel;
+using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
@@ -65,18 +66,57 @@ namespace ThreePlus.Components.Assets
             double intensity = 1.0;
             bool hasIntensity = DA.GetData(1, ref intensity);
 
-            Sd.Bitmap posX = null;
-            if (!DA.GetData(2, ref posX))return;
-            Sd.Bitmap negX = null;
-            if (!DA.GetData(3, ref negX)) return;
-            Sd.Bitmap posY = null;
-            if (!DA.GetData(4, ref posY)) return;
-            Sd.Bitmap negY = null;
-            if (!DA.GetData(5, ref negY)) return;
-            Sd.Bitmap posZ = null;
-            if (!DA.GetData(6, ref posZ)) return;
-            Sd.Bitmap negZ = null;
-            if (!DA.GetData(7, ref negZ)) return;
+            string message = string.Empty;
+
+            IGH_Goo posXg = null;
+            if (!DA.GetData(2, ref posXg)) return;
+            IGH_Goo negXg = null;
+            if (!DA.GetData(3, ref negXg)) return;
+            IGH_Goo posYg = null;
+            if (!DA.GetData(4, ref posYg)) return;
+            IGH_Goo negYg = null;
+            if (!DA.GetData(5, ref negYg)) return;
+            IGH_Goo posZg = null;
+            if (!DA.GetData(6, ref posZg)) return;
+            IGH_Goo negZg = null;
+            if (!DA.GetData(7, ref negZg)) return;
+
+            Sd.Bitmap posX;
+            if (!posXg.TryGetBitmap(out posX, out message))
+            {
+                this.AddRuntimeMessage(GH_RuntimeMessageLevel.Error, message);
+                return;
+            }
+            Sd.Bitmap negX;
+            if (!negXg.TryGetBitmap(out negX, out message))
+            {
+                this.AddRuntimeMessage(GH_RuntimeMessageLevel.Error, message);
+                return;
+            }
+            Sd.Bitmap posY;
+            if (!posYg.TryGetBitmap(out posY, out message))
+            {
+                this.AddRuntimeMessage(GH_RuntimeMessageLevel.Error, message);
+                return;
+            }
+            Sd.Bitmap negY;
+            if (!negYg.TryGetBitmap(out negY, out message))
+            {
+                this.AddRuntimeMessage(GH_RuntimeMessageLevel.Error, message);
+                return;
+            }
+            Sd.Bitmap posZ;
+            if (!posZg.TryGetBitmap(out posZ, out message))
+            {
+                this.AddRuntimeMessage(GH_RuntimeMessageLevel.Error, message);
+                return;
+            }
+            Sd.Bitmap negZ;
+            if (!negZg.TryGetBitmap(out negZ, out message))
+            {
+                this.AddRuntimeMessage(GH_RuntimeMessageLevel.Error, message);
+                return;
+            }
 
             CubeMap cubeMap = new CubeMap(name, posX, negX, posY, negY, posZ, negZ);
             if (hasIntensity) cubeMap.Intensity = intensity;

@@ -31,7 +31,7 @@ namespace ThreePlus.Components.Lights
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Light / Sky", "L", "A light or sky object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Light / Sky", "L", "A Light Element or Sky Scene Element", GH_ParamAccess.item);
             pManager.AddIntegerParameter("Samples", "S", "The shadow resolution samples", GH_ParamAccess.item, 20);
             pManager[1].Optional = true;
             pManager.AddNumberParameter("Threshold", "T", "The opacity threshold for casting shadows", GH_ParamAccess.item, 0.5);
@@ -43,7 +43,7 @@ namespace ThreePlus.Components.Lights
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Light", "L", "An updated light object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Light Element", "L", "The updated Three Plus Light Element", GH_ParamAccess.item);
         }
 
         /// <summary>

@@ -33,12 +33,12 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddPointParameter("Points", "P", "A list of points to populate a cloud", GH_ParamAccess.list);
-            pManager.AddColourParameter("Colors", "C", "A corresponding list of colors", GH_ParamAccess.list);
+            pManager.AddPointParameter("Points", "P", "A list of points to populate a cloud.", GH_ParamAccess.list);
+            pManager.AddColourParameter("Colors", "C", "A corresponding list of colors.", GH_ParamAccess.list);
             pManager[1].Optional = true;
-            pManager.AddNumberParameter("Size", "S", "The size of the point cloud visualization", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Size", "S", "The size of the point cloud visualization.", GH_ParamAccess.item);
             pManager[2].Optional = true;
-            pManager.AddGenericParameter("Bitmap", "Img", "A bitmap image", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Bitmap", "Img", "A System Drawing Bitmap or full file path to an image.", GH_ParamAccess.item);
             pManager[3].Optional = true;
             pManager.AddNumberParameter("Threshold", "T", "The opacity threshold.", GH_ParamAccess.item);
             pManager[4].Optional = true;
@@ -49,7 +49,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "The new point cloud Model", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model Element", "M", "The updated Three Plus Model Element", GH_ParamAccess.item);
         }
 
         /// <summary>

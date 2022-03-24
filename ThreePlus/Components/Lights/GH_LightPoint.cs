@@ -31,15 +31,15 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddColourParameter("Color", "C", "The lights color", GH_ParamAccess.item, Color.White);
+            pManager.AddColourParameter("Color", "C", "The light color.", GH_ParamAccess.item, Color.White);
             pManager[0].Optional = true;
-            pManager.AddPointParameter("Position", "P", "The position of the light", GH_ParamAccess.item, new Point3d(100, 100, 100));
+            pManager.AddPointParameter("Position", "P", "The light position.", GH_ParamAccess.item, new Point3d(100, 100, 100));
             pManager[1].Optional = true;
-            pManager.AddNumberParameter("Intensity", "I", "The light's strength/intensity.", GH_ParamAccess.item, 1);
+            pManager.AddNumberParameter("Intensity", "I", "The light strength/intensity.", GH_ParamAccess.item, 1);
             pManager[2].Optional = true;
-            pManager.AddNumberParameter("Distance", "D", "Maximum range of the light.", GH_ParamAccess.item, 0);
+            pManager.AddNumberParameter("Distance", "D", "The light maximum range.", GH_ParamAccess.item, 0);
             pManager[3].Optional = true;
-            pManager.AddNumberParameter("Decay", "F", "The amount the light dims along the distance of the light.", GH_ParamAccess.item, 1);
+            pManager.AddNumberParameter("Decay Factor", "F", "The amount the light dims along the distance of the light.", GH_ParamAccess.item, 1);
             pManager[4].Optional = true;
         }
 
@@ -48,7 +48,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Light", "L", "A Point light", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Light Element", "L", "A Three Plus Light Element", GH_ParamAccess.item);
         }
 
         /// <summary>

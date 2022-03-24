@@ -33,7 +33,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Light", "L", "A light object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Light Element", "L", "A Light Element", GH_ParamAccess.item);
             pManager.AddNumberParameter("Size", "S", "The preview size", GH_ParamAccess.item, 5);
             pManager[1].Optional = true;
             pManager.AddColourParameter("Color", "C", "The preview color", GH_ParamAccess.item, Color.Gray);
@@ -45,7 +45,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Light", "L", "An updated light object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Light Element", "L", "The updated Three Plus Light Element", GH_ParamAccess.item);
         }
 
         /// <summary>

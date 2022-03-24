@@ -13,7 +13,7 @@ namespace ThreePlus.Components.Output
         /// </summary>
         public GH_SaveJson()
           : base("Save Json", "SaveJson",
-              "Save a Json file in the Three.js Object Scene format 4 compatible with the https://threejs.org/editor/",
+              "Save a Json file in the Three.js Object Scene format 4 compatible with https://threejs.org/editor/",
               Constants.ShortName, "Output")
         {
         }
@@ -31,10 +31,10 @@ namespace ThreePlus.Components.Output
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Scene", "S", "Scene", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Scene", "S", "A Three Plus Scene", GH_ParamAccess.item);
             pManager.AddTextParameter("Folder Path", "F", "The folderpath to save the file", GH_ParamAccess.item);
             pManager[1].Optional = true;
-            pManager.AddTextParameter("Folder Name", "N", "The new export folder name", GH_ParamAccess.item);
+            pManager.AddTextParameter("File Name", "N", "The new file name", GH_ParamAccess.item);
             pManager[2].Optional = true;
             pManager.AddBooleanParameter("Save", "S", "If true, the new file will be written or overwritten", GH_ParamAccess.item, false);
             pManager[3].Optional = true;
@@ -45,7 +45,7 @@ namespace ThreePlus.Components.Output
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Json path", "J", "The json file path location", GH_ParamAccess.item);
+            pManager.AddTextParameter("JSON Path", "J", "The JSON file path location.", GH_ParamAccess.item);
         }
 
         /// <summary>

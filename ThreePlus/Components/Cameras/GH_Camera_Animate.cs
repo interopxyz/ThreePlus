@@ -12,7 +12,7 @@ namespace ThreePlus.Components.Cameras
         /// </summary>
         public GH_Camera_Animate()
           : base("Camera Animate", "Move Cam",
-              "Sets sequential camera positions to animate between",
+              "Animate between sequential camera positions",
               Constants.ShortName, "Cameras")
         {
         }
@@ -41,7 +41,7 @@ namespace ThreePlus.Components.Cameras
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Camera", "C", "An updated camera", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Camera Element", "C", "The updated Three Plus Camera Element", GH_ParamAccess.item);
         }
 
         /// <summary>

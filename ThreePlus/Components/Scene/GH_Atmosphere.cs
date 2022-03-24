@@ -13,7 +13,7 @@ namespace ThreePlus.Components
         /// </summary>
         public GH_Atmosphere()
           : base("Atmosphere", "Atmosphere",
-              "Adds a fog effect from the horizon",
+              "Adds a fog effect from the horizon to a scene",
               Constants.ShortName, "Scene")
         {
         }
@@ -42,7 +42,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Atmosphere", "A", "A Scene Atmosphere object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Scene Element", "E", "An Atmosphere Three Plus Scene Modifier Element", GH_ParamAccess.item);
         }
 
         /// <summary>
