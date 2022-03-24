@@ -1,6 +1,6 @@
 # threeplus
 
-Three.js scene compiler for Grasshopper 3d
+Three.Js scene compiler for Grasshopper 3d
 
 ---
 
@@ -9,7 +9,7 @@ This plugin was developed to allow for the creation of visually rich scenes for 
 [Download the Plugin at Food4Rhino](https://www.food4rhino.com/en/app/three)
 
 
-
+![definition](https://user-images.githubusercontent.com/25797596/159863476-469e0dad-76a9-4b71-b3b8-c39fe8cf5ac8.png)
 
 
 ## Learn More
