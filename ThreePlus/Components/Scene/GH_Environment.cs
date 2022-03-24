@@ -14,8 +14,8 @@ namespace ThreePlus.Components
         /// Initializes a new instance of the GH_EnvironmentMap class.
         /// </summary>
         public GH_EnvironmentMap()
-          : base("Environment Map", "EnvMap",
-              "Adds an environment map to the scene for reflections and background as well as a light probe for box maps.",
+          : base("Environment", "Env",
+              "Adds an environment map to a scene for reflections and background as well as a light probe for box maps.",
               Constants.ShortName, "Scene")
         {
         }
@@ -35,7 +35,7 @@ namespace ThreePlus.Components
         {
             pManager.AddColourParameter("Background Color", "C", "The background color if an image is not used.", GH_ParamAccess.item, Color.White);
             pManager[0].Optional = true;
-            pManager.AddGenericParameter("Image", "Img", "A bitmap, cubemap, or file path to an image", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Image", "Img", "A Bitmap, CubeMap, or file path to an image.", GH_ParamAccess.item);
             pManager[1].Optional = true;
             pManager.AddBooleanParameter("Is Background", "B", "If true the image will be used as the background", GH_ParamAccess.item, true);
             pManager[2].Optional = true;
@@ -50,7 +50,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Environment", "E", "The Environment Object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Scene Element", "E", "An Environment Three Plus Scene Modifier Element", GH_ParamAccess.item);
         }
 
         /// <summary>

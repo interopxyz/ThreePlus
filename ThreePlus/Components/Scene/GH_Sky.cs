@@ -15,7 +15,7 @@ namespace ThreePlus.Components
         /// </summary>
         public GH_Sky()
           : base("Sky", "Sky",
-              "Generates a sky box map based on location and atmospheric properties with an optional coordinated directional light.",
+              "Adds a generated sky box map to a scene based on location and atmospheric properties with an optional coordinated directional light.",
               Constants.ShortName, "Scene")
         {
         }
@@ -58,7 +58,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Sky", "S", "The Sky Object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Scene Element", "E", "A Sky Three Plus Scene Modifier Element", GH_ParamAccess.item);
         }
 
         /// <summary>

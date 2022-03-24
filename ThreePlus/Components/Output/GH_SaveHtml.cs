@@ -16,7 +16,7 @@ namespace ThreePlus.Components.Output
         /// </summary>
         public GH_SaveHtml()
           : base("Save Html", "SaveHtml",
-              "Export a standalone html and javascript file which can be loaded locally to view the scene.",
+              "Export a standalone html and JavaScript file which can be loaded locally to view the scene.",
               Constants.ShortName, "Output")
         {
         }
@@ -34,7 +34,7 @@ namespace ThreePlus.Components.Output
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Scene", "S", "Scene", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Scene", "S", "A Three Plus Scene", GH_ParamAccess.item);
             pManager.AddTextParameter("Folder Path", "F", "The folderpath to save the file", GH_ParamAccess.item);
             pManager[1].Optional = true;
             pManager.AddTextParameter("Folder Name", "N", "The new export folder name", GH_ParamAccess.item);
@@ -43,20 +43,23 @@ namespace ThreePlus.Components.Output
                 "Select the scenario to open the scene" + System.Environment.NewLine
                 + "0: Offline (Lg)" + System.Environment.NewLine
                 + "Run locally and with no internet connection. Writes all the scene assets to the app file and copy the dependencies to a sub folder." + System.Environment.NewLine
-                + "1: Local (Md)" + System.Environment.NewLine
+                + "1: Single (Md)" + System.Environment.NewLine
+                + "Runs locally, but requires an internet connection. Writes everything to a single html and references dependencies via cdn." + System.Environment.NewLine
+                + "2: Local (Md)" + System.Environment.NewLine
                 + "Runs locally, but requires an internet connection. Writes all the scene assets to the app file and references dependencies via cdn." + System.Environment.NewLine
-                + "2: Server (Sm)" + System.Environment.NewLine 
+                + "3: Server (Sm)" + System.Environment.NewLine 
                 + "Requires a server or online hosting. Assets are saved seperately in an assets folder and references dependencies via cdn." + System.Environment.NewLine
                 + "   (Note: Server output can be hosted on Amazon S3 static hosting, etc., but will not run locally due to to modern browsers \"Cross-Origin Resource Sharing (CORS)\" restrictions"
-                , GH_ParamAccess.item, 1);
+                , GH_ParamAccess.item, 2);
             pManager[3].Optional = true;
             pManager.AddBooleanParameter("Save", "S", "If true, the new file will be written or overwritten", GH_ParamAccess.item, false);
             pManager[4].Optional = true;
 
             Param_Integer paramA = (Param_Integer)pManager[3];
             paramA.AddNamedValue("Offline", 0);
-            paramA.AddNamedValue("Local", 1);
-            paramA.AddNamedValue("Server", 2);
+            paramA.AddNamedValue("Single", 1);
+            paramA.AddNamedValue("Local", 2);
+            paramA.AddNamedValue("Server", 3);
 
         }
 
@@ -65,8 +68,8 @@ namespace ThreePlus.Components.Output
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Html path", "H", "The html file path location", GH_ParamAccess.item);
-            pManager.AddTextParameter("Javascript path", "J", "The javascript file path location", GH_ParamAccess.item);
+            pManager.AddTextParameter("HTML Path", "H", "The HTML file path location.", GH_ParamAccess.item);
+            pManager.AddTextParameter("JavaScript Path", "J", "The JavaScript file path location.", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -89,6 +92,7 @@ namespace ThreePlus.Components.Output
 
             bool local = true;
             bool assets = false;
+            bool embed = false;
             int mode = 1;
             if (!DA.GetData(3, ref mode)) return;
             switch (mode)
@@ -100,8 +104,13 @@ namespace ThreePlus.Components.Output
                 case 1:
                     local = false;
                     assets = false;
+                    embed = true;
                     break;
                 case 2:
+                    local = false;
+                    assets = false;
+                    break;
+                case 3:
                     local = false;
                     assets = true;
                     break;
@@ -138,11 +147,12 @@ namespace ThreePlus.Components.Output
                 if (local)Directory.CreateDirectory(child);
                 if (assets) Directory.CreateDirectory(asset);
 
-                string html = scene.ToHtml(local);
-                string js = scene.ToJavascript(asset, assets);
+                string html = scene.ToHtml(local,embed);
+                string js = string.Empty;
+                if (mode != 1) js = scene.ToJavascript(asset, assets);
 
                 File.WriteAllText(parent + "index.html", html);
-                File.WriteAllText(parent + "app.js", js);
+                if(mode!=1)File.WriteAllText(parent + "app.js", js);
 
                 if(local)
                 {

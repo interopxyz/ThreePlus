@@ -31,11 +31,11 @@ namespace ThreePlus.Components.Lights
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddColourParameter("Zenith Color", "Z", "The lights color at the Zenith", GH_ParamAccess.item, Color.White);
+            pManager.AddColourParameter("Zenith Color", "Z", "The light color at the Zenith", GH_ParamAccess.item, Color.White);
             pManager[0].Optional = true;
-            pManager.AddColourParameter("Horizon Color", "H", "The lights color at the Horizon", GH_ParamAccess.item, Color.Gray);
+            pManager.AddColourParameter("Horizon Color", "H", "The light color at the Horizon", GH_ParamAccess.item, Color.Gray);
             pManager[1].Optional = true;
-            pManager.AddNumberParameter("Intensity", "I", "The light's strength/intensity.", GH_ParamAccess.item, 1);
+            pManager.AddNumberParameter("Intensity", "I", "The light strength/intensity.", GH_ParamAccess.item, 1);
             pManager[2].Optional = true;
         }
 
@@ -44,7 +44,7 @@ namespace ThreePlus.Components.Lights
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Light", "L", "A Hemisphere light", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Light Element", "L", "A Three Plus Light Element", GH_ParamAccess.item);
         }
 
         /// <summary>

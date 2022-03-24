@@ -12,8 +12,8 @@ namespace ThreePlus.Components
         /// Initializes a new instance of the GH_ToJson class.
         /// </summary>
         public GH_ToJson()
-          : base("ToJson", "ToJson",
-              "Create a Json string in the Three.js Object Scene format 4 compatible with the https://threejs.org/editor/",
+          : base("To Json", "ToJson",
+              "Create a Json string in the Three.js Object Scene format 4 compatible with https://threejs.org/editor/",
               Constants.ShortName, "Output")
         {
         }
@@ -31,7 +31,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Scene", "S", "Scene", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Scene", "S", "A Three Plus Scene", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Text", "T", "The json text", GH_ParamAccess.item);
+            pManager.AddTextParameter("JSON", "J", "The JSON text", GH_ParamAccess.item);
         }
 
         /// <summary>

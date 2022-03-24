@@ -33,16 +33,16 @@ namespace ThreePlus.Components.Materials.Maps
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "The Model with a Material to update", GH_ParamAccess.item);
-            pManager.AddGenericParameter("Clearcoat Map", "Img", "The red channel of this texture is multiplied against .clearcoat, for per-pixel control over a coating's intensity." + System.Environment.NewLine + "(A System Drawing Bitmap or full filepath to an image.)", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model Element", "M", "A Three Plus Model Element to update", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Clearcoat Map", "Cm", "The red channel of this texture is multiplied against .clearcoat, for per-pixel control over a coating's intensity." + System.Environment.NewLine + "(A System Drawing Bitmap or full filepath to an image.)", GH_ParamAccess.item);
             pManager[1].Optional = true;
             pManager.AddNumberParameter("Clearcoat", "C", "Represents the intensity of the clear coat layer 0-1.", GH_ParamAccess.item);
             pManager[2].Optional = true;
-            pManager.AddGenericParameter("Roughness Map", "Img", "The green channel of this texture is multiplied against the Clearcoat Roughness, for per-pixel control over a coating's roughness." + System.Environment.NewLine + "(A System Drawing Bitmap or full filepath to an image.)", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Roughness Map", "Rm", "The green channel of this texture is multiplied against the Clearcoat Roughness, for per-pixel control over a coating's roughness." + System.Environment.NewLine + "(A System Drawing Bitmap or full filepath to an image.)", GH_ParamAccess.item);
             pManager[3].Optional = true;
             pManager.AddNumberParameter("Roughness", "R", "Roughness of the clear coat layer 0-1.", GH_ParamAccess.item);
             pManager[4].Optional = true;
-            pManager.AddGenericParameter("Normal Map", "Img", "Can be used to enable independent normals for the clear coat layer." + System.Environment.NewLine + "(A System Drawing Bitmap or full filepath to an image.)", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Normal Map", "Nm", "Can be used to enable independent normals for the clear coat layer." + System.Environment.NewLine + "(A System Drawing Bitmap or full filepath to an image.)", GH_ParamAccess.item);
             pManager[5].Optional = true;
         }
 
@@ -51,7 +51,7 @@ namespace ThreePlus.Components.Materials.Maps
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "The updated Model", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model Element", "M", "The updated Three Plus Model Element", GH_ParamAccess.item);
         }
 
         /// <summary>

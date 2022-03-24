@@ -13,8 +13,8 @@ namespace ThreePlus.Components.Output
         /// Initializes a new instance of the ToHtml class.
         /// </summary>
         public GH_ToHtml()
-          : base("ToHtml", "ToHtml",
-              "Create text outputs for Html and Javascript App representation of the scene",
+          : base("To Html", "ToHtml",
+              "Create text outputs for Html and JavaScript App representation of the scene",
               Constants.ShortName, "Output")
         {
         }
@@ -32,7 +32,7 @@ namespace ThreePlus.Components.Output
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Scene", "S", "Scene", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Scene", "S", "A Three Plus Scene", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -40,8 +40,8 @@ namespace ThreePlus.Components.Output
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("HTML", "H", "The html text", GH_ParamAccess.list);
-            pManager.AddTextParameter("Javascript", "J", "The javascript text", GH_ParamAccess.list);
+            pManager.AddTextParameter("HTML", "H", "The HTML text", GH_ParamAccess.list);
+            pManager.AddTextParameter("Javascript", "J", "The JavaScript text", GH_ParamAccess.list);
         }
 
         /// <summary>

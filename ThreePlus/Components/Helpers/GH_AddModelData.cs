@@ -31,12 +31,12 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "A Model or Curve, Mesh, or Brep", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model Element", "M", "A Model Element, Curve, Mesh, or Brep", GH_ParamAccess.item);
             pManager.AddTextParameter("Name", "N", "The optional name of the model", GH_ParamAccess.item,"");
             pManager[1].Optional = true;
             pManager.AddTextParameter("Keys", "K", "A list of titles to attach to the model", GH_ParamAccess.list);
             pManager[2].Optional = true;
-            pManager.AddTextParameter("Values", "V", "The values coordinted with the titles to attach to the model", GH_ParamAccess.list);
+            pManager.AddTextParameter("Values", "V", "The values coordinated with the titles to attach to the model", GH_ParamAccess.list);
             pManager[3].Optional = true;
         }
 
@@ -45,7 +45,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "The updated Model", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model Element", "M", "The updated Three Plus Model Element", GH_ParamAccess.item);
         }
 
         /// <summary>

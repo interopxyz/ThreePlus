@@ -32,8 +32,8 @@ namespace ThreePlus.Components.Materials
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "A Model, Mesh, or Brep", GH_ParamAccess.item);
-            pManager.AddColourParameter("Color", "C", "The shadows color", GH_ParamAccess.item, Color.Transparent);
+            pManager.AddGenericParameter("Model Element", "M", "A Three Plus Model, Mesh, or Brep", GH_ParamAccess.item);
+            pManager.AddColourParameter("Color", "C", "The shadow color", GH_ParamAccess.item, Color.Transparent);
             pManager[1].Optional = true;
         }
 
@@ -42,7 +42,7 @@ namespace ThreePlus.Components.Materials
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "The updated Model", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model Element", "M", "The updated Three Plus Model Element", GH_ParamAccess.item);
         }
 
         /// <summary>

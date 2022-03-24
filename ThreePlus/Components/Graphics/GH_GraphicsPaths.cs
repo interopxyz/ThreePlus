@@ -16,7 +16,7 @@ namespace ThreePlus.Components.Graphics
         /// </summary>
         public GH_GraphicsPaths()
           : base("Graphics", "Graphics",
-              "A material for drawing wireframe-style geometries with dashed lines. ",
+              "A material for adding curve stroke appearance properties. ",
               Constants.ShortName, "Materials")
         {
         }
@@ -34,14 +34,14 @@ namespace ThreePlus.Components.Graphics
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "A Model, Mesh, or Brep", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model", "M", "A Three Plus Model or Curve", GH_ParamAccess.item);
             pManager.AddColourParameter("Colors", "C", "The graphic colors. A single color or list of colors corresponding to each control point.", GH_ParamAccess.list);
             pManager[1].Optional = true;
-            pManager.AddNumberParameter("Width", "W", "The stroke width",GH_ParamAccess.item);
+            pManager.AddNumberParameter("Width", "W", "The stroke width.",GH_ParamAccess.item);
             pManager[2].Optional = true;
-            pManager.AddNumberParameter("Dash", "D", "The dashed stroke solid", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Dash", "D", "The dashed stroke solid.", GH_ParamAccess.item);
             pManager[3].Optional = true;
-            pManager.AddNumberParameter("Gap", "G", "The dashed stroke gap", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Gap", "G", "The dashed stroke gap.", GH_ParamAccess.item);
             pManager[4].Optional = true;
 
         }
@@ -51,7 +51,7 @@ namespace ThreePlus.Components.Graphics
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "The updated Model", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model Element", "M", "The updated Three Plus Model Element", GH_ParamAccess.item);
         }
 
         /// <summary>

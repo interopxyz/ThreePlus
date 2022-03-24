@@ -41,7 +41,7 @@ namespace ThreePlus.Components.Assets
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddIntegerParameter("Index", "I", "The index of the default bitmap", GH_ParamAccess.item, 0);
+            pManager.AddIntegerParameter("Map Index", "M", "The index of the preselected Bitmap", GH_ParamAccess.item, 0);
             pManager[0].Optional = true;
 
             Param_Integer paramA = (Param_Integer)pManager[0];

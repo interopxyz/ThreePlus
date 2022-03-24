@@ -42,7 +42,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Outline", "O", "The Outline Object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Scene Element", "E", "An Outline Three Plus Scene Modifier Element", GH_ParamAccess.item);
         }
 
         /// <summary>

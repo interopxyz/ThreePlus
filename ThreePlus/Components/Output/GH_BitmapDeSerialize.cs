@@ -14,7 +14,7 @@ namespace ThreePlus.Components.Output
         /// </summary>
         public GH_BitmapDeSerialize()
           : base("DeSerialize Bitmap", "DeSerBmp",
-              "DeSerialize a byte array string representation of a bitmap to a system.drawing.bitmap. Useful for restoring a internalized bitmap.",
+              "DeSerialize a byte array string representation of a Bitmap to a System.Drawing.Bitmap. Useful for restoring an internalized Bitmap.",
               Constants.ShortName, "Output")
         {
         }

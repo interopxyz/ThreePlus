@@ -12,7 +12,7 @@ namespace ThreePlus.Components.RhinoObjects
         /// </summary>
         public GH_RefCamera()
           : base("Reference View", "RefView",
-              "Reference a Rhino document's camera by Name",
+              "Reference a Rhino Doc Named View by Name",
               Constants.ShortName, "Doc")
         {
         }
@@ -38,7 +38,7 @@ namespace ThreePlus.Components.RhinoObjects
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Elements", "E", "Description", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Camera Elements", "E", "Three Plus Camera Elements", GH_ParamAccess.item);
         }
 
         /// <summary>

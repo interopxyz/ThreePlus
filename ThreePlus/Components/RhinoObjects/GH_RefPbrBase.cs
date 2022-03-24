@@ -34,7 +34,7 @@ namespace ThreePlus.Components.RhinoObjects
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddTextParameter("Material Name", "N", "The name of the material to reference", GH_ParamAccess.item);
+            pManager.AddTextParameter("Material Name", "N", "The name of the Rhino Material to reference", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -42,21 +42,21 @@ namespace ThreePlus.Components.RhinoObjects
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddColourParameter("Diffuse Color", "DC", "", GH_ParamAccess.item);//0
-            pManager.AddGenericParameter("Diffuse Map", "DM", "", GH_ParamAccess.item);//1
-            pManager.AddColourParameter("Ambient Color", "AC", "", GH_ParamAccess.item);//2
-            pManager.AddColourParameter("Base Color", "BC", "", GH_ParamAccess.item);//3
-            pManager.AddNumberParameter("Base Color Intensity", "BI", "", GH_ParamAccess.item);//4
-            pManager.AddGenericParameter("Base Color Map", "BM", "", GH_ParamAccess.item);//5
-            pManager.AddNumberParameter("Shine", "SH", "", GH_ParamAccess.item);//6
-            pManager.AddNumberParameter("Reflectivity", "RF", "", GH_ParamAccess.item);//7
-            pManager.AddColourParameter("Reflection Color", "RC", "", GH_ParamAccess.item);//8
-            pManager.AddNumberParameter("Reflection Glossiness", "RG", "", GH_ParamAccess.item);//9
-            pManager.AddNumberParameter("Reflective IOR", "RI", "", GH_ParamAccess.item);//10
-            pManager.AddNumberParameter("Metallic", "MT", "", GH_ParamAccess.item);//11
-            pManager.AddGenericParameter("Metallic Map", "MM", "", GH_ParamAccess.item);//12
-            pManager.AddNumberParameter("Roughness", "RH", "", GH_ParamAccess.item);//13
-            pManager.AddGenericParameter("Roughness Map", "RM", "", GH_ParamAccess.item);//14
+            pManager.AddColourParameter("Diffuse Color", "DC", "The material base color", GH_ParamAccess.item);//0
+            pManager.AddGenericParameter("Diffuse Map", "DM", "The Bitmap used to set the diffuse colors of the material", GH_ParamAccess.item);//1
+            pManager.AddColourParameter("Ambient Color", "AC", "Adds a color to the unlit part of the object", GH_ParamAccess.item);//2
+            pManager.AddColourParameter("Base Color", "BC", "The surface color, or albedo. Base color also affects the various tint amounts.", GH_ParamAccess.item);//3
+            pManager.AddNumberParameter("Base Color Intensity", "BI", "A multiplier on the base color", GH_ParamAccess.item);//4
+            pManager.AddGenericParameter("Base Color Map", "BM", "The Bitmap used to set the base color of the material", GH_ParamAccess.item);//5
+            pManager.AddNumberParameter("Shine", "SH", "The Shine Factor of the material", GH_ParamAccess.item);//6
+            pManager.AddNumberParameter("Reflectivity", "RF", "How Reflective value of the material", GH_ParamAccess.item);//7
+            pManager.AddColourParameter("Reflection Color", "RC", "The reflection color tint", GH_ParamAccess.item);//8
+            pManager.AddNumberParameter("Reflection Glossiness", "RG", "The reflection glossiness", GH_ParamAccess.item);//9
+            pManager.AddNumberParameter("Reflective IOR", "RI", "Index of refraction", GH_ParamAccess.item);//10
+            pManager.AddNumberParameter("Metallic", "MT", "The metallic-ness (0 = dielectric, 1 = metallic).  The only two physically correct values are 0.0 and 1.0 which specify the different models.  The metallic model has no diffuse component, but has tinted specular equal to the base color.", GH_ParamAccess.item);//11
+            pManager.AddGenericParameter("Metallic Map", "MM", "The Bitmap used to alter the metalness of the material ", GH_ParamAccess.item);//12
+            pManager.AddNumberParameter("Roughness", "RH", "Surface roughness.  Controls both diffuse and specular response.", GH_ParamAccess.item);//13
+            pManager.AddGenericParameter("Roughness Map", "RM", "The Bitmap used to alter the roughness of the material", GH_ParamAccess.item);//14
         }
 
         /// <summary>

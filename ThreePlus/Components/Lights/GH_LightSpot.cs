@@ -31,15 +31,15 @@ namespace ThreePlus.Components.Lights
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddColourParameter("Color", "C", "The lights color", GH_ParamAccess.item, Color.White);
+            pManager.AddColourParameter("Color", "C", "The light color", GH_ParamAccess.item, Color.White);
             pManager[0].Optional = true;
-            pManager.AddPointParameter("Position", "P", "The position of the light", GH_ParamAccess.item, new Point3d(100, 100, 100));
+            pManager.AddPointParameter("Position", "P", "The light position", GH_ParamAccess.item, new Point3d(100, 100, 100));
             pManager[1].Optional = true;
-            pManager.AddPointParameter("Target", "T", "The target of the light", GH_ParamAccess.item, new Point3d(0, 0, 0));
+            pManager.AddPointParameter("Target", "T", "The light target", GH_ParamAccess.item, new Point3d(0, 0, 0));
             pManager[2].Optional = true;
-            pManager.AddNumberParameter("Intensity", "I", "The light's strength/intensity.", GH_ParamAccess.item, 1);
+            pManager.AddNumberParameter("Intensity", "I", "The light strength/intensity.", GH_ParamAccess.item, 1);
             pManager[3].Optional = true;
-            pManager.AddNumberParameter("Decay", "D", "The amount the light dims along the distance of the light.", GH_ParamAccess.item, 1);
+            pManager.AddNumberParameter("Decay Factor", "F", "The amount the light dims along the distance of the light.", GH_ParamAccess.item, 1);
             pManager[4].Optional = true;
             pManager.AddNumberParameter("Angle", "A", "Maximum angle of light dispersion from its direction.", GH_ParamAccess.item, Math.PI/3.0);
             pManager[5].Optional = true;
@@ -52,7 +52,7 @@ namespace ThreePlus.Components.Lights
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Light", "L", "A point light", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Light Element", "L", "A Three Plus Light Element", GH_ParamAccess.item);
         }
 
         /// <summary>

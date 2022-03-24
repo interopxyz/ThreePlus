@@ -34,7 +34,7 @@ namespace ThreePlus.Components.RhinoObjects
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddTextParameter("Material Name", "N", "The name of the material to reference", GH_ParamAccess.item);
+            pManager.AddTextParameter("Material Name", "N", "The name of the Rhino Material to reference", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -42,19 +42,19 @@ namespace ThreePlus.Components.RhinoObjects
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddNumberParameter("Opacity", "OP", "", GH_ParamAccess.item);//0
-            pManager.AddNumberParameter("Transparency", "TR", "", GH_ParamAccess.item);//1
-            pManager.AddColourParameter("Transparency Color", "TC", "", GH_ParamAccess.item);//2
-            pManager.AddGenericParameter("Opacity Map", "OM", "", GH_ParamAccess.item);//3
-            pManager.AddNumberParameter("Opacity IOR", "OI", "", GH_ParamAccess.item);//4
-            pManager.AddGenericParameter("Opacity IOR Map", "IM", "", GH_ParamAccess.item);//5
-            pManager.AddNumberParameter("Opacity Roughness", "OR", "", GH_ParamAccess.item);//6
-            pManager.AddGenericParameter("Opacity Roughness Map", "RM", "", GH_ParamAccess.item);//7
-            pManager.AddNumberParameter("Alpha", "AL", "", GH_ParamAccess.item);//8
-            pManager.AddGenericParameter("Alpha Map", "AM", "", GH_ParamAccess.item);//9
-            pManager.AddNumberParameter("Fresnel IOR", "FI", "", GH_ParamAccess.item);//10
-            pManager.AddNumberParameter("Refraction Glossiness", "RG", "", GH_ParamAccess.item);//11
-            pManager.AddColourParameter("Specular Color", "SC", "", GH_ParamAccess.item);//12
+            pManager.AddNumberParameter("Opacity", "OP", "The opacity of the material (0.0 = transparent to 1.0 = opaque)", GH_ParamAccess.item);//0
+            pManager.AddNumberParameter("Transparency", "TR", "The transparency of the material (0.0 = opaque to 1.0 = transparent)", GH_ParamAccess.item);//1
+            pManager.AddColourParameter("Transparency Color", "TC", "The transparency color", GH_ParamAccess.item);//2
+            pManager.AddGenericParameter("Opacity Map", "OM", "The Bitmap used to alter the opacity value of the material.", GH_ParamAccess.item);//3
+            pManager.AddNumberParameter("Opacity IOR", "OI", "Index of refraction for transmitted light.", GH_ParamAccess.item);//4
+            pManager.AddGenericParameter("Opacity IOR Map", "IM", "The Bitmap used to alter the opacity IOR value of the material.", GH_ParamAccess.item);//5
+            pManager.AddNumberParameter("Opacity Roughness", "OR", "Controls roughness used for transmitted light", GH_ParamAccess.item);//6
+            pManager.AddGenericParameter("Opacity Roughness Map", "RM", "The Bitmap used to alter the opacity roughness value of the material.", GH_ParamAccess.item);//7
+            pManager.AddNumberParameter("Alpha", "AL", "The alpha transparency value.", GH_ParamAccess.item);//8
+            pManager.AddGenericParameter("Alpha Map", "AM", "The Bitmap used to alter the alpha value of the material.", GH_ParamAccess.item);//9
+            pManager.AddNumberParameter("Fresnel IOR", "FI", "Fresnel Index of Refraction", GH_ParamAccess.item);//10
+            pManager.AddNumberParameter("Refraction Glossiness", "RG", "Simulates a rougher surface, by diffusing the light rays in different directions.", GH_ParamAccess.item);//11
+            pManager.AddColourParameter("Specular Color", "SC", "The reflected color of the object's highlights.", GH_ParamAccess.item);//12
         }
 
         /// <summary>

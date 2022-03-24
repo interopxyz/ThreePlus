@@ -33,8 +33,8 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Scene Objects", "O", "Scene Objects including (Curves, Breps, Meshes, Lights, Cameras, Three Objects)", GH_ParamAccess.list);
-            pManager.AddIntegerParameter("Click Modes", "C", "Add click events to model elements", GH_ParamAccess.item, 0);
+            pManager.AddGenericParameter("Elements", "E", "Elements including Models, Lights, Cameras, Helpers, Scene Elements, and Geometry (Curves, Breps, Meshes)", GH_ParamAccess.list);
+            pManager.AddIntegerParameter("Click Modes", "C", "Adds click events to model elements", GH_ParamAccess.item, 0);
             pManager[1].Optional = true;
 
             Param_Integer paramA = (Param_Integer)pManager[1];
@@ -48,7 +48,7 @@ namespace ThreePlus.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Scene", "S", "Scene", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Scene", "S", "A Three Plus Scene", GH_ParamAccess.item);
         }
 
         /// <summary>

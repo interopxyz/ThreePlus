@@ -32,7 +32,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "A Model or Curve, Mesh, or Brep", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model Element", "M", "A Model Element, Curve, Mesh, or Brep", GH_ParamAccess.item);
             pManager.AddColourParameter("Color", "C", "The preview color", GH_ParamAccess.item, Color.Gray);
             pManager[1].Optional = true;
         }
@@ -42,7 +42,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Model", "M", "The updated Model", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Model Element", "M", "The updated Three Plus Model Element", GH_ParamAccess.item);
         }
 
         /// <summary>

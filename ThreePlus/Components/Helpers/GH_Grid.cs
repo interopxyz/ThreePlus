@@ -13,7 +13,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         public GH_Grid()
           : base("Grid", "Grid",
-              "The GridHelper is an object to define grids. Grids are two-dimensional arrays of lines.",
+              "Two-dimensional arrays of lines on the ground plane.",
               Constants.ShortName, "Helpers")
         {
         }
@@ -40,7 +40,7 @@ namespace ThreePlus.Components.Helpers
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Grid", "G", "The grid object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Grid", "G", "A Three Plus Helper Element", GH_ParamAccess.item);
         }
 
         /// <summary>
