@@ -523,7 +523,8 @@ namespace ThreePlus
         public static string ToJsObjMap(this Sd.Bitmap input, string path, string name, bool assets = false)
         {
             StringBuilder output = new StringBuilder();
-            string mapName = "./assets/"+input.SavePng(path,name); 
+            string mapName = "";
+            if (assets) mapName = "./assets/" + input.SavePng(path,name); 
             if (!assets) mapName = "data:image / png; base64," + input.ToStr();
             output.AppendLine("var " + name + " = new THREE.TextureLoader().load(\""+ mapName + "\");");
             output.AppendLine(name + ".mapping = THREE.UVMapping;");
@@ -576,8 +577,8 @@ namespace ThreePlus
                 default:
                     break;
                 case Environment.EnvironmentModes.Environment:
-
-                    string envMap = "./assets/"+ input.EnvMap.SavePng(path, "envMapImg");
+                    string envMap = "";
+                    if (assets) envMap = "./assets/"+ input.EnvMap.SavePng(path, "envMapImg");
                     if(!assets)envMap = "data:image / png; base64," + input.EnvMap.ToStr(); 
                     output.AppendLine("var envMap = new THREE.TextureLoader().load(\""+ envMap + "\");");
 

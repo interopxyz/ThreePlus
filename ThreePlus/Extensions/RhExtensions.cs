@@ -296,7 +296,10 @@ namespace ThreePlus
         public static string SavePng(this Sd.Bitmap input, string path, string name)
         {
             string filename= name+".png";
-            input.Save(path + filename, Sd.Imaging.ImageFormat.Png);
+
+            Sd.Bitmap bitmap = new Sd.Bitmap(input);
+
+            bitmap.Save(path + filename);
 
             return filename;
         }
