@@ -66,6 +66,7 @@
     <Compile Include="Classes\PointCloud.cs" />
     <Compile Include="Classes\PostProcessing\AmbientOcclusion.cs" />
     <Compile Include="Classes\PostProcessing\Outline.cs" />
+    <Compile Include="Classes\Shape.cs" />
     <Compile Include="Classes\Sky.cs" />
     <Compile Include="Components\Assets\GH_Assets_CubeMap.cs" />
     <Compile Include="Components\Assets\GH_Assets_CubeMaps.cs" />
@@ -76,6 +77,19 @@
     <Compile Include="Components\Cameras\GH_Camera_Animate.cs" />
     <Compile Include="Components\Cameras\GH_Camera_Orthographic.cs" />
     <Compile Include="Components\Cameras\GH_Camera_Perspective.cs" />
+    <Compile Include="Components\Geometry\GH_GeoBox.cs" />
+    <Compile Include="Components\Geometry\GH_GeoCylinder.cs" />
+    <Compile Include="Components\Geometry\GH_GeoCircle.cs" />
+    <Compile Include="Components\Geometry\GH_GeoCone.cs" />
+    <Compile Include="Components\Geometry\GH_GeoDodecahedron.cs" />
+    <Compile Include="Components\Geometry\GH_GeoIcosahedron.cs" />
+    <Compile Include="Components\Geometry\GH_GeoOctahedron.cs" />
+    <Compile Include="Components\Geometry\GH_GeoPlane.cs" />
+    <Compile Include="Components\Geometry\GH_GeoSphere.cs" />
+    <Compile Include="Components\Geometry\GH_GeoTetrahedron.cs" />
+    <Compile Include="Components\Geometry\GH_GeoTorus.cs" />
+    <Compile Include="Components\Geometry\GH_GeoTorusKnot.cs" />
+    <Compile Include="Components\GH_GeoPreview.cs" />
     <Compile Include="Components\GH_Preview.cs" />
     <Compile Include="Components\Graphics\GH_GraphicsPaths.cs" />
     <Compile Include="Components\Helpers\GH_AddModelData.cs" />
@@ -895,6 +909,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Three_Helper_Data-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Shape-Box-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Shape-Circle-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Shape-Cone-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Shape-Cylinder-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Shape-Dodecahedron-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Shape-Icosahedron-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Shape-Octahedron-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Shape-Plane-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Shape-Sphere-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Shape-Tetrahedron-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Shape-Torus-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Three_Shape-TorusKnot-01.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -13,7 +13,7 @@ namespace ThreePlus
     {
         
         #region members
-        public enum GeometryTypes { None,Cloud,Plane,Curve,Mesh}
+        public enum GeometryTypes { None,Cloud,Plane,Curve,Mesh, Shape}
         protected GeometryTypes geometryType = GeometryTypes.None;
 
         protected Guid geoId = new Guid();
@@ -23,6 +23,7 @@ namespace ThreePlus
         protected Rg.Mesh mesh = null;
         protected Rg.NurbsCurve curve = null;
         protected PointCloud cloud = null;
+        protected Shape shape = null;
 
         protected List<Rg.Transform> tweens = new List<Rg.Transform>();
 
@@ -56,6 +57,7 @@ namespace ThreePlus
             if (model.curve != null) this.curve = model.curve.DuplicateCurve().ToNurbsCurve();
             if (model.plane != Rg.Plane.Unset) this.plane= (Rg.Plane)model.plane.Clone();
             if (model.cloud != null) this.cloud = new PointCloud(model.cloud);
+            if (model.shape != null) this.shape = new Shape(model.shape);
 
             this.Data = model.Data;
 
@@ -138,9 +140,37 @@ namespace ThreePlus
             this.cloud = new PointCloud(point,Color.Black);
         }
 
+        public Model(Shape shape):base()
+        {
+            this.geoId = Guid.NewGuid();
+            this.geometryType = GeometryTypes.Shape;
+            this.objectType = "Shape";
+
+            this.type = "BufferGeometry";
+
+            this.shape = new Shape(shape);
+        }
+
         #endregion
 
         #region properties
+
+        public virtual Rg.BoundingBox BoundingBox
+        {
+            get
+            {
+                if (this.IsMesh) return this.Mesh.GetBoundingBox(false);
+                if (this.IsCurve) return this.Curve.GetBoundingBox(false);
+                if (this.IsCloud) return new Rg.BoundingBox(this.Cloud.Points);
+                if (this.IsShape) if (this.Shape.PreviewMesh!=null) return this.Shape.PreviewMesh.GetBoundingBox(false);
+                return Rg.BoundingBox.Unset;
+            }
+        }
+
+        public virtual bool IsShape
+        {
+            get { return this.geometryType == GeometryTypes.Shape; }
+        }
 
         public virtual bool IsMesh
         {
@@ -167,6 +197,11 @@ namespace ThreePlus
             get { return this.geometryType.ToString(); }
         }
 
+        public GeometryTypes GeoType
+        {
+            get { return this.geometryType; }
+        }
+
         public virtual Rg.Mesh Mesh 
         {
             get { return mesh; }
@@ -185,6 +220,11 @@ namespace ThreePlus
         public virtual PointCloud Cloud
         {
             get { return cloud; }
+        }
+
+        public virtual Shape Shape
+        {
+            get { return shape; }
         }
 
         public virtual double Size
@@ -266,6 +306,8 @@ namespace ThreePlus
                     return "Model | " + GeometryType.ToString() + " | " + this.Cloud.Points.Count + " points";
                 case GeometryTypes.Plane:
                     return "Model | " + GeometryType.ToString() + " | " + this.size + " size";
+                case GeometryTypes.Shape:
+                    return "Model | " + GeometryType.ToString() + " | " + shape.ShapeType.ToString();
                 default:
                     return "Model | empty";
             }

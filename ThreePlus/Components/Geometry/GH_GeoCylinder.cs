@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace ThreePlus.Components.Geometry
 {
-    public class GH_GeoBox : GH_GeoPreview
+    public class GH_GeoCylinder : GH_GeoPreview
     {
         /// <summary>
-        /// Initializes a new instance of the GH_Primative_Box class.
+        /// Initializes a new instance of the GH_GeoCapsule class.
         /// </summary>
-        public GH_GeoBox()
-          : base("Box Geometry", "Box",
-              "A Three JS Standard Geometry Box",
+        public GH_GeoCylinder()
+          : base("Cylinder Geometry", "Cylinder",
+              "A Three JS Standard Geometry Cylinder",
               Constants.ShortName, "Shapes")
         {
         }
@@ -22,14 +22,16 @@ namespace ThreePlus.Components.Geometry
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddBoxParameter("Box", "B", "Base Box", GH_ParamAccess.item, new Box(Plane.WorldXY,new Interval(-5,5),new Interval(-5,5), new Interval(-5, 5)));
+            pManager.AddPlaneParameter("Plane", "P", "The plane", GH_ParamAccess.item, Plane.WorldXY);
             pManager[0].Optional = true;
-            pManager.AddIntegerParameter("X Count", "X", "Face count in the X direction", GH_ParamAccess.item, 1);
+            pManager.AddNumberParameter("Radius", "R", "The base radius", GH_ParamAccess.item, 10);
             pManager[1].Optional = true;
-            pManager.AddIntegerParameter("Y Count", "Y", "Face count in the Y direction", GH_ParamAccess.item, 1);
+            pManager.AddNumberParameter("Height", "H", "The cone height", GH_ParamAccess.item, 20);
             pManager[2].Optional = true;
-            pManager.AddIntegerParameter("Z Count", "Z", "Face count in the Z direction", GH_ParamAccess.item, 1);
+            pManager.AddBooleanParameter("Smooth", "S", "Is the cap smoothed", GH_ParamAccess.item, false);
             pManager[3].Optional = true;
+            pManager.AddIntegerParameter("Divisions", "D", "The number of radial divisions", GH_ParamAccess.item, 24);
+            pManager[4].Optional = true;
         }
 
         /// <summary>
@@ -46,19 +48,31 @@ namespace ThreePlus.Components.Geometry
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            Box box = Box.Unset;
-            DA.GetData(0, ref box);
+            Plane plane = Plane.WorldXY;
+            DA.GetData(0, ref plane);
 
-            int x = 1;
-            DA.GetData(1, ref x);
+            double radius = 10.0;
+            DA.GetData(1, ref radius);
 
-            int y = 1;
-            DA.GetData(2, ref y);
+            double height = 20.0;
+            DA.GetData(2, ref height);
 
-            int z = 1;
-            DA.GetData(3, ref z);
+            bool capsule = false;
+            DA.GetData(3, ref capsule);
 
-            Shape shape = Shape.BoxShape(box, x,y,z);
+            int divisions = 24;
+            DA.GetData(4, ref divisions);
+
+            Shape shape = new Shape();
+            if (capsule)
+            {
+                shape = Shape.CapsuleShape(plane, radius, height, divisions);
+            }
+            else
+            {
+                shape = Shape.CylinderShape(plane, radius, height, divisions);
+            }
+            
             Model model = new Model(shape);
 
             prevModels.Add(model);
@@ -74,7 +88,7 @@ namespace ThreePlus.Components.Geometry
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.Three_Shape_Box_01;
+                return Properties.Resources.Three_Shape_Cylinder_01;
             }
         }
 
@@ -83,7 +97,7 @@ namespace ThreePlus.Components.Geometry
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("6452750e-9669-4375-bed8-76b4358a93e1"); }
+            get { return new Guid("fdd8ae15-0b71-45d5-8bd8-2c2520962e31"); }
         }
     }
 }
