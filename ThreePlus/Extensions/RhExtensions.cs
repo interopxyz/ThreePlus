@@ -25,9 +25,7 @@ namespace ThreePlus
 
             foreach (Model model in input)
             {
-                if (model.IsMesh) bbox.Union(model.Mesh.GetBoundingBox(false));
-                if (model.IsCurve) bbox.Union(model.Curve.GetBoundingBox(false));
-                if (model.IsCloud) bbox.Union(new Rg.BoundingBox(model.Cloud.Points));
+                bbox.Union(model.BoundingBox);
             }
 
             return bbox;
@@ -296,9 +294,189 @@ namespace ThreePlus
         public static string SavePng(this Sd.Bitmap input, string path, string name)
         {
             string filename= name+".png";
-            input.Save(path + filename, Sd.Imaging.ImageFormat.Png);
+
+            Sd.Bitmap bitmap = new Sd.Bitmap(input);
+
+            bitmap.Save(path + filename);
 
             return filename;
         }
+
+        #region meshes
+
+        public static Rg.Mesh CreateDisk(this Rg.Mesh input, Rg.Plane plane, double radius, int divisions)
+        {
+            Rg.Mesh mesh = new Rg.Mesh();
+
+            double s = Math.PI * 2.0 * (1.0 / divisions);
+            mesh.Vertices.Add(plane.Origin);
+            for (int i = 0; i < divisions; i++)
+            {
+                mesh.Vertices.Add(plane.PointAt(radius * Math.Sin(s * i), radius * Math.Cos(s * i)));
+            }
+
+            for (int i = 0; i < divisions - 1; i++)
+            {
+                mesh.Faces.AddFace(new Rg.MeshFace(0, i + 1, i + 2));
+            }
+            mesh.Faces.AddFace(new Rg.MeshFace(0, mesh.Vertices.Count - 1, 1));
+            mesh.RebuildNormals();
+
+            return mesh;
+        }
+
+        public static Rg.Mesh CreateRing(this Rg.Mesh input, Rg.Plane plane, double radiusA, double radiusB, int divisions)
+        {
+            Rg.Mesh mesh = new Rg.Mesh();
+
+            double s = Math.PI * 2.0 * (1.0 / divisions);
+
+            for (int i = 0; i < divisions; i++)
+            {
+                mesh.Vertices.Add(plane.PointAt(radiusA * Math.Sin(s * i), radiusA * Math.Cos(s * i)));
+                mesh.Vertices.Add(plane.PointAt(radiusB * Math.Sin(s * i), radiusB * Math.Cos(s * i)));
+            }
+
+            for (int i = 0; i < divisions - 1; i++)
+            {
+                mesh.Faces.AddFace(new Rg.MeshFace(i * 2, i*2 + 1, i*2 + 3, i * 2 + 2));
+            }
+            mesh.Faces.AddFace(new Rg.MeshFace(mesh.Vertices.Count - 2, mesh.Vertices.Count - 1, 1,0));
+            mesh.RebuildNormals();
+
+            return mesh;
+        }
+
+        public static Rg.Mesh CreateOctahedron(this Rg.Mesh input, Rg.Plane plane, double radius)
+        {
+            Rg.Mesh mesh = new Rg.Mesh();
+
+            mesh.Vertices.Add(plane.PointAt(0, 0, radius));
+            mesh.Vertices.Add(plane.PointAt(-radius, 0, 0));
+            mesh.Vertices.Add(plane.PointAt(0, -radius, 0));
+            mesh.Vertices.Add(plane.PointAt(radius, 0, 0));
+            mesh.Vertices.Add(plane.PointAt(0, radius, 0));
+            mesh.Vertices.Add(plane.PointAt(0, 0, -radius));
+
+            mesh.Faces.AddFace(new Rg.MeshFace(0, 1, 2));
+            mesh.Faces.AddFace(new Rg.MeshFace(0, 2, 3));
+            mesh.Faces.AddFace(new Rg.MeshFace(0, 3, 4));
+            mesh.Faces.AddFace(new Rg.MeshFace(0, 4, 1));
+
+            mesh.Faces.AddFace(new Rg.MeshFace(5, 2, 1));
+            mesh.Faces.AddFace(new Rg.MeshFace(5, 3, 2));
+            mesh.Faces.AddFace(new Rg.MeshFace(5, 4, 3));
+            mesh.Faces.AddFace(new Rg.MeshFace(5, 1, 4));
+
+            mesh.Faces.AddFace(new Rg.MeshFace(mesh.Vertices.Count - 2, mesh.Vertices.Count - 1, 1, 0));
+
+            mesh.Unweld(Math.PI / 3.0, true);
+            mesh.RebuildNormals();
+
+            return mesh;
+        }
+
+        public static Rg.Mesh CreateTetrahedron(this Rg.Mesh input, Rg.Plane plane, double radius)
+        {
+            Rg.Mesh mesh = new Rg.Mesh();
+            double a = radius / Math.Sqrt(3.0);
+            mesh.Vertices.Add(plane.PointAt(a, a, a));
+            mesh.Vertices.Add(plane.PointAt(-a, -a, a));
+            mesh.Vertices.Add(plane.PointAt(-a, a, -a));
+            mesh.Vertices.Add(plane.PointAt(a, -a, -a));
+
+            mesh.Faces.AddFace(new Rg.MeshFace(1, 0, 2));
+            mesh.Faces.AddFace(new Rg.MeshFace(2, 3, 1));
+            mesh.Faces.AddFace(new Rg.MeshFace(0, 1, 3));
+            mesh.Faces.AddFace(new Rg.MeshFace(3, 2, 0));
+
+            mesh.Unweld(Math.PI / 3.0, true);
+            mesh.RebuildNormals();
+
+            return mesh;
+        }
+
+        public static Rg.Mesh CreateDodecahedron(this Rg.Mesh input, Rg.Plane plane, double radius)
+        {
+            Rg.Mesh mesh = new Rg.Mesh();
+
+            double phi = (Math.Sqrt(5.0) - 1.0) / 2.0;
+
+            double a = 1 / Math.Sqrt(3.0);
+            double b = a / phi;
+            double c = a * phi;
+
+            foreach (var i in new[] { -1, 1 })
+            {
+                foreach (var j in new[] { -1, 1 })
+                {
+                    mesh.Vertices.Add(new Rg.Point3d(0, i * c * radius, j * b * radius));
+                    mesh.Vertices.Add(new Rg.Point3d(i * c * radius, j * b * radius, 0));
+                    mesh.Vertices.Add(new Rg.Point3d(i * b * radius, 0, j * c * radius));
+
+                    foreach (var k in new[] { -1, 1 })
+                    {
+                        mesh.Vertices.Add(new Rg.Point3d(i * a * radius, j * a * radius, k * a * radius));
+                    }
+                }
+            }
+
+            mesh.Faces.AddFace(new Rg.MeshFace(0, 3, 1));
+            mesh.Faces.AddFace(new Rg.MeshFace(0, 1, 11));
+            mesh.Faces.AddFace(new Rg.MeshFace(0, 11, 13));
+                                   
+            mesh.Faces.AddFace(new Rg.MeshFace(10, 0, 13));
+            mesh.Faces.AddFace(new Rg.MeshFace(10, 13, 12));
+            mesh.Faces.AddFace(new Rg.MeshFace(10, 12, 18));
+                                   
+            mesh.Faces.AddFace(new Rg.MeshFace(10, 18, 16));
+            mesh.Faces.AddFace(new Rg.MeshFace(10, 16, 6));
+            mesh.Faces.AddFace(new Rg.MeshFace(10, 6, 8));
+                                   
+            mesh.Faces.AddFace(new Rg.MeshFace(0, 10, 8));
+            mesh.Faces.AddFace(new Rg.MeshFace(0, 8, 2));
+            mesh.Faces.AddFace(new Rg.MeshFace(0, 2, 3));
+                                   
+            mesh.Faces.AddFace(new Rg.MeshFace(5, 14, 11));
+            mesh.Faces.AddFace(new Rg.MeshFace(5, 11, 1));
+            mesh.Faces.AddFace(new Rg.MeshFace(5, 1, 4));
+                                   
+            mesh.Faces.AddFace(new Rg.MeshFace(15, 19, 17));
+            mesh.Faces.AddFace(new Rg.MeshFace(15, 17, 14));
+            mesh.Faces.AddFace(new Rg.MeshFace(15, 14, 5));
+                                   
+            mesh.Faces.AddFace(new Rg.MeshFace(15, 9, 6));
+            mesh.Faces.AddFace(new Rg.MeshFace(15, 6, 16));
+            mesh.Faces.AddFace(new Rg.MeshFace(15, 16, 19));
+                                   
+            mesh.Faces.AddFace(new Rg.MeshFace(5, 4, 7));
+            mesh.Faces.AddFace(new Rg.MeshFace(5, 7, 9));
+            mesh.Faces.AddFace(new Rg.MeshFace(5, 9, 15));
+                                   
+            mesh.Faces.AddFace(new Rg.MeshFace(8, 6, 9));
+            mesh.Faces.AddFace(new Rg.MeshFace(8, 9, 7));
+            mesh.Faces.AddFace(new Rg.MeshFace(8, 7, 2));
+                                   
+            mesh.Faces.AddFace(new Rg.MeshFace(4, 1, 3));
+            mesh.Faces.AddFace(new Rg.MeshFace(4, 3, 2));
+            mesh.Faces.AddFace(new Rg.MeshFace(4, 2, 7));
+                                   
+            mesh.Faces.AddFace(new Rg.MeshFace(13, 11, 14));
+            mesh.Faces.AddFace(new Rg.MeshFace(13, 14, 17));
+            mesh.Faces.AddFace(new Rg.MeshFace(13, 17, 12));
+                                   
+            mesh.Faces.AddFace(new Rg.MeshFace(19, 16, 18));
+            mesh.Faces.AddFace(new Rg.MeshFace(19, 18, 12));
+            mesh.Faces.AddFace(new Rg.MeshFace(19, 12, 17));
+
+            mesh.Unweld(Math.PI / 3.0, true);
+            mesh.RebuildNormals();
+
+            return mesh;
+
+        }
+
+        #endregion
+
     }
 }
