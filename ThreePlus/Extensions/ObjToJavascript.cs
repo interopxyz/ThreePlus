@@ -1136,6 +1136,7 @@ namespace ThreePlus
             StringBuilder output = new StringBuilder();
             string shape = "const shape" + index + " = new THREE.";
             double adjust = 0;
+            if (input.IsRotated) adjust = Math.PI / 2.0;
 
             switch (input.ShapeType)
             {
@@ -1162,30 +1163,24 @@ namespace ThreePlus
                     break;
                 case Shape.ShapeTypes.Plane:
                     shape += "PlaneGeometry( " + input.SizeX + ", " + input.SizeY + " );";
-                    adjust = -Math.PI / 2;
                     break;
                 case Shape.ShapeTypes.Circle:
                     shape += "CircleGeometry( " + input.SizeX + ", " + input.DivisionsU + " );";
-                    adjust = -Math.PI / 2;
                     break;
                 case Shape.ShapeTypes.Ring:
                     shape += "RingGeometry( " + input.SizeX + ", " + input.SizeY + ", " + input.DivisionsU + " );";
-                    adjust = -Math.PI / 2;
                     break;
                 case Shape.ShapeTypes.Sphere:
                     shape += "SphereGeometry( " + input.SizeX + ", " + input.DivisionsU + ", " + input.DivisionsV + " );";
-                    adjust = -Math.PI / 2;
                     break;
                 case Shape.ShapeTypes.Tetrahedron:
                     shape += "TetrahedronGeometry( " + input.SizeX + " );";
                     break;
                 case Shape.ShapeTypes.Torus:
                     shape += "TorusGeometry( " + input.SizeX + ", " + input.SizeY + ", " + input.DivisionsU + ", " + input.DivisionsV + " );";
-                    adjust = -Math.PI/2;
                     break;
                 case Shape.ShapeTypes.TorusKnot:
                     shape += "TorusKnotGeometry( " + input.SizeX + ", " + input.SizeY + ", " + input.DivisionsU + ", " + input.DivisionsV + ", " + input.TurnsA + ", " + input.TurnsB + " );";
-                    adjust = -Math.PI / 2;
                     break;
             }
 

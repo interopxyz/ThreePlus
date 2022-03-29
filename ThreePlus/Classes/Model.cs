@@ -144,11 +144,13 @@ namespace ThreePlus
         {
             this.geoId = Guid.NewGuid();
             this.geometryType = GeometryTypes.Shape;
-            this.objectType = "Shape";
+            this.objectType = "Mesh";
+
 
             this.type = "BufferGeometry";
 
             this.shape = new Shape(shape);
+            SetShapeMatrix();
         }
 
         #endregion
@@ -270,6 +272,15 @@ namespace ThreePlus
         #endregion
 
         #region methods
+
+        private void SetShapeMatrix()
+        {
+            Rg.Plane plane = shape.Plane;
+            int digits = 5;
+            double[] matrixVals = new double[] { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, Math.Round(plane.Origin.Y, digits), Math.Round(-plane.Origin.Z, digits), Math.Round(plane.Origin.X, digits), 1 };
+            if(shape.IsRotated) matrixVals = new double[] { 1, 0, 0, 0, 0, 2.220446049250313e-16, -1, 0, 0, 1, 2.220446049250313e-16, 0, Math.Round(plane.Origin.Y, digits), Math.Round(-plane.Origin.Z, digits), Math.Round(plane.Origin.X, digits), 1 };
+            this.matrix = matrixVals;
+        }
 
         public void SetEdges(double threshold, Color edgeColor)
         {

@@ -29,6 +29,8 @@ namespace ThreePlus
         protected int turnsA = 2;
         protected int turnsB = 3;
 
+        protected bool isRotated = false;
+
         protected Rg.Mesh previewMesh = Rg.Mesh.CreateFromBox(new Rg.Box(Rg.Plane.WorldXY, new Rg.Interval(-5, 5), new Rg.Interval(-5, 5), new Rg.Interval(-5, 5)),1,1,1);
 
         #endregion
@@ -56,6 +58,8 @@ namespace ThreePlus
 
             this.turnsA = shape.turnsA;
             this.turnsB = shape.turnsB;
+
+            this.isRotated = shape.isRotated;
 
             this.previewMesh = shape.previewMesh;
         }
@@ -87,6 +91,8 @@ namespace ThreePlus
 
             output.plane = plane;
 
+            output.isRotated = true;
+
             output.sizeX = radius;
 
             output.divisionsU = divisionsU;
@@ -103,6 +109,8 @@ namespace ThreePlus
             output.shapeType = ShapeTypes.Torus;
 
             output.plane = plane;
+
+            output.isRotated = true;
 
             output.sizeX = radius;
             output.sizeY = thickness;
@@ -121,6 +129,8 @@ namespace ThreePlus
             output.shapeType = ShapeTypes.TorusKnot;
 
             output.plane = plane;
+
+            output.isRotated = true;
 
             output.sizeX = radius;
             output.sizeY = thickness;
@@ -142,6 +152,8 @@ namespace ThreePlus
             output.shapeType = ShapeTypes.Plane;
 
             output.plane = plane;
+
+            output.isRotated = true;
 
             output.sizeX = width;
             output.sizeY = height;
@@ -219,6 +231,8 @@ namespace ThreePlus
 
             output.plane = plane;
 
+            output.isRotated = true;
+
             output.sizeX = radius;
 
             output.divisionsU = divisions;
@@ -237,6 +251,8 @@ namespace ThreePlus
             double r1 = Math.Max(outerRadius, innerRadius);
 
             output.plane = plane;
+
+            output.isRotated = true;
 
             output.sizeX = r0;
             output.sizeY = r1;
@@ -313,6 +329,10 @@ namespace ThreePlus
 
         #region properties
 
+        public virtual bool IsRotated
+        {
+            get { return isRotated; }
+        }
         public virtual Rg.Mesh PreviewMesh
         {
             get { return previewMesh; }
