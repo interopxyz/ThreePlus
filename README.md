@@ -1,6 +1,5 @@
 # Three +
-
-Three.Js scene compiler for Grasshopper 3d
+Three.js scene compiler for Grasshopper 3d
 
 ---
 
