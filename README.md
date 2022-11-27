@@ -1,4 +1,4 @@
-# threeplus
+# ThreePlus
 
 Three.Js scene compiler for Grasshopper 3d
 
