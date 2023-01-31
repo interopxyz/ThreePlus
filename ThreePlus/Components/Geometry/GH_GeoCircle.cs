@@ -11,9 +11,9 @@ namespace ThreePlus.Components.Geometry
         /// Initializes a new instance of the GH_GeoCircle class.
         /// </summary>
         public GH_GeoCircle()
-          : base("GH_GeoCircle", "Nickname",
-              "Description",
-              "Category", "Subcategory")
+          : base("Circle Shape", "Circle",
+              "Convert a Rhino Circle to a ThreeJs default Geometry",
+              Constants.ShortName, "Shapes")
         {
         }
 
@@ -37,6 +37,7 @@ namespace ThreePlus.Components.Geometry
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            //Circle & Ring
         }
 
         /// <summary>

@@ -11,9 +11,9 @@ namespace ThreePlus.Components.Geometry
         /// Initializes a new instance of the GH_Primative_Box class.
         /// </summary>
         public GH_Primative_Box()
-          : base("GH_Primative_Box", "Nickname",
-              "Description",
-              "Category", "Subcategory")
+          : base("Box Shape", "Box",
+              "Convert a Rhino Box to a ThreeJs default Geometry",
+              Constants.ShortName, "Shapes")
         {
         }
 
@@ -22,6 +22,7 @@ namespace ThreePlus.Components.Geometry
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
+
         }
 
         /// <summary>

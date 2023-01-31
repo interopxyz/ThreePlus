@@ -5,15 +5,15 @@ using System.Collections.Generic;
 
 namespace ThreePlus.Components.Geometry
 {
-    public class GH_GeoCapsule : GH_Component
+    public class GH_GeoCylinder : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the GH_GeoCapsule class.
         /// </summary>
-        public GH_GeoCapsule()
-          : base("GH_GeoCapsule", "Nickname",
-              "Description",
-              "Category", "Subcategory")
+        public GH_GeoCylinder()
+          : base("Cylinder Shape", "Cylinder",
+              "Convert a Rhino Cylinder to a ThreeJs default Geometry",
+              Constants.ShortName, "Shapes")
         {
         }
 
@@ -37,6 +37,7 @@ namespace ThreePlus.Components.Geometry
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            //Cylinder and Capsule
         }
 
         /// <summary>

@@ -11,9 +11,9 @@ namespace ThreePlus.Components.Geometry
         /// Initializes a new instance of the GH_GeoCone class.
         /// </summary>
         public GH_GeoCone()
-          : base("GH_GeoCone", "Nickname",
-              "Description",
-              "Category", "Subcategory")
+          : base("Cone Shape", "Cone",
+              "Create a ThreeJs default Cone Geometry",
+              Constants.ShortName, "Shapes")
         {
         }
 
