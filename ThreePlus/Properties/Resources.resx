@@ -766,6 +766,42 @@
   <data name="Three_SceneSky_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Three_SceneSky-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Three_Shape_Box_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Shape-Box-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Shape_Circle_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Shape-Circle-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Shape_Cone_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Shape-Cone-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Shape_Cylinder_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Shape-Cylinder-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Shape_Dodecahedron_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Shape-Dodecahedron-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Shape_Icosahedron_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Shape-Icosahedron-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Shape_Octahedron_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Shape-Octahedron-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Shape_Plane_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Shape-Plane-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Shape_Sphere_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Shape-Sphere-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Shape_Tetrahedron_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Shape-Tetrahedron-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Shape_TorusKnot_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Shape-TorusKnot-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Three_Shape_Torus_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Three_Shape-Torus-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Vasanegx" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Vasanegx.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

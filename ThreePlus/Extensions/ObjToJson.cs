@@ -107,7 +107,7 @@ namespace ThreePlus
             if (absolute)
             {
                 matrix = "[1,0,0,0,0,1,0,0,0,0,1,0," + Math.Round(-input.Position.X, digits) + ","
-                    + Math.Round(-input.Position.Z, digits) + ","
+                    + Math.Round(input.Position.Z, digits) + ","
                     + Math.Round(input.Position.Y, digits) + ",1]";
             }
             else
@@ -239,19 +239,25 @@ namespace ThreePlus
             output.AppendLine("{");
 
             output.AppendLine(SetItem("uuid", input.GeoId));
-            output.AppendLine(SetItem("type", input.Type));
 
             if (input.IsMesh)
             {
+                output.AppendLine(SetItem("type", input.Type));
                 output.Append(input.Mesh.ToJson());
             }
             else if(input.IsCloud)
             {
+                output.AppendLine(SetItem("type", input.Type));
                 output.Append(input.Cloud.ToJson());
             }
             else if(input.IsCurve)
             {
+                output.AppendLine(SetItem("type", input.Type));
                 output.Append(input.Curve.ToJson(input.Graphic));
+            }
+            else if(input.IsShape)
+            {
+                output.Append(input.Shape.ToJson());
             }
             output.AppendLine(CloseObject(comma));
 
@@ -271,7 +277,7 @@ namespace ThreePlus
             output.AppendLine("{");
                 output.AppendLine(SetItem("uuid", material.Uuid));
 
-            if (input.IsMesh) 
+            if (input.IsMesh|input.IsShape) 
             {
 
             if (material.IsDefault)
@@ -625,7 +631,7 @@ namespace ThreePlus
             foreach (Model input in inputs)
             {
                 output.AppendLine("{");
-                output.Append(((MetaData)input).ToJsonObjectMeta());
+                output.Append(((MetaData)input).ToJsonObjectMeta(input.IsShape));
                 output.AppendLine(SetItem("geometry", input.GeoId));
                 output.AppendLine(SetItem("material", input.Material.Uuid,false));
                 output.AppendLine(CloseObject(i<inputs.Count));
@@ -803,7 +809,104 @@ namespace ThreePlus
             return output.ToString();
         }
 
-        private static string ToJson(this Rg.Mesh input)
+        private static string ToJson(this Shape input)
+        {
+            StringBuilder output = new StringBuilder();
+
+            output.AppendLine(SetItem("type", input.ShapeType.ToString() + "Geometry"));
+
+            switch (input.ShapeType)
+            {
+                case Shape.ShapeTypes.Box:
+                    output.AppendLine(SetItem("width", input.SizeX));
+                    output.AppendLine(SetItem("height", input.SizeY));
+                    output.AppendLine(SetItem("depth", input.SizeZ));
+                    output.AppendLine(SetItem("widthSegments", input.DivisionsU));
+                    output.AppendLine(SetItem("heightSegments", input.DivisionsV));
+                    output.AppendLine(SetItem("depthSegments", input.DivisionsW,false));
+                    break;
+                case Shape.ShapeTypes.Capsule:
+                    output.AppendLine(SetItem("radius", input.SizeX));
+                    output.AppendLine(SetItem("length", input.SizeY));
+                    output.AppendLine(SetItem("capSegments", 8));
+                    output.AppendLine(SetItem("radialSegments", input.DivisionsU, false));
+                    break;
+                case Shape.ShapeTypes.Circle:
+                    output.AppendLine(SetItem("radius", input.SizeX));
+                    output.AppendLine(SetItem("segments", input.DivisionsU));
+                    output.AppendLine(SetItem("thetaStart", 0));
+                    output.AppendLine(SetItem("thetaLength", 3.141592653589793, false));
+                    break;
+                case Shape.ShapeTypes.Cone:
+                    output.AppendLine(SetItem("radius", input.SizeX));
+                    output.AppendLine(SetItem("height", input.SizeY));
+                    output.AppendLine(SetItem("radialSegments", input.DivisionsU));
+                    output.AppendLine(SetItem("heightSegments", 1));
+                    output.AppendLine(SetItem("openEnded", false));
+                    output.AppendLine(SetItem("thetaStart", 0));
+                    output.AppendLine(SetItem("thetaLength", 6.283185307179586, false));
+                    break;
+                case Shape.ShapeTypes.Cylinder:
+                    output.AppendLine(SetItem("radiusTop", input.SizeX));
+                    output.AppendLine(SetItem("radiusBottom", input.SizeX));
+                    output.AppendLine(SetItem("height", input.SizeY));
+                    output.AppendLine(SetItem("radialSegments", input.DivisionsU));
+                    output.AppendLine(SetItem("heightSegments", input.DivisionsV));
+                    output.AppendLine(SetItem("openEnded", false));
+                    output.AppendLine(SetItem("thetaStart", 0));
+                    output.AppendLine(SetItem("thetaLength", 6.283185307179586, false));
+                    break;
+                case Shape.ShapeTypes.Dodecahedron:
+                case Shape.ShapeTypes.Icosahedron:
+                case Shape.ShapeTypes.Tetrahedron:
+                case Shape.ShapeTypes.Octahedron:
+                    output.AppendLine(SetItem("radius", input.SizeX));
+                    output.AppendLine(SetItem("detail", 0, false));
+                    break;
+                case Shape.ShapeTypes.Plane:
+                    output.AppendLine(SetItem("width", input.SizeX));
+                    output.AppendLine(SetItem("height", input.SizeY));
+                    output.AppendLine(SetItem("widthSegments", input.DivisionsU));
+                    output.AppendLine(SetItem("heightSegments", input.DivisionsV, false));
+                    break;
+                case Shape.ShapeTypes.Ring:
+                    output.AppendLine(SetItem("innerRadius", input.SizeX));
+                    output.AppendLine(SetItem("outerRadius", input.SizeY));
+                    output.AppendLine(SetItem("thetaSegments", input.DivisionsU));
+                    output.AppendLine(SetItem("phiSegments", 1));
+                    output.AppendLine(SetItem("thetaStart", 0));
+                    output.AppendLine(SetItem("thetaLength", 6.283185307179586, false));
+                    break;
+                case Shape.ShapeTypes.Sphere:
+                    output.AppendLine(SetItem("radius", input.SizeX));
+                    output.AppendLine(SetItem("widthSegments", input.DivisionsU));
+                    output.AppendLine(SetItem("heightSegments", input.DivisionsV));
+                    output.AppendLine(SetItem("phiStart", 0));
+                    output.AppendLine(SetItem("phiLength", 6.283185307179586));
+                    output.AppendLine(SetItem("thetaStart", 0));
+                    output.AppendLine(SetItem("thetaLength", 3.141592653589793, false));
+                    break;
+                case Shape.ShapeTypes.Torus:
+                    output.AppendLine(SetItem("radius", input.SizeX));
+                    output.AppendLine(SetItem("tube", input.SizeY));
+                    output.AppendLine(SetItem("radialSegments", input.DivisionsU));
+                    output.AppendLine(SetItem("tubularSegments", input.DivisionsV));
+                    output.AppendLine(SetItem("arc", 6.283185307179586, false));
+                    break;
+                case Shape.ShapeTypes.TorusKnot:
+                    output.AppendLine(SetItem("radius", input.SizeX));
+                    output.AppendLine(SetItem("tube", input.SizeY));
+                    output.AppendLine(SetItem("tubularSegments", input.DivisionsU));
+                    output.AppendLine(SetItem("radialSegments", input.DivisionsV));
+                    output.AppendLine(SetItem("p", input.TurnsA));
+                    output.AppendLine(SetItem("q", input.TurnsB, false));
+                    break;
+            }
+
+            return output.ToString();
+        }
+
+            private static string ToJson(this Rg.Mesh input)
         {
             StringBuilder output = new StringBuilder();
 

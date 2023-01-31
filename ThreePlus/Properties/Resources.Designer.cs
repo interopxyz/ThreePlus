@@ -2575,6 +2575,126 @@ namespace ThreePlus.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Shape_Box_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Shape_Box_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Shape_Circle_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Shape_Circle_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Shape_Cone_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Shape_Cone_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Shape_Cylinder_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Shape_Cylinder_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Shape_Dodecahedron_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Shape_Dodecahedron_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Shape_Icosahedron_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Shape_Icosahedron_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Shape_Octahedron_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Shape_Octahedron_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Shape_Plane_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Shape_Plane_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Shape_Sphere_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Shape_Sphere_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Shape_Tetrahedron_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Shape_Tetrahedron_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Shape_Torus_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Shape_Torus_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Three_Shape_TorusKnot_01 {
+            get {
+                object obj = ResourceManager.GetObject("Three_Shape_TorusKnot_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to import * as THREE from &apos;https://threejsfundamentals.org/threejs/resources/threejs/r127/build/three.module.js&apos;;.
         /// </summary>
         internal static string ThreeJsHeader {

@@ -159,7 +159,7 @@ namespace ThreePlus
 
             foreach (Model model in input.Models)
             {
-                if (model.IsMesh)
+                if (model.IsMesh | model.IsShape)
                 {
                     for (int j = 0; j < 14; j++)
                     {
@@ -228,6 +228,11 @@ namespace ThreePlus
                     if (model.IsMesh)
                     {
                         output.Append(model.Mesh.ToJavascript(index));
+                    }
+
+                    if(model.IsShape)
+                    {
+                        output.Append(model.Shape.ToJavascript(index));
                     }
 
                     if (input.HasShadows)
@@ -1121,6 +1126,69 @@ namespace ThreePlus
 
             output.AppendLine("const model"+index+" = new THREE.Line2( "+name+", lineMat" + index +" );");
             output.AppendLine("model" + index + ".computeLineDistances();");
+
+            return output.ToString();
+        }
+
+        public static string ToJavascript(this Shape input, string index)
+        {
+
+            StringBuilder output = new StringBuilder();
+            string shape = "const shape" + index + " = new THREE.";
+            double adjust = 0;
+            if (input.IsRotated) adjust = Math.PI / 2.0;
+
+            switch (input.ShapeType)
+            {
+                case Shape.ShapeTypes.Box:
+                    shape += "BoxGeometry( " + input.SizeX + ", " + input.SizeY + ", " + input.SizeZ + ", " + input.DivisionsU + ", " + input.DivisionsV + ", " + input.DivisionsW + " );";
+                    break;
+                case Shape.ShapeTypes.Capsule:
+                    shape += "CapsuleGeometry( " + input.SizeX + ", " + input.SizeY + ", 8, " + input.DivisionsU + " );";
+                    break;
+                case Shape.ShapeTypes.Cone:
+                    shape += "ConeGeometry( " + input.SizeX + ", " + input.SizeY + ", " + input.DivisionsU + " );";
+                    break;
+                case Shape.ShapeTypes.Cylinder:
+                    shape += "CylinderGeometry( " + input.SizeX + ", " + input.SizeX + ", " + input.SizeY + ", " + input.DivisionsU + " );";
+                    break;
+                case Shape.ShapeTypes.Dodecahedron:
+                    shape += "DodecahedronGeometry( " + input.SizeX + " );";
+                    break;
+                case Shape.ShapeTypes.Icosahedron:
+                    shape += "IcosahedronGeometry( " + input.SizeX + " );";
+                    break;
+                case Shape.ShapeTypes.Octahedron:
+                    shape += "OctahedronGeometry( " + input.SizeX + " );";
+                    break;
+                case Shape.ShapeTypes.Plane:
+                    shape += "PlaneGeometry( " + input.SizeX + ", " + input.SizeY + " );";
+                    break;
+                case Shape.ShapeTypes.Circle:
+                    shape += "CircleGeometry( " + input.SizeX + ", " + input.DivisionsU + " );";
+                    break;
+                case Shape.ShapeTypes.Ring:
+                    shape += "RingGeometry( " + input.SizeX + ", " + input.SizeY + ", " + input.DivisionsU + " );";
+                    break;
+                case Shape.ShapeTypes.Sphere:
+                    shape += "SphereGeometry( " + input.SizeX + ", " + input.DivisionsU + ", " + input.DivisionsV + " );";
+                    break;
+                case Shape.ShapeTypes.Tetrahedron:
+                    shape += "TetrahedronGeometry( " + input.SizeX + " );";
+                    break;
+                case Shape.ShapeTypes.Torus:
+                    shape += "TorusGeometry( " + input.SizeX + ", " + input.SizeY + ", " + input.DivisionsU + ", " + input.DivisionsV + " );";
+                    break;
+                case Shape.ShapeTypes.TorusKnot:
+                    shape += "TorusKnotGeometry( " + input.SizeX + ", " + input.SizeY + ", " + input.DivisionsU + ", " + input.DivisionsV + ", " + input.TurnsA + ", " + input.TurnsB + " );";
+                    break;
+            }
+
+            output.AppendLine(shape);
+            output.AppendLine("const model" + index + " = new THREE.Mesh( shape" + index + ", material" + index + " );");
+
+            output.AppendLine("model" + index + ".position.set( "+input.Plane.Origin.Y+", "+ input.Plane.Origin.Z + ", "+ input.Plane.Origin.X + " );");
+            output.AppendLine("model" + index + ".rotation.set( " + adjust + ", " + 0 + ", " + 0 + " );");
 
             return output.ToString();
         }
