@@ -7,7 +7,7 @@ using Sd = System.Drawing;
 
 namespace ThreePlus.Components
 {
-    public class GH_Preview : GH_Component
+    public abstract class GH_Preview : GH_Component
     {
         private BoundingBox prevBox = new BoundingBox();
         protected double radius = 2;

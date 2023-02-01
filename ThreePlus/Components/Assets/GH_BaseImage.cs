@@ -9,7 +9,7 @@ using Sd = System.Drawing;
 
 namespace ThreePlus.Components.Assets
 {
-    public class GH_BaseImage : GH_Component
+    public abstract class GH_BaseImage : GH_Component
     {
         public Sd.Image img = null;
         int width = 100;
