@@ -22,7 +22,7 @@ namespace ThreePlus.Components.Geometry
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddPlaneParameter("Plane", "P", "The plane", GH_ParamAccess.item, Plane.WorldXY);
+            pManager.AddPlaneParameter("Plane", "P", "The base plane", GH_ParamAccess.item, Plane.WorldXY);
             pManager[0].Optional = true;
             pManager.AddNumberParameter("Radius", "R", "The radius", GH_ParamAccess.item, 7);
             pManager[1].Optional = true;

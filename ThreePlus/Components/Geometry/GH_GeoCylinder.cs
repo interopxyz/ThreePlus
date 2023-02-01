@@ -26,7 +26,7 @@ namespace ThreePlus.Components.Geometry
             pManager[0].Optional = true;
             pManager.AddNumberParameter("Radius", "R", "The base radius", GH_ParamAccess.item, 10);
             pManager[1].Optional = true;
-            pManager.AddNumberParameter("Height", "H", "The cone height", GH_ParamAccess.item, 20);
+            pManager.AddNumberParameter("Height", "H", "The cylinder height", GH_ParamAccess.item, 20);
             pManager[2].Optional = true;
             pManager.AddBooleanParameter("Smooth", "S", "Is the cap smoothed", GH_ParamAccess.item, false);
             pManager[3].Optional = true;
