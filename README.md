@@ -1,6 +1,8 @@
 # Three +
 Three.js scene compiler for Grasshopper 3d
 
+_Like Three+ [Buy me a coffee :D](http://www.buymeacoffee.com/davidmans)_
+
 ---
 
 This plugin was developed to allow for the creation of visually rich scenes for model representation in a ready-to-view format. Scene construction is based on merging Geometry, Lights, Scene Elements, Cameras, and other Helpers and Post Processing elements into the Scene component. The Scene object output from this component can then be written to a Page or JSON output. Building up elements for a Scene can be done in the following categories.
